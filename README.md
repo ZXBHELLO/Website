@@ -1,42 +1,23 @@
-# zxbhello
+# ZXBHELLO 网站
 
-The Site is generated using [vuepress](https://vuepress.vuejs.org/) and [vuepress-theme-plume](https://github.com/pengzhanbo/vuepress-theme-plume)
+这是 ZXBHELLO 的个人网站和导航站，使用 [VuePress](https://vuepress.vuejs.org/) 和 [vuepress-theme-plume](https://github.com/pengzhanbo/vuepress-theme-plume) 构建生成。
 
-## Install
+## 功能特性
 
-```sh
-pnpm i
-```
+- 个人博客和文档站点
+- 支持 GitHub 在线编辑
+- 集成 Giscus 评论系统
+- 支持 PDF 预览和嵌入资源
+- 自动显示文档贡献者
+- 响应式设计，支持移动端浏览
 
-## Usage
+## 项目地址
 
-```sh
-# start dev server
-pnpm docs:dev
-# build for production
-pnpm docs:build
-# preview production build in local
-pnpm docs:preview
-# update vuepress and theme
-pnpm vp-update
-```
+- [在线访问网站](http://doc.zxbhello.top)
+- [GitHub 仓库](https://github.com/ZXBHELLO/Website)
 
-## Deploy to GitHub Pages
+## 文档
 
-The plume theme has been created with GitHub Actions: `.github/workflows/docs-deploy.yml`. You also need to make the following settings in the GitHub repository:
-
-- [ ] `settings > Actions > General`, Scroll to the bottom of the page, under `Workflow permissions`, check `Read and write permissions`, and click the save button.
-
-- [ ] `settings > Pages`, In `Build and deployment`, select `Deploy from a branch` for `Source`, choose `gh-pages` for `Branch`, and click the save button.
-  (The `gh-pages` branch may not exist upon first creation. You can complete the above setup first, push the code to the main branch, wait for `github actions` to finish, and then proceed with the setup.)
-
-- [ ] Modify the `base` option in `docs/.vuepress/config.ts`:
-  - If you are planning to deploy to `https://<USERNAME>.github.io/`, you can skip this step as `base` defaults to `"/"`.
-  - If you are planning to deploy to `https://<USERNAME>.github.io/<REPO>/`, meaning your repository URL is `https://github.com/<USERNAME>/<REPO>`, set `base` to `"/<REPO>/"`.
-
-To customize a domain name, please refer to [Github Pages](https://docs.github.com/zh/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages)
-
-## Documents
-
-- [vuepress](https://vuepress.vuejs.org/)
-- [vuepress-theme-plume](https://theme-plume.vuejs.press/)
+- [VuePress 官方文档](https://vuepress.vuejs.org/)
+- [VuePress Plume 主题文档](https://theme-plume.vuejs.press/)
+- [部署指南](./docs/guide/deployment.md)
