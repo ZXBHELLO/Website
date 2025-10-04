@@ -1,3 +1,8 @@
+---
+title: deployment
+createTime: 2025/10/05 05:54:51
+permalink: /article/n5l5ldec/
+---
 # 部署指南
 
 ## 安装

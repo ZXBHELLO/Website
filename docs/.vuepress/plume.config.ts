@@ -26,7 +26,7 @@ export default defineThemeConfig({
     { icon: 'bilibili', link: 'https://space.bilibili.com/1917782316' },
   ],
   // navbarSocialInclude: ['bilibili'], // 允许显示在导航栏的 social 社交链接
-  // aside: true, // 页内侧边栏， 默认显示在右侧
+  aside: true, // 页内侧边栏， 默认显示在右侧
   outline: [1, 2], // 页内大纲， 显示 h1, h2
 
   /**

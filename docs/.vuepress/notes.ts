@@ -30,7 +30,7 @@ const demoNote = defineNoteConfig({
   //sidebar: ['', 'foo', 'bar'],
   // 根据文件结构自动生成侧边栏
   //dir: 'notes',
-    sidebar: 'structure',
+  // sidebar 应该是一个数组或者 undefined，而不是字符串
 })
 
 
