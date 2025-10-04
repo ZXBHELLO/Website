@@ -17,7 +17,7 @@ export default defineUserConfig({
   base: '/',
   lang: 'zh-CN',
   title: 'ZXBHELLO',
-  description: 'ZXBHELLO的主页以及导航站',
+  description: 'ZXBHELLO的主页导航站',
 
   head: [
     // 配置站点图标
@@ -46,7 +46,7 @@ export default defineUserConfig({
      * 博客
      * @see https://theme-plume.vuejs.press/config/basic/#blog
      */
-     //blog: true, // 禁用博客
+     // blog: false, // 禁用博客
        blog: {
          postList: true, // 是否启用文章列表页
          tags: true, // 是否启用标签页
@@ -69,11 +69,7 @@ export default defineUserConfig({
      * 为 markdown 文件自动添加 frontmatter 配置
      * @see https://theme-plume.vuejs.press/config/basic/#autofrontmatter
      */
-    // autoFrontmatter: {
-    //   permalink: true,  // 是否生成永久链接
-    //   createTime: true, // 是否生成创建时间
-    //   title: true,      // 是否生成标题
-    // },
+    // autoFrontmatter: false,
 
     /* 本地搜索, 默认启用 */
     search: { provider: 'local' },
@@ -83,25 +79,16 @@ export default defineUserConfig({
      * 启用此搜索需要将 本地搜索 search 设置为 false
      * @see https://theme-plume.vuejs.press/config/plugins/search/#algolia-docsearch
      */
-    // search: {
-    //   provider: 'algolia',
-    //   appId: '',
-    //   apiKey: '',
-    //   indexName: '',
-    // },
+    // search: false,
 
     /**
      * Shiki 代码高亮
      * @see https://theme-plume.vuejs.press/config/plugins/code-highlight/
      */
-    // codeHighlighter: {
-    //   twoslash: true, // 启用 twoslash
-    //   whitespace: true, // 启用 空格/Tab 高亮
-    //   lineNumbers: true, // 启用行号
-    // },
+    // codeHighlighter: false,
 
     /* 文章字数统计、阅读时间，设置为 false 则禁用 */
-    // readingTime: true,
+    readingTime: false,
 
     /**
       * markdown
@@ -115,7 +102,7 @@ export default defineUserConfig({
       plot: true,         // 启用隐秘文本语法 !!xxxx!!
       bilibili: true,     // 启用嵌入 bilibili视频 语法 @[bilibili](bid)
       youtube: true,      // 启用嵌入 youtube视频 语法 @[youtube](video_id)
-      artPlayer: true,    // 启用嵌入 artPlayer 本地视频 语法 @[artPlayer](url)
+      artPlayer: false,   // 启用嵌入 artPlayer 本地视频 语法 @[artPlayer](url) （需要mpegts.js依赖）
       audioReader: true,  // 启用嵌入音频朗读功能 语法 @[audioReader](url)
       icon: { provider: 'iconify' },        // 启用内置图标语法  ::icon-name::
       table: true,        // 启用表格增强容器语法 ::: table
@@ -125,12 +112,7 @@ export default defineUserConfig({
       jsfiddle: true,     // 启用嵌入 jsfiddle 语法 @[jsfiddle](user/id)
       npmTo: true,        // 启用 npm-to 容器  ::: npm-to
       demo: true,         // 启用 demo 容器  ::: demo
-      repl: {             // 启用 代码演示容器
-        go: true,         // ::: go-repl
-        rust: true,       // ::: rust-repl
-        kotlin: true,     // ::: kotlin-repl
-        python: true,     // ::: python-repl
-      },
+      repl: false,            // 禁用所有 REPL 功能，避免构建错误
       math: {             // 启用数学公式
         type: 'katex',
       },
@@ -152,7 +134,7 @@ export default defineUserConfig({
      * 水印
      * @see https://theme-plume.vuejs.press/guide/features/watermark/
      */
-    // watermark: true,
+    watermark: false,
 
     /**
      * 评论 comments
@@ -174,12 +156,12 @@ export default defineUserConfig({
      * 资源链接替换
      * @see https://theme-plume.vuejs.press/guide/features/replace-assets/
      */
-    // replaceAssets: 'https://cdn.example.com',
+    replaceAssets: false,
 
     /**
      * 加密功能
      * @see https://theme-plume.vuejs.press/guide/features/encryption/
      */
-    // encrypt: {},
+    encrypt: false,
   }),
 })
