@@ -46,15 +46,15 @@ export default defineUserConfig({
      * 博客
      * @see https://theme-plume.vuejs.press/config/basic/#blog
      */
-     // blog: false, // 禁用博客
-       blog: {
-         postList: false, // 是否启用文章列表页
-         tags: false, // 是否启用标签页
-         archives: false, // 是否启用归档页
-         categories: false, // 是否启用分类页
-         postCover: 'right', // 文章封面位置
-         pagination: 10, // 每页显示文章数量
-       },
+       blog: false, // 禁用博客
+     //blog: {
+     //  postList: false, // 是否启用文章列表页
+     //  tags: false, // 是否启用标签页
+     //  archives: false, // 是否启用归档页
+     //  categories: false, // 是否启用分类页
+     //  postCover: 'right', // 文章封面位置
+     //  pagination: 10, // 每页显示文章数量
+     //},
 
     /* 博客文章页面链接前缀 */
     article: '/article/',
@@ -151,6 +151,7 @@ export default defineUserConfig({
       reactionsEnabled: true,
       inputPosition: 'top',
     },
+
 
     /**
      * 资源链接替换

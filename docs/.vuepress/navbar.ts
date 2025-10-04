@@ -7,13 +7,16 @@
 import { defineNavbarConfig } from 'vuepress-theme-plume'
 
 export default defineNavbarConfig([
-  { text: '首页', link: '/' },
-  { text: '博客', link: '/blog/' },
-  { text: '标签', link: '/blog/tags/' },
-  { text: '归档', link: '/blog/archives/' },
+  //{ text: '首页', link: '/' },
+  //{ text: '博客', link: '/blog/' },
+  //{ text: '标签', link: '/blog/tags/' },
+  //{ text: '归档', link: '/blog/archives/' },
   {
     text: '文档',
-    items: [{ text: 'Minecraft服务器', link: '/ZakoZakoCraft/' }
+    items: [
+      { text: 'Minecraft服务器', link: '/ZakoZakoCraft/' },
+      { text: 'MobLaunch', link: 'https://github.com/ZXBHELLO/MobLaunch' },
+      { text: 'MC红石编辑器', link: 'https://github.com/ZXBHELLO/MinecraftRedStoneEditor-2D' }
     ],
   },
 ])

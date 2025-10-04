@@ -25,11 +25,10 @@ const demoNote = defineNoteConfig({
   // `dir` 所指向的目录中的所有 markdown 文件，其 permalink 需要以 `link` 配置作为前缀
   // 如果 前缀不一致，则无法生成侧边栏。
   // 所以请确保  markdown 文件的 permalink 都以 `link` 开头
-  //link: '/',
-  // 手动配置侧边栏结构
-  //sidebar: ['', 'foo', 'bar'],
+  //dir: 'notes/ZakoZakoCraft',
+  //link: 'ZakoZakoCraft',
+  sidebar: 'auto',
   // 根据文件结构自动生成侧边栏
-  //dir: 'notes',
   // sidebar 应该是一个数组或者 undefined，而不是字符串
 })
 

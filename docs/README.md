@@ -4,19 +4,18 @@ config:
   -
     type: hero
     hero:
-      name: 欢迎来到 ZXBHELLO 的网站
+      name: ZXBHELLO
       text: 个人主页 & 技术文档
-      tagline: 这里包含了我的项目、文档和一些技术分享
       image: /plume.svg
       actions:
         -
           theme: brand
-          text: 开始浏览
-          link: /article/
+          text: 个人页
+          link: /about.html
         -
-          theme: alt
-          text: GitHub
-          link: https://github.com/ZXBHELLO
+          theme: brand
+          text: QQ群
+          link: https://qm.qq.com/q/SPZEHOyWsw
           
 
   -
@@ -40,22 +39,4 @@ config:
         details: 用于在网页中设计二维的我的世界红石机械单片
         link: https://github.com/ZXBHELLO/MinecraftRedStoneEditor-2D
         linkText: 查看 GitHub
-
-  -
-    type: markdown
-    content: |
-      ## 关于本站
-      
-      这是一个使用 [VuePress](https://vuepress.vuejs.org/) 和 [Plume 主题](https://theme-plume.vuejs.press/)构建的个人网站。
-      
-      - 📚 技术文档和教程
-      - 💡 项目展示和分享
-      - 📝 个人博客和思考
-      
-      如果你对我的项目感兴趣，欢迎通过下方链接与我交流！
-
-  -
-    type: cards
-    cards:
-      
 ---

@@ -24,8 +24,9 @@ export default defineThemeConfig({
 
   social: [
     { icon: 'bilibili', link: 'https://space.bilibili.com/1917782316' },
+    { icon: 'github', link: 'https://github.com/ZXBHELLO' },
   ],
-  // navbarSocialInclude: ['bilibili'], // 允许显示在导航栏的 social 社交链接
+  navbarSocialInclude: ['bilibili', 'github'], // 允许显示在导航栏的 social 社交链接
   aside: true, // 页内侧边栏， 默认显示在右侧
   outline: [1, 2], // 页内大纲， 显示 h1, h2
 
@@ -41,8 +42,8 @@ export default defineThemeConfig({
 
   /* 站点页脚 */
     footer: {
-      message: '版权所无 不保留所有权益  <a target="_blank" href="https://space.bilibili.com/1917782316">ZXBHELLO</a>',
-      copyright: '',
+      message: '如有转载请标注本站原文地址',
+      copyright: 'Copyright © 2023-present ZXBHELLO',
     },
 
   /**
