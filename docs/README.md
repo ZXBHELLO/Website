@@ -17,6 +17,7 @@ config:
           theme: alt
           text: GitHub
           link: https://github.com/ZXBHELLO
+          
 
   -
     type: features
@@ -56,14 +57,5 @@ config:
   -
     type: cards
     cards:
-      -
-        title: QQ 交流群
-        icon: 🗨️
-        description: 加入我们的 QQ 群进行交流讨论
-        link: https://qm.qq.com/q/1DsoBIUNXW
-      -
-        title: Bilibili
-        icon: 📺
-        description: 关注我的 Bilibili 账号获取最新动态
-        link: https://space.bilibili.com/1917782316
+      
 ---
