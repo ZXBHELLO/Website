@@ -25,6 +25,7 @@ export default defineThemeConfig({
   social: [
     { icon: 'bilibili', link: 'https://space.bilibili.com/1917782316' },
     { icon: 'github', link: 'https://github.com/ZXBHELLO' },
+    { icon: 'email', link: 'mailto:zxbhello@gmail.com' },
   ],
   navbarSocialInclude: ['bilibili', 'github'], // 允许显示在导航栏的 social 社交链接
   aside: true, // 页内侧边栏， 默认显示在右侧

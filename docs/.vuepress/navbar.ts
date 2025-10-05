@@ -7,10 +7,7 @@
 import { defineNavbarConfig } from 'vuepress-theme-plume'
 
 export default defineNavbarConfig([
-  //{ text: '首页', link: '/' },
-  //{ text: '博客', link: '/blog/' },
-  //{ text: '标签', link: '/blog/tags/' },
-  //{ text: '归档', link: '/blog/archives/' },
+  { text: '首页', link: '/' },
   {
     text: '文档',
     items: [
@@ -19,4 +16,5 @@ export default defineNavbarConfig([
       { text: 'MC红石编辑器', link: 'https://github.com/ZXBHELLO/MinecraftRedStoneEditor-2D' }
     ],
   },
+  { text: '友情链接', link: '/friends/' },
 ])
