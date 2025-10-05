@@ -12,7 +12,7 @@ permalink: /ZakoZakoCraft/function/overview/
 :::
 
 ## 快捷方式
-<LinkCard icon="famicons:business" title="领地系统" href="/ZakoZakoCraft/function/dominion/player/" />
+<LinkCard icon="famicons:business" title="领地系统" href="/ZakoZakoCraft/function/dominion/" />
 <LinkCard icon="famicons:diamond" title="经济系统" href="/ZakoZakoCraft/function/economy/" />
 <LinkCard icon="solar:donut-bitten-line-duotone" title="装饰功能" href="/ZakoZakoCraft/function/decoration/" />
 <LinkCard icon="solar:box-broken" title="其他功能" href="/ZakoZakoCraft/function/services/" />
