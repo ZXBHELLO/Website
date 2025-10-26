@@ -19,24 +19,25 @@ config:
         - theme: alt
           text: 审核群
           link: https://qm.qq.com/q/wGEB6fFybC
-
-  - type: image-text
-    title: 服务器介绍
-    description: 关于ZakoZakoCraft服务器
-    image: /images/plume-1.svg
-    list:
-      - title: 定位
-        description: 高版本公益群组服务器<br/>公益性质的Minecraft多人游戏服务器，不以盈利为目的
-
-      - title: 口号
-        description: 这里是生存与冒险、温馨与和谐交汇的幻想世界。<br/>我们有着公平公正的管理条例，为玩家的权益以及服务器的管理保驾护航。
-
-      - title: 版本
-        description: JAVA 版（离线/正版）1.19–1.21.10<br/>手机(FCL/HMCL-PE)电脑(PCL/HMCL)都能玩~！
-
   - type: custom
 ---
----
+
+:::: demo-wrapper
+# 服务器介绍
+
+- **定位** >
+  高版本公益群组服务器
+  公益性质的Minecraft多人游戏服务器，不以盈利为目的
+
+- **口号** >
+  这里是生存与冒险、温馨与和谐交汇的幻想世界。
+  我们有着公平公正的管理条例，为玩家的权益以及服务器的管理保驾护航。
+
+- **版本** >
+  JAVA 版（离线/正版）1.19–1.21.10
+  手机(FCL/HMCL-PE)电脑(PCL/HMCL)都能玩~！
+::::
+
 <center>
   <h1>服务器列表</h1>
 </center>
@@ -55,6 +56,30 @@ config:
     数百种休闲小游戏、闲暇之余的消遣之地
   </LinkCard>
 </CardGrid>
+
+<center>
+  <h1>图片一览</h1>
+</center>
+
+<script setup>
+import Swiper from 'vuepress-theme-plume/features/Swiper.vue'
+</script>
+
+<Swiper :items="[
+  '/assets/ZakoZakoCraft/ExchangeImage/1.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/2.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/3.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/4.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/5.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/6.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/7.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/8.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/9.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/a.png',  
+  '/assets/ZakoZakoCraft/ExchangeImage/b.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/c.png',
+]" effect="cards" />
+
 
 <center>
   <h1>服务器特色</h1>
@@ -87,28 +112,6 @@ config:
   </Card>
 </CardGrid>
 
-<center>
-  <h1>图片一览</h1>
-</center>
-
-<script setup>
-import Swiper from 'vuepress-theme-plume/features/Swiper.vue'
-</script>
-
-<Swiper :items="[
-  '/assets/ZakoZakoCraft/ExchangeImage/1.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/2.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/3.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/4.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/5.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/6.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/7.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/8.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/9.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/a.png',  
-  '/assets/ZakoZakoCraft/ExchangeImage/b.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/c.png',
-]" effect="cards" />
 
 ---
 
