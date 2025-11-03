@@ -14,6 +14,7 @@ export default defineNavbarConfig([
     text: '项目',
     items: [
       { text: 'Minecraft服务器', link: '/ZakoZakoCraft/' },
+      { text: 'MCMMO插件文档', link: '/mcmmo/' },
       { text: 'MobLaunch', link: 'https://github.com/ZXBHELLO/MobLaunch' },
       { text: 'MC红石编辑器', link: 'https://github.com/ZXBHELLO/MinecraftRedStoneEditor-2D' }
     ],
