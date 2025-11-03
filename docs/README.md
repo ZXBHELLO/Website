@@ -34,6 +34,12 @@ config:
         link: /MCMMO/
         linkText: 查看文档
       -
+        title: Carpet模组
+        icon: 🧻
+        details: 为原版Minecraft添加技术性功能的强大模组，特别适合技术型服务器和红石工程师使用
+        link: /Carpet/
+        linkText: 查看文档
+      -
         title: MobLaunch
         icon: 🚀
         details: 允许玩家抱起生物并在蓄力后投掷出去。该插件支持 Folia、Spigot 和 Paper
