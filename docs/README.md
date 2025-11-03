@@ -28,6 +28,12 @@ config:
         link: /ZakoZakoCraft/
         linkText: 访问文档
       -
+        title: MCMMO插件
+        icon: ⚔️
+        details: 为Minecraft服务器添加RPG元素的插件，包含技能系统、等级提升、特殊能力等
+        link: /MCMMO/
+        linkText: 查看文档
+      -
         title: MobLaunch
         icon: 🚀
         details: 允许玩家抱起生物并在蓄力后投掷出去。该插件支持 Folia、Spigot 和 Paper
