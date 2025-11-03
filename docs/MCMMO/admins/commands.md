@@ -1,52 +1,65 @@
 ---
-title: MCMMO管理员指令
-shortTitle: 管理员指令
+title: 管理员指令
 date: 2025-11-03
 article: false
-permalink: /MCMMO/admins/commands/
+permalink: /mcmmo/admins/commands/
 ---
 
 # MCMMO管理员指令
 
+::: tip 💡 简介
 MCMMO为服务器管理员提供了强大的管理指令，用于管理玩家技能、经验倍率、数据库等。
+:::
 
 ## 管理员指令列表
 
 ### /mmoedit
 
+::: warning ⚠️ 管理指令
 - **描述**：编辑用户的MCMMO技能值
 - **别名**：无
 - **权限节点**：mcmmo.commands.mmoedit
+:::
 
 ### /xprate 或 /mcxprate
 
+::: warning ⚠️ 管理指令
 - **描述**：修改经验倍率或开始活动
 - **别名**：/mcxprate
 - **权限节点**：mcmmo.commands.xprate
+:::
 
 ### /mcpurge
 
+::: warning ⚠️ 管理指令
 - **描述**：清除技能等级为0或长期不活跃的用户
 - **别名**：无
 - **权限节点**：mcmmo.commands.mcpurge
+:::
 
 ### /mcremove
 
+::: warning ⚠️ 管理指令
 - **描述**：从MCMMO数据库中删除用户
 - **别名**：无
 - **权限节点**：mcmmo.commands.mcremove
+:::
 
 ### /mcgod
 
+::: warning ⚠️ 管理指令
 - **描述**：切换MCMMO上帝模式（无敌状态）
 - **别名**：无
 - **权限节点**：mcmmo.commands.mcgod
+:::
 
 ### /mcmmoreloadlocale 或 /mcreloadlocale
 
+::: warning ⚠️ 管理指令
 - **描述**：重新加载MCMMO本地化设置
 - **别名**：/mcreloadlocale
 - **权限节点**：mcmmo.commands.reloadlocale
+:::
 
 ### /mmoxpbar 或 /xpbarsettings
 

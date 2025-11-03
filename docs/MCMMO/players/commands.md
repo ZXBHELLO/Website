@@ -1,44 +1,55 @@
 ---
-title: MCMMO玩家指令
-shortTitle: 玩家指令
+title: 玩家指令
 date: 2025-11-03
 article: false
-permalink: /MCMMO/players/commands/
+permalink: /mcmmo/players/commands/
 ---
 
 # MCMMO玩家指令
 
+::: tip 💡 简介
 MCMMO为玩家提供了丰富的指令来查看技能信息、管理队伍和控制技能设置。
+:::
 
 ## 基本信息指令
 
 ### /mcmmo
 
+::: info ℹ️ 基本信息
 - **描述**：显示MCMMO插件的简要介绍和完整指令列表
 - **别名**：无
 - **权限节点**：无
+:::
 
 ### /mcstats 或 /stats
 
+::: info ℹ️ 技能信息
 - **描述**：显示你的MCMMO技能等级和经验
 - **别名**：/stats
 - **权限节点**：mcmmo.commands.mcstats
+:::
 
 ### /mcrank
 
+::: info ℹ️ 排名信息
 - **描述**：显示你的MCMMO排名
 - **别名**：无
 - **权限节点**：mcmmo.commands.mcrank
+:::
 
 ### /mctop
 
+::: info ℹ️ 排行榜
 - **描述**：显示MCMMO排行榜
 - **别名**：无
 - **权限节点**：mcmmo.commands.mctop
+:::
 
 ## 技能特定指令
 
+::: tip 💡 技能详细信息
 这些指令用于查看特定技能的详细信息：
+:::
 
 | 指令 | 描述 | 权限节点 |
 |------|------|----------|

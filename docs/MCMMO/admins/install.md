@@ -1,21 +1,24 @@
 ---
-title: MCMMO安装与配置指南
-shortTitle: 安装配置
+title: 安装与配置指南
 date: 2025-11-03
 article: false
-permalink: /MCMMO/admins/install/
+permalink: /mcmmo/admins/install/
 ---
 
 # MCMMO安装与配置指南
 
+::: tip 💡 简介
 本指南将帮助服务器管理员（腐竹）正确安装和配置MCMMO插件。
+:::
 
 ## 前置要求
 
 ### Java和Minecraft版本
 
+::: warning ⚠️ 环境要求
 - 推荐使用最新版本的Java Minecraft
 - 使用兼容版本的Spigot、Paper或Folia
+:::
 
 > MCMMO官方支持Spigot、Paper和Folia。对于这些平台之外的支持最多只是非官方的。
 
@@ -29,6 +32,7 @@ MCMMO是Spigot API的插件，这使得运行Spigot或Paper成为必需，其他
 
 ### 步骤
 
+::: info ℹ️ 安装流程
 1. 从以下来源获取最新版本的MCMMO：
    - [SpigotMC](https://www.spigotmc.org/resources/mcmmo.1447/)
    - [Polymart](https://polymart.org/resource/mcmmo.142)
@@ -39,17 +43,22 @@ MCMMO是Spigot API的插件，这使得运行Spigot或Paper成为必需，其他
    ```
 
 3. 启动或重启服务器
+:::
 
 ## 升级MCMMO
 
+::: tip 💡 升级说明
 升级MCMMO旨在尽可能简单，您永远不需要删除数据或配置。
+:::
 
 ### 步骤
 
+::: info ℹ️ 升级流程
 1. 从SpigotMC或Polymart获取最新版本的MCMMO
 2. 确保您的Spigot或Paper服务器是最新的
 3. 将mcMMO.jar放置在服务器目录的`plugins`文件夹中
 4. 替换现有的mcMMO.jar
+:::
 
 恭喜，您已升级MCMMO。请确保您运行的是兼容版本的Java Minecraft和Spigot/Paper。最新版本的MCMMO针对最新版本的Java Minecraft，因此可能不适用于旧版本。
 
