@@ -7,7 +7,7 @@ permalink: /mcmmo/admins/commands/
 
 # MCMMO管理员指令
 
-::: tip 💡 简介
+::: tip 简介
 MCMMO为服务器管理员提供了强大的管理指令，用于管理玩家技能、经验倍率、数据库等。
 :::
 
@@ -15,7 +15,7 @@ MCMMO为服务器管理员提供了强大的管理指令，用于管理玩家技
 
 ### /mmoedit
 
-::: warning ⚠️ 管理指令
+::: warning 管理指令
 - **描述**：编辑用户的MCMMO技能值
 - **别名**：无
 - **权限节点**：mcmmo.commands.mmoedit
@@ -23,7 +23,7 @@ MCMMO为服务器管理员提供了强大的管理指令，用于管理玩家技
 
 ### /xprate 或 /mcxprate
 
-::: warning ⚠️ 管理指令
+::: warning 管理指令
 - **描述**：修改经验倍率或开始活动
 - **别名**：/mcxprate
 - **权限节点**：mcmmo.commands.xprate
@@ -31,7 +31,7 @@ MCMMO为服务器管理员提供了强大的管理指令，用于管理玩家技
 
 ### /mcpurge
 
-::: warning ⚠️ 管理指令
+::: warning 管理指令
 - **描述**：清除技能等级为0或长期不活跃的用户
 - **别名**：无
 - **权限节点**：mcmmo.commands.mcpurge
@@ -39,7 +39,7 @@ MCMMO为服务器管理员提供了强大的管理指令，用于管理玩家技
 
 ### /mcremove
 
-::: warning ⚠️ 管理指令
+::: warning 管理指令
 - **描述**：从MCMMO数据库中删除用户
 - **别名**：无
 - **权限节点**：mcmmo.commands.mcremove
@@ -47,7 +47,7 @@ MCMMO为服务器管理员提供了强大的管理指令，用于管理玩家技
 
 ### /mcgod
 
-::: warning ⚠️ 管理指令
+::: warning 管理指令
 - **描述**：切换MCMMO上帝模式（无敌状态）
 - **别名**：无
 - **权限节点**：mcmmo.commands.mcgod
@@ -55,7 +55,7 @@ MCMMO为服务器管理员提供了强大的管理指令，用于管理玩家技
 
 ### /mcmmoreloadlocale 或 /mcreloadlocale
 
-::: warning ⚠️ 管理指令
+::: warning 管理指令
 - **描述**：重新加载MCMMO本地化设置
 - **别名**：/mcreloadlocale
 - **权限节点**：mcmmo.commands.reloadlocale

@@ -7,7 +7,7 @@ permalink: /mcmmo/players/production/
 
 # MCMMO生产类技能详解
 
-::: tip 💡 简介
+::: tip
 生产类技能包括修理、炼药、分解等，这些技能帮助玩家维护和制作装备。
 :::
 
@@ -21,7 +21,7 @@ permalink: /mcmmo/players/production/
 
 ### 使用方法
 
-::: info ℹ️ 操作步骤
+::: info
 1. 放置一个铁块（默认的MCMMO铁砧）
 2. 右键点击铁块打开修理界面
 3. 选择要修理的物品进行修理
@@ -32,19 +32,19 @@ permalink: /mcmmo/players/production/
 
 #### Repair Mastery（修理精通）
 
-::: info ℹ️ 被动能力
+::: info 被动能力
 - **效果**：提升修理效果，修理量随技能等级提升而增加
 :::
 
 #### Super Repair（超级修理）
 
-::: info ℹ️ 被动能力
+::: info 被动能力
 - **效果**：修理时有一定几率触发超级修理，效果翻倍
 :::
 
 #### Arcane Forging（奥术锻造）
 
-::: warning ⚠️ 高级技能
+::: warning
 - **解锁等级**：依赖于服务器配置
 - **效果**：修理附魔物品时有一定几率保持附魔
 - **机制**：
@@ -55,7 +55,7 @@ permalink: /mcmmo/players/production/
 
 ## Alchemy（炼药学）
 
-::: tip 💡 简介
+::: tip
 炼药学技能增强酿造药水的能力。
 :::
 

@@ -7,7 +7,7 @@ permalink: /mcmmo/players/gathering/
 
 # MCMMO采集类技能详解
 
-::: tip 💡 简介
+::: tip 简介
 采集类技能是MCMMO中最基础的技能类型，包括挖矿、伐木、钓鱼、挖掘和草药学等。这些技能通过执行相应的采集动作来获得经验值。
 :::
 
@@ -35,7 +35,7 @@ permalink: /mcmmo/players/gathering/
 
 #### Super Breaker（超级碎矿）
 
-::: warning ⚠️ 主动技能
+::: warning 主动技能
 - **激活方式**：手持镐右键
 - **效果**：短时间内大幅提升挖掘速度，并且获得三倍掉落几率
 - **机制**：在激活状态下，镐的效率附魔等级会临时增加5级（例如效率3会变成效率8）
@@ -45,7 +45,7 @@ permalink: /mcmmo/players/gathering/
 
 #### Blast Mining（爆破挖矿）
 
-::: info ℹ️ 特殊机制
+::: info 特殊机制
 - **激活方式**：手持镐潜行右键TNT
 - **效果**：远程引爆TNT，减少爆炸伤害并增加矿物掉落
 - **组成部分**：

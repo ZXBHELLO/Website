@@ -7,7 +7,7 @@ permalink: /mcmmo/players/combat/
 
 # MCMMO战斗类技能详解
 
-::: tip 💡 简介
+::: tip 简介
 战斗类技能是MCMMO中非常重要的技能类型，包括剑术、弓术、格斗、斧技、驯养等。这些技能通过造成或承受伤害来获得经验值。
 :::
 
@@ -23,7 +23,7 @@ permalink: /mcmmo/players/combat/
 
 #### Serrated Strikes（锯齿攻击）
 
-::: warning ⚠️ 主动技能
+::: warning 主动技能
 - **激活方式**：手持剑右键
 - **效果**：释放范围攻击，对周围敌人造成额外25%伤害，并可能触发撕裂效果
 - **撕裂效果**：使敌人每2秒受到一次伤害，持续时间随技能等级提升而增加
@@ -31,19 +31,19 @@ permalink: /mcmmo/players/combat/
 
 #### Counter Attack（反击）
 
-::: info ℹ️ 被动能力
+::: info 被动能力
 - **效果**：在格挡状态下受到攻击时，有一定几率反射50%的伤害给攻击者
 :::
 
 #### Rupture（撕裂）
 
-::: info ℹ️ 被动效果
+::: info 被动效果
 - **效果**：使敌人流血，每2秒受到伤害直到效果结束或死亡
 :::
 
 ## Axes（斧技）
 
-::: tip 💡 简介
+::: tip 简介
 斧技不仅可用于砍伐树木，还能在战斗中发挥巨大作用。
 :::
 
@@ -55,7 +55,7 @@ permalink: /mcmmo/players/combat/
 
 #### Skull Splitter（碎颅者）
 
-::: warning ⚠️ 主动技能
+::: warning 主动技能
 - **激活方式**：手持斧头右键
 - **效果**：释放范围攻击，对周围敌人造成伤害
 - **机制**：伤害随技能等级提升而增加
@@ -63,17 +63,17 @@ permalink: /mcmmo/players/combat/
 
 #### Critical Strikes（暴击）
 
-::: info ℹ️ 被动能力
+::: info 被动能力
 - **效果**：攻击时有一定几率造成暴击，造成额外伤害
 
 #### Armor Impact（冲击装甲）
 
-::: info ℹ️ 被动能力
+::: info 被动能力
 - **效果**：攻击时有一定几率削弱敌人的盔甲效果
 
 #### Greater Impact（强力冲击）
 
-::: info ℹ️ 被动能力
+::: info 被动能力
 - **效果**：攻击时有一定几率击退敌人并造成额外伤害
 
 ## Archery（箭术）

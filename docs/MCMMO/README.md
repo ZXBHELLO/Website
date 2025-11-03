@@ -37,13 +37,13 @@ permalink: /mcmmo/
 
 ## 什么是MCMMO？
 
-::: tip 💡 MCMMO简介
+::: tip MCMMO简介
 MCMMO是一个开源的Minecraft服务器插件，为游戏添加了RPG元素。玩家可以通过使用各种工具和技能来获得经验值并升级，解锁特殊能力和增强效果。
 :::
 
 ### MCMMO的特点
 
-::: details 📋 点击展开MCMMO的主要特点
+::: details 点击展开MCMMO的主要特点
 - 16种不同的技能系统
 - 技能等级和经验值系统
 - 特殊主动和被动能力
@@ -54,7 +54,7 @@ MCMMO是一个开源的Minecraft服务器插件，为游戏添加了RPG元素。
 
 ## 参考资料
 
-::: info ℹ️ 相关链接
+::: info 相关链接
 - [MCMMO官方Wiki](https://wiki.mcmmo.org/)
 - [MCMMO GitHub仓库](https://github.com/mcMMO-Dev/mcMMO)
 - [MCMMO Spigot页面](https://www.spigotmc.org/resources/mcmmo.1447/)
