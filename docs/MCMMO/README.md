@@ -1,12 +1,11 @@
 ---
-title: MCMMO插件完整指南
+title: MCMMO插件文档
 date: 2025-11-03
 article: false
 permalink: /mcmmo/
 ---
 
-
-::: warning ⚠️ 免责声明
+::: warning 免责声明
 本指南并非MCMMO官方文档，而是基于互联网上收集整理的资料汇编而成。由于MCMMO插件可能会更新，本文档内容可能与最新版本存在差异。如有不准确之处，欢迎通过[GitHub](https://github.com/zxbhello/Website)提交PR进行改进。
 :::
 
