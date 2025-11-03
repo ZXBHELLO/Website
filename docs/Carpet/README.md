@@ -18,7 +18,7 @@ permalink: /carpet/
 ## 原版Carpet
 <LinkCard icon="mdi:alpha-c-box-outline" title="Carpet基础介绍" href="./carpet/intro.md" />
 <LinkCard icon="mdi:format-list-bulleted" title="Carpet规则分类" href="./carpet/rules.md" />
-<LinkCard icon="mdi:console-line" title="Carpet指令" href="./carpet/commands.md" />
+<LinkCard icon="mdi:console-line" title="Carpet指令教程" href="./carpet/commands.md" />
 
 ## Carpet附属模组
 <LinkCard icon="mdi:puzzle-plus-outline" title="Carpet Extra" href="./addons/carpet-extra.md" />

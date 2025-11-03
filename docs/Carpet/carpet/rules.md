@@ -1,7 +1,7 @@
 ---
 title: Carpet规则分类
 date: 2025-11-04
-permalink: /carpet/carpet/rules/
+permalink: /carpet/rules/
 ---
 
 # Carpet规则分类

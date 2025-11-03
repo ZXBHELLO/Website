@@ -6,11 +6,11 @@ permalink: /carpet/addons/carpet-extra/
 
 # Carpet Extra
 
-Carpet Extra是Carpet模组的一个官方扩展模组，添加了许多额外的功能，特别是大量的发射器行为扩展、可再生资源获取方式等[^1]。
+Carpet Extra是Carpet模组的一个官方扩展模组，添加了许多额外的功能，特别是大量的发射器行为扩展、可再生资源获取方式等[^1].
 
 ## 简介
 
-Carpet Extra由Carpet原作者gnembon开发，为Fabric Carpet添加额外的特性。它包含了许多有趣的发射器行为扩展、新的可再生资源获取方式等[^1]。
+Carpet Extra由Carpet原作者gnembon开发，为Fabric Carpet添加额外的特性。它包含了许多有趣的发射器行为扩展、新的可再生资源获取方式等[^1].
 
 ## 安装方法
 

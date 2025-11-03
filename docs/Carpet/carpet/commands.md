@@ -1,7 +1,7 @@
 ---
 title: Carpet指令
 date: 2025-11-04
-permalink: /carpet/carpet/commands/
+permalink: /carpet/commands/
 ---
 
 # Carpet指令

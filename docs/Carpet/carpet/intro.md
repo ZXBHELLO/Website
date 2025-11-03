@@ -1,7 +1,7 @@
 ---
 title: Carpet基础介绍
 date: 2025-11-04
-permalink: /carpet/carpet/intro/
+permalink: /docs/Carpet/carpet/intro/
 ---
 
 # Carpet基础介绍

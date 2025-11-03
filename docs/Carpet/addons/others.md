@@ -1,7 +1,7 @@
 ---
 title: 其他常用Carpet附属模组
 date: 2025-11-04
-permalink: /carpet/addons/others/
+permalink: /carpet/addons/more/
 ---
 
 # 其他常用Carpet附属模组

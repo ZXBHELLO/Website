@@ -6,7 +6,7 @@ permalink: /carpet/addons/carpet-tis-addition/
 
 # Carpet TIS Addition
 
-Carpet TIS Addition是由TIS团队开发的Carpet模组扩展，包含了许多有趣的功能和游戏监控特性[^1]。
+Carpet TIS Addition是由TIS团队开发的Carpet模组扩展，包含了许多有趣的功能和游戏监控特性[^1].
 
 ## 简介
 
