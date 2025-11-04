@@ -35,7 +35,9 @@ list:
         icon: steam
         link: https://steamcommunity.com/id/PineSensei/
 ---
-欢迎互换友链！
-注：排名不分先后，按照姓氏字母排序。
 
+::: info
+欢迎 Pull Request 互换友链！
+注：按照时间顺序。
+:::
 <!-- 可以添加更多自定义内容 -->
