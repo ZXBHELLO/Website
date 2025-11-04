@@ -34,6 +34,21 @@ list:
       -
         icon: steam
         link: https://steamcommunity.com/id/PineSensei/
+  -
+    name: Ryan100c
+    link: https://hotpad100c.github.io/
+    avatar: https://github.com/hotpad100c.png
+    desc: 假如再也碰不到你，祝你ቼ ዽ ጿ ኈ ቼ ዽ ጿ ኈ ቼ！
+    socials:
+      -
+        icon: github
+        link: https://github.com/hotpad100c
+      -
+        icon: bilibili
+        link: https://b23.tv/gR2fZk3
+      -
+        icon: youtube
+        link: https://youtube.com/@ryan100c
 ---
 欢迎互换友链！
 注：排名不分先后，按照姓氏字母排序。
