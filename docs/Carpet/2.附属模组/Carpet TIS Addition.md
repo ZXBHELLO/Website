@@ -13,11 +13,13 @@ Carpet TIS Addition是由TIS团队开发的Carpet模组扩展，包含了许多�
 
 Carpet TIS Addition为原版Carpet模组添加了大量额外功能，主要包括：
 
-- 游戏监控功能
-- 命令增强
-- 规则扩展
-- 性能优化
-- 实用工具
+| 功能类别 | 描述 |
+|----------|------|
+| 游戏监控 | 游戏监控功能 |
+| 命令增强 | 命令增强 |
+| 规则扩展 | 规则扩展 |
+| 性能优化 | 性能优化 |
+| 实用工具 | 实用工具 |
 
 ## 游戏监控功能
 
@@ -29,6 +31,10 @@ Carpet TIS Addition为原版Carpet模组添加了大量额外功能，主要包�
 
 ### chunkDebugTool
 区块调试工具，用于调试和分析区块加载情况。
+
+**监控用途：**
+- 实时监控服务器状态
+- 分析性能瓶颈
 
 ## 命令增强
 
@@ -53,6 +59,10 @@ Carpet TIS Addition为原版Carpet模组添加了大量额外功能，主要包�
 ### commandProfile
 性能分析命令。
 
+**命令集合：**
+- 丰富的调试命令集
+- 详细的数据追踪功能
+
 ## 规则扩展
 
 ### optimizedHardHitBoxEntityCollision
@@ -67,6 +77,10 @@ Carpet TIS Addition为原版Carpet模组添加了大量额外功能，主要包�
 ### tntDupingFix
 TNT复制漏洞修复，修复TNT复制漏洞。
 
+**规则优化：**
+- 优化游戏性能
+- 修复游戏漏洞
+
 ## 性能优化
 
 ### optimizedFastEntityScheduler
@@ -74,6 +88,10 @@ TNT复制漏洞修复，修复TNT复制漏洞。
 
 ### optimizedTntExplosion
 优化TNT爆炸，提高TNT爆炸性能。
+
+**性能改进：**
+- 优化核心游戏机制
+- 减少系统资源消耗
 
 ## 实用工具
 
@@ -86,9 +104,17 @@ TNT复制漏洞修复，修复TNT复制漏洞。
 ### hopperCounter
 漏斗计数器，统计通过漏斗的物品数量。
 
+**工具功能：**
+- 自动合成和存储系统
+- 物品流通统计分析
+
 ## 配置文件
 
 Carpet TIS Addition的配置文件通常保存在`config/carpet-tis-addition.conf`中，可以手动编辑以设置默认值。
+
+**配置管理：**
+- 统一管理模组配置
+- 重启后配置依然有效
 
 ## 参考资料
 

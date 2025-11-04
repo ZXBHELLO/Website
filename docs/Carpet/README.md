@@ -10,18 +10,16 @@ createTime: 2025/11/04 00:32:12
 本指南并非Carpet官方文档，而是基于互联网上收集整理的资料汇编而成。由于Carpet模组可能会更新，本文档内容可能与最新版本存在差异。如有不准确之处，欢迎通过[GitHub](https://github.com/zxbhello/Website)提交PR进行改进。
 :::
 
-欢迎来到Carpet模组的指南！Carpet是一个为Minecraft设计的强大模组，它为原版Minecraft增加了丰富的技术性功能，特别适合技术型服务器和红石工程师使用。
 
-无论你是普通玩家还是服务器管理员（腐竹），这份指南都将帮助你全面了解和使用Carpet模组及其相关扩展。
 
-# 快捷方式
+## 快速导航
 
-## 1.原版Carpet
+### 原版Carpet
 <LinkCard icon="mdi:alpha-c-box-outline" title="Carpet基础介绍" href="./1.原版Carpet/基础介绍.md" />
 <LinkCard icon="mdi:format-list-bulleted" title="Carpet规则分类" href="./1.原版Carpet/规则分类.md" />
 <LinkCard icon="mdi:console-line" title="Carpet指令" href="./1.原版Carpet/指令.md" />
 
-## 2.附属模组
+### 附属模组
 <LinkCard icon="mdi:puzzle-plus-outline" title="Carpet Extra" href="./2.附属模组/Carpet Extra.md" />
 <LinkCard icon="mdi:puzzle-plus-outline" title="Carpet TIS Addition" href="./2.附属模组/Carpet TIS Addition.md" />
 <LinkCard icon="mdi:puzzle-plus-outline" title="其他常用附属" href="./2.附属模组/其他常用附属.md" />
@@ -40,15 +38,43 @@ Carpet Mod是一个开源的Minecraft模组，基于Fabric开发。它允许玩�
 Carpet最初由gnembon开发，现在由社区维护。它通过添加各种规则和命令来扩展和增强游戏的可玩性[^2]。
 :::
 
-### Carpet的特点
+### 核心特性
 
-::: details 点击展开Carpet的主要特点
-- 性能优化：通过加速测试和调整机制，帮助玩家快速迭代自动化设计，减少资源占用
-- 游戏机制改进：提供了一系列原版游戏中不具备的特性，如更灵活的方块放置、实体操作等
-- 调试与监控：增强了游戏内的数据监控功能，使玩家能够实时了解服务器状态、性能指标等关键信息
-- 高度可定制：通过规则系统，可以灵活开启或关闭各种功能
-- 丰富的扩展生态系统：支持多种附属模组，提供更多功能
-:::
+<CarouselWrapper>
+  <CardGrid>
+    <Card title="性能优化" icon="mdi:speedometer">
+      通过加速测试和调整机制，帮助玩家快速迭代自动化设计，减少资源占用
+    </Card>
+    <Card title="机制改进" icon="mdi:cog">
+      提供了一系列原版游戏中不具备的特性，如更灵活的方块放置、实体操作等
+    </Card>
+    <Card title="调试监控" icon="mdi:monitor-eye">
+      增强了游戏内的数据监控功能，使玩家能够实时了解服务器状态、性能指标等关键信息
+    </Card>
+    <Card title="高度可定制" icon="mdi:tune">
+      通过规则系统，可以灵活开启或关闭各种功能
+    </Card>
+    <Card title="丰富生态" icon="mdi:puzzle">
+      支持多种附属模组，提供更多功能
+    </Card>
+  </CardGrid>
+</CarouselWrapper>
+
+### 适用场景
+
+<CarouselWrapper>
+  <CardGrid>
+    <Card title="技术服" icon="mdi:server-network">
+      需要对游戏环境进行精细控制的服务器管理者
+    </Card>
+    <Card title="生电玩家" icon="mdi:lightning-bolt-circle">
+      深入探索游戏机制并通过模组实现高级自动化和优化的玩家
+    </Card>
+    <Card title="红石工程" icon="mdi:creation">
+      红石工程师和建筑大师的理想工具
+    </Card>
+  </CardGrid>
+</CarouselWrapper>
 
 ## 参考资料
 

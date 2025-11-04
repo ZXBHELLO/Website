@@ -185,6 +185,7 @@ const Carpet = defineCollection({
   title: 'Carpet模组文档',
   // 手动配置侧边栏结构
   sidebar: [
+    '',
     {
       text: '原版Carpet',
       prefix: '1.原版Carpet/',

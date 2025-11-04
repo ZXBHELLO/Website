@@ -11,7 +11,7 @@ config:
         -
           theme: brand
           text: 个人页
-          link: /about.html
+          link: /blog/about-me.html
         -
           theme: brand
           text: QQ群
