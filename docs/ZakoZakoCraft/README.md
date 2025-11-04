@@ -1,0 +1,126 @@
+---
+pageLayout: home
+home: true
+title: ZakoZakoCraft
+createTime: 2025/09/06 23:49:14
+permalink: /ZakoZakoCraft/
+externalLinkIcon: false
+config:
+  - type: hero
+    full: true
+    backgroundImage: /assets/ZakoZakoCraft/background3.png
+    hero:
+      name: ZakoZakoCraft
+      text: 高版本 · 纯公益 · 零杂质 · 高品质 Minecraft 服务器
+      actions:
+        - theme: brand
+          text: 快速开始
+          link: join/
+        - theme: alt
+          text: 审核群
+          link: https://qm.qq.com/q/wGEB6fFybC
+  - type: custom
+---
+
+:::: demo-wrapper
+# 服务器介绍
+
+- **定位** >
+  高版本公益群组服务器
+  公益性质的Minecraft多人游戏服务器，不以盈利为目的
+
+- **口号** >
+  这里是生存与冒险、温馨与和谐交汇的幻想世界。
+  我们有着公平公正的管理条例，为玩家的权益以及服务器的管理保驾护航。
+
+- **版本** >
+  JAVA 版（离线/正版）1.19–1.21.10
+  手机(FCL/HMCL-PE)电脑(PCL/HMCL)都能玩~！
+::::
+
+<center>
+  <h1>服务器列表</h1>
+</center>
+
+<CardGrid>
+  <LinkCard title="休闲生存服" icon="twemoji:desktop-computer" href="function/overview/">
+    不限生电 | 经济 | 领地 | 公会 | 反作弊 | 超大视距
+  </LinkCard>
+  <LinkCard title="实验创造服" icon="twemoji:open-book" href="Creative/overview/">
+    Carpet Mod、Axiom Mod等功能性MOD加持
+  </LinkCard>
+  <LinkCard title="建筑创造服" icon="twemoji:rocket" href="Building/overview/">
+    内置256x256超大地皮系统、公理MOD、创世神
+  </LinkCard>
+  <LinkCard title="娱乐游戏服" icon="twemoji:video-game" href="Games/overview/">
+    数百种休闲小游戏、闲暇之余的消遣之地
+  </LinkCard>
+</CardGrid>
+
+<center>
+  <h1>图片一览</h1>
+</center>
+
+<script setup>
+import Swiper from 'vuepress-theme-plume/features/Swiper.vue'
+</script>
+
+<Swiper :items="[
+  '/assets/ZakoZakoCraft/ExchangeImage/1.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/2.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/3.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/4.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/5.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/6.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/7.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/8.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/9.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/a.png',  
+  '/assets/ZakoZakoCraft/ExchangeImage/b.png',
+  '/assets/ZakoZakoCraft/ExchangeImage/c.png',
+]" effect="cards" />
+
+
+<center>
+  <h1>服务器特色</h1>
+</center>
+
+<CardGrid>
+  <Card title="领地系统" icon="twemoji:house-with-garden">
+    拥有一个属于自己的小家吧！在这里你可以自由建造心中理想家园，不用担心别人来捣乱。邀请好友一起来参观你的杰作，分享快乐时光~
+  </Card>
+  <Card title="经济系统" icon="twemoji:money-bag">
+    努力挖矿、打怪就能赚金币哦！看着钱包慢慢鼓起来是不是特别有成就感？快用这些金币去商城买喜欢的东西吧，我们这里有超多好物！
+  </Card>
+  <Card title="系统商店" icon="twemoji:shopping-cart">
+    哇～这里有好多宝藏呀！从实用工具到稀有材料应有尽有，就像一个魔法百货商店一样！快来看看有没有你心仪的好东西吧~
+  </Card>
+  <Card title="社交系统" icon="twemoji:busts-in-silhouette">
+    在这里你会遇到很多有趣的小伙伴！可以一起探险、建家、聊天谈心，甚至组建自己的小团体。快来交新朋友，扩大朋友圈吧！
+  </Card>
+  <Card title="玩家称号" icon="twemoji:military-medal">
+    每个成就都值得被纪念！完成各种挑战就可以获得独特的称号和勋章，展示你的实力和经历，成为大家眼中的闪耀之星！
+  </Card>
+  <Card title="收集挑战" icon="twemoji:trophy">
+    收集控的天堂！寻找隐藏在世界各地的宝藏吧，每找到一个都会有惊喜奖励哦。看看谁能率先完成所有收集挑战呢？
+  </Card>
+  <Card title="模组扩展" icon="twemoji:package">
+    厌倦了普通的玩法？来试试我们的趣味模组吧！它们会让你的游戏体验变得超级有趣，就像打开了新世界的大门一样！
+  </Card>
+  <Card title="养老种田" icon="twemoji:seedling">
+    想放松一下？那就来种种菜、养养花吧！悠闲地享受田园生活，感受四季变化的美好。这里是治愈心灵的小天地哟~
+  </Card>
+  <Card title="生电支持" icon="twemoji:high-voltage">
+    生电爱好者的乐园！我们完全不限制生电玩法，几乎所有的生电装置都可以在这里实现。发挥你的创造力，打造炫酷的自动化设备吧！
+  </Card>
+  <Card title="民主共建" icon="twemoji:ballot-box-with-check">
+    拒绝神权，人人平等！我们实行透明化管理制度，所有规则公开公正。每个玩家都能参与建设，提出宝贵建议，共同打造理想中的服务器！
+  </Card>
+</CardGrid>
+
+
+---
+
+<center>
+《我的世界》和《Minecraft》是微软公司和 Mojang Synergies AB 的商标<br/>本站点及服务器与微软公司没有从属关系
+</center>
