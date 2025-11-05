@@ -6,10 +6,6 @@ permalink: /mcmmo/
 createTime: 2025/11/03 12:41:37
 ---
 
-::: warning 免责声明
-本指南并非MCMMO官方文档，而是基于互联网上收集整理的资料汇编而成。由于MCMMO插件可能会更新，本文档内容可能与最新版本存在差异。如有不准确之处，欢迎通过[GitHub](https://github.com/zxbhello/Website)提交PR进行改进。
-:::
-
 欢迎来到MCMMO插件的完整指南！MCMMO是一个为Minecraft服务器设计的RPG风格插件，它为原版Minecraft增加了技能系统、等级提升、特殊能力等丰富的RPG元素。
 
 无论你是普通玩家还是服务器管理员（腐竹），这份指南都将帮助你全面了解和使用MCMMO插件。
@@ -49,6 +45,10 @@ MCMMO是一个开源的Minecraft服务器插件，为游戏添加了RPG元素。
 - **稀有战利品和掉落物** - 增加游戏的趣味性和奖励
 - **全新的游戏机制** - 丰富原版游戏体验
 - **更深入的PVP体验** - 增强战斗系统的策略性
+
+::: warning 免责声明
+本指南并非MCMMO官方文档，而是基于互联网上收集整理的资料汇编而成。由于MCMMO插件可能会更新，本文档内容可能与最新版本存在差异。如有不准确之处，欢迎通过[GitHub](https://github.com/zxbhello/Website)提交PR进行改进。
+:::
 
 ## 参考资料
 
