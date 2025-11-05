@@ -14,20 +14,20 @@ createTime: 2025/11/03 12:41:37
 
 无论你是普通玩家还是服务器管理员（腐竹），这份指南都将帮助你全面了解和使用MCMMO插件。
 
-# 快捷方式
+## 快捷方式
 
 ## 玩家
-<LinkCard icon="mdi:account-card-details-outline" title="MCMMO基础介绍" href="./players/intro.md" />
-<LinkCard icon="game-icons:mining" title="采集技能" href="./players/gathering.md" />
-<LinkCard icon="game-icons:crossed-swords" title="战斗技能" href="./players/combat.md" />
-<LinkCard icon="game-icons:anvil" title="生产技能" href="./players/production.md" />
-<LinkCard icon="mdi:console-line" title="玩家指令" href="./players/commands.md" />
+<LinkCard icon="mdi:account-card-details-outline" title="MCMMO基础介绍" href="./players/基础介绍.md" />
+<LinkCard icon="game-icons:mining" title="采集技能" href="./players/采集类技能详解.md" />
+<LinkCard icon="game-icons:crossed-swords" title="战斗技能" href="./players/战斗类技能详解.md" />
+<LinkCard icon="game-icons:anvil" title="生产技能" href="./players/生产类技能详解.md" />
+<LinkCard icon="mdi:console-line" title="玩家指令" href="./players/玩家指令.md" />
 
 ## 管理员
-<LinkCard icon="mdi:download-circle-outline" title="安装配置" href="./admins/install.md" />
-<LinkCard icon="mdi:shield-account" title="权限管理" href="./admins/permissions.md" />
-<LinkCard icon="mdi:account-supervisor-circle" title="管理指令" href="./admins/commands.md" />
-<LinkCard icon="mdi:cog" title="高级配置" href="./admins/config.md" />
+<LinkCard icon="mdi:download-circle-outline" title="安装配置" href="./admins/安装与配置指南.md" />
+<LinkCard icon="mdi:shield-account" title="权限管理" href="./admins/权限管理.md" />
+<LinkCard icon="mdi:account-supervisor-circle" title="管理指令" href="./admins/管理员指令.md" />
+<LinkCard icon="mdi:cog" title="高级配置" href="./admins/高级配置.md" />
 
 ---
 
@@ -43,14 +43,12 @@ MCMMO是一个开源的Minecraft服务器插件，为游戏添加了RPG元素。
 
 ### MCMMO的特点
 
-::: details 点击展开MCMMO的主要特点
-- 16种不同的技能系统
-- 技能等级和经验值系统
-- 特殊主动和被动能力
-- 稀有战利品和掉落物
-- 全新的游戏机制
-- 更深入的PVP体验
-:::
+- **16种不同的技能系统** - 涵盖采集、战斗、生产等各个方面
+- **技能等级和经验值系统** - 通过使用技能获得经验并升级
+- **特殊主动和被动能力** - 每种技能都有独特的能力
+- **稀有战利品和掉落物** - 增加游戏的趣味性和奖励
+- **全新的游戏机制** - 丰富原版游戏体验
+- **更深入的PVP体验** - 增强战斗系统的策略性
 
 ## 参考资料
 
