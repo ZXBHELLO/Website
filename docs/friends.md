@@ -1,7 +1,7 @@
 ---
 friends: true
 title: 友情链接
-description: 我的友情链接页面
+description: 我的朋友们
 permalink: /friends/
 contentPosition: after
 list:
@@ -9,8 +9,6 @@ list:
     name: pengzhanbo
     link: https://pengzhanbo.cn/
     avatar: https://pengzhanbo.cn/images/blogger-fav.png
-    location: 广州，中国
-    organization: VuePress
     desc: 即使慢，驰而不息，纵会落后，纵会失败，但必须能够到达他所向的目标。
     socials:
       -
@@ -51,7 +49,8 @@ list:
         link: https://youtube.com/@ryan100c
 ---
 
-::: info
-欢迎 Pull Request 互换友链！
+:::: demo-wrapper title="如何添加友链？"
+::: info 提交 `friends.md` 或 `issue` 添加/申请友链~！
 :::
+::::
 <!-- 可以添加更多自定义内容 -->

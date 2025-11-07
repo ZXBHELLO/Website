@@ -6,11 +6,11 @@ full: true
 ---
 ## 文档教程
 <CardGrid>
-  <LinkCard icon="fluent:document-one-page-24-regular" title="杂鱼服文档" href="/ZakoZakoCraft/">
+  <LinkCard icon="material-symbols:article-outline" title="杂鱼服文档" href="/ZakoZakoCraft/">
     高版本公益群组服务器
   </LinkCard>
   <LinkCard icon="/assets/nav/mcmmo.png" title="MCMMO插件文档" href="/MCMMO/">
-    为Minecraft添加RPG元素的插件
+    为Minecraft添加==RPG元素==的插件
   </LinkCard>
   <LinkCard icon="/assets/nav/carpet.png" title="Carpet模组文档" href="/Carpet/">
     原版Minecraft技术性功能增强模组

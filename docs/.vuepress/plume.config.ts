@@ -23,11 +23,12 @@ export default defineThemeConfig({
   appearance: true,  // 配置 深色模式
 
   social: [
-    { icon: 'bilibili', link: 'https://space.bilibili.com/1917782316' },
     { icon: 'github', link: 'https://github.com/ZXBHELLO' },
-    { icon: 'email', link: 'mailto:zxbhello@gmail.com' },
+    { icon: 'bilibili', link: 'https://space.bilibili.com/1917782316' },
+    { icon: 'youtube', link: 'https://www.youtube.com/@ZXBHELLO' },
+    { icon: 'discord', link: 'mailto:zxbhello@gmail.com' },
   ],
-  navbarSocialInclude: ['bilibili', 'github'], // 允许显示在导航栏的 social 社交链接
+  navbarSocialInclude: ['bilibili', 'youtube', 'github'], // 允许显示在导航栏的 social 社交链接
   // navbarSocialInclude: ['github'], // 允许显示在导航栏的 social 社交链接
   // aside: true, // 页内侧边栏， 默认显示在右侧
   // outline: [2, 3], // 页内大纲， 默认显示 h2, h3
@@ -44,20 +45,20 @@ export default defineThemeConfig({
 
   /* 站点页脚 */
     footer: {
-      message: 'Power by ZXBHELLO',
-      copyright: '',
+      message: '希望有朝一日能够成为人类...',
+      copyright: 'Copyright © 2024 ZXBHELLO',
     },
 
   /**
    * @see https://theme-plume.vuejs.press/config/basic/#profile
    */
   profile: {
-    avatar: 'https://theme-plume.vuejs.press/plume.png',
-    name: 'ZXBHELLO Pages',
-    description: 'ZXBHELLO的文档/博客/日记',
-    // circle: true,
-    // location: '',
-    // organization: '',
+    avatar: '',
+    name: 'ZXBHELLO',
+    description: '文档/博客/日记',
+    circle: true,
+    location: 'China',
+    organization: 'ZXBHELLO',
   },
 
   navbar,

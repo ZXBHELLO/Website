@@ -3,15 +3,25 @@ home: true
 config:
   -
     type: hero
+    effect: tint-plate
+    effectConfig:
+      r:
+        value: 220
+        offset: 36
+      g:
+        value: 220
+        offset: 36
+      b:
+        value: 220
+        offset: 36
     full: true
-    effect: liquid-ether
     hero:
       name: ZXBHELLO
-      text: 个人主页 & 技术文档
+      text: 个人主页 & 技术文档 & 项目仓库
       image: /plume.svg
       actions:
         -
-          theme: brand
+          theme: alt
           text: 个人页
           link: /blog/about-me/
         -
@@ -19,7 +29,7 @@ config:
           text: 导航页
           link: /nav/
         -
-          theme: brand
+          theme: alt
           text: QQ群
           link: https://qm.qq.com/q/SPZEHOyWsw
 ---
