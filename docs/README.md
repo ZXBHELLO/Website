@@ -14,6 +14,10 @@ config:
           link: /blog/about-me.html
         -
           theme: brand
+          text: 导航页
+          link: /nav
+        -
+          theme: brand
           text: QQ群
           link: https://qm.qq.com/q/SPZEHOyWsw
           
