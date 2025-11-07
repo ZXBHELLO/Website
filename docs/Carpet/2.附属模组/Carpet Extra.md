@@ -7,7 +7,7 @@ createTime: 2025/11/04 00:33:26
 
 # Carpet Extra
 
-Carpet Extra是Carpet模组的一个官方扩展模组，添加了许多额外的功能，特别是大量的发射器行为扩展、可再生资源获取方式等[^1]。
+Carpet Extra是Carpet模组的一个官方扩展模组，添加了许多额外的功能，特别是大量的发射器行为扩展、可再生资源获取方式等。
 
 ## 功能概述
 
@@ -120,5 +120,5 @@ Carpet Extra的配置文件通常保存在`config/carpet.conf`中，可以手动
 ## 参考资料
 
 ::: info 相关链接
-[^1]: https://github.com/gnembon/carpet-extra
+- [Carpet Extra GitHub仓库](https://github.com/gnembon/carpet-extra)
 :::

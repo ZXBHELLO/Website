@@ -6,10 +6,9 @@ permalink: /mcmmo/
 createTime: 2025/11/03 12:41:37
 ---
 
-欢迎来到MCMMO插件的汉化文档！MCMMO是一个为Minecraft服务器设计的RPG风格插件，它为原版Minecraft增加了技能系统、等级提升、特殊能力等丰富的RPG元素。
-
-无论你是普通玩家还是服务器管理员（腐竹），这份指南都将帮助你简单了解和使用MCMMO插件。
-
+::: info 使用说明
+本文档为MCMMO插件汉化文档，点击 `下方卡片` 快速跳转到相关章节。
+:::
 ## 快捷方式
 
 ## 玩家导航
@@ -26,10 +25,6 @@ createTime: 2025/11/03 12:41:37
 <LinkCard icon="mdi:cog" title="高级配置" href="./admins/高级配置.md" />
 
 ---
-
-::: info 使用说明
-本文档为MCMMO插件指南，包含玩家和管理员（腐竹）文档。点击上方卡片快速跳转到相关章节。
-:::
 
 ::: warning 免责声明
 本文档并非MCMMO官方文档，而是基于互联网上收集整理的资料汇编而成。由于MCMMO插件可能会更新，本文档内容可能与最新版本存在差异。如有不准确之处，欢迎通过[GitHub](https://github.com/zxbhello/Website)提交PR进行改进。

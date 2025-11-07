@@ -7,7 +7,7 @@ createTime: 2025/11/04 00:33:45
 
 # Carpet TIS Addition
 
-Carpet TIS Addition是由TIS团队开发的Carpet模组扩展，包含了许多有趣的功能和游戏监控特性[^1]。
+Carpet TIS Addition是由TIS团队开发的Carpet模组扩展，包含了许多有趣的功能和游戏监控特性。
 
 ## 功能概述
 
@@ -119,5 +119,5 @@ Carpet TIS Addition的配置文件通常保存在`config/carpet-tis-addition.con
 ## 参考资料
 
 ::: info 相关链接
-[^1]: https://github.com/TISUnion/Carpet-TIS-Addition
+- [Carpet TIS Addition GitHub仓库](https://github.com/TISUnion/Carpet-TIS-Addition)
 :::
