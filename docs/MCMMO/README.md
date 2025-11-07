@@ -1,25 +1,25 @@
 ---
-title: MCMMO插件文档
+title: MCMMO插件汉化文档
 date: 2025-11-03T00:00:00.000Z
 article: false
 permalink: /mcmmo/
 createTime: 2025/11/03 12:41:37
 ---
 
-欢迎来到MCMMO插件的完整指南！MCMMO是一个为Minecraft服务器设计的RPG风格插件，它为原版Minecraft增加了技能系统、等级提升、特殊能力等丰富的RPG元素。
+欢迎来到MCMMO插件的汉化文档！MCMMO是一个为Minecraft服务器设计的RPG风格插件，它为原版Minecraft增加了技能系统、等级提升、特殊能力等丰富的RPG元素。
 
-无论你是普通玩家还是服务器管理员（腐竹），这份指南都将帮助你全面了解和使用MCMMO插件。
+无论你是普通玩家还是服务器管理员（腐竹），这份指南都将帮助你简单了解和使用MCMMO插件。
 
 ## 快捷方式
 
-## 玩家
-<LinkCard icon="mdi:account-card-details-outline" title="MCMMO基础介绍" href="./players/基础介绍.md" />
+## 玩家导航
+<LinkCard icon="mdi:account-card-details-outline" title="基础介绍" href="./players/基础介绍.md" />
 <LinkCard icon="game-icons:mining" title="采集技能" href="./players/采集类技能详解.md" />
 <LinkCard icon="game-icons:crossed-swords" title="战斗技能" href="./players/战斗类技能详解.md" />
 <LinkCard icon="game-icons:anvil" title="生产技能" href="./players/生产类技能详解.md" />
 <LinkCard icon="mdi:console-line" title="玩家指令" href="./players/玩家指令.md" />
 
-## 管理员
+## 管理员(腐竹)导航
 <LinkCard icon="mdi:download-circle-outline" title="安装配置" href="./admins/安装与配置指南.md" />
 <LinkCard icon="mdi:shield-account" title="权限管理" href="./admins/权限管理.md" />
 <LinkCard icon="mdi:account-supervisor-circle" title="管理指令" href="./admins/管理员指令.md" />
@@ -28,26 +28,11 @@ createTime: 2025/11/03 12:41:37
 ---
 
 ::: info 使用说明
-本文档为MCMMO插件完整指南，包含玩家和管理员（腐竹）所需的全部信息。点击上方卡片快速跳转到相关章节。
+本文档为MCMMO插件指南，包含玩家和管理员（腐竹）文档。点击上方卡片快速跳转到相关章节。
 :::
-
-## 什么是MCMMO？
-
-::: tip MCMMO简介
-MCMMO是一个开源的Minecraft服务器插件，为游戏添加了RPG元素。玩家可以通过使用各种工具和技能来获得经验值并升级，解锁特殊能力和增强效果。
-:::
-
-### MCMMO的特点
-
-- **16种不同的技能系统** - 涵盖采集、战斗、生产等各个方面
-- **技能等级和经验值系统** - 通过使用技能获得经验并升级
-- **特殊主动和被动能力** - 每种技能都有独特的能力
-- **稀有战利品和掉落物** - 增加游戏的趣味性和奖励
-- **全新的游戏机制** - 丰富原版游戏体验
-- **更深入的PVP体验** - 增强战斗系统的策略性
 
 ::: warning 免责声明
-本指南并非MCMMO官方文档，而是基于互联网上收集整理的资料汇编而成。由于MCMMO插件可能会更新，本文档内容可能与最新版本存在差异。如有不准确之处，欢迎通过[GitHub](https://github.com/zxbhello/Website)提交PR进行改进。
+本文档并非MCMMO官方文档，而是基于互联网上收集整理的资料汇编而成。由于MCMMO插件可能会更新，本文档内容可能与最新版本存在差异。如有不准确之处，欢迎通过[GitHub](https://github.com/zxbhello/Website)提交PR进行改进。
 :::
 
 ## 参考资料

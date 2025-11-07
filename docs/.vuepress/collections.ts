@@ -149,9 +149,9 @@ const MCMMO = defineCollection({
       prefix: 'players/',
       items: [
         '基础介绍',
-        '采集类技能详解',
-        '战斗类技能详解',
-        '生产类技能详解',
+        '采集技能',
+        '战斗技能',
+        '生产技能',
         '玩家指令'
       ],
       collapsed:false
@@ -160,10 +160,10 @@ const MCMMO = defineCollection({
       text: '管理员指南',
       prefix: 'admins/',
       items: [
-        '安装与配置指南',
+        '安装指南',
         '权限管理',
         '高级配置',
-        '管理员指令'
+        '管理指令'
       ],
       collapsed:false
     }
