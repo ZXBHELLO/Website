@@ -45,12 +45,6 @@ export default defineUserConfig({
     lastUpdated: true,
     contributors: {
       mode: 'block',
-      info: [
-        {
-          username: 'ZXBHELLO', // github username
-          alias: ['ZXBHELLO'], // 别名，本地 git 配置中的用户名
-        }
-      ]
     },
     changelog: true,
     copyright: 'CC-BY-NC-SA-4.0',
