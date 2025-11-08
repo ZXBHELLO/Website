@@ -96,15 +96,6 @@ export const navData = [
     items: [
       {
         //不填ID好像也可以?
-        title: '没有描述的示例',
-        // description: '没有描述',
-        url: 'https://github.com/ZXBHELLO/Website',
-        iconType: 'iconify',
-        icon: 'line-md:emoji-smile-wink',
-        showIconBorder: true,
-      },
-      {
-        //不填ID好像也可以?
         title: 'iconfiy图标示例',
         description: '支持iconfiy图标',
         url: 'https://github.com/ZXBHELLO/Website',
@@ -114,17 +105,26 @@ export const navData = [
       },
       {
         //不填ID好像也可以?
+        title: '没有描述的示例',
+        // description: '没有描述',
+        url: 'https://github.com/ZXBHELLO/Website',
+        iconType: 'iconify',
+        icon: 'line-md:emoji-smile-wink',
+        showIconBorder: true,
+      },
+      {
+        //不填ID好像也可以?
         title: '没有图标边框的示例',
-        description: '图标没有边框',
+        description: '这个示例图标不显示边框',
         url: 'https://github.com/ZXBHELLO/Website',
         iconType: 'iconify',
         icon: 'line-md:emoji-smile-wink',
         showIconBorder: false,  //←这里禁用了
       },
       {
-        title: '没有图标的链接',
-        description: '这个链接不显示图标',
-        url: 'https://example.com',
+        title: '没有图标的示例',
+        description: '这个示例不显示图标',
+        url: 'https://github.com/ZXBHELLO/Website',
         icon: 'none',  //不写这一行也行
       },
     ]
