@@ -22,10 +22,12 @@ export default defineUserConfig({
   head: [
     // 配置站点图标
     ['link', { rel: 'icon', type: 'image/png', href: 'https://theme-plume.vuejs.press/favicon-32x32.png' }],
+    // 添加 Iconify 支持
+    ['script', { src: 'https://code.iconify.design/2/2.1.2/iconify.min.js', async: 'true' }]
   ],
 
   // 开发服务器配置
-  port: 3000,
+  port: 3001, // 更改端口以避免冲突
   host: '0.0.0.0',
 
   bundler: webpackBundler(),
@@ -42,7 +44,13 @@ export default defineUserConfig({
 
     /* 页内信息 */
     editLink: true,
-    lastUpdated: true,
+    lastUpdated: {
+      text: '最后更新于',
+      formatOptions: {
+        dateStyle: 'short',
+        timeStyle: 'short'
+      }
+    },
     contributors: {
       mode: 'block',
     },
