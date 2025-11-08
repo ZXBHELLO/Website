@@ -63,54 +63,55 @@ const ZakoZakoCraft = defineCollection({
     '',
     {
       text: '从此处开始',
-      prefix: '1.从此处开始/',
+      link: '从此处开始/',
+      prefix: '从此处开始/',
       items: [
-        '1.加入服务器',
-        '2.服务器规则',
-        '3.常见问题',
-        '4.名人堂',
-        '5.封神榜'
+        '加入服务器',
+        '服务器规则',
+        '常见问题',
+        '名人堂',
+        '封神榜'
       ]
     },
     {
       text: '休闲生存服',
-      link: '2.休闲生存服/',
-      prefix: '2.休闲生存服/',
+      link: '休闲生存服/',
+      prefix: '休闲生存服/',
       items: [
-        '1.领地系统',
-        '2.工会系统',
-        '3.经济功能',
-        '4.实用功能',
-        '5.特色配方',
-        '6.装饰功能'
+        '领地系统',
+        '工会系统',
+        '经济功能',
+        '实用功能',
+        '特色配方',
+        '装饰功能'
       ],
       collapsed: true
     },
     {
       text: '实验创造服',
-      link: '3.实验创造服/',
-      prefix: '3.实验创造服/',
+      link: '实验创造服/',
+      prefix: '实验创造服/',
       items: [
-        '1.Carpet地毯',
-        '2.Axiom公理'
+        'Carpet地毯',
+        'Axiom公理'
       ],
       collapsed: true
     },
     {
       text: '建筑创造服',
-      link: '4.建筑创造服/',
-      prefix: '4.建筑创造服/',
+      link: '建筑创造服/',
+      prefix: '建筑创造服/',
       items: [
-        '1.地皮系统',
-        '2.Axiom公理',
-        '3.创世神'
+        '地皮系统',
+        'Axiom公理',
+        '创世神'
       ],
       collapsed: true
     },
     {
       text: '娱乐游戏服',
-      link: '5.娱乐游戏服/',
-      prefix: '5.娱乐游戏服/',
+      link: '娱乐游戏服/',
+      prefix: '娱乐游戏服/',
       items: [
         ''
       ],
@@ -118,8 +119,8 @@ const ZakoZakoCraft = defineCollection({
     },
     {
       text: '先行测试服',
-      link: '6.先行测试服/',
-      prefix: '6.先行测试服/',
+      link: '先行测试服/',
+      prefix: '先行测试服/',
       items: [
         ''
       ],
@@ -146,7 +147,7 @@ const MCMMO = defineCollection({
     '',
     {
       text: '玩家指南',
-      prefix: 'players/',
+      prefix: '玩家指南/',
       items: [
         '基础介绍',
         '采集技能',
@@ -157,8 +158,8 @@ const MCMMO = defineCollection({
       collapsed:false
     },
     {
-      text: '管理员指南',
-      prefix: 'admins/',
+      text: '服主指南',
+      prefix: '服主指南/',
       items: [
         '安装指南',
         '权限管理',
@@ -188,7 +189,7 @@ const Carpet = defineCollection({
     '',
     {
       text: '原版Carpet',
-      prefix: '1.原版Carpet/',
+      prefix: '原版Carpet/',
       items: [
         '基础介绍',
         '规则分类',
@@ -198,7 +199,7 @@ const Carpet = defineCollection({
     },
     {
       text: '附属模组',
-      prefix: '2.附属模组/',
+      prefix: '附属模组/',
       items: [
         'Carpet Extra',
         'Carpet TIS Addition',

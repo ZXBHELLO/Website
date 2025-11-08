@@ -14,11 +14,14 @@ config:
       text: 高版本 · 纯公益 · 零杂质 · 高品质 Minecraft 服务器
       actions:
         - theme: brand
-          text: 快速开始
-          link: join/
+          text: 加入我们
+          link: /ZakoZakoCraft/getting-started/
         - theme: alt
-          text: 审核群
+          text: 快速审核
           link: https://qm.qq.com/q/wGEB6fFybC
+        - theme: alt
+          text: 游玩规则
+          link: /ZakoZakoCraft/terms/
   - type: custom
 ---
 
