@@ -13,14 +13,14 @@ createTime: 2025/11/04 00:32:12
 ## 快速导航
 
 ### 原版Carpet
-<LinkCard icon="mdi:alpha-c-box-outline" title="Carpet基础介绍" href="./1.原版Carpet/基础介绍.md" />
-<LinkCard icon="mdi:format-list-bulleted" title="Carpet规则分类" href="./1.原版Carpet/规则分类.md" />
-<LinkCard icon="mdi:console-line" title="Carpet指令" href="./1.原版Carpet/指令.md" />
+<LinkCard icon="mdi:alpha-c-box-outline" title="Carpet基础介绍" href="/carpet/vanilla-carpet/introduction/" />
+<LinkCard icon="mdi:format-list-bulleted" title="Carpet规则分类" href="/carpet/vanilla-carpet/rules/" />
+<LinkCard icon="mdi:console-line" title="Carpet指令" href="/carpet/vanilla-carpet/commands/" />
 
 ### 附属模组
-<LinkCard icon="mdi:puzzle-plus-outline" title="Carpet Extra" href="./2.附属模组/Carpet Extra.md" />
-<LinkCard icon="mdi:puzzle-plus-outline" title="Carpet TIS Addition" href="./2.附属模组/Carpet TIS Addition.md" />
-<LinkCard icon="mdi:puzzle-plus-outline" title="其他常用附属" href="./2.附属模组/其他常用附属.md" />
+<LinkCard icon="mdi:puzzle-plus-outline" title="Carpet Extra" href="/carpet/addons/carpet-extra/" />
+<LinkCard icon="mdi:puzzle-plus-outline" title="Carpet TIS Addition" href="/carpet/addons/carpet-tis-addition/" />
+<LinkCard icon="mdi:puzzle-plus-outline" title="其他常用附属" href="/carpet/addons/others/" />
 
 ---
 

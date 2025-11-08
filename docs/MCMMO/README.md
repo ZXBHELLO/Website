@@ -12,17 +12,17 @@ createTime: 2025/11/03 12:41:37
 ## 快捷方式
 
 ## 玩家导航
-<LinkCard icon="mdi:account-card-details-outline" title="基础介绍" href="./players/基础介绍.md" />
-<LinkCard icon="game-icons:mining" title="采集技能" href="./players/采集类技能详解.md" />
-<LinkCard icon="game-icons:crossed-swords" title="战斗技能" href="./players/战斗类技能详解.md" />
-<LinkCard icon="game-icons:anvil" title="生产技能" href="./players/生产类技能详解.md" />
-<LinkCard icon="mdi:console-line" title="玩家指令" href="./players/玩家指令.md" />
+<LinkCard icon="mdi:account-card-details-outline" title="基础介绍" href="/mcmmo/players/intro/" />
+<LinkCard icon="game-icons:mining" title="采集技能" href="/mcmmo/players/gathering/" />
+<LinkCard icon="game-icons:crossed-swords" title="战斗技能" href="/mcmmo/players/combat/" />
+<LinkCard icon="game-icons:anvil" title="生产技能" href="/mcmmo/players/production/" />
+<LinkCard icon="mdi:console-line" title="玩家指令" href="/mcmmo/players/commands/" />
 
 ## 管理员(腐竹)导航
-<LinkCard icon="mdi:download-circle-outline" title="安装配置" href="./admins/安装与配置指南.md" />
-<LinkCard icon="mdi:shield-account" title="权限管理" href="./admins/权限管理.md" />
-<LinkCard icon="mdi:account-supervisor-circle" title="管理指令" href="./admins/管理员指令.md" />
-<LinkCard icon="mdi:cog" title="高级配置" href="./admins/高级配置.md" />
+<LinkCard icon="mdi:download-circle-outline" title="安装配置" href="/mcmmo/admins/install/" />
+<LinkCard icon="mdi:shield-account" title="权限管理" href="/mcmmo/admins/permissions/" />
+<LinkCard icon="mdi:account-supervisor-circle" title="管理指令" href="/mcmmo/admins/commands/" />
+<LinkCard icon="mdi:cog" title="高级配置" href="/mcmmo/admins/config/" />
 
 ---
 

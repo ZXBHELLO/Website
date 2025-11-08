@@ -15,7 +15,7 @@ export const navData = [
         id: 'mcmmo',
         title: 'MCMMO插件文档',
         description: '为Minecraft添加RPG元素的插件',
-        url: '/MCMMO/',
+        url: '/mcmmo/',
         iconType: 'image',
         icon: '/assets/nav/mcmmo.png',
         showIconBorder: false,
