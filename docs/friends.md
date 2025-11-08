@@ -47,10 +47,30 @@ list:
       -
         icon: youtube
         link: https://youtube.com/@ryan100c
+  -
+    name: 人间工作P
+    link: https://producer.mrxiaom.top/
+    avatar: https://static.mcio.dev/mrxiaom.top/images/avatar-new.jpg
+    desc: 我每天都好困…
+    socials:
+      -
+        icon: github
+        link: https://github.com/MrXiaoM
+      
+      -
+        icon: bilibili
+        link: https://space.bilibili.com/330771760
+      
+      -
+        icon: youtube
+        link: https://www.youtube.com/@littlecatx
+      
+      -
+        icon: twitter
+        link: https://x.com/coolxiaom95
 ---
 
 :::: demo-wrapper title="如何添加友链？"
 ::: info 提交 `friends.md` 或 `issue` 添加/申请友链~！
 :::
 ::::
-<!-- 可以添加更多自定义内容 -->
