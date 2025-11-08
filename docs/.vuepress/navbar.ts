@@ -16,6 +16,7 @@ export default defineNavbarConfig([
     items: [
       { text: '文章', link: '/blog/' },
       { text: '标签', link: '/blog/tags/' },
+      { text: '分类', link: '/blog/categories/' },
       { text: '归档', link: '/blog/archives/' },
     ]
   },
@@ -23,7 +24,7 @@ export default defineNavbarConfig([
     text: '更多',
     icon: 'line-md:plus-circle-twotone',
     items: [
-      { text: '关于站主', link: '/about/', icon: 'material-symbols:emoji-people-rounded' },
+      { text: '关于站主', link: '/blog/about-me/', icon: 'material-symbols:emoji-people-rounded' },
       { text: '友情链接', link: '/friends/', icon: 'carbon:friendship' },
     ] },
 ])
