@@ -1,5 +1,5 @@
 ---
-title: 前端页
+title: 导航页
 pageLayout: page
 permalink: /nav/
 ---
