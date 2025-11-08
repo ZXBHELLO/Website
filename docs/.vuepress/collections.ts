@@ -125,6 +125,15 @@ const ZakoZakoCraft = defineCollection({
         ''
       ],
       collapsed: true
+    },
+    {
+      text: '测试功能',
+      link: '测试功能/',
+      prefix: '测试功能/',
+      items: [
+        '通过虚拟局域网加入服务器',
+      ],
+      collapsed: true
     }
   ],
   // 根据文件结构自动生成侧边栏

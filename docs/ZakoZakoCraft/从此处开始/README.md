@@ -12,19 +12,19 @@ createTime: 2025/11/08 12:00:00
 
 ## 快捷导航
 
-<LinkCard icon="mdi:account-arrow-right" title="加入服务器" href="./1.加入服务器.md" />
-<LinkCard icon="mdi:alert-circle-outline" title="服务器规则" href="./2.服务器规则.md" />
-<LinkCard icon="mdi:help-circle-outline" title="常见问题" href="./3.常见问题.md" />
-<LinkCard icon="mdi:trophy-outline" title="名人堂" href="./4.名人堂.md" />
-<LinkCard icon="mdi:star-outline" title="封神榜" href="./5.封神榜.md" />
+<LinkCard icon="mdi:account-arrow-right" title="加入服务器" href="./加入服务器.md" />
+<LinkCard icon="mdi:alert-circle-outline" title="服务器规则" href="./服务器规则.md" />
+<LinkCard icon="mdi:help-circle-outline" title="常见问题" href="./常见问题.md" />
+<LinkCard icon="mdi:trophy-outline" title="名人堂" href="./名人堂.md" />
+<LinkCard icon="mdi:star-outline" title="封神榜" href="./封神榜.md" />
 
 ## 服务器分组导航
 
-<LinkCard icon="mdi:desktop-classic" title="休闲生存服" href="../2.休闲生存服/README.md" />
-<LinkCard icon="mdi:test-tube" title="实验创造服" href="../3.实验创造服/README.md" />
-<LinkCard icon="mdi:brush" title="建筑创造服" href="../4.建筑创造服/README.md" />
-<LinkCard icon="mdi:gamepad-variant" title="娱乐游戏服" href="../5.娱乐游戏服/README.md" />
-<LinkCard icon="mdi:alpha-z-box" title="先行测试服" href="../6.先行测试服/README.md" />
+<LinkCard icon="mdi:desktop-classic" title="休闲生存服" href="../休闲生存服/README.md" />
+<LinkCard icon="mdi:test-tube" title="实验创造服" href="../实验创造服/README.md" />
+<LinkCard icon="mdi:brush" title="建筑创造服" href="../建筑创造服/README.md" />
+<LinkCard icon="mdi:gamepad-variant" title="娱乐游戏服" href="../娱乐游戏服/README.md" />
+<LinkCard icon="mdi:alpha-z-box" title="先行测试服" href="../先行测试服/README.md" />
 
 ---
 
