@@ -61,7 +61,7 @@ export const navData = [
         id: 'redstone-editor',
         title: 'MC 红石编辑器',
         description: '在线红石机械设计器',
-        url: 'https://rseditor.zxbhello.top/',
+        url: '/app/rseditor/',
         iconType: 'iconify',
         icon: 'fluent:calendar-edit-32-regular',
         showIconBorder: true,
