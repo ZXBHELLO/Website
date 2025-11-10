@@ -7,4 +7,4 @@ permalink: /app/rseditor/
 
 <HideFooter />
 
-<embed type="text/x-scriptlet" src="https://rseditor.zxbhello.top/" style="position: fixed; top: 60px; left: 0; width: 100vw; height: calc(100vh - 60px); border: none; z-index: 0;">
+<iframe src="https://rseditor.zxbhello.top/" style="position: fixed; top: 60px; left: 0; width: 100vw; height: calc(100vh - 60px); border: none; z-index: 0;"></iframe>
