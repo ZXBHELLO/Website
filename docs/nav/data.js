@@ -1,6 +1,6 @@
 export const navData = [
   {
-    category: '文档教程 (Documents)',
+    category: '文档与教程',
     items: [
       {
         id: 'zakozakocraft',
@@ -41,7 +41,7 @@ export const navData = [
     ]
   },
   {
-    category: '插件模组 (Plugins/Mods)',
+    category: '插件与模组',
     items: [
       {
         id: 'moblaunch',
@@ -69,7 +69,7 @@ export const navData = [
     ]
   },
   {
-    category: '配置文件 (Configurations)',
+    category: '配置文件',
     items: [
       {
         id: 'flight-charge-menu',
@@ -91,45 +91,7 @@ export const navData = [
       },
     ]
   },
-  {
-    category: '导航示例 (Navigation Examples)',
-    items: [
-      {
-        //不填ID好像也可以?
-        title: 'iconfiy图标示例',
-        description: '支持iconfiy图标',
-        url: 'https://github.com/ZXBHELLO/Website',
-        iconType: 'iconify',
-        icon: 'line-md:compass-filled-loop',
-        showIconBorder: true,
-      },
-      {
-        //不填ID好像也可以?
-        title: '没有描述的示例',
-        // description: '没有描述',
-        url: 'https://github.com/ZXBHELLO/Website',
-        iconType: 'iconify',
-        icon: 'line-md:emoji-smile-wink',
-        showIconBorder: true,
-      },
-      {
-        //不填ID好像也可以?
-        title: '没有图标边框的示例',
-        description: '这个示例图标不显示边框',
-        url: 'https://github.com/ZXBHELLO/Website',
-        iconType: 'iconify',
-        icon: 'line-md:emoji-smile-wink',
-        showIconBorder: false,  //←这里禁用了
-      },
-      {
-        title: '没有图标的示例',
-        description: '这个示例不显示图标',
-        url: 'https://github.com/ZXBHELLO/Website',
-        iconType: 'none',
-        showIconBorder: false,
-      },
-    ]
-  },
+
   {
     category: '开发基础',
     items: [
@@ -304,8 +266,8 @@ export const navData = [
       {
         title: 'Nuejs',
         url: 'https://nuejs.org/',
-        iconType: 'iconify',
-        icon: 'logos:nuejs-icon',
+        iconType: 'image',
+        icon: 'https://avatars.githubusercontent.com/u/128560732?s=48&v=4',
         showIconBorder: true,
         description: '极简的JavaScript UI库',
       },
@@ -320,8 +282,8 @@ export const navData = [
       {
         title: 'Yew',
         url: 'https://yew.rs/',
-        iconType: 'iconify',
-        icon: 'logos:yew',
+        iconType: 'image',
+        icon: 'https://yew.rs/zh-Hans/img/logo.svg',
         showIconBorder: true,
         description: 'Rust编写的前端框架',
       },
@@ -364,7 +326,7 @@ export const navData = [
         url: 'https://swearer23.github.io/micro-frontends/',
         iconType: 'iconify',
         icon: 'mdi:puzzle-outline',
-        showIconBorder: false,
+        showIconBorder: true,
         description: '微前端概念与示例集合',
       },
       {
@@ -514,7 +476,7 @@ export const navData = [
         title: 'Adonis',
         url: 'https://adonisjs.com/',
         iconType: 'image',
-        icon: 'https://adonisjs.com/icons/favicon-32x32.png',
+        icon: 'https://avatars.githubusercontent.com/u/13810373?s=48&v=4',
         showIconBorder: true,
         description: 'Node.js的全功能Web框架',
       },
@@ -591,8 +553,8 @@ export const navData = [
       {
         title: 'Lightning CSS',
         url: 'https://lightningcss.dev/',
-        iconType: 'image',
-        icon: 'https://lightningcss.dev/favicon.3aabf677.svg',
+        iconType: 'iconify',
+        icon: 'gg:ericsson',
         showIconBorder: true,
         description: '极快的CSS解析和编译工具',
       },
@@ -642,7 +604,7 @@ export const navData = [
         url: 'https://www.shadcn-vue.com/',
         iconType: 'iconify',
         icon: 'mdi:vuejs',
-        showIconBorder: false,
+        showIconBorder: true,
         description: '为Vue设计的可复制组件',
       },
       // React UI库
@@ -666,8 +628,8 @@ export const navData = [
         title: 'Shadcn UI',
         url: 'https://ui.shadcn.com/',
         iconType: 'iconify',
-        icon: 'mdi:component',
-        showIconBorder: false,
+        icon: 'simple-icons:shadcnui',
+        showIconBorder: true,
         description: '可复制粘贴的React组件',
       },
       {
@@ -675,7 +637,7 @@ export const navData = [
         url: 'https://v2.chakra-ui.com/',
         iconType: 'iconify',
         icon: 'simple-icons:chakraui',
-        showIconBorder: false,
+        showIconBorder: true,
         description: '简单、模块化且可访问的React组件库',
       },
       // React CSS方案
@@ -731,7 +693,7 @@ export const navData = [
         url: 'http://streamich.github.io/react-use',
         iconType: 'iconify',
         icon: 'mdi:react',
-        showIconBorder: false,
+        showIconBorder: true,
         description: 'React Hooks的集合',
       },
       {
@@ -739,7 +701,7 @@ export const navData = [
         url: 'https://react-hook-form.com/',
         iconType: 'iconify',
         icon: 'mdi:form-textbox',
-        showIconBorder: false,
+        showIconBorder: true,
         description: '高性能、灵活的表单库',
       },
       {
@@ -747,7 +709,7 @@ export const navData = [
         url: 'https://ahooks.js.org/',
         iconType: 'iconify',
         icon: 'mdi:hook',
-        showIconBorder: false,
+        showIconBorder: true,
         description: '高质量和可靠的React Hooks库',
       },
       {
@@ -761,8 +723,8 @@ export const navData = [
       {
         title: 'umijs',
         url: 'https://umijs.org/',
-        iconType: 'iconify',
-        icon: 'simple-icons:umi',
+        iconType: 'image',
+        icon: 'https://gw.alipayobjects.com/zos/bmw-prod/598d14af-4f1c-497d-b579-5ac42cd4dd1f/k7bjua9c_w132_h130.png',
         showIconBorder: true,
         description: '可插拔的企业级React应用框架',
       },
@@ -771,7 +733,7 @@ export const navData = [
         url: 'https://formilyjs.org/',
         iconType: 'iconify',
         icon: 'mdi:form-select',
-        showIconBorder: false,
+        showIconBorder: true,
         description: '阿里巴巴集团出品的表单解决方案',
       },
       {
@@ -779,7 +741,7 @@ export const navData = [
         url: 'https://react-dnd.github.io/',
         iconType: 'iconify',
         icon: 'mdi:drag',
-        showIconBorder: false,
+        showIconBorder: true,
         description: 'React的拖放组件库',
       },
       // 状态管理库
@@ -810,8 +772,8 @@ export const navData = [
       {
         title: 'Zustand',
         url: 'https://zustand-demo.pmnd.rs/',
-        iconType: 'iconify',
-        icon: 'simple-icons:zustand',
+        iconType: 'image',
+        icon: 'https://zustand.nodejs.cn/favicon.webp',
         showIconBorder: true,
         description: '小而美的React状态管理方案',
       },
@@ -896,8 +858,8 @@ export const navData = [
       {
         title: 'rspack',
         url: 'https://www.rspack.dev/',
-        iconType: 'iconify',
-        icon: 'simple-icons:rspack',
+        iconType: 'image',
+        icon: 'https://assets.rspack.rs/rspack/rspack-logo.svg',
         showIconBorder: true,
         description: '基于Rust的Web打包工具',
       },
@@ -912,8 +874,8 @@ export const navData = [
       {
         title: 'farm',
         url: 'https://www.farmfe.org/',
-        iconType: 'iconify',
-        icon: 'simple-icons:farm',
+        iconType: 'image',
+        icon: 'https://www.farmfe.org/zh/img/logo.png',
         showIconBorder: true,
         description: '极速Web构建工具',
       },
@@ -922,7 +884,7 @@ export const navData = [
         title: 'VitePress',
         url: 'https://vitepress.dev/',
         iconType: 'iconify',
-        icon: 'vscode-icons:file-type-vitepress',
+        icon: 'simple-icons:vitepress',
         showIconBorder: true,
         description: '由Vite和Vue驱动的静态站点生成器',
       },
@@ -930,7 +892,7 @@ export const navData = [
         title: 'VuePress',
         url: 'https://v2.vuepress.vuejs.org/',
         iconType: 'iconify',
-        icon: 'vscode-icons:file-type-vuepress',
+        icon: 'material-icon-theme:folder-vuepress',
         showIconBorder: true,
         description: 'Vue驱动的静态网站生成器',
       },
@@ -983,8 +945,8 @@ export const navData = [
       {
         title: 'Taro',
         url: 'https://taro.zone/',
-        iconType: 'iconify',
-        icon: 'logos:taro',
+        iconType: 'image',
+        icon: 'https://taro-ui.jd.com/img/logo-taro.png',
         showIconBorder: true,
         description: '多端统一开发解决方案',
       },
@@ -1055,8 +1017,8 @@ export const navData = [
       {
         title: 'Iconify',
         url: 'https://icon-sets.iconify.design/',
-        iconType: 'image',
-        icon: 'https://icon-sets.iconify.design/favicon.svg',
+        iconType: 'iconify',
+        icon: 'simple-icons:iconify',
         showIconBorder: true,
         description: '统一图标框架',
       },
@@ -1079,8 +1041,8 @@ export const navData = [
       {
         title: 'Simple Icons',
         url: 'https://simpleicons.org/',
-        iconType: 'image',
-        icon: 'https://simpleicons.org/logo-fc26614b48c3f1fd.svg',
+        iconType: 'iconify',
+        icon: 'simple-icons:icon',
         showIconBorder: true,
         description: '流行品牌的免费SVG图标',
       },
@@ -1154,7 +1116,7 @@ export const navData = [
         title: '渐变色',
         url: 'https://color.oulu.me/',
         iconType: 'iconify',
-        icon: 'line-md:color-swatch',
+        icon: 'streamline-ultimate-color:color-palette-2',
         showIconBorder: true,
         description: '在线渐变色生成器',
       },
@@ -1295,8 +1257,8 @@ export const navData = [
       {
         title: 'sinon',
         url: 'https://sinonjs.org/',
-        iconType: 'iconify',
-        icon: 'simple-icons:sinon',
+        iconType: 'image',
+        icon: 'https://sinonjs.org/assets/images/logo.png',
         showIconBorder: true,
         description: 'JavaScript测试辅助库',
       },
@@ -1337,7 +1299,7 @@ export const navData = [
         title: 'Chart.js',
         url: 'https://www.chartjs.org/',
         iconType: 'iconify',
-        icon: 'simple-icons:chartjs',
+        icon: 'simple-icons:chartdotjs',
         showIconBorder: true,
         description: '简单灵活的JavaScript图表库',
       },
@@ -1360,8 +1322,8 @@ export const navData = [
       {
         title: 'ApexCharts',
         url: 'https://apexcharts.com/',
-        iconType: 'iconify',
-        icon: 'simple-icons:apexcharts',
+        iconType: 'image',
+        icon: 'https://apexcharts.com/wp-content/themes/apexcharts/img/apexcharts-logo-white-trimmed.svg',
         showIconBorder: true,
         description: '现代JavaScript图表库',
       },
@@ -1377,7 +1339,7 @@ export const navData = [
         title: 'C3.js',
         url: 'http://c3js.org/',
         iconType: 'iconify',
-        icon: 'simple-icons:c3',
+        icon: 'vscode-icons:file-type-c3',
         showIconBorder: true,
         description: '基于D3的可重用图表库',
       },
@@ -1442,7 +1404,7 @@ export const navData = [
         title: 'cdnjs',
         url: 'https://cdnjs.com/',
         iconType: 'iconify',
-        icon: 'simple-icons:cdnjs',
+        icon: 'simple-icons:cloudflare',
         showIconBorder: true,
         description: '免费开源CDN服务',
       },
@@ -1471,9 +1433,9 @@ export const navData = [
       {
         title: 'dev.to',
         url: 'https://dev.to',
-        description: '技术社区，拥有庞大的开发者用户基数，适合学习技术、分享交流、提升专业能力。',
+        description: '庞大用户、学习技术、分享交流',
         iconType: 'iconify',
-        icon: 'simple-icons:devto',
+        icon: 'simple-icons:devdotto',
         showIconBorder: true,
       },
       {
@@ -1481,7 +1443,7 @@ export const navData = [
         url: 'https://segmentfault.com',
         description: '中文技术问答社区',
         iconType: 'iconify',
-        icon: 'simple-icons:segmentfault',
+        icon: 'mdi:head-flash-outline',
         showIconBorder: true,
       },
       {
@@ -1561,8 +1523,8 @@ export const navData = [
       {
         title: 'builder.io',
         url: 'https://builder.io',
-        iconType: 'iconify',
-        icon: 'simple-icons:builderdotcom',
+        iconType: 'image',
+        icon: 'https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F9b97b9d453a446ac85912b993b840a00?width=120',
         showIconBorder: true,
         description: '现代Web开发博客',
       },
@@ -1683,10 +1645,49 @@ export const navData = [
         title: 'caniuse',
         url: 'https://caniuse.com/',
         iconType: 'iconify',
-        icon: 'mdi:browser-check',
+        icon: 'mingcute:question-fill',
         showIconBorder: true,
         description: 'Web兼容性检查工具',
       },
     ]
-  }
+  },
+    {
+    category: '导航示例',
+    items: [
+      {
+        //不填ID好像也可以?
+        title: 'iconfiy图标示例',
+        description: '支持iconfiy图标',
+        url: 'https://github.com/ZXBHELLO/Website',
+        iconType: 'iconify',
+        icon: 'line-md:compass-filled-loop',
+        showIconBorder: true,
+      },
+      {
+        //不填ID好像也可以?
+        title: '没有描述的示例',
+        // description: '没有描述',
+        url: 'https://github.com/ZXBHELLO/Website',
+        iconType: 'iconify',
+        icon: 'line-md:emoji-smile-wink',
+        showIconBorder: true,
+      },
+      {
+        //不填ID好像也可以?
+        title: '没有图标边框的示例',
+        description: '这个示例图标不显示边框',
+        url: 'https://github.com/ZXBHELLO/Website',
+        iconType: 'iconify',
+        icon: 'line-md:emoji-smile-wink',
+        showIconBorder: true,  //←这里禁用了
+      },
+      {
+        title: '没有图标的示例',
+        description: '这个示例不显示图标',
+        url: 'https://github.com/ZXBHELLO/Website',
+        iconType: 'none',
+        showIconBorder: true,
+      },
+    ]
+  },
 ]
