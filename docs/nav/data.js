@@ -75,7 +75,7 @@ export const navData = [
         id: 'flight-charge-menu',
         title: '飞行充能菜单',
         description: '适用于Trmenu的配置文件',
-        url: 'https://github.com/ZXBHELLO/Website',
+        url: 'https://github.com/MrXiaoM/SweetFlight',
         iconType: 'iconify',
         icon: 'line-md:document-code',
         showIconBorder: true,
