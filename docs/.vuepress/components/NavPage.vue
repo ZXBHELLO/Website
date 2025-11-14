@@ -68,8 +68,8 @@ import { navData } from '../../nav/data.js'
   max-width: 1800px;
   margin: 0 auto;
   padding: 0 0.5rem; /* 减小边距到0.5rem */
-  margin-left: 4rem; /* 添加左边距 */
-  margin-right: 5; /* 右边距为0 */
+  margin-left: 4rem; /* 左边距 */
+  margin-right: 4rem; /* 右边距 */
 }
 
 /* 导航分组样式 */
@@ -104,25 +104,66 @@ import { navData } from '../../nav/data.js'
   align-items: center;
   padding: 0.6rem 0.6rem 0.6rem 0.6rem; /* 上 右 下 左 - 统一内边距 */
   border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
+  border-radius: 12px;
   text-decoration: none !important;
-  transition: all 0.2s ease;
+  position: relative;
+  background: var(--vp-c-bg);
+  transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: visible;
+}
+
+/* 添加指针箭头伪元素 */
+.m-nav-link::after {
+  content: '→';
+  position: absolute;
+  right: 0.6rem;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--vp-c-brand-1);
+  font-weight: bold;
+}
+
+/* 添加边框和阴影过渡伪元素 */
+.m-nav-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  pointer-events: none;
+  transition: border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  box-shadow: 0 0 0 rgba(80, 134, 161, 0);
 }
 
 /* 导航链接悬停效果 */
-/* 改变边框颜色、添加阴影、向上移动 */
+/* 背景渐变、边框和阴影淡入 */
 .m-nav-link:hover {
-  border-color: var(--vp-c-brand);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(80, 134, 161, 0.05) 0%, rgba(131, 208, 218, 0.05) 100%);
+}
+
+/* 悬停时边框和阴影淡入 */
+.m-nav-link:hover::before {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 8px 24px rgba(80, 134, 161, 0.2);
+}
+
+/* 悬停时显示指针箭头 */
+.m-nav-link:hover::after {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* 导航链接图标容器 */
-/* 设置宽度、高度、不收缩、右边距、对齐方式 */
+/* 设置宽度、高度、不收缩、边距、对齐方式 */
 /* 添加边框以增强视觉效果 */
 .m-nav-link-icon {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   flex-shrink: 0;
   margin-right: 0.8rem; /* 图标与文字之间的间距 */
   margin-left: 0.3rem; /* 图标与左边框的距离 */
@@ -131,6 +172,7 @@ import { navData } from '../../nav/data.js'
   justify-content: center;
   border: 1px solid var(--vp-c-divider);
   border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.06);
 }
 
 /* 为不显示边框的图标移除边框样式 */
@@ -138,20 +180,30 @@ import { navData } from '../../nav/data.js'
   border: none;
 }
 
+/* 深色模式下的图标容器背景 */
+[data-theme="dark"] .m-nav-link-icon {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
 /* 导航链接图标图片样式 */
-/* 设置宽度、高度、适应方式 */
+/* 设置宽度、高度、适应方式、防止渲染卡顿 */
 .m-nav-link-icon img {
-  width: 100%;
-  height: 100%;
+  width: 32px;
+  height: 32px;
+  max-width: 32px;
+  max-height: 32px;
   object-fit: contain;
+  object-position: center;
 }
 
 /* 添加 Iconify 图标支持 */
-/* 设置 Iconify 图标的宽度、高度和显示方式 */
+/* 设置 Iconify 图标的宽度、高度和显示方式，限制最大尺寸防止卡顿 */
 .m-nav-link-icon .iconify {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   display: inline-block;
+  max-width: 32px;
+  max-height: 32px;
 }
 
 /* 确保所有文本元素都没有下划线 */
@@ -171,7 +223,7 @@ import { navData } from '../../nav/data.js'
 /* 设置字体大小、粗细、颜色、底部外边距 */
 .m-nav-link-title {
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 700;
   color: var(--vp-c-text-1);
   margin-bottom: 0.25rem;
 }
@@ -179,16 +231,17 @@ import { navData } from '../../nav/data.js'
 /* 导航链接描述样式 */
 /* 设置字体大小、颜色 */
 .m-nav-link-desc {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--vp-c-text-2);
 }
 
 /* 响应式设计 - 平板及以下尺寸 */
 @media (max-width: 768px) {
-  /* 调整导航容器内边距和左边距 */
+  /* 调整导航容器内边距和左右边距 */
   .m-nav-container {
     padding: 0 0.5rem;
     margin-left: 0.5rem;
+    margin-right: 0.5rem;
   }
   
   /* 调整导航链接网格列数和间距 */
@@ -200,10 +253,11 @@ import { navData } from '../../nav/data.js'
 
 /* 响应式设计 - 手机尺寸 */
 @media (max-width: 480px) {
-  /* 进一步减小导航容器内边距和左边距 */
+  /* 进一步减小导航容器内边距和左右边距 */
   .m-nav-container {
     padding: 0 0.25rem;
     margin-left: 0.25rem;
+    margin-right: 0.25rem;
   }
   
   /* 在手机上使用单列布局，减小间距 */

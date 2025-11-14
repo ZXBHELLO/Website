@@ -55,7 +55,7 @@ export const navData = [
     ]
   },
   {
-    category: '软件项目 (Software Projects)',
+    category: '软件项目',
     items: [
       {
         id: 'redstone-editor',
@@ -1655,7 +1655,7 @@ export const navData = [
     category: '导航示例',
     items: [
       {
-        //不填ID好像也可以?
+        //不填ID���像也可以?
         title: 'iconfiy图标示例',
         description: '支持iconfiy图标',
         url: 'https://github.com/ZXBHELLO/Website',
