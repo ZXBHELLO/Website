@@ -1,6 +1,6 @@
 export const navData = [
   {
-    category: '文档教程',
+    category: '文档教程 (Documents)',
     items: [
       {
         id: 'zakozakocraft',
@@ -16,18 +16,18 @@ export const navData = [
         title: 'MCMMO插件文档',
         description: '为Minecraft添加RPG元素的插件',
         url: '/mcmmo/',
-        iconType: 'image',
-        icon: '/assets/nav/mcmmo.png',
-        showIconBorder: false,
+        iconType: 'iconify',
+        icon: 'mdi:minecraft',
+        showIconBorder: true,
       },
       {
         id: 'carpet',
         title: 'Carpet模组文档',
         description: 'Minecraft功能增强模组',
         url: '/Carpet/',
-        iconType: 'image',
-        icon: '/assets/nav/carpet.png',
-        showIconBorder: false,
+        iconType: 'iconify',
+        icon: 'mdi:carpet',
+        showIconBorder: true,
       },
       {
         id: 'nav-doc',
@@ -41,7 +41,7 @@ export const navData = [
     ]
   },
   {
-    category: '插件模组',
+    category: '插件模组 (Plugins/Mods)',
     items: [
       {
         id: 'moblaunch',
@@ -55,7 +55,7 @@ export const navData = [
     ]
   },
   {
-    category: '软件项目',
+    category: '软件项目 (Software Projects)',
     items: [
       {
         id: 'redstone-editor',
@@ -69,7 +69,7 @@ export const navData = [
     ]
   },
   {
-    category: '配置文件',
+    category: '配置文件 (Configurations)',
     items: [
       {
         id: 'flight-charge-menu',
@@ -85,14 +85,14 @@ export const navData = [
         title: '站点生成器模板',
         description: '本文档的源代码',
         url: 'https://github.com/ZXBHELLO/Website',
-        iconType: 'image',
-        icon: '/plume.svg',
+        iconType: 'iconify',
+        icon: 'mdi:vuejs',
         showIconBorder: true,
       },
     ]
   },
   {
-    category: '导航示例',
+    category: '导航示例 (Navigation Examples)',
     items: [
       {
         //不填ID好像也可以?
@@ -125,19 +125,22 @@ export const navData = [
         title: '没有图标的示例',
         description: '这个示例不显示图标',
         url: 'https://github.com/ZXBHELLO/Website',
-        icon: 'none',  //不写这一行也行
+        iconType: 'none',
+        showIconBorder: false,
       },
     ]
   },
   {
-    category: 'Runtime',
+    category: '开发基础',
     items: [
+      // 运行时
       {
         title: 'Node',
         url: 'https://nodejs.org/',
         iconType: 'iconify',
         icon: 'logos:nodejs-icon',
         showIconBorder: true,
+        description: '基于Chrome V8引擎的JavaScript运行时',
       },
       {
         title: 'Deno',
@@ -145,6 +148,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:deno',
         showIconBorder: true,
+        description: '安全的JavaScript和TypeScript运行时',
       },
       {
         title: 'Bun',
@@ -152,18 +156,16 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:bun',
         showIconBorder: true,
+        description: '一体化JavaScript运行时和工具链',
       },
-    ]
-  },
-  {
-    category: 'Registry',
-    items: [
+      // 包管理器
       {
         title: 'npm',
         url: 'https://www.npmjs.com/',
         iconType: 'iconify',
         icon: 'logos:npm',
         showIconBorder: true,
+        description: 'Node.js的默认包管理器',
       },
       {
         title: 'yarn',
@@ -171,6 +173,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:yarn',
         showIconBorder: true,
+        description: '快速、可靠、安全的依赖管理',
       },
       {
         title: 'pnpm',
@@ -178,25 +181,29 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:pnpm',
         showIconBorder: true,
+        description: '快速且节省磁盘空间的包管理器',
       },
       {
         title: 'jsr',
         url: 'https://jsr.io/',
-        iconType: 'image',
-        icon: 'https://jsr.io/logo-square.svg',
+        iconType: 'iconify',
+        icon: 'simple-icons:jsr',
         showIconBorder: true,
+        description: '为TypeScript优化的包注册表',
       },
     ]
   },
   {
-    category: '库/框架',
+    category: '前端框架与库',
     items: [
+      // 核心框架
       {
         title: 'React',
         url: 'https://zh-hans.react.dev/',
         iconType: 'iconify',
         icon: 'logos:react',
         showIconBorder: true,
+        description: '用于构建用户界面的JavaScript库',
       },
       {
         title: 'Vue',
@@ -204,6 +211,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:vue',
         showIconBorder: true,
+        description: '渐进式JavaScript框架',
       },
       {
         title: 'Angular',
@@ -211,6 +219,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:angular-icon',
         showIconBorder: true,
+        description: '平台和框架，用于构建SPA应用',
       },
       {
         title: 'Preact',
@@ -218,6 +227,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:preact',
         showIconBorder: true,
+        description: '快速轻量的React替代方案',
       },
       {
         title: 'Svelte',
@@ -225,6 +235,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:svelte-icon',
         showIconBorder: true,
+        description: '编译时优化的前端框架',
       },
       {
         title: 'Solid',
@@ -232,6 +243,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:solidjs-icon',
         showIconBorder: true,
+        description: '高性能的声明式JavaScript库',
       },
       {
         title: 'Astro',
@@ -239,6 +251,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:astro-icon',
         showIconBorder: true,
+        description: '内容优先的网站构建工具',
       },
       {
         title: 'Lit',
@@ -246,6 +259,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:lit-icon',
         showIconBorder: true,
+        description: '用于构建快速Web组件的库',
       },
       {
         title: 'Inferno',
@@ -253,6 +267,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:inferno',
         showIconBorder: true,
+        description: '高效、轻量的React-like库',
       },
       {
         title: 'Alpine',
@@ -260,6 +275,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:alpinejs-icon',
         showIconBorder: true,
+        description: '轻量级的JavaScript框架',
       },
       {
         title: 'Qwik',
@@ -267,6 +283,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:qwik-icon',
         showIconBorder: true,
+        description: '为最快可能的首屏加载而构建',
       },
       {
         title: 'Cycle.js',
@@ -274,6 +291,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:cyclejs',
         showIconBorder: true,
+        description: '函数式和响应式的前端框架',
       },
       {
         title: 'Marko',
@@ -281,39 +299,40 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:marko',
         showIconBorder: true,
+        description: '高性能的HTML模板引擎',
       },
       {
         title: 'Nuejs',
         url: 'https://nuejs.org/',
-        iconType: 'image',
-        icon: 'https://nuejs.org/favicon.ico',
+        iconType: 'iconify',
+        icon: 'logos:nuejs-icon',
         showIconBorder: true,
+        description: '极简的JavaScript UI库',
       },
       {
         title: 'Htmx',
         url: 'https://htmx.org/',
         iconType: 'iconify',
-        icon: 'ph:code-bold',
+        icon: 'simple-icons:htmx',
         showIconBorder: true,
+        description: '通过HTML属性实现AJAX交互',
       },
       {
         title: 'Yew',
         url: 'https://yew.rs/',
-        iconType: 'image',
-        icon: 'https://yew.rs/img/logo.svg',
+        iconType: 'iconify',
+        icon: 'logos:yew',
         showIconBorder: true,
+        description: 'Rust编写的前端框架',
       },
-    ]
-  },
-  {
-    category: '框架',
-    items: [
+      // 全栈框架
       {
         title: 'Nuxt.js',
         url: 'https://nuxtjs.org/',
         iconType: 'iconify',
         icon: 'logos:nuxt-icon',
         showIconBorder: true,
+        description: '基于Vue的通用应用框架',
       },
       {
         title: 'Next.js',
@@ -321,6 +340,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:nextjs-icon',
         showIconBorder: true,
+        description: 'React服务端渲染应用框架',
       },
       {
         title: 'SvelteKit',
@@ -328,6 +348,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:svelte-icon',
         showIconBorder: true,
+        description: 'Svelte的全功能Web应用框架',
       },
       {
         title: 'SolidStart',
@@ -335,112 +356,16 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:solidjs-icon',
         showIconBorder: true,
+        description: 'Solid的全栈应用框架',
       },
-    ]
-  },
-  {
-    category: 'Web框架',
-    items: [
-      {
-        title: 'express',
-        url: 'https://expressjs.com/',
-        iconType: 'iconify',
-        icon: 'logos:express',
-        showIconBorder: true,
-      },
-      {
-        title: 'koa',
-        url: 'https://koajs.com/',
-        iconType: 'iconify',
-        icon: 'logos:koa',
-        showIconBorder: true,
-      },
-      {
-        title: 'fastify',
-        url: 'https://fastify.dev/',
-        iconType: 'iconify',
-        icon: 'logos:fastify-icon',
-        showIconBorder: true,
-      },
-      {
-        title: 'Tiny Http',
-        url: 'https://tinyhttp.v1rtl.site/',
-        iconType: 'image',
-        icon: 'https://tinyhttp.v1rtl.site/favicon.png',
-        showIconBorder: true,
-      },
-      {
-        title: 'h3',
-        url: 'https://h3.unjs.io/',
-        iconType: 'image',
-        icon: 'https://h3.unjs.io/icon.svg',
-        showIconBorder: true,
-      },
-      {
-        title: 'Nitro',
-        url: 'https://nitro.build/',
-        iconType: 'image',
-        icon: 'https://nitro.build/icon.svg',
-        showIconBorder: true,
-      },
-    ]
-  },
-  {
-    category: '企业级框架',
-    items: [
-      {
-        title: 'Nest.js',
-        url: 'https://nestjs.com/',
-        iconType: 'iconify',
-        icon: 'logos:nestjs',
-        showIconBorder: true,
-      },
-      {
-        title: 'loopback',
-        url: 'https://loopback.io/',
-        iconType: 'iconify',
-        icon: 'logos:loopback-icon',
-        showIconBorder: true,
-      },
-      {
-        title: 'Egg',
-        url: 'https://eggjs.org/',
-        iconType: 'image',
-        icon: 'https://www.eggjs.org/logo.svg',
-        showIconBorder: true,
-      },
-      {
-        title: 'Midway',
-        url: 'https://midwayjs.org/',
-        iconType: 'image',
-        icon: 'https://midwayjs.org/img/logo.svg',
-        showIconBorder: true,
-      },
-      {
-        title: 'Thinkjs',
-        url: 'https://thinkjs.org/',
-        iconType: 'image',
-        icon: 'https://thinkjs.org/static/img/new/logo.png',
-        showIconBorder: true,
-      },
-      {
-        title: 'Adonis',
-        url: 'https://adonisjs.com/',
-        iconType: 'image',
-        icon: 'https://adonisjs.com/icons/favicon-32x32.png',
-        showIconBorder: true,
-      },
-    ]
-  },
-  {
-    category: '微前端',
-    items: [
+      // 微前端
       {
         title: 'micro-frontends',
         url: 'https://swearer23.github.io/micro-frontends/',
-        iconType: 'none',
-        icon: '',
+        iconType: 'iconify',
+        icon: 'mdi:puzzle-outline',
         showIconBorder: false,
+        description: '微前端概念与示例集合',
       },
       {
         title: 'single-spa',
@@ -448,6 +373,7 @@ export const navData = [
         iconType: 'image',
         icon: 'https://single-spa.js.org/img/single-spa-mark-magenta.svg',
         showIconBorder: true,
+        description: '微前端实现方案',
       },
       {
         title: 'qiankun',
@@ -455,6 +381,7 @@ export const navData = [
         iconType: 'image',
         icon: 'https://gw.alipayobjects.com/mdn/rms_655822/afts/img/A*4sIUQpcos_gAAAAAAAAAAAAAARQnAQ',
         showIconBorder: true,
+        description: '支付宝开源微前端解决方案',
       },
       {
         title: 'Garfish',
@@ -462,6 +389,7 @@ export const navData = [
         iconType: 'image',
         icon: 'https://lf3-static.bytednsdoc.com/obj/eden-cn/dhozeh7vhpebvog/open-garfish/icons/icon.png',
         showIconBorder: true,
+        description: '字节跳动出品微前端框架',
       },
       {
         title: 'icestark',
@@ -469,6 +397,7 @@ export const navData = [
         iconType: 'image',
         icon: 'https://micro-frontends.ice.work/img/logo.png',
         showIconBorder: true,
+        description: '面向大型应用的微前端解决方案',
       },
       {
         title: '无界',
@@ -476,6 +405,7 @@ export const navData = [
         iconType: 'image',
         icon: 'https://wujie-micro.github.io/doc/wujie.svg',
         showIconBorder: true,
+        description: '极致的微前端框架',
       },
       {
         title: 'awesome micro frontends',
@@ -483,18 +413,124 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:awesome',
         showIconBorder: true,
+        description: '微前端资源集合',
       },
     ]
   },
   {
-    category: 'CSS',
+    category: '后端与全栈',
     items: [
+      // Web框架
+      {
+        title: 'express',
+        url: 'https://expressjs.com/',
+        iconType: 'iconify',
+        icon: 'logos:express',
+        showIconBorder: true,
+        description: 'Node.js的快速、灵活Web框架',
+      },
+      {
+        title: 'koa',
+        url: 'https://koajs.com/',
+        iconType: 'iconify',
+        icon: 'logos:koa',
+        showIconBorder: true,
+        description: '下一代Node.js Web框架',
+      },
+      {
+        title: 'fastify',
+        url: 'https://fastify.dev/',
+        iconType: 'iconify',
+        icon: 'logos:fastify-icon',
+        showIconBorder: true,
+        description: '快速且低开销的Web框架',
+      },
+      {
+        title: 'Tiny Http',
+        url: 'https://tinyhttp.v1rtl.site/',
+        iconType: 'iconify',
+        icon: 'simple-icons:fastify',
+        showIconBorder: true,
+        description: '现代轻量级Node.js Web框架',
+      },
+      {
+        title: 'h3',
+        url: 'https://h3.unjs.io/',
+        iconType: 'image',
+        icon: 'https://h3.unjs.io/icon.svg',
+        showIconBorder: true,
+        description: '服务端HTTP框架',
+      },
+      {
+        title: 'Nitro',
+        url: 'https://nitro.build/',
+        iconType: 'image',
+        icon: 'https://nitro.build/icon.svg',
+        showIconBorder: true,
+        description: '跨平台服务器框架',
+      },
+      // 企业级框架
+      {
+        title: 'Nest.js',
+        url: 'https://nestjs.com/',
+        iconType: 'iconify',
+        icon: 'logos:nestjs',
+        showIconBorder: true,
+        description: '构建高效可扩展Node.js服务端应用',
+      },
+      {
+        title: 'loopback',
+        url: 'https://loopback.io/',
+        iconType: 'iconify',
+        icon: 'logos:loopback-icon',
+        showIconBorder: true,
+        description: '高度可扩展的Node.js框架',
+      },
+      {
+        title: 'Egg',
+        url: 'https://eggjs.org/',
+        iconType: 'image',
+        icon: 'https://www.eggjs.org/logo.svg',
+        showIconBorder: true,
+        description: '为企业级框架和应用而生',
+      },
+      {
+        title: 'Midway',
+        url: 'https://midwayjs.org/',
+        iconType: 'image',
+        icon: 'https://midwayjs.org/img/logo.svg',
+        showIconBorder: true,
+        description: '面向未来的Web全栈框架',
+      },
+      {
+        title: 'Thinkjs',
+        url: 'https://thinkjs.org/',
+        iconType: 'image',
+        icon: 'https://thinkjs.org/static/img/new/logo.png',
+        showIconBorder: true,
+        description: '使用ES6/7开发的Node.js框架',
+      },
+      {
+        title: 'Adonis',
+        url: 'https://adonisjs.com/',
+        iconType: 'image',
+        icon: 'https://adonisjs.com/icons/favicon-32x32.png',
+        showIconBorder: true,
+        description: 'Node.js的全功能Web框架',
+      },
+    ]
+  },
+  {
+    category: '样式与UI',
+    items: [
+      // CSS工具
       {
         title: 'PostCSS',
         url: 'https://postcss.org/',
         iconType: 'iconify',
         icon: 'logos:postcss',
         showIconBorder: true,
+        description: '用JavaScript转换CSS的工具',
       },
       {
         title: 'SASS',
@@ -502,6 +538,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:sass',
         showIconBorder: true,
+        description: '成熟、稳定、强大的CSS扩展语言',
       },
       {
         title: 'Less',
@@ -509,6 +546,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:less',
         showIconBorder: true,
+        description: '向CSS中添加编程特性的语言',
       },
       {
         title: 'Stylus',
@@ -516,6 +554,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:stylus',
         showIconBorder: true,
+        description: '富有表现力、动态且健壮的CSS',
       },
       {
         title: 'PandaCSS',
@@ -523,6 +562,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:pandacss-icon',
         showIconBorder: true,
+        description: '高性能的CSS-in-JS解决方案',
       },
       {
         title: 'TailwindCSS',
@@ -530,6 +570,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:tailwindcss-icon',
         showIconBorder: true,
+        description: '实用优先的CSS框架',
       },
       {
         title: 'WindiCSS',
@@ -537,6 +578,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:windi-css',
         showIconBorder: true,
+        description: '下一代工具类CSS框架',
       },
       {
         title: 'unocss',
@@ -544,6 +586,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:unocss',
         showIconBorder: true,
+        description: '即时按需原子CSS引擎',
       },
       {
         title: 'Lightning CSS',
@@ -551,18 +594,16 @@ export const navData = [
         iconType: 'image',
         icon: 'https://lightningcss.dev/favicon.3aabf677.svg',
         showIconBorder: true,
+        description: '极快的CSS解析和编译工具',
       },
-    ]
-  },
-  {
-    category: 'Vue UI库',
-    items: [
+      // Vue UI库
       {
         title: 'Element Plus',
         url: 'https://element-plus.org/',
         iconType: 'iconify',
         icon: 'logos:element',
         showIconBorder: true,
+        description: '为开发者、设计师和产品经理准备的桌面端组件库',
       },
       {
         title: 'Naive UI',
@@ -570,6 +611,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:naiveui',
         showIconBorder: true,
+        description: 'Vue 3的高质量组件库',
       },
       {
         title: 'Vant UI',
@@ -577,6 +619,7 @@ export const navData = [
         iconType: 'image',
         icon: 'https://fastly.jsdelivr.net/npm/@vant/assets/logo.png',
         showIconBorder: true,
+        description: '轻量、可靠的移动端组件库',
       },
       {
         title: 'vuetify',
@@ -584,6 +627,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:vuetifyjs',
         showIconBorder: true,
+        description: 'Vue的Material Design组件框架',
       },
       {
         title: 'Radix Vue',
@@ -591,51 +635,24 @@ export const navData = [
         iconType: 'image',
         icon: 'https://www.radix-vue.com/logo.svg',
         showIconBorder: true,
+        description: '无样式可访问的Vue组件',
       },
       {
         title: 'Shadcn Vue',
         url: 'https://www.shadcn-vue.com/',
-        iconType: 'none',
-        icon: '',
+        iconType: 'iconify',
+        icon: 'mdi:vuejs',
         showIconBorder: false,
+        description: '为Vue设计的可复制组件',
       },
-    ]
-  },
-  {
-    category: 'Vue 工具',
-    items: [
-      {
-        title: 'Vue Use',
-        url: 'https://vueuse.org/',
-        iconType: 'iconify',
-        icon: 'logos:vueuse',
-        showIconBorder: true,
-      },
-      {
-        title: 'Pinia',
-        url: 'https://pinia.vuejs.org/',
-        iconType: 'iconify',
-        icon: 'logos:pinia',
-        showIconBorder: true,
-      },
-      {
-        title: 'Vue Router',
-        url: 'https://router.vuejs.org/',
-        iconType: 'iconify',
-        icon: 'logos:vue',
-        showIconBorder: true,
-      },
-    ]
-  },
-  {
-    category: 'React UI库',
-    items: [
+      // React UI库
       {
         title: 'Ant Design',
         url: 'https://ant.design/',
         iconType: 'iconify',
         icon: 'logos:ant-design',
         showIconBorder: true,
+        description: '为Web应用提供设计规范和React实现',
       },
       {
         title: 'Material UI',
@@ -643,119 +660,32 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:material-ui',
         showIconBorder: true,
+        description: 'React组件库，实现Google的Material Design',
       },
       {
         title: 'Shadcn UI',
         url: 'https://ui.shadcn.com/',
-        iconType: 'none',
-        icon: '',
+        iconType: 'iconify',
+        icon: 'mdi:component',
         showIconBorder: false,
+        description: '可复制粘贴的React组件',
       },
       {
         title: 'Chakra UI',
         url: 'https://v2.chakra-ui.com/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-    ]
-  },
-  {
-    category: 'React 状态管理',
-    items: [
-      {
-        title: 'Redux',
-        url: 'https://redux.js.org/',
         iconType: 'iconify',
-        icon: 'logos:redux',
-        showIconBorder: true,
-      },
-      {
-        title: 'Recoil',
-        url: 'https://recoiljs.org/',
-        iconType: 'iconify',
-        icon: 'logos:recoil-icon',
-        showIconBorder: true,
-      },
-      {
-        title: 'MobX',
-        url: 'https://mobx.js.org/',
-        iconType: 'iconify',
-        icon: 'logos:mobx',
-        showIconBorder: true,
-      },
-      {
-        title: 'Zustand',
-        url: 'https://zustand-demo.pmnd.rs/',
-        iconType: 'none',
-        icon: '',
+        icon: 'simple-icons:chakraui',
         showIconBorder: false,
+        description: '简单、模块化且可访问的React组件库',
       },
-    ]
-  },
-  {
-    category: 'React 工具',
-    items: [
-      {
-        title: 'React Use',
-        url: 'http://streamich.github.io/react-use',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-      {
-        title: 'React Hooks Form',
-        url: 'https://react-hook-form.com/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-      {
-        title: 'a-hooks',
-        url: 'https://ahooks.js.org/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-      {
-        title: 'swr',
-        url: 'https://swr.vercel.app/',
-        iconType: 'iconify',
-        icon: 'logos:swr',
-        showIconBorder: true,
-      },
-      {
-        title: 'umijs',
-        url: 'https://umijs.org/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-      {
-        title: 'formily',
-        url: 'https://formilyjs.org/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-      {
-        title: 'React Dnd',
-        url: 'https://react-dnd.github.io/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-    ]
-  },
-  {
-    category: 'React CSS方案',
-    items: [
+      // React CSS方案
       {
         title: 'styled-components',
         url: 'https://styled-components.com/',
         iconType: 'image',
         icon: 'https://styled-components.com/favicon.png',
         showIconBorder: true,
+        description: 'React的CSS-in-JS库',
       },
       {
         title: 'emotion',
@@ -763,125 +693,302 @@ export const navData = [
         iconType: 'image',
         icon: 'https://emotion.sh/logo-96x96.png',
         showIconBorder: true,
+        description: '为应用而生的CSS-in-JS库',
       },
     ]
   },
   {
-    category: '小程序',
+    category: '状态管理与工具',
     items: [
+      // Vue工具
+      {
+        title: 'Vue Use',
+        url: 'https://vueuse.org/',
+        iconType: 'iconify',
+        icon: 'logos:vueuse',
+        showIconBorder: true,
+        description: 'Vue的实用函数集合',
+      },
+      {
+        title: 'Pinia',
+        url: 'https://pinia.vuejs.org/',
+        iconType: 'iconify',
+        icon: 'logos:pinia',
+        showIconBorder: true,
+        description: 'Vue的轻量级状态管理库',
+      },
+      {
+        title: 'Vue Router',
+        url: 'https://router.vuejs.org/',
+        iconType: 'iconify',
+        icon: 'logos:vue',
+        showIconBorder: true,
+        description: 'Vue.js官方路由管理器',
+      },
+      // React工具
+      {
+        title: 'React Use',
+        url: 'http://streamich.github.io/react-use',
+        iconType: 'iconify',
+        icon: 'mdi:react',
+        showIconBorder: false,
+        description: 'React Hooks的集合',
+      },
+      {
+        title: 'React Hooks Form',
+        url: 'https://react-hook-form.com/',
+        iconType: 'iconify',
+        icon: 'mdi:form-textbox',
+        showIconBorder: false,
+        description: '高性能、灵活的表单库',
+      },
+      {
+        title: 'a-hooks',
+        url: 'https://ahooks.js.org/',
+        iconType: 'iconify',
+        icon: 'mdi:hook',
+        showIconBorder: false,
+        description: '高质量和可靠的React Hooks库',
+      },
+      {
+        title: 'swr',
+        url: 'https://swr.vercel.app/',
+        iconType: 'iconify',
+        icon: 'logos:swr',
+        showIconBorder: true,
+        description: '用于数据请求的React Hooks库',
+      },
+      {
+        title: 'umijs',
+        url: 'https://umijs.org/',
+        iconType: 'iconify',
+        icon: 'simple-icons:umi',
+        showIconBorder: true,
+        description: '可插拔的企业级React应用框架',
+      },
+      {
+        title: 'formily',
+        url: 'https://formilyjs.org/',
+        iconType: 'iconify',
+        icon: 'mdi:form-select',
+        showIconBorder: false,
+        description: '阿里巴巴集团出品的表单解决方案',
+      },
+      {
+        title: 'React Dnd',
+        url: 'https://react-dnd.github.io/',
+        iconType: 'iconify',
+        icon: 'mdi:drag',
+        showIconBorder: false,
+        description: 'React的拖放组件库',
+      },
+      // 状态管理库
+      {
+        title: 'Redux',
+        url: 'https://redux.js.org/',
+        iconType: 'iconify',
+        icon: 'logos:redux',
+        showIconBorder: true,
+        description: 'JavaScript应用的可预测状态容器',
+      },
+      {
+        title: 'Recoil',
+        url: 'https://recoiljs.org/',
+        iconType: 'iconify',
+        icon: 'logos:recoil-icon',
+        showIconBorder: true,
+        description: 'React的状态管理库',
+      },
+      {
+        title: 'MobX',
+        url: 'https://mobx.js.org/',
+        iconType: 'iconify',
+        icon: 'logos:mobx',
+        showIconBorder: true,
+        description: '简单、可扩展的状态管理',
+      },
+      {
+        title: 'Zustand',
+        url: 'https://zustand-demo.pmnd.rs/',
+        iconType: 'iconify',
+        icon: 'simple-icons:zustand',
+        showIconBorder: true,
+        description: '小而美的React状态管理方案',
+      },
+    ]
+  },
+  {
+    category: '构建与工具链',
+    items: [
+      // 构建工具
+      {
+        title: 'vite',
+        url: 'https://vitejs.dev/',
+        iconType: 'iconify',
+        icon: 'logos:vitejs',
+        showIconBorder: true,
+        description: '下一代前端构建工具',
+      },
+      {
+        title: 'webpack',
+        url: 'https://webpack.js.org/',
+        iconType: 'iconify',
+        icon: 'logos:webpack',
+        showIconBorder: true,
+        description: '静态模块打包工具',
+      },
+      {
+        title: 'parcel',
+        url: 'https://parceljs.org/',
+        iconType: 'iconify',
+        icon: 'logos:parcel-icon',
+        showIconBorder: true,
+        description: '零配置Web应用打包工具',
+      },
+      {
+        title: 'rollup',
+        url: 'https://rollupjs.org/',
+        iconType: 'iconify',
+        icon: 'logos:rollup',
+        showIconBorder: true,
+        description: 'JavaScript模块打包工具',
+      },
+      {
+        title: 'esbuild',
+        url: 'https://esbuild.github.io/',
+        iconType: 'iconify',
+        icon: 'logos:esbuild',
+        showIconBorder: true,
+        description: '极快的打包和压缩工具',
+      },
+      {
+        title: 'tsup',
+        url: 'https://tsup.egoist.dev/',
+        iconType: 'iconify',
+        icon: 'logos:typescript-icon',
+        showIconBorder: true,
+        description: 'TypeScript打包工具',
+      },
+      {
+        title: 'unbuild',
+        url: 'https://github.com/unjs/unbuild',
+        iconType: 'iconify',
+        icon: 'unjs:unbuild',
+        showIconBorder: true,
+        description: '统一构建系统',
+      },
+      {
+        title: 'turbo',
+        url: 'https://turbo.build/',
+        iconType: 'iconify',
+        icon: 'logos:turbopack-icon',
+        showIconBorder: true,
+        description: '高性能构建工具',
+      },
+      {
+        title: 'rolldown',
+        url: 'https://rolldown.rs/',
+        iconType: 'iconify',
+        icon: 'simple-icons:rolldown',
+        showIconBorder: true,
+        description: 'Rust编写的快速打包工具',
+      },
+      {
+        title: 'rspack',
+        url: 'https://www.rspack.dev/',
+        iconType: 'iconify',
+        icon: 'simple-icons:rspack',
+        showIconBorder: true,
+        description: '基于Rust的Web打包工具',
+      },
+      {
+        title: 'swc',
+        url: 'https://swc.rs/',
+        iconType: 'iconify',
+        icon: 'logos:swc',
+        showIconBorder: true,
+        description: '基于Rust的TypeScript/JavaScript编译器',
+      },
+      {
+        title: 'farm',
+        url: 'https://www.farmfe.org/',
+        iconType: 'iconify',
+        icon: 'simple-icons:farm',
+        showIconBorder: true,
+        description: '极速Web构建工具',
+      },
+      // 静态站点生成器
+      {
+        title: 'VitePress',
+        url: 'https://vitepress.dev/',
+        iconType: 'iconify',
+        icon: 'vscode-icons:file-type-vitepress',
+        showIconBorder: true,
+        description: '由Vite和Vue驱动的静态站点生成器',
+      },
+      {
+        title: 'VuePress',
+        url: 'https://v2.vuepress.vuejs.org/',
+        iconType: 'iconify',
+        icon: 'vscode-icons:file-type-vuepress',
+        showIconBorder: true,
+        description: 'Vue驱动的静态网站生成器',
+      },
+      {
+        title: 'Docusaurus',
+        url: 'https://docusaurus.io/',
+        iconType: 'iconify',
+        icon: 'logos:docusaurus',
+        showIconBorder: true,
+        description: 'Facebook开源文档站点生成器',
+      },
+      {
+        title: 'Startlight',
+        url: 'https://starlight.astro.build/',
+        iconType: 'iconify',
+        icon: 'simple-icons:astro',
+        showIconBorder: true,
+        description: '为内容网站构建的Astro主题',
+      },
+      {
+        title: 'Hexo',
+        url: 'https://hexo.io/',
+        iconType: 'iconify',
+        icon: 'logos:hexo',
+        showIconBorder: true,
+        description: '快速、简洁且高效的博客框架',
+      },
+      {
+        title: 'Slidev',
+        url: 'https://sli.dev/',
+        iconType: 'iconify',
+        icon: 'logos:slidev',
+        showIconBorder: true,
+        description: '为开发者打造的演示文稿工具',
+      },
+    ]
+  },
+  {
+    category: '跨平台开发',
+    items: [
+      // 小程序
       {
         title: 'uni app',
         url: 'https://uniapp.dcloud.io/',
         iconType: 'image',
         icon: 'https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/uni-app.png',
         showIconBorder: true,
+        description: '使用Vue开发跨平台应用',
       },
       {
         title: 'Taro',
         url: 'https://taro.zone/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-    ]
-  },
-  {
-    category: '图标',
-    items: [
-      {
-        title: 'XIcons',
-        url: 'https://www.xicons.org/',
-        iconType: 'image',
-        icon: 'https://www.xicons.org/favicon.svg',
+        iconType: 'iconify',
+        icon: 'logos:taro',
         showIconBorder: true,
+        description: '多端统一开发解决方案',
       },
-      {
-        title: 'Iconify',
-        url: 'https://icon-sets.iconify.design/',
-        iconType: 'image',
-        icon: 'https://icon-sets.iconify.design/favicon.svg',
-        showIconBorder: true,
-      },
-      {
-        title: 'IconPark',
-        url: 'https://iconpark.oceanengine.com/',
-        iconType: 'image',
-        icon: 'https://lf1-cdn2-tos.bytegoofy.com/bydesign/iconparksite/logo.svg',
-        showIconBorder: true,
-      },
-      {
-        title: 'Lucide Icon',
-        url: 'https://lucide.dev/',
-        iconType: 'image',
-        icon: 'https://lucide.dev/logo.light.svg',
-        showIconBorder: true,
-      },
-      {
-        title: 'Simple Icons',
-        url: 'https://simpleicons.org/',
-        iconType: 'image',
-        icon: 'https://simpleicons.org/logo-fc26614b48c3f1fd.svg',
-        showIconBorder: true,
-      },
-      {
-        title: 'Font Awesome',
-        url: 'https://fontawesome.com/',
-        iconType: 'image',
-        icon: 'https://fontawesome.com/images/favicon/icon.svg',
-        showIconBorder: true,
-      },
-      {
-        title: 'Bootstrap Icons',
-        url: 'https://icons.getbootstrap.com/',
-        iconType: 'image',
-        icon: 'https://icons.getbootstrap.com/assets/img/favicons/favicon-32x32.png',
-        showIconBorder: true,
-      },
-      {
-        title: 'Iconfont',
-        url: 'https://www.iconfont.cn/',
-        iconType: 'image',
-        icon: 'https://www.iconfont.cn/favicon.ico',
-        showIconBorder: true,
-      },
-    ]
-  },
-  {
-    category: '素材',
-    items: [
-      {
-        title: 'Unsplash',
-        url: 'https://unsplash.com/',
-        iconType: 'image',
-        icon: 'https://unsplash.com/favicon-32x32.png',
-        showIconBorder: true,
-      },
-      {
-        title: 'Many Pixels',
-        url: 'https://www.manypixels.co/gallery',
-        iconType: 'image',
-        icon: 'https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64a5f701714b5fe13a08253f_favicons%201%20(2).png',
-        showIconBorder: true,
-      },
-      {
-        title: 'Undraw',
-        url: 'https://undraw.co/illustrations',
-        iconType: 'image',
-        icon: 'https://undraw.co/favicon.ico',
-        showIconBorder: true,
-      },
-      {
-        title: '搜图导航',
-        url: 'https://www.91sotu.com/',
-        iconType: 'image',
-        icon: 'https://www.91sotu.com/favicon.ico',
-        showIconBorder: true,
-      },
-    ]
-  },
-  {
-    category: '桌面应用开发',
-    items: [
+      // 桌面应用
       {
         title: 'Electron',
         url: 'https://electronjs.org/',
@@ -906,17 +1013,14 @@ export const navData = [
         icon: 'https://neutralino.js.org/img/logo.png',
         showIconBorder: true,
       },
-    ]
-  },
-  {
-    category: '跨平台开发',
-    items: [
+      // 移动端
       {
         title: 'React Native',
         url: 'https://reactnative.dev/',
         iconType: 'iconify',
         icon: 'logos:react',
         showIconBorder: true,
+        description: '使用React构建原生应用',
       },
       {
         title: 'Flutter',
@@ -924,6 +1028,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:flutter',
         showIconBorder: true,
+        description: 'Google的UI工具包',
       },
       {
         title: 'NativeScript',
@@ -931,504 +1036,205 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:nativescript',
         showIconBorder: true,
+        description: '使用Web技能构建原生移动应用',
       },
     ]
   },
   {
-    category: '构建工具',
+    category: '资源与设计',
     items: [
+      // 图标
       {
-        title: 'vite',
-        url: 'https://vitejs.dev/',
-        iconType: 'iconify',
-        icon: 'logos:vitejs',
-        showIconBorder: true,
-      },
-      {
-        title: 'webpack',
-        url: 'https://webpack.js.org/',
-        iconType: 'iconify',
-        icon: 'logos:webpack',
-        showIconBorder: true,
-      },
-      {
-        title: 'parcel',
-        url: 'https://parceljs.org/',
-        iconType: 'iconify',
-        icon: 'logos:parcel-icon',
-        showIconBorder: true,
-      },
-      {
-        title: 'rollup',
-        url: 'https://rollupjs.org/',
-        iconType: 'iconify',
-        icon: 'logos:rollup',
-        showIconBorder: true,
-      },
-      {
-        title: 'esbuild',
-        url: 'https://esbuild.github.io/',
-        iconType: 'iconify',
-        icon: 'logos:esbuild',
-        showIconBorder: true,
-      },
-      {
-        title: 'tsup',
-        url: 'https://tsup.egoist.dev/',
-        iconType: 'iconify',
-        icon: 'logos:typescript-icon',
-        showIconBorder: true,
-      },
-      {
-        title: 'unbuild',
-        url: 'https://github.com/unjs/unbuild',
-        iconType: 'iconify',
-        icon: 'unjs:unbuild',
-        showIconBorder: true,
-      },
-      {
-        title: 'turbo',
-        url: 'https://turbo.build/',
-        iconType: 'iconify',
-        icon: 'logos:turbopack-icon',
-        showIconBorder: true,
-      },
-      {
-        title: 'rolldown',
-        url: 'https://rolldown.rs/',
+        title: 'XIcons',
+        url: 'https://www.xicons.org/',
         iconType: 'image',
-        icon: 'https://rolldown.rs/lightning-down.svg',
+        icon: 'https://www.xicons.org/favicon.svg',
         showIconBorder: true,
+        description: 'SVG Vue/React组件图标库',
       },
       {
-        title: 'rspack',
-        url: 'https://www.rspack.dev/',
+        title: 'Iconify',
+        url: 'https://icon-sets.iconify.design/',
         iconType: 'image',
-        icon: 'https://assets.rspack.dev/rspack/rspack-logo.svg',
+        icon: 'https://icon-sets.iconify.design/favicon.svg',
         showIconBorder: true,
+        description: '统一图标框架',
       },
       {
-        title: 'swc',
-        url: 'https://swc.rs/',
-        iconType: 'iconify',
-        icon: 'logos:swc',
-        showIconBorder: true,
-      },
-      {
-        title: 'farm',
-        url: 'https://www.farmfe.org/',
+        title: 'IconPark',
+        url: 'https://iconpark.oceanengine.com/',
         iconType: 'image',
-        icon: 'https://www.farmfe.org/img/logo.png',
+        icon: 'https://lf1-cdn2-tos.bytegoofy.com/bydesign/iconparksite/logo.svg',
         showIconBorder: true,
+        description: '字节跳动出品的图标库',
       },
-    ]
-  },
-  {
-    category: '站点生成工具',
-    items: [
       {
-        title: 'VitePress',
-        url: 'https://vitepress.dev/',
+        title: 'Lucide Icon',
+        url: 'https://lucide.dev/',
         iconType: 'image',
-        icon: 'https://vitepress.dev/vitepress-logo-mini.svg',
+        icon: 'https://lucide.dev/logo.light.svg',
         showIconBorder: true,
+        description: '开源图标库',
       },
       {
-        title: 'VuePress',
-        url: 'https://v2.vuepress.vuejs.org/',
+        title: 'Simple Icons',
+        url: 'https://simpleicons.org/',
         iconType: 'image',
-        icon: 'https://v2.vuepress.vuejs.org/images/hero.png',
+        icon: 'https://simpleicons.org/logo-fc26614b48c3f1fd.svg',
         showIconBorder: true,
+        description: '流行品牌的免费SVG图标',
       },
       {
-        title: 'Docusaurus',
-        url: 'https://docusaurus.io/',
-        iconType: 'iconify',
-        icon: 'logos:docusaurus',
-        showIconBorder: true,
-      },
-      {
-        title: 'Startlight',
-        url: 'https://starlight.astro.build/',
+        title: 'Font Awesome',
+        url: 'https://fontawesome.com/',
         iconType: 'image',
-        icon: 'https://starlight.astro.build/_astro/hero-star.CRrHICv4_Zc4Kge.webp',
+        icon: 'https://fontawesome.com/images/favicon/icon.svg',
         showIconBorder: true,
+        description: '矢量图标和CSS工具包',
       },
       {
-        title: 'Hexo',
-        url: 'https://hexo.io/',
-        iconType: 'iconify',
-        icon: 'logos:hexo',
-        showIconBorder: true,
-      },
-      {
-        title: 'Slidev',
-        url: 'https://sli.dev/',
-        iconType: 'iconify',
-        icon: 'logos:slidev',
-        showIconBorder: true,
-      },
-    ]
-  },
-  {
-    category: '社区',
-    items: [
-      {
-        title: 'dev.to',
-        url: 'https://dev.to',
-        description: '技术社区，拥有庞大的开发者用户基数，适合学习技术、分享交流、提升专业能力。',
+        title: 'Bootstrap Icons',
+        url: 'https://icons.getbootstrap.com/',
         iconType: 'image',
-        icon: 'https://media.dev.to/cdn-cgi/image/quality=100/https://dev-to-uploads.s3.amazonaws.com/uploads/logos/resized_logo_UQww2soKuUsjaOGNB38o.png',
+        icon: 'https://icons.getbootstrap.com/assets/img/favicons/favicon-32x32.png',
         showIconBorder: true,
+        description: 'Bootstrap官方图标库',
       },
       {
-        title: '思否',
-        url: 'https://segmentfault.com',
-        description: '中文技术问答社区',
+        title: 'Iconfont',
+        url: 'https://www.iconfont.cn/',
         iconType: 'image',
-        icon: 'https://static.segmentfault.com/main_site_next/9e69005a/_next/static/media/logo-b.1ef53c6e.svg',
+        icon: 'https://www.iconfont.cn/favicon.ico',
         showIconBorder: true,
+        description: '阿里巴巴矢量图标库',
       },
+      // 素材
       {
-        title: '掘金',
-        url: 'https://juejin.cn',
-        description: '中文技术社区',
+        title: 'Unsplash',
+        url: 'https://unsplash.com/',
         iconType: 'image',
-        icon: 'https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/e08da34488b114bd4c665ba2fa520a31.svg',
+        icon: 'https://unsplash.com/favicon-32x32.png',
         showIconBorder: true,
+        description: '免费高质量图片',
       },
       {
-        title: 'v2ex',
-        url: 'https://www.v2ex.com',
-        description: '中文技术社区，分享、探索',
+        title: 'Many Pixels',
+        url: 'https://www.manypixels.co/gallery',
         iconType: 'image',
-        icon: 'https://www.v2ex.com/static/img/v2ex@2x.png',
+        icon: 'https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64a5f701714b5fe13a08253f_favicons%201%20(2).png',
         showIconBorder: true,
+        description: '免费插画素材库',
       },
       {
-        title: 'LeetCode',
-        url: 'https://leetcode.cn',
-        description: '算法题库',
+        title: 'Undraw',
+        url: 'https://undraw.co/illustrations',
         iconType: 'image',
-        icon: 'https://leetcode.cn/favicon.ico',
+        icon: 'https://undraw.co/favicon.ico',
         showIconBorder: true,
-      },
-    ]
-  },
-  {
-    category: '周刊',
-    items: [
-      {
-        title: 'Nodeweekly',
-        url: 'https://nodeweekly.com/issues',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
+        description: '开源插画集合',
       },
       {
-        title: 'JavaScript Weekly',
-        url: 'https://javascriptweekly.com/issues',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-      {
-        title: 'Frontender',
-        url: 'https://frontender-ua.medium.com/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-      {
-        title: '奇舞周刊',
-        url: 'https://weekly.75.team/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-    ]
-  },
-  {
-    category: '博客',
-    items: [
-      {
-        title: 'web.dev',
-        url: 'https://web.dev',
-        description: 'Chrome DevRel',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-      {
-        title: 'Chrome Developer',
-        url: 'https://developer.chrome.com',
-        description: 'Chrome 团队博客',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-      {
-        title: 'builder.io',
-        url: 'https://builder.io',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-    ]
-  },
-  {
-    category: 'Git',
-    items: [
-      {
-        title: 'Learn Git Branching',
-        url: 'https://learngitbranching.js.org/?locale=zh_CN',
-        description: '学习 git 分支',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-    ]
-  },
-  {
-    category: '工具',
-    items: [
-      {
-        title: 'js 可视化执行',
-        url: 'https://www.jsv9000.app',
-        iconType: 'iconify',
-        icon: 'logos:javascript',
+        title: '搜图导航',
+        url: 'https://www.91sotu.com/',
+        iconType: 'image',
+        icon: 'https://www.91sotu.com/favicon.ico',
         showIconBorder: true,
+        description: '设计师图片素材导航',
       },
-      {
-        title: 'js 性能对比',
-        url: 'https://jsbench.me',
-        iconType: 'iconify',
-        icon: 'logos:javascript',
-        showIconBorder: true,
-      },
-      {
-        title: 'AST explorer',
-        url: 'https://www.astexplorer.net',
-        iconType: 'iconify',
-        icon: 'logos:javascript',
-        showIconBorder: true,
-      },
-    ]
-  },
-  {
-    category: 'CSS工具',
-    items: [
-      {
-        title: 'CSS 灵感',
-        url: 'https://csscoco.com/inspiration/#/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-      {
-        title: 'CSS Tricks',
-        url: 'https://qishaoxuan.github.io/css_tricks/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-      {
-        title: 'you need to know css',
-        url: 'https://lhammer.cn/You-need-to-know-css/#/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-    ]
-  },
-  {
-    category: '设计工具',
-    items: [
+      // 设计工具
       {
         title: 'Web 安全色',
         url: 'https://www.bootcss.com/p/websafecolors/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
+        iconType: 'iconify',
+        icon: 'mdi:palette',
+        showIconBorder: true,
+        description: 'Web安全色参考',
       },
       {
         title: '渐变色',
         url: 'https://color.oulu.me/',
-        iconType: 'image',
-        icon: 'https://color.oulu.me/favicon.ico',
+        iconType: 'iconify',
+        icon: 'line-md:color-swatch',
         showIconBorder: true,
+        description: '在线渐变色生成器',
       },
       {
         title: 'SVG background',
         url: 'https://www.svgbackgrounds.com/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
+        iconType: 'iconify',
+        icon: 'mdi:svg',
+        showIconBorder: true,
+        description: 'SVG背景图案生成',
       },
       {
         title: 'SVG 波浪背景生成',
         url: 'https://svgwave.in/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
+        iconType: 'iconify',
+        icon: 'mdi:wave',
+        showIconBorder: true,
+        description: '波浪状SVG背景生成器',
       },
       {
         title: '贝塞尔生成',
         url: 'https://easings.co/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
+        iconType: 'iconify',
+        icon: 'mdi:chart-bell-curve',
+        showIconBorder: true,
+        description: 'CSS贝塞尔曲线生成器',
       },
       {
         title: 'CSS 动画',
         url: 'https://animista.net/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
+        iconType: 'iconify',
+        icon: 'mdi:animation',
+        showIconBorder: true,
+        description: 'CSS动画效果集合',
       },
       {
         title: 'CSS Timing Function',
         url: 'https://easings.net/zh-cn',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
+        iconType: 'iconify',
+        icon: 'mdi:chart-bell-curve',
+        showIconBorder: true,
+        description: 'CSS缓动函数参考',
       },
       {
         title: 'Color Hunt',
         url: 'https://colorhunt.co/',
-        iconType: 'image',
-        icon: 'https://colorhunt.co/img/colorhunt-favicon.svg?2',
+        iconType: 'iconify',
+        icon: 'ph:palette-fill',
         showIconBorder: true,
+        description: '流行配色方案收集',
       },
       {
         title: 'Colordrop',
         url: 'https://colordrop.io/',
-        iconType: 'image',
-        icon: 'https://colordrop.io/favicon.ico',
+        iconType: 'iconify',
+        icon: 'ph:drop-fill',
         showIconBorder: true,
+        description: '简约配色灵感工具',
       },
       {
         title: 'Picular',
         url: 'https://picular.co/',
-        iconType: 'image',
-        icon: 'https://picular.co/favicon.ico',
+        iconType: 'iconify',
+        icon: 'ic:baseline-color-lens',
         showIconBorder: true,
+        description: '基于Google图片的配色提取',
       },
     ]
   },
   {
-    category: '正则',
+    category: '开发工具与测试',
     items: [
-      {
-        title: '正则生成，图解',
-        url: 'https://regex-vis.com/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-      {
-        title: '正则测试',
-        url: 'https://regex101.com/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-    ]
-  },
-  {
-    category: 'Shell',
-    items: [
-      {
-        title: 'tldr',
-        url: 'https://tldr.sh/',
-        description: '在线帮助手册',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-    ]
-  },
-  {
-    category: '开源',
-    items: [
-      {
-        title: 'bestofjs',
-        url: 'https://bestofjs.org/',
-        description: '前端开源项目最新热点趋势',
-        iconType: 'image',
-        icon: 'https://bestofjs.org/favicon.ico',
-        showIconBorder: true,
-      },
-      {
-        title: 'publint',
-        url: 'https://publint.dev/',
-        description: '检查 npm package 是否正确发布',
-        iconType: 'image',
-        icon: 'https://publint.dev/favicon.ico',
-        showIconBorder: true,
-      },
-      {
-        title: 'Ray',
-        url: 'https://www.ray.so/',
-        description: '代码 Demo 图片生成',
-        iconType: 'image',
-        icon: 'https://www.ray.so/favicon.ico',
-        showIconBorder: true,
-      },
-      {
-        title: 'Carbon',
-        url: 'https://carbon.now.sh/',
-        description: '代码 Demo 图片生成',
-        iconType: 'image',
-        icon: 'https://carbon.now.sh/favicon.ico',
-        showIconBorder: true,
-      },
-      {
-        title: '屏幕截图设备模型生成器',
-        url: 'https://mockuphone.com/',
-        description: '将屏幕截图适配到不同的设备模型中',
-        iconType: 'image',
-        icon: 'https://mockuphone.com/images/favicon.png',
-        showIconBorder: true,
-      },
-      {
-        title: '在线画板',
-        url: 'https://excalidraw.com/',
-        description: '在线画板',
-        iconType: 'image',
-        icon: 'https://excalidraw.com/favicon-32x32.png',
-        showIconBorder: true,
-      },
-    ]
-  },
-  {
-    category: '服务',
-    items: [
-      {
-        title: 'Nginx 配置生成',
-        url: 'https://www.digitalocean.com/community/tools/nginx?global.app.lang=zhCN',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-      {
-        title: 'caniuse',
-        url: 'https://caniuse.com/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
-      },
-    ]
-  },
-  {
-    category: 'Test',
-    items: [
+      // 测试框架
       {
         title: 'storybook',
         url: 'https://storybook.js.org/',
         iconType: 'iconify',
         icon: 'logos:storybook-icon',
         showIconBorder: true,
+        description: 'UI组件开发和测试环境',
       },
       {
         title: 'vitest',
@@ -1436,6 +1242,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:vitest',
         showIconBorder: true,
+        description: '由Vite驱动的测试框架',
       },
       {
         title: 'cypress',
@@ -1443,6 +1250,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:cypress-icon',
         showIconBorder: true,
+        description: '现代化端到端测试工具',
       },
       {
         title: 'jest',
@@ -1450,6 +1258,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:jest',
         showIconBorder: true,
+        description: '令人愉快的JavaScript测试框架',
       },
       {
         title: 'mocha',
@@ -1457,6 +1266,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:mocha',
         showIconBorder: true,
+        description: '功能丰富的JavaScript测试框架',
       },
       {
         title: 'ava',
@@ -1464,6 +1274,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:ava',
         showIconBorder: true,
+        description: '面向未来的测试运行器',
       },
       {
         title: 'karma',
@@ -1471,6 +1282,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:karma',
         showIconBorder: true,
+        description: '令人满意的JavaScript测试器',
       },
       {
         title: 'nightwatch',
@@ -1478,13 +1290,15 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:nightwatch',
         showIconBorder: true,
+        description: '集成自动化测试框架',
       },
       {
         title: 'sinon',
         url: 'https://sinonjs.org/',
-        iconType: 'image',
-        icon: 'https://sinonjs.org/assets/images/logo.png',
+        iconType: 'iconify',
+        icon: 'simple-icons:sinon',
         showIconBorder: true,
+        description: 'JavaScript测试辅助库',
       },
       {
         title: 'chai',
@@ -1492,149 +1306,386 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:chai',
         showIconBorder: true,
+        description: 'BDD/TDD断言库',
       },
       {
         title: 'tape',
         url: 'https://github.com/ljharb/tape',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
+        iconType: 'iconify',
+        icon: 'mdi:tape-drive',
+        showIconBorder: true,
+        description: '为Node和浏览器设计的测试工具',
       },
       {
         title: 'istanbul',
         url: 'https://istanbul.js.org/',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
+        iconType: 'iconify',
+        icon: 'mdi:map-marker',
+        showIconBorder: true,
+        description: 'JavaScript代码覆盖率工具',
       },
       {
         title: 'uvu',
         url: 'https://github.com/lukeed/uvu',
-        iconType: 'none',
-        icon: '',
-        showIconBorder: false,
+        iconType: 'iconify',
+        icon: 'mdi:test-tube',
+        showIconBorder: true,
+        description: '轻量级且快速的测试框架',
       },
-    ]
-  },
-  {
-    category: 'Chart',
-    items: [
+      // 图表库
       {
         title: 'Chart.js',
         url: 'https://www.chartjs.org/',
-        iconType: 'image',
-        icon: 'https://www.chartjs.org/img/chartjs-logo.svg',
+        iconType: 'iconify',
+        icon: 'simple-icons:chartjs',
         showIconBorder: true,
+        description: '简单灵活的JavaScript图表库',
       },
       {
         title: 'ECharts',
         url: 'https://echarts.apache.org/',
-        iconType: 'image',
-        icon: 'https://echarts.apache.org/favicon.ico',
+        iconType: 'iconify',
+        icon: 'simple-icons:apacheecharts',
         showIconBorder: true,
+        description: '百度开源可视化图表库',
       },
       {
         title: 'Mermaid',
         url: 'https://mermaid.js.org/',
-        iconType: 'image',
-        icon: 'https://mermaid.js.org/favicon.ico',
+        iconType: 'iconify',
+        icon: 'simple-icons:mermaid',
         showIconBorder: true,
+        description: '用文本生成图表的库',
       },
       {
         title: 'ApexCharts',
         url: 'https://apexcharts.com/',
-        iconType: 'image',
-        icon: 'https://apexcharts.com/wp-content/themes/apexcharts/img/apexcharts-logo-white-trimmed.svg',
+        iconType: 'iconify',
+        icon: 'simple-icons:apexcharts',
         showIconBorder: true,
+        description: '现代JavaScript图表库',
       },
       {
         title: 'visx',
         url: 'https://airbnb.io/visx',
-        iconType: 'image',
-        icon: 'https://airbnb.io/favicon.ico',
+        iconType: 'iconify',
+        icon: 'simple-icons:airbnb',
         showIconBorder: true,
+        description: 'Airbnb可视化组件库',
       },
       {
         title: 'C3.js',
         url: 'http://c3js.org/',
-        iconType: 'image',
-        icon: 'https://c3js.org/img/favicon-74acff28.png',
+        iconType: 'iconify',
+        icon: 'simple-icons:c3',
         showIconBorder: true,
+        description: '基于D3的可重用图表库',
       },
       {
         title: 'D3',
         url: 'https://d3js.org/',
-        iconType: 'image',
-        icon: 'https://d3js.org/logo.svg',
+        iconType: 'iconify',
+        icon: 'simple-icons:d3',
         showIconBorder: true,
+        description: '数据驱动文档的JavaScript库',
       },
       {
         title: 'G2',
         url: 'https://g2.antv.antgroup.com/',
-        iconType: 'image',
-        icon: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*7svFR6wkPMoAAAAAAAAAAAAADmJ7AQ/original',
+        iconType: 'iconify',
+        icon: 'ant-design:bar-chart-outlined',
         showIconBorder: true,
+        description: '蚂蚁集团数据可视化解决方案',
       },
       {
         title: 'G2Plot',
         url: 'https://g2plot.antv.antgroup.com/',
-        iconType: 'image',
-        icon: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*7svFR6wkPMoAAAAAAAAAAAAADmJ7AQ/original',
+        iconType: 'iconify',
+        icon: 'ant-design:dot-chart-outlined',
         showIconBorder: true,
+        description: '开箱即用的图表库',
       },
       {
         title: 'G6',
         url: 'https://g6.antv.antgroup.com/en',
-        iconType: 'image',
-        icon: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*7svFR6wkPMoAAAAAAAAAAAAADmJ7AQ/original',
+        iconType: 'iconify',
+        icon: 'ant-design:share-alt-outlined',
         showIconBorder: true,
+        description: '图可视化引擎',
       },
       {
         title: 'F2',
         url: 'https://f2.antv.vision/zh',
-        iconType: 'image',
-        icon: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*7svFR6wkPMoAAAAAAAAAAAAADmJ7AQ/original',
+        iconType: 'iconify',
+        icon: 'ant-design:line-chart-outlined',
         showIconBorder: true,
+        description: '移动端可视化解决方案',
       },
       {
         title: 'X6',
         url: 'https://x6.antv.antgroup.com/en',
-        iconType: 'image',
-        icon: 'https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*7svFR6wkPMoAAAAAAAAAAAAADmJ7AQ/original',
+        iconType: 'iconify',
+        icon: 'ant-design:apartment-outlined',
         showIconBorder: true,
+        description: '图编辑引擎',
       },
-    ]
-  },
-  {
-    category: 'CDN',
-    items: [
+      // CDN服务
       {
         title: 'jsdelivr',
         url: 'https://www.jsdelivr.com/',
         iconType: 'iconify',
         icon: 'logos:jsdelivr',
         showIconBorder: true,
+        description: '开源项目CDN服务',
       },
       {
         title: 'cdnjs',
         url: 'https://cdnjs.com/',
-        iconType: 'image',
-        icon: 'https://cdnjs.com/_/f7a2ebfb819c118086546e481876aef6.svg',
+        iconType: 'iconify',
+        icon: 'simple-icons:cdnjs',
         showIconBorder: true,
+        description: '免费开源CDN服务',
       },
       {
         title: 'unpkg',
         url: 'https://unpkg.com/',
-        iconType: 'image',
-        icon: 'https://unpkg.com/favicon.ico',
+        iconType: 'iconify',
+        icon: 'simple-icons:unpkg',
         showIconBorder: true,
+        description: 'npm上的CDN服务',
       },
       {
         title: 'Bootcdn',
         url: 'https://www.bootcdn.cn/',
-        iconType: 'image',
-        icon: 'https://www.bootcdn.cn/favicon.ico',
+        iconType: 'iconify',
+        icon: 'mdi:bootstrap',
         showIconBorder: true,
+        description: '稳定、快速、免费的前端开源项目CDN',
+      },
+    ]
+  },
+  {
+    category: '社区与学习资源',
+    items: [
+      // 社区
+      {
+        title: 'dev.to',
+        url: 'https://dev.to',
+        description: '技术社区，拥有庞大的开发者用户基数，适合学习技术、分享交流、提升专业能力。',
+        iconType: 'iconify',
+        icon: 'simple-icons:devto',
+        showIconBorder: true,
+      },
+      {
+        title: '思否',
+        url: 'https://segmentfault.com',
+        description: '中文技术问答社区',
+        iconType: 'iconify',
+        icon: 'simple-icons:segmentfault',
+        showIconBorder: true,
+      },
+      {
+        title: '掘金',
+        url: 'https://juejin.cn',
+        description: '中文技术社区',
+        iconType: 'iconify',
+        icon: 'simple-icons:juejin',
+        showIconBorder: true,
+      },
+      {
+        title: 'v2ex',
+        url: 'https://www.v2ex.com',
+        description: '中文技术社区，分享、探索',
+        iconType: 'iconify',
+        icon: 'simple-icons:v2ex',
+        showIconBorder: true,
+      },
+      {
+        title: 'LeetCode',
+        url: 'https://leetcode.cn',
+        description: '算法题库',
+        iconType: 'iconify',
+        icon: 'simple-icons:leetcode',
+        showIconBorder: true,
+      },
+      // 周刊
+      {
+        title: 'Nodeweekly',
+        url: 'https://nodeweekly.com/issues',
+        iconType: 'iconify',
+        icon: 'simple-icons:nodedotjs',
+        showIconBorder: true,
+        description: 'Node.js最新资讯',
+      },
+      {
+        title: 'JavaScript Weekly',
+        url: 'https://javascriptweekly.com/issues',
+        iconType: 'iconify',
+        icon: 'logos:javascript',
+        showIconBorder: true,
+        description: 'JavaScript最新资讯',
+      },
+      {
+        title: 'Frontender',
+        url: 'https://frontender-ua.medium.com/',
+        iconType: 'iconify',
+        icon: 'mdi:web',
+        showIconBorder: true,
+        description: '前端技术周刊',
+      },
+      {
+        title: '奇舞周刊',
+        url: 'https://weekly.75.team/',
+        iconType: 'iconify',
+        icon: 'mdi:numeric-7-box',
+        showIconBorder: true,
+        description: '前端技术周刊',
+      },
+      // 博客
+      {
+        title: 'web.dev',
+        url: 'https://web.dev',
+        iconType: 'iconify',
+        icon: 'mdi:web',
+        showIconBorder: true,
+        description: 'Web开发教程和指南',
+      },
+      {
+        title: 'Chrome Developer',
+        url: 'https://developer.chrome.com',
+        iconType: 'iconify',
+        icon: 'simple-icons:googlechrome',
+        showIconBorder: true,
+        description: 'Chrome开发者博客',
+      },
+      {
+        title: 'builder.io',
+        url: 'https://builder.io',
+        iconType: 'iconify',
+        icon: 'simple-icons:builderdotcom',
+        showIconBorder: true,
+        description: '现代Web开发博客',
+      },
+      // 学习工具
+      {
+        title: 'Learn Git Branching',
+        url: 'https://learngitbranching.js.org/?locale=zh_CN',
+        description: '学习 git 分支',
+        iconType: 'iconify',
+        icon: 'mdi:source-branch',
+        showIconBorder: true,
+      },
+      {
+        title: 'js 可视化执行',
+        url: 'https://www.jsv9000.app',
+        iconType: 'iconify',
+        icon: 'logos:javascript',
+        showIconBorder: true,
+        description: 'JavaScript代码可视化执行工具',
+      },
+      {
+        title: 'js 性能对比',
+        url: 'https://jsbench.me',
+        iconType: 'iconify',
+        icon: 'logos:javascript',
+        showIconBorder: true,
+        description: '在线JavaScript性能测试工具',
+      },
+      {
+        title: 'AST explorer',
+        url: 'https://www.astexplorer.net',
+        iconType: 'iconify',
+        icon: 'logos:javascript',
+        showIconBorder: true,
+        description: '在线AST查看和转换工具',
+      },
+      {
+        title: '正则生成，图解',
+        url: 'https://regex-vis.com/',
+        iconType: 'iconify',
+        icon: 'mdi:regex',
+        showIconBorder: true,
+        description: '正则表达式可视化工具',
+      },
+      {
+        title: '正则测试',
+        url: 'https://regex101.com/',
+        iconType: 'iconify',
+        icon: 'mdi:regex',
+        showIconBorder: true,
+        description: '在线正则表达式测试工具',
+      },
+      {
+        title: 'tldr',
+        url: 'https://tldr.sh/',
+        description: '在线帮助手册',
+        iconType: 'iconify',
+        icon: 'mdi:console',
+        showIconBorder: true,
+      },
+      {
+        title: 'bestofjs',
+        url: 'https://bestofjs.org/',
+        description: '前端开源项目最新热点趋势',
+        iconType: 'iconify',
+        icon: 'mdi:star-circle',
+        showIconBorder: true,
+      },
+      {
+        title: 'publint',
+        url: 'https://publint.dev/',
+        description: '检查 npm package 是否正确发布',
+        iconType: 'iconify',
+        icon: 'mdi:package-check',
+        showIconBorder: true,
+      },
+      {
+        title: 'Ray',
+        url: 'https://www.ray.so/',
+        description: '代码 Demo 图片生成',
+        iconType: 'iconify',
+        icon: 'mdi:code-tags',
+        showIconBorder: true,
+      },
+      {
+        title: 'Carbon',
+        url: 'https://carbon.now.sh/',
+        description: '代码 Demo 图片生成',
+        iconType: 'iconify',
+        icon: 'mdi:code-braces',
+        showIconBorder: true,
+      },
+      {
+        title: '屏幕截图设备模型生成器',
+        url: 'https://mockuphone.com/',
+        description: '将屏幕截图适配到不同的设备模型中',
+        iconType: 'iconify',
+        icon: 'mdi:cellphone-screenshot',
+        showIconBorder: true,
+      },
+      {
+        title: '在线画板',
+        url: 'https://excalidraw.com/',
+        description: '在线画板',
+        iconType: 'iconify',
+        icon: 'mdi:drawing',
+        showIconBorder: true,
+      },
+      {
+        title: 'Nginx 配置生成',
+        url: 'https://www.digitalocean.com/community/tools/nginx?global.app.lang=zhCN',
+        iconType: 'iconify',
+        icon: 'simple-icons:nginx',
+        showIconBorder: true,
+        description: '在线Nginx配置生成工具',
+      },
+      {
+        title: 'caniuse',
+        url: 'https://caniuse.com/',
+        iconType: 'iconify',
+        icon: 'mdi:browser-check',
+        showIconBorder: true,
+        description: 'Web兼容性检查工具',
       },
     ]
   }
