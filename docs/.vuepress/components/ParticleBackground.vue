@@ -61,7 +61,7 @@ class ParticleEffect {
   // 粒子颜色数组
   colors = ['#4CAF50', '#2196F3', '#E91E63', '#FFC107']
   // 连线颜色
-  lineColor = '#FFFFFF'
+  lineColor = '#CCCCCC'
   // 背景填充样式
   bgFillStyle = 'rgba(255, 255, 255, 0.02)'
 
@@ -83,10 +83,10 @@ class ParticleEffect {
    */
   updateThemeColors() {
     if (this.isDark) {
-      this.lineColor = '#CCCCCC'
+      this.lineColor = '#2F4F4F'
       this.bgFillStyle = 'rgba(0, 0, 0, 0.08)'
     } else {
-      this.lineColor = '#999999'
+      this.lineColor = '#C0C0C0'
       this.bgFillStyle = 'rgba(255, 255, 255, 0.02)'
     }
   }
@@ -191,9 +191,13 @@ class ParticleEffect {
    * @param y2 终点y坐标
    */
   drawLine(x1: number, y1: number, x2: number, y2: number) {
-    const rgb = this.isDark ? '204, 204, 204' : '255, 255, 255'
-    this.ctx.strokeStyle = `rgba(${rgb}, ${this.config.lineOpacity})`
-    this.ctx.lineWidth = 1
+    // 将十六进制颜色转换为 RGB
+    const hex = this.lineColor.replace('#', '')
+    const r = parseInt(hex.substring(0, 2), 16)
+    const g = parseInt(hex.substring(2, 4), 16)
+    const b = parseInt(hex.substring(4, 6), 16)
+    this.ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.6)`
+    this.ctx.lineWidth = 1.2
     this.ctx.beginPath()
     this.ctx.moveTo(x1, y1)
     this.ctx.lineTo(x2, y2)
@@ -218,9 +222,8 @@ class ParticleEffect {
   animate = () => {
     if (!this.isRunning) return
 
-    // 绘制背景
-    this.ctx.fillStyle = this.bgFillStyle
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+    // 清空 canvas，移除拖影效果
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
     // 遍历所有粒子
     for (let i = 0; i < this.particles.length; i++) {

@@ -1,9 +1,13 @@
 ---
 title: 粒子效果禁用测试
-date: 2024-01-01T00:00:00.000Z
+date: 2025-11-15
 disableParticle: true
-createTime: 2025/11/15 12:11:04
-permalink: /blog/pampvv13/
+tags:
+  - VuePress
+  - 粒子效果
+  - 前端开发
+permalink: /blog/particle-disable-test/
+createTime: 2025/11/15
 ---
 
 ## 粒子效果禁用测试
@@ -35,3 +39,13 @@ disableParticle: true
 ```
 
 点击上方的"导航页"或其他文章链接回到显示粒子效果的页面进行对比！
+
+
+<!-- 转载/引用/使用需保留模板设计者信息 -->
+<div style="text-align: center; margin-top: 2rem; padding: 1rem; border-top: 1px solid var(--vp-c-divider);">
+  <p style="color: var(--vp-c-text-2); font-size: 0.9rem;">
+    本<a href="https://github.com/ZXBHELLO/Website" target="_blank" rel="noopener noreferrer">背景粒子效果</a>由 
+    <a href="https://github.com/ZXBHELLO" target="_blank" rel="noopener noreferrer">ZXBHELLO</a> 
+    制作，引用、使用、转载请保留设计者信息。
+  </p>
+</div>

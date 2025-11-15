@@ -1,6 +1,13 @@
 ---
 title: 粒子背景效果配置教程
-permalink: /nav/particle-guide/
+date: 2025-11-15
+category: 技术教程
+tags:
+  - VuePress
+  - 粒子效果
+  - 前端开发
+permalink: /blog/particle-guide/
+createTime: 2025/11/15
 ---
 
 # 粒子背景效果使用指南
@@ -8,7 +15,8 @@ permalink: /nav/particle-guide/
 本文档将指导您如何在您的 VuePress 项目中集成动态粒子背景效果，包括组件安装、配置说明和样式自定义。
 
 ::: tip
-您可以访问 [ZXBHELLO的文档站点](https://doc.zxbhello.top)，查看整个站点应用的粒子效果示例。
+您可以访问 [ZXBHELLO的导航页](https://doc.zxbhello.top/nav/)，查看整个站点应用的粒子效果示例。
+您可访问 [粒子效果禁用测试](https://doc.zxbhello.top/blog/particle-disable-test/)，查看禁用粒子效果示例。
 :::
 
 ## 功能特性
@@ -21,6 +29,7 @@ permalink: /nav/particle-guide/
 - 🎯 **灵活控制**：支持按页面禁用效果
 - 🌓 **深色模式支持**：自动适配浅色和深色主题
 - ⚡ **高性能**：使用 Canvas 和优化算法确保流畅动画
+- 🚫 **自由关闭**：可为页面配置标签单独禁用粒子背景
 
 ## 前置准备
 
@@ -56,7 +65,7 @@ permalink: /nav/particle-guide/
 
 ## 安装步骤
 
-### 步骤 1：复制组件���件
+### 步骤 1：复制组件文件
 
 将以下两个文件复制到您的项目中：
 
@@ -69,17 +78,13 @@ permalink: /nav/particle-guide/
 
 ```typescript
 import { defineClientConfig } from 'vuepress/client'
-// 保留您现有的导入语句
-import NavPage from './components/NavPage.vue'
-import HideFooter from './components/HideFooter.vue'
+// 保留您现有的语句并导入需要添加的内容
 import ParticleBackground from './components/ParticleBackground.vue'
 import AppSetup from './components/AppSetup.vue'
 
 export default defineClientConfig({
   enhance({ app }) {
     // 保留您现有的组件注册
-    app.component('NavPage', NavPage)
-    app.component('HideFooter', HideFooter)
     // 添加粒子背景组件注册
     app.component('ParticleBackground', ParticleBackground)
   },
@@ -94,11 +99,7 @@ export default defineClientConfig({
 完成以上步骤后，重启您的 VuePress 开发服务器：
 
 ```bash
-npm run docs:dev
-# 或
 pnpm docs:dev
-# 或
-yarn docs:dev
 ```
 
 访问任何页面，您应该能看到背景中的动态粒子效果。
@@ -107,7 +108,7 @@ yarn docs:dev
 
 ### 全局配置
 
-粒子效果��认在所有页面启用。无需额外配置即可在整个站点使用。
+粒子效果默认在所有页面启用。无需额外配置即可在整个站点使用。
 
 ### 按页面禁用效果
 
@@ -132,19 +133,6 @@ disableParticle: true
 - 设备性能较低的用户访问
 - 某些特殊的展示页面
 
-#### 示例
-
-```markdown
----
-title: 代码参考手册
-disableParticle: true
-category: 技术文档
----
-
-## API 文档
-
-这个页面禁用了粒子效果，以便用户专注于阅读代码...
-```
 
 ## 自定义配置
 
@@ -330,3 +318,12 @@ export default defineClientConfig({
 ---
 
 **祝您使用愉快！** 如果这个教程对您有帮助，欢迎在 GitHub 上 Star ⭐ 或分享给其他人。
+
+<!-- 转载/引用/使用需保留模板设计者信息 -->
+<div style="text-align: center; margin-top: 2rem; padding: 1rem; border-top: 1px solid var(--vp-c-divider);">
+  <p style="color: var(--vp-c-text-2); font-size: 0.9rem;">
+    本<a href="https://github.com/ZXBHELLO/Website" target="_blank" rel="noopener noreferrer">背景粒子效果</a>由 
+    <a href="https://github.com/ZXBHELLO" target="_blank" rel="noopener noreferrer">ZXBHELLO</a> 
+    制作，引用、使用、转载请保留设计者信息。
+  </p>
+</div>

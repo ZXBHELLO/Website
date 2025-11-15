@@ -12,7 +12,7 @@ permalink: /nav/
   <p style="color: var(--vp-c-text-2); font-size: 0.9rem;">
     本<a href="https://github.com/ZXBHELLO/Website" target="_blank" rel="noopener noreferrer">导航页模板</a>由 
     <a href="https://github.com/ZXBHELLO" target="_blank" rel="noopener noreferrer">ZXBHELLO</a> 
-    设计制作，转载请保留设计者信息。
+    制作，引用、使用、转载请保留设计者信息。
   </p>
 </div>
 
