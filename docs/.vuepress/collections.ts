@@ -42,9 +42,9 @@ const blog = defineCollection({
   // 启用分类页
   categories: true,
   //   linkPrefix: '/article/', // 相关文章的链接前缀
-  //   postList: true, // 是否启用文章列表页
-  //   postCover: 'right', // 文章封面位置
-  //   pagination: 15, // 每页显示文章数量
+  postList: true, // 是否启用文章列表页
+  postCover: 'right', // 文档封面位置
+  pagination: 15, // 每页显示文章数量
 })
 
 const ZakoZakoCraft = defineCollection({
@@ -138,6 +138,8 @@ const ZakoZakoCraft = defineCollection({
   ],
   // 根据文件结构自动生成侧边栏
   // sidebar: 'auto',
+  sidebarScrollbar: true, // 显示侧边栏滚动条
+  sidebarCollapsed: false, // 侧边栏默认展开
 })
 
 const MCMMO = defineCollection({
@@ -180,6 +182,8 @@ const MCMMO = defineCollection({
   ],
   // 根据文件结构自动生成侧边栏
   // sidebar: 'auto',
+  sidebarScrollbar: true, // 显示侧边栏滚动条
+  sidebarCollapsed: false, // 侧边栏默认展开
 })
 
 const Carpet = defineCollection({
@@ -219,6 +223,8 @@ const Carpet = defineCollection({
   ],
   // 根据文件结构自动生成侧边栏
   // sidebar: 'auto',
+  sidebarScrollbar: true, // 显示侧边栏滚动条
+  sidebarCollapsed: false, // 侧边栏默认展开
 })
 
 /**
