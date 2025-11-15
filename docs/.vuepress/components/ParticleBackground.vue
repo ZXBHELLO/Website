@@ -419,3 +419,24 @@ onUnmounted(() => {
   }
   shouldShowParticles.value = false
 })
+</script>
+
+<template>
+  <canvas
+    v-if="shouldShowParticles"
+    ref="canvasRef"
+    class="particle-canvas"
+  />
+</template>
+
+<style scoped>
+.particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+}
+</style>

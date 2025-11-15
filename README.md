@@ -10,9 +10,11 @@
 - 支持 PDF 预览和嵌入资源
 - 自动显示文档贡献者
 - 响应式设计，支持移动端浏览
+- 动态粒子背景效果
+- 深色/浅色主题自动切换
 
-## 个人开发自定义界面
-- [导航页](https://doc.zxbhello.top/nav/guide/)
+## 个人开发自定义组件
+- [通用导航页](https://doc.zxbhello.top/nav/guide/)
 
 ## 项目地址
 
@@ -25,6 +27,19 @@
 - [VuePress Plume 主题文档](https://theme-plume.vuejs.press/)
 - [部署指南](./docs/guide/deployment.md)
 
+## 项目结构
+
+```
+.
+├── docs/                   # 文档源文件
+│   ├── .vuepress/          # VuePress 配置
+│   │   ├── components/     # 自定义组件
+│   │   ├── public/         # 静态资源
+│   │   └── config.ts       # 主配置文件
+│   └── ...                 # 各类文档内容
+├── package.json            # 项目依赖和脚本
+└── README.md               # 项目说明文件
+```
 
 ## 安装依赖
 
@@ -37,13 +52,23 @@ pnpm i
 ```sh
 # 启动开发服务
 pnpm docs:dev
+
 # 构建生产包
 pnpm docs:build
+
 # 本地预览生产服务
 pnpm docs:preview
+
 # 更新 vuepress 和主题
 pnpm vp-update
 ```
+
+## 开发指南
+
+1. 所有文档内容位于 `docs/` 目录下
+2. 自定义组件位于 `docs/.vuepress/components/` 目录下
+3. 静态资源（如图片、PDF等）放在 `docs/.vuepress/public/` 目录下
+4. 配置文件位于 `docs/.vuepress/config.ts`
 
 ## 部署到 GitHub Pages
 
@@ -59,3 +84,11 @@ pnpm vp-update
   - 如果你准备发布到 `https://<USERNAME>.github.io/<REPO>/` ，也就是说你的仓库地址是 `https://github.com/<USERNAME>/<REPO>` ，则将 `base` 设置为 `"/<REPO>/"`。
 
 如需要自定义域名，请查看 [Github Pages 文档](https://docs.github.com/zh/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages)
+
+## 贡献
+
+如果你想要改进这个项目，欢迎提交 PR 或者在 Issues 中提出建议。
+
+## 许可证
+
+转载/引用需保留模板设计者信息。
