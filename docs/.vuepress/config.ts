@@ -12,6 +12,7 @@
 import { webpackBundler } from '@vuepress/bundler-webpack'
 import { defineUserConfig } from 'vuepress'
 import { plumeTheme } from 'vuepress-theme-plume'
+import { viteBundler } from '@vuepress/bundler-vite'
 
 export default defineUserConfig({
   base: '/',
@@ -30,7 +31,7 @@ export default defineUserConfig({
   port: 3000, // 更改端口以避免冲突
   host: '0.0.0.0',
 
-  bundler: webpackBundler(),
+  bundler: viteBundler(),
   shouldPrefetch: false, // 站点较大，页面数量较多时，不建议启用
 
   theme: plumeTheme({
