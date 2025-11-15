@@ -30,6 +30,6 @@ config:
           link: /nav/
         -
           theme: alt
-          text: QQ群
+          text: 企鹅群
           link: https://qm.qq.com/q/SPZEHOyWsw
 ---
