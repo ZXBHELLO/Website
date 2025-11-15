@@ -15,8 +15,10 @@ createTime: 2025/11/15
 本文档将指导您如何在您的 VuePress 项目中集成动态粒子背景效果，包括组件安装、配置说明和样式自定义。
 
 ::: tip
-您可以访问 [ZXBHELLO的导航页](https://doc.zxbhello.top/nav/)，查看整个站点应用的粒子效果示例。
-您可访问 [粒子效果禁用测试](https://doc.zxbhello.top/blog/particle-disable-test/)，查看禁用粒子效果示例。
+
+- 访问 [ZXBHELLO的导航页](https://doc.zxbhello.top/nav/)，查看整个站点应用的粒子效果示例。
+- 访问 [粒子效果禁用测试](https://doc.zxbhello.top/blog/particle-disable-test/)，查看禁用粒子效果示例。
+
 :::
 
 ## 功能特性
