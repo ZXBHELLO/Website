@@ -44,7 +44,7 @@ export const navData = [
         description: '为站点添加炫彩粒子动画背景',
         url: '/nav/particle-guide/',
         iconType: 'iconify',
-        icon: 'simple-icons:particle',
+        icon: 'geo:turf-concave',
         showIconBorder: true,
       },
     ]

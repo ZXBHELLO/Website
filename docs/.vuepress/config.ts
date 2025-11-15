@@ -27,7 +27,7 @@ export default defineUserConfig({
   ],
 
   // 开发服务器配置
-  port: 3001, // 更改端口以避免冲突
+  port: 3000, // 更改端口以避免冲突
   host: '0.0.0.0',
 
   bundler: webpackBundler(),
