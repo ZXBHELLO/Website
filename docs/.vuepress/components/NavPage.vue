@@ -152,12 +152,6 @@ import { navData } from '../../nav/data.js'
   box-shadow: 0 8px 24px rgba(80, 134, 161, 0.2);
 }
 
-/* 悬停时显示指针箭头 */
-.m-nav-link:hover::after {
-  opacity: 1;
-  transform: translateX(0);
-}
-
 /* 导航链接图标容器 */
 /* 设置宽度、高度、不收缩、边距、对齐方式 */
 /* 添加边框以增强视觉效果 */
