@@ -14,7 +14,7 @@
     "vp-update": "pnpm dlx vp-update"
   },
   "devDependencies": {
-    "@vuepress/bundler-webpack": "2.0.0-rc.26",
+    "@vuepress/bundler-vite": "2.0.0-rc.26",
     "http-server": "^14.1.1",
     "typescript": "^5.9.3",
     "vue": "^3.5.24",
