@@ -55,7 +55,8 @@ class ParticleEffect {
     lineOpacity: 0.4,         // 连线透明度
     mouseRadius: 180,         // 鼠标影响半径
     maxConnections: 4,        // 单个粒子最多连接数
-    mobileFactor: 1.8,        // 移动端粒子密度因子
+    mobileBaseDensity: 50,    // 移动端粒子密度（更高密度 = 更多粒子）
+    mobileMaxParticles: 200,  // 移动端最大粒子数量
   }
 
   // 粒子颜色数组
@@ -136,14 +137,14 @@ class ParticleEffect {
   createParticles(reset = false) {
     if (reset) this.particles = []
 
-    // 根据窗口宽度计算粒子数量
-    let particleCount = Math.floor(window.innerWidth / this.config.baseDensity)
-    particleCount = Math.min(particleCount, this.config.maxParticles)
+    const isMobile = window.innerWidth < 768
 
-    // 移动端减少粒子数量
-    if (window.innerWidth < 768) {
-      particleCount = Math.floor(particleCount / this.config.mobileFactor)
-    }
+    // 根据窗口宽度和设备类型计算粒子数量
+    let baseDensity = isMobile ? this.config.mobileBaseDensity : this.config.baseDensity
+    let maxParticles = isMobile ? this.config.mobileMaxParticles : this.config.maxParticles
+
+    let particleCount = Math.floor(window.innerWidth / baseDensity)
+    particleCount = Math.min(particleCount, maxParticles)
 
     // 创建指定数量的粒子
     for (let i = 0; i < particleCount; i++) {
@@ -441,5 +442,10 @@ onUnmounted(() => {
   pointer-events: none;
   width: 100vw;
   height: 100vh;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
 }
 </style>
