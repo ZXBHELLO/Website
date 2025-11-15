@@ -38,6 +38,15 @@ export const navData = [
         icon: 'material-symbols:article-outline',
         showIconBorder: true,
       },
+      {
+        id: 'particle-effect',
+        title: '动态粒子背景效果',
+        description: '为站点添加炫彩粒子动画背景',
+        url: '/nav/particle-guide/',
+        iconType: 'iconify',
+        icon: 'simple-icons:particle',
+        showIconBorder: true,
+      },
     ]
   },
   {
@@ -1204,7 +1213,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:vitest',
         showIconBorder: true,
-        description: '由Vite驱动的测试框架',
+        description: '��Vite驱动的测试框架',
       },
       {
         title: 'cypress',
@@ -1341,7 +1350,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'vscode-icons:file-type-c3',
         showIconBorder: true,
-        description: '基于D3的可重用图表库',
+        description: '基于D3的可��用图表库',
       },
       {
         title: 'D3',

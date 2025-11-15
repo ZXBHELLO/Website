@@ -4,7 +4,7 @@ home: true
 title: ZakoZakoCraft
 createTime: 2025/09/06 23:49:14
 permalink: /ZakoZakoCraft/
-externalLinkIcon: false
+externalLinkIcon: true
 config:
   - type: hero
     full: true

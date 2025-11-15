@@ -31,7 +31,7 @@ export default defineThemeConfig({
   navbarSocialInclude: ['bilibili', 'youtube', 'github'], // 允许显示在导航栏的 social 社交链接
   // navbarSocialInclude: ['github'], // 允许显示在导航栏的 social 社交链接
   // aside: true, // 页内侧边栏， 默认显示在右侧
-  // outline: [2, 3], // 页内大纲， 默认显示 h2, h3
+  // outline: [2, 3], // 页内��纲， 默认显示 h2, h3
 
   /**
    * 文章版权信息
@@ -44,10 +44,19 @@ export default defineThemeConfig({
   // createTime: true, // 是否显示文章创建时间
 
   /* 站点页脚 */
-    footer: {
-      message: '希望有朝一日能够成为人类...',
-      copyright: 'Copyright © 2024 ZXBHELLO',
-    },
+  footer: {
+    message: '希望有朝一日能够成为人类...',
+    copyright: 'Copyright © 2024 ZXBHELLO',
+  },
+
+  /**
+   * 粒子背景效果配置
+   * 全站默认启用动态粒子背景效果
+   * 如需在特定页面禁用，在 markdown 文件的 frontmatter 中添加:
+   * ---
+   * disableParticle: true
+   * ---
+   */
 
   /**
    * @see https://theme-plume.vuejs.press/config/basic/#profile
