@@ -75,6 +75,15 @@ export const navData = [
         icon: 'fluent:calendar-edit-32-regular',
         showIconBorder: true,
       },
+      {
+        id: 'ai-tools',
+        title: 'AI 工具集',
+        description: '免费无限制的AI工具集合',
+        url: '/app/AI-TOOLS/',
+        iconType: 'iconify',
+        icon: 'line-md:iconify1',
+        showIconBorder: true,
+      },
     ]
   },
   {

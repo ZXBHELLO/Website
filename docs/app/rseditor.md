@@ -7,4 +7,4 @@ permalink: /app/rseditor/
 
 <HideFooter />
 
-<iframe src="https://rseditor.zxbhello.top/" style="position: fixed; top: 60px; left: 0; width: 100vw; height: calc(100vh - 60px); border: none; z-index: 0;"></iframe>
+<iframe src="\assets\app\MinecraftRedStoneEditor-2D\index.html" style="position: fixed; top: 60px; left: 0; width: 100vw; height: calc(100vh - 60px); border: none; z-index: 0;"></iframe>
