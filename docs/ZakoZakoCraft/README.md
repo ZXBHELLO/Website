@@ -8,7 +8,7 @@ externalLinkIcon: true
 config:
   - type: hero
     full: true
-    backgroundImage: /assets/ZakoZakoCraft/background3.png
+    backgroundImage: /
     hero:
       name: ZakoZakoCraft
       text: 高版本 · 纯公益 · 零杂质 · 高品质 Minecraft 服务器
