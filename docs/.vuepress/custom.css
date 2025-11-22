@@ -6,7 +6,7 @@
 /* --- 字体设置 --- */
 
 :root {
-  --vp-font-family-base: "LXGW Bright", sans-serif;
+  --vp-font-family-base: "LXGW WenKai", sans-serif;
   --vp-font-family-mono: "Cascadia Code", monospace;
   font-optical-sizing: auto;
 }
@@ -18,7 +18,7 @@
 
 :root:where(:lang(zh)),
 :root:where(:lang(zh-CN)) {
-  --vp-font-family-base: "LXGW Bright", sans-serif;
+  --vp-font-family-base: "LXGW WenKai", sans-serif;
 }
 
 /* --- 其他元素字体设置 --- */
@@ -54,4 +54,3 @@ html {
   font-weight: 350;
   font-variant-ligatures: normal;
 }
-
