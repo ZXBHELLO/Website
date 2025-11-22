@@ -3,6 +3,8 @@ import NavPage from './components/NavPage.vue'
 import HideFooter from './components/HideFooter.vue'
 import ParticleBackground from './components/ParticleBackground.vue'
 import AppSetup from './components/AppSetup.vue'
+import AsideNav from './components/AsideNav.vue'
+
 
 export default defineClientConfig({
   enhance({ app }) {
@@ -12,6 +14,8 @@ export default defineClientConfig({
     app.component('HideFooter', HideFooter)
     // 注册粒子背景组件
     app.component('ParticleBackground', ParticleBackground)
+    // 注册侧边导航组件
+    app.component('AsideNav', AsideNav)
   },
 
   rootComponents: [AppSetup],
