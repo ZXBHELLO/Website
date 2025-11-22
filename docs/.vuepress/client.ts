@@ -4,6 +4,8 @@ import HideFooter from './components/HideFooter.vue'
 import ParticleBackground from './components/ParticleBackground.vue'
 import AppSetup from './components/AppSetup.vue'
 import AsideNav from './components/AsideNav.vue'
+import { h } from 'vue'
+import { Layout } from 'vuepress-theme-plume/client'
 
 
 export default defineClientConfig({
@@ -16,6 +18,17 @@ export default defineClientConfig({
     app.component('ParticleBackground', ParticleBackground)
     // 注册侧边导航组件
     app.component('AsideNav', AsideNav)
+  },
+
+  setup() {
+    // 应用级设置
+  },
+
+  layouts: {
+    // 在侧边栏大纲后面插入AsideNav组件
+    Layout: h(Layout, null, {
+      'aside-outline-after': () => h(AsideNav),
+    }),
   },
 
   rootComponents: [AppSetup],
