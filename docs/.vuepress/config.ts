@@ -180,5 +180,11 @@ export default defineUserConfig({
      * @see https://theme-plume.vuejs.press/guide/features/encryption/
      */
     // encrypt: {},
+
+    /**
+     * llms.txt 插件
+     * @see https://theme-plume.vuejs.press/config/plugins/llmstxt/
+     */
+    llmstxt: true,
   }),
 })

@@ -6,6 +6,7 @@ import AppSetup from './components/AppSetup.vue'
 import AsideNav from './components/AsideNav.vue'
 import { h } from 'vue'
 import { Layout } from 'vuepress-theme-plume/client'
+import PageContextMenu from 'vuepress-theme-plume/features/PageContextMenu.vue'
 
 
 export default defineClientConfig({
@@ -28,6 +29,8 @@ export default defineClientConfig({
     // 在侧边栏大纲后面插入AsideNav组件
     Layout: h(Layout, null, {
       'aside-outline-after': () => h(AsideNav),
+      // 在文章标题后添加 PageContextMenu 组件
+      'doc-title-after': () => h(PageContextMenu),
     }),
   },
 
