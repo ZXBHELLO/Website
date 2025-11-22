@@ -1,0 +1,4088 @@
+---
+url: /app/AI-TOOLS/index.md
+---
+# AI-TOOLS
+::: info 使用说明
+欢迎来到本页~！这是免费AI工具，基于开源项目==Pollinations.AI==，点击 `下方卡片` 快速跳转到相关应用。
+:::
+
+## 快捷导航
+
+---
+
+---
+url: /app/AI-TOOLS/AI-Chat/index.md
+---
+# AI Chat
+
+---
+
+---
+url: /app/AI-TOOLS/AI-Draw/index.md
+---
+# AI Draw
+
+---
+
+---
+url: /app/AI-TOOLS/AI-TTS/index.md
+---
+# AI Text to Speech
+
+---
+
+---
+url: /app/rseditor/index.md
+---
+# Redstone Editor
+
+---
+
+---
+url: /blog/about-me/index.md
+---
+# 关于我
+
+欢迎来到我的个人博客！我是一个正在学习编程的初学者，对技术世界充满好奇与热情。
+
+## 个人简介
+
+作为一名编程新手，我对软件开发和技术解决方案充满浓厚兴趣。虽然目前经验有限，但我正积极学习各种编程语言和开发技能，努力提升自己的技术水平。我相信技术的力量可以改变世界，也希望自己能成为这个变革中的一份子。
+
+## 联系方式
+
+如果你有任何建议或者愿意帮助一个初学者，欢迎通过以下方式与我联系：
+
+* GitHub: [@ZXBHELLO](https://github.com/ZXBHELLO)
+
+## 学习目标
+
+我的目标是逐步提高编程技能，深入理解计算机科学的核心概念。虽然现在还在起步阶段，但我坚信通过持续的学习和实践，一定能够不断进步，最终成为一名优秀的开发者。
+
+## 兴趣爱好
+
+除了编程学习之外，我还对以下领域感兴趣：
+
+* 玩 Minecraft - 享受创造和探索的乐趣
+* 关注前沿技术发展动态
+* 编写实用的代码项目
+* 解决复杂的技术问题
+
+感谢你的访问，希望你能在这里找到有价值的内容！
+
+---
+
+---
+url: /blog/first-post/index.md
+---
+# 欢迎阅读我的第一篇博客文章！
+
+这是使用 VuePress Plume 主题创建的第一篇博客文章。
+
+## 为什么选择 VuePress？
+
+VuePress 是一个专注于内容的静态网站构建工具，特别适合用于创建技术文档和博客。
+
+* 简单易用
+* SEO 友好
+* 移动端适配
+* 强大的 Markdown 扩展
+
+## 关于 Plume 主题
+
+Plume 主题为 VuePress 提供了现代化的界面设计和丰富的功能：
+
+* 响应式布局
+* 深色模式支持
+* 代码高亮
+* 全文搜索
+* 评论系统
+
+***
+
+希望你喜欢这个新博客！
+
+---
+
+---
+url: /blog/nav-guide/index.md
+---
+# 导航页面使用指南
+
+本文档将指导您如何在您的 VuePress 项目中添加和配置ZXBHELLO的自定义导航页面，包括组件安装、数据配置和样式自定义。
+
+::: tip
+你可以访问[ZXBHELLO的导航页](https://doc.zxbhello.top/nav/)，查看底部的示例。
+:::
+
+## 前置准备
+
+### 1. 下载必要文件
+
+由于这些组件是自定义开发的，官方原版中并不存在，您需要从本仓库下载以下文件：
+
+```
+.vuepress/
+├── components/
+│   └── NavPage.vue      # 导航页面组件
+└── nav/
+    ├── data.js          # 导航数据配置文件
+    ├── index.md         # 导航页面入口文件
+    └── guide.md         # 本指南文件
+```
+
+### 2. 文件放置位置
+
+请确保将文件放置在正确的位置：
+
+1. `NavPage.vue` 放置在 `.vuepress/components/` 目录下
+2. `data.js` 放置在 `nav/` 目录下
+3. `index.md` 放置在 `nav/` 目录下
+
+### 3. 注册组件
+
+在您的项目中，您可能已经有 `client.ts` 文件并包含了一些配置。在这种情况下，您需要在现有配置的基础上添加 NavPage 组件的导入和注册，而不是替换整个文件。
+
+在您的 `client.ts` 文件中添加以下内容：
+
+```typescript
+import { defineClientConfig } from 'vuepress/client'
+// 保留您现有的导入语句
+import NavPage from './components/NavPage.vue' // 添加这一行来导入 NavPage 组件
+
+export default defineClientConfig({
+  enhance({ app }) {
+    // 保留您现有的增强配置
+    app.component('NavPage', NavPage) // 添加这一行来注册 NavPage 组件
+  },
+  // 保留您现有的其他配置
+})
+```
+
+如果您的 `client.ts` 文件还不存在，您可以创建一个新文件并添加以上内容。
+
+## 目录结构
+
+导航页面由以下几个主要文件组成：
+
+```
+nav/
+├── data.js          # 导航数据配置文件
+├── index.md         # 导航页面入口文件
+└── guide.md         # 本指南文件
+```
+
+## 添加新的导航项
+
+### 1. 编辑 data.js 文件
+
+在 `data.js` 文件中添加新的导航项。每个导航项的字段说明如下：
+
+```javascript
+{
+  category: '分类名称',             // 必填，用于分组显示导航项
+  items: [
+    {
+      id: '唯一标识符',              // 项目唯一ID
+      title: '项目标题',             // 显示的标题
+      description: '项目描述',       // 显示的描述信息
+      url: '链接地址',               // 跳转链接
+      iconType: 'iconify|image|none', // 图标类型 (留空默认为none)
+      icon: '图标名称或路径',         // 图标内容
+      showIconBorder: true          // 可选，是否显示图标边框，默认为true (仅当iconType不为none时生效)
+    }
+  ]
+}
+```
+
+### 2. 字段说明
+
+#### 配置字段
+
+* `category`: 分类名称，用于将相关导航项分组显示
+* `id`: 项目的唯一标识符，建议使用英文和数字组合
+* `title`: 显示的标题文本
+* `description`: 项目描述信息
+* `url`: 点击后跳转的链接地址
+* `iconType`: 图标类型，可选值为：
+  * `iconify`: 使用 Iconify 图标库中的图标
+  * `image`: 使用本地或远程图片作为图标
+  * `none`: 不显示图标
+* `icon`:
+  * 当 `iconType` 为 `iconify` 时，填写图标名称（如：`material-symbols:article-outline`）
+  * 当 `iconType` 为 `image` 时，填写图片路径（如：`/assets/nav/mcmmo.png`）
+  * 当 `iconType` 为 `none` 时，可填写 `'none'` 或留空
+
+#### 可选字段
+
+* `showIconBorder`: 控制图标边框显示
+  * `true`: 显示边框（默认值）
+  * `false`: 隐藏边框
+  * 如果不设置该字段，默认为 `true`
+  * 当 `iconType` 为 `none` 时，此字段无效
+
+### 3. 示例配置
+
+```javascript
+{
+  category: '文档教程',
+  items: [
+    {
+      id: 'example-full',
+      title: '完整示例',
+      description: '这是一个完整配置示例',
+      url: '/example/',
+      iconType: 'iconify',
+      icon: 'material-symbols:article-outline',
+      showIconBorder: false
+    },
+    {
+      id: 'example-no-icon',
+      title: '无图标示例',
+      description: '这是一个不显示图标的示例',
+      url: '/example-no-icon/',
+      iconType: 'none',
+      icon: 'none'
+    }
+  ]
+}
+```
+
+## 使用导航页面
+
+在您的导航页面 Markdown 文件中（如 `index.md`）的特定位置，使用以下代码引入导航组件：
+
+```markdown
+<NavPage />
+```
+
+确保在 Markdown 文件的 frontmatter 中包含适当的布局配置：
+
+```markdown
+---
+title: 前端导航(可以自行修改)
+pageLayout: page
+---
+```
+
+## 样式自定义
+
+### 1. 调整边距
+
+导航项的边距可以通过修改 `NavPage.vue` 组件中的 CSS 样式来调整：
+
+```css
+/* 导航项之间的间距 */
+.m-nav-links {
+  gap: 1rem;
+}
+
+/* 导航项内边距 */
+.m-nav-link {
+  padding: 1rem;
+}
+
+/* 图标与文字间距 */
+.m-nav-link-icon {
+  margin-right: 1rem;
+  margin-left: 0.5rem;
+}
+```
+
+### 2. 调整图标大小
+
+可以通过修改以下样式来调整图标大小：
+
+```css
+.m-nav-link-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.m-nav-link-icon .iconify {
+  width: 24px;
+  height: 24px;
+}
+```
+
+当使用无图标模式时，导航项会自动调整布局，文字内容会占据原来图标的位置，保持整体布局的美观和一致性。
+
+---
+
+---
+url: /blog/particle-disable-test/index.md
+---
+# 粒子效果禁用测试
+## 粒子效果禁用测试
+
+这个页面已禁用粒子背景效果。你会注意到这个页面**没有**背景粒子动画。
+
+### 对比说明
+
+* **启用粒子效果的页面**（如首页、其他文章）：可以看到彩色粒子和连接线
+* **禁用粒子效果的页面**（当前页面）：清晰的背景，便于专注阅读
+
+### 适用场景
+
+禁用粒子效果适合以下情况：
+
+* 需要展示代码的页面
+* 需要用户专注阅读的重要内容
+* 包含大量表格或数据的页面
+* 设备性能较低的用户访问
+
+### 如何在你的页面中禁用粒子效果
+
+在 markdown 文件的 frontmatter 中添加：
+
+```
+---
+title: 你的页面标题
+disableParticle: true
+---
+```
+
+点击上方的"导航页"或其他文章链接回到显示粒子效果的页面进行对比！
+
+---
+
+---
+url: /blog/particle-guide/index.md
+---
+# 粒子背景效果使用指南
+
+本文档将指导您如何在您的 VuePress 项目中集成动态粒子背景效果，包括组件安装、配置说明和样式自定义。
+
+::: tip
+
+* 访问 [ZXBHELLO的导航页](https://doc.zxbhello.top/nav/)，查看整个站点应用的粒子效果示例。
+* 访问 [粒子效果禁用测试](https://doc.zxbhello.top/blog/particle-disable-test/)，查看禁用粒子效果示例。
+
+:::
+
+## 功能特性
+
+粒子背景效果提供以下特性：
+
+* ✨ **生动的视觉效果**：彩色粒子与连接线的动态动画
+* 🖱️ **交互式体验**：粒子会对鼠标移动进行响应
+* 📱 **响应式设计**：自动适配桌面和移动设备
+* 🎯 **灵活控制**：支持按页面禁用效果
+* 🌓 **深色模式支持**：自动适配浅色和深色主题
+* ⚡ **高性能**：使用 Canvas 和优化算法确保流畅动画
+
+## 前置准备
+
+### 1. 项目要求
+
+* VuePress 2.0 或更高版本
+* Vue 3.x
+* TypeScript（推荐，但可选）
+* 现有的 `.vuepress/client.ts` 文件或支持创建该文件
+
+### 2. 下载必要文件
+
+从 ZXBHELLO 的项目中复制以下文件到您的项目：
+
+```
+.vuepress/
+├── components/
+│   ├── ParticleBackground.vue    # 粒子效果核心组件
+│   └── AppSetup.vue              # 应用启动组件（全局注入）
+```
+
+## 目录结构
+
+粒子效果由以下文件组成：
+
+```
+.vuepress/
+├── components/
+│   ├── ParticleBackground.vue    # 粒子动画和逻辑实现
+│   └── AppSetup.vue              # 全局注入粒子效果
+└── client.ts                      # 客户端配置（需要修改）
+```
+
+## 安装步骤
+
+### 步骤 1：复制组件文件
+
+将以下两个文件复制到您的项目中：
+
+1. **ParticleBackground.vue** - 核心粒子效果组件
+2. **AppSetup.vue** - 应用启动时注入粒子效果的包装组件
+
+### 步骤 2：更新 client.ts
+
+在您的 `.vuepress/client.ts` 文件中添加以下导入和配置。如果该文件不存在，创建一个新文件：
+
+```typescript
+import { defineClientConfig } from 'vuepress/client'
+// 保留您现有的语句并导入需要添加的内容
+import ParticleBackground from './components/ParticleBackground.vue'
+import AppSetup from './components/AppSetup.vue'
+
+export default defineClientConfig({
+  enhance({ app }) {
+    // 保留您现有的组件注册
+    // 添加粒子背景组件注册
+    app.component('ParticleBackground', ParticleBackground)
+  },
+  
+  // 添加 AppSetup 到根组件，使其在整个应用中可用
+  rootComponents: [AppSetup],
+})
+```
+
+### 步骤 3：验证安装
+
+完成以上步骤后，重启您的 VuePress 开发服务器：
+
+```bash
+pnpm docs:dev
+```
+
+访问任何页面，您应该能看到背景中的动态粒子效果。
+
+## 配置说明
+
+### 全局配置
+
+粒子效果默认在所有页面启用。无需额外配置即可在整个站点使用。
+
+### 按页面禁用效果
+
+如果需要在特定页面禁用粒子背景效果，在该页面的 Markdown frontmatter 中添加 `disableParticle: true`：
+
+```markdown
+---
+title: 我的文章标题
+date: 2024-01-01
+disableParticle: true
+---
+
+页面内容...
+```
+
+#### 使用场景
+
+以下情况建议禁用粒子效果：
+
+* 需要用户专注阅读重要内容的页面
+* 包含大量代码示例或数据表格的页面
+* 设备性能较低的用户访问
+* 某些特殊的展示页面
+
+## 自定义配置
+
+### 调整粒子参数
+
+编辑 `ParticleBackground.vue` 中的 `config` 对象来自定义粒子行为：
+
+```typescript
+config = {
+  baseDensity: 35,           // 粒子密度（数值越大粒子越少）
+  maxParticles: 150,         // 最多粒子数量
+  particleSpeed: 0.4,        // 粒子移动速度
+  lineMaxDistance: 120,      // 连接线的最大距离
+  lineOpacity: 0.4,          // 连接线的透明度（0-1）
+  mouseRadius: 180,          // 鼠标影响范围
+  maxConnections: 4,         // 每个粒子最多连接数
+  mobileFactor: 1.8,         // 移动设备粒子数量因子
+}
+```
+
+### 修改粒子颜色
+
+在 `ParticleBackground.vue` 中修改 `colors` 数组：
+
+```typescript
+colors = ['#4CAF50', '#2196F3', '#E91E63', '#FFC107']
+// 改为您喜欢的颜色，例如：
+colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A']
+```
+
+### 调整 Canvas 样式
+
+修改 `<style>` 部分中的 CSS：
+
+```css
+.particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;           /* 确保在页面内容下方 */
+  pointer-events: none;  /* 不拦截鼠标事件 */
+  width: 100vw;
+  height: 100vh;
+}
+```
+
+## 主题兼容性
+
+粒子效果已完全支持深色模式：
+
+* **浅色模式**：使用白色连接线和清晰的粒子
+* **深色模式**：自动调整为浅灰色连接线，确保在深色背景上清晰可见
+
+主题切换时，粒子效果会自动更新颜色，无需手动干预。
+
+## 性能优化
+
+粒子效果已进行以下优化：
+
+### 桌面设备
+
+* 最多 150 个粒子
+* 60fps 动画帧率
+* 优化的渲染算法
+
+### 移动设备
+
+* 自动降低粒子数量（约 1.8 倍因子）
+* 减少连接线计算
+* 优化内存使用
+
+### 渲染性能
+
+* 使用 `requestAnimationFrame` 实现高效动画
+* Canvas 双缓冲渲染
+* 防止内存泄漏的事件监听器管理
+
+## 常见问题
+
+### Q: 粒子效果会影响页面加载速度吗？
+
+A: 影响极小。粒子效果使用 Canvas 进行高性能渲染，对页面加载时间影响不明显。首次加载时会初始化 Canvas，之后的性能开销主要是动画帧绘制。
+
+### Q: 如何在我的项目中禁用某个页面的粒子效果？
+
+A: 在页面的 frontmatter 中添加 `disableParticle: true`：
+
+```markdown
+---
+title: 页面标题
+disableParticle: true
+---
+```
+
+### Q: 粒子颜色可以动态改变吗？
+
+A: 当前版本的颜色是固定的。如需动态颜色，可以修改 `colors` 数组或增强 `ParticleEffect` 类以接受自定义颜色参数。
+
+### Q: 如何处理移动设备上的性能问题？
+
+A: 粒子效果已自动针对移动设备进行优化。如果仍然遇到性能问题，可以：
+
+1. 减小 `maxParticles` 值
+2. 增大 `baseDensity` 值
+3. 在特定移动页面禁用效果：`disableParticle: true`
+
+### Q: 粒子效果为什么被页面内容遮挡？
+
+A: 确保 CSS 中的 `z-index: -1` 正确设置。这使粒子 Canvas 显示在页面内容的下方。
+
+### Q: 如何保留我原有的 client.ts 配置？
+
+A: 在修改 `client.ts` 时，只需在现有配置的基础上添加粒子相关的导入和注册，不要替换整个文件。例如：
+
+```typescript
+export default defineClientConfig({
+  enhance({ app }) {
+    // 保留现有组件
+    app.component('YourComponent', YourComponent)
+    // 添加粒子背景
+    app.component('ParticleBackground', ParticleBackground)
+  },
+  
+  rootComponents: [AppSetup], // 在现有根组件基础上添加
+})
+```
+
+## 故障排除
+
+### 粒子不显示
+
+* 检查 `AppSetup.vue` 是否在 `rootComponents` 中注册
+* 确认 `ParticleBackground.vue` 组件路径正确
+* 检查浏览器控制台是否有错误信息
+
+### 粒子覆盖内容
+
+* 检查 CSS 中 `z-index` 是否为 `-1`
+* 确保 `pointer-events: none` 已设置
+
+### 深色模式下粒子不可见
+
+* 检查主题切换是否正常工作
+* 尝试刷新页面
+* 检查 `updateThemeColors()` 方法是否被调用
+
+### 性能问题
+
+* 减少 `maxParticles` 的值
+* 增加 `baseDensity` 值（粒子会变少）
+* 在不需要的页面禁用效果
+
+## 高级用法
+
+### 创建自定义粒子效果
+
+如需创建与众不同的粒子效果，可以：
+
+1. 复制 `ParticleBackground.vue` 并重命名
+2. 修改 `ParticleEffect` 类中的算法
+3. 自定义 `drawParticle()` 和 `animate()` 方法
+4. 在特定页面通过组件注册使用
+
+### 集成其他动画效果
+
+粒子背景可以与其他 Canvas 动画结合。修改 `animate()` 方法以支持多个效果层。
+
+## 获取帮助
+
+如遇到问题，您可以：
+
+1. 查看 [ZXBHELLO 的 GitHub 项目](https://github.com/ZXBHELLO/Website)
+2. 检查项目中的相关组件实现
+3. 提交 Issue 或 Pull Request
+
+## 参考资源
+
+* [VuePress 官方文档](https://v2.vuepress.vuejs.org/)
+* [Vue 3 文档](https://vuejs.org/)
+* [Canvas API 参考](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
+* [ZXBHELLO 项目仓库](https://github.com/ZXBHELLO/Website)
+
+***
+
+**祝您使用愉快！** 如果这个教程对您有帮助，欢迎在 GitHub 上 Star ⭐ 或分享给其他人。
+
+---
+
+---
+url: /carpet/index.md
+---
+# Carpet模组文档
+::: info 使用说明
+本文档为Carpet模组汉化文档，包含原版Carpet和常见附属模组的部分教程。点击 `下方卡片` 快速跳转到相关章节。
+:::
+
+## 快速导航
+
+### 原版Carpet
+
+### 附属模组
+
+***
+
+::: warning 免责声明
+本指南并非Carpet官方文档，而是基于互联网上收集整理的资料汇编而成。由于Carpet模组可能会更新，本文档内容可能与最新版本存在差异。如有不准确之处，欢迎通过[GitHub](https://github.com/zxbhello/Website)提交PR进行改进。
+:::
+
+## 参考资料
+
+::: info 相关链接
+
+* [Carpet GitHub仓库](https://github.com/gnembon/fabric-carpet)
+* [Carpet Wiki](https://github.com/gnembon/fabric-carpet/wiki)
+* [Carpet Extra GitHub仓库](https://github.com/gnembon/carpet-extra)
+* [Carpet TIS Addition GitHub仓库](https://github.com/TISUnion/Carpet-TIS-Addition)
+  :::
+
+---
+
+---
+url: /carpet/addons/carpet-extra/index.md
+---
+# Carpet Extra
+
+Carpet Extra是Carpet模组的一个官方扩展模组，添加了许多额外的功能，特别是大量的发射器行为扩展、可再生资源获取方式等。
+
+## 功能概述
+
+Carpet Extra为原版Carpet模组添加了大量额外功能，主要包括：
+
+| 功能类别 | 描述 |
+|----------|------|
+| 发射器扩展 | 大量的发射器行为扩展 |
+| 资源再生 | 可再生资源获取方式 |
+| 生物调整 | 生物行为调整 |
+| 红石增强 | 红石机制增强 |
+| 实用工具 | 实用工具添加 |
+
+## 发射器行为扩展
+
+### dispenserPlacesBlocks
+
+允许发射器放置方块。
+
+### renewableLava
+
+可再生熔岩，发射器可以将熔岩桶转换为空桶并生成新的熔岩源。
+
+### renewableSoulFire
+
+可再生灵魂火，发射器可以制作灵魂火。
+
+**应用场景：**
+
+* 发射器放置方块实现自动化建造
+* 可再生资源获取，减少资源消耗
+
+## 可再生资源获取
+
+### renewableNetherrack
+
+可再生下界岩，通过特定方式获得下界岩。
+
+### renewableCoral
+
+可再生珊瑚，通过特定条件使珊瑚可再生。
+
+### renewableSponges
+
+可再生海绵，通过特定条件使海绵可再生。
+
+**设计理念：**
+
+* 可持续发展游戏机制
+* 提升自动化农场产出
+
+## 生物行为调整
+
+### stackableShulkerBoxes
+
+潜影盒堆叠，允许潜影盒在特定条件下堆叠。
+
+### xpNoCooldown
+
+经验球无冷却，移除经验球拾取的冷却时间。
+
+### accurateBlockPlacement
+
+精确方块放置，允许更精确地放置方块。
+
+**使用优势：**
+
+* 潜影盒堆叠提升存储效率
+* 移除冷却提升游戏流畅度
+
+## 红石机制增强
+
+### railPowerLimit
+
+铁轨充能限制，修改铁轨充能范围限制。
+
+### movableBlockEntities
+
+可移动方块实体，允许活塞推动方块实体。
+
+**创新应用：**
+
+* 扩展红石电路可能性
+* 实现移动机械结构
+
+## 实用工具添加
+
+### creativeNoClip
+
+创造模式穿墙，创造模式玩家可以穿墙。
+
+### instantCommandBlock
+
+即时命令方块，命令方块中的命令即时执行。
+
+**工具价值：**
+
+* 创造模式穿墙便于建筑
+* 即时执行命令提升测试效率
+
+## 配置和使用
+
+### 命令设置
+
+Carpet Extra的规则可以通过命令进行设置：
+
+```
+/carpet [规则名] [值]
+```
+
+例如：
+
+```
+/carpet dispenserPlacesBlocks true
+```
+
+### 配置文件
+
+Carpet Extra的配置文件通常保存在`config/carpet.conf`中，可以手动编辑以设置默认值。
+
+要将设置保存为默认值（重启后仍然有效）：
+
+```
+/carpet setDefault dispenserPlacesBlocks true
+```
+
+| 配置方式 | 说明 |
+|----------|------|
+| 命令配置 | 使用命令即时生效 |
+| 文件配置 | 编辑配置文件或使用setDefault命令 |
+
+## 参考资料
+
+::: info 相关链接
+
+* [Carpet Extra GitHub仓库](https://github.com/gnembon/carpet-extra)
+  :::
+
+---
+
+---
+url: /carpet/addons/carpet-tis-addition/index.md
+---
+# Carpet TIS Addition
+
+Carpet TIS Addition是由TIS团队开发的Carpet模组扩展，包含了许多有趣的功能和游戏监控特性。
+
+## 功能概述
+
+Carpet TIS Addition为原版Carpet模组添加了大量额外功能，主要包括：
+
+| 功能类别 | 描述 |
+|----------|------|
+| 游戏监控 | 游戏监控功能 |
+| 命令增强 | 命令增强 |
+| 规则扩展 | 规则扩展 |
+| 性能优化 | 性能优化 |
+| 实用工具 | 实用工具 |
+
+## 游戏监控功能
+
+### mobcapsDisplay
+
+生物上限显示，实时显示当前维度的生物上限信息。
+
+### entityCounter
+
+实体计数器，统计世界中各种实体的数量。
+
+### chunkDebugTool
+
+区块调试工具，用于调试和分析区块加载情况。
+
+**监控用途：**
+
+* 实时监控服务器状态
+* 分析性能瓶颈
+
+## 命令增强
+
+### commandCounter
+
+计数器命令。
+
+### commandDataTracker
+
+数据追踪命令。
+
+### commandDraw
+
+绘图命令。
+
+### commandLightning
+
+闪电命令。
+
+### commandLog
+
+日志命令。
+
+### commandPlayerAction
+
+玩家行为命令。
+
+### commandProfile
+
+性能分析命令。
+
+**命令集合：**
+
+* 丰富的调试命令集
+* 详细的数据追踪功能
+
+## 规则扩展
+
+### optimizedHardHitBoxEntityCollision
+
+优化硬碰撞箱实体碰撞，提高实体碰撞检测性能。
+
+### renewableDragonEgg
+
+可再生龙蛋，通过特定方式获得龙蛋。
+
+### fakePlayerTicksLikeRealPlayer
+
+假人像真实玩家一样游戏刻，使假人行为更像真实玩家。
+
+### tntDupingFix
+
+TNT复制漏洞修复，修复TNT复制漏洞。
+
+**规则优化：**
+
+* 优化游戏性能
+* 修复游戏漏洞
+
+## 性能优化
+
+### optimizedFastEntityScheduler
+
+优化快速实体调度器，提高实体调度性能。
+
+### optimizedTntExplosion
+
+优化TNT爆炸，提高TNT爆炸性能。
+
+**性能改进：**
+
+* 优化核心游戏机制
+* 减少系统资源消耗
+
+## 实用工具
+
+### autoCraftingTable
+
+自动工作台，提供自动合成功能。
+
+### enderChest
+
+末影箱，提供额外的存储功能。
+
+### hopperCounter
+
+漏斗计数器，统计通过漏斗的物品数量。
+
+**工具功能：**
+
+* 自动合成和存储系统
+* 物品流通统计分析
+
+## 配置文件
+
+Carpet TIS Addition的配置文件通常保存在`config/carpet-tis-addition.conf`中，可以手动编辑以设置默认值。
+
+**配置管理：**
+
+* 统一管理模组配置
+* 重启后配置依然有效
+
+## 参考资料
+
+::: info 相关链接
+
+* [Carpet TIS Addition GitHub仓库](https://github.com/TISUnion/Carpet-TIS-Addition)
+  :::
+
+---
+
+---
+url: /carpet/addons/others/index.md
+---
+# 其他常用Carpet附属模组
+
+除了Carpet Extra和Carpet TIS Addition之外，还有许多优秀的Carpet附属模组，为玩家提供更多功能和特性。
+
+## Carpet AMS Addition
+
+Carpet AMS Addition是一个功能丰富的Carpet附属模组，添加了许多实用的功能。
+
+### 主要功能
+
+| 功能类别 | 描述 |
+|----------|------|
+| 游戏机制增强 | 添加新的游戏规则，扩展原版游戏机制，增强玩家体验 |
+| 命令扩展 | 添加新的命令，增强现有命令功能，提供更多调试工具 |
+| 性能优化 | 优化游戏性能，减少资源占用，提高服务器稳定性 |
+
+## Carpet Redstone additions
+
+Carpet Redstone additions专注于红石机制的扩展和增强。
+
+### 主要功能
+
+| 功能类别 | 描述 |
+|----------|------|
+| 红石组件扩展 | 添加新的红石组件，增强现有红石组件功能，提供更多红石控制选项 |
+| 电路优化 | 优化红石电路性能，减少红石延迟，提高红石信号传输效率 |
+
+## Carpet Skippy
+
+Carpet Skippy为游戏添加了更多移动和传送功能。
+
+### 主要功能
+
+| 功能类别 | 描述 |
+|----------|------|
+| 传送功能 | 添加传送命令，增强传送机制，提供更多传送选项 |
+| 移动增强 | 增强玩家移动能力，添加新的移动方式，提供更多移动控制选项 |
+
+## 安装注意事项
+
+### 版本兼容性
+
+**兼容性检查：**
+
+* 确保附属模组与主Carpet模组版本兼容
+* 检查是否需要特定版本的Fabric API
+* 部分附属模组可能需要Fabric Loader特定版本
+
+### 冲突检测
+
+**冲突避免：**
+
+* 某些附属模组可能与其他模组存在冲突
+* 避免同时使用功能重复的附属模组
+* 注意附属模组之间的兼容性
+
+### 性能影响
+
+**性能考虑：**
+
+* 部分功能丰富的附属模组可能会影响服务器性能
+* 在生产环境中使用前应进行充分测试
+* 根据服务器配置合理选择附属模组
+
+## 使用建议
+
+### 选择原则
+
+**选择标准：**
+
+* 根据服务器类型选择合适的附属模组
+* 优先选择维护活跃、文档完善的模组
+* 避免安装过多功能重复的附属模组
+
+### 配置管理
+
+**配置操作：**
+
+* 使用`/carpet setDefault`命令保存常用配置
+* 为不同世界设置不同的规则配置
+* 定期备份配置文件
+
+### 权限控制
+
+**权限设置：**
+
+* 合理设置命令权限等级
+* 为不同用户组分配适当的规则控制权限
+* 注意假玩家相关功能的权限设置
+
+## 参考资料
+
+::: info 相关链接
+
+* [MC百科 Carpet模组页面](https://www.mcmod.cn/class/2361.html)
+* [Bilibili Carpet教程](https://www.bilibili.com/video/BV1hE411D7um/)
+* 各附属模组的GitHub页面和文档
+  :::
+
+---
+
+---
+url: /carpet/vanilla-carpet/commands/index.md
+---
+# Carpet指令
+
+Carpet模组提供了丰富的指令系统，允许玩家和管理员控制游戏的各个方面。以下是对Carpet模组中主要指令的详细介绍。
+
+## Carpet基础命令
+
+### /carpet
+
+Carpet模组的主要命令，用于查看和修改规则。
+
+#### 用法
+
+```
+/carpet                           # 显示当前Carpet版本和非原版规则列表
+/carpet list                      # 列出所有可用的Carpet规则
+/carpet list [category]           # 列出指定分类中的所有规则
+/carpet [rule] [value]            # 设置指定规则为指定值
+/carpet setDefault [rule] [value] # 将规则的默认值设置为指定值
+/carpet removeDefault [rule]      # 移除规则的自定义默认配置，恢复为原版默认值
+/carpet list defaults             # 列出当前世界存储在carpet.conf中的默认配置
+```
+
+## 核心功能命令
+
+### /tick
+
+控制游戏时钟的命令，可以改变时间流逝速度。
+
+#### 用法
+
+```
+/tick health [ticks]              # 监控游戏性能，默认监控100 ticks (5秒)
+/tick entities [ticks]            # 显示CPU时间和计数最多的10个实体
+/tick freeze                      # 冻结游戏，停止实体处理、世界时钟、方块更新和红石更新
+/tick step [ticks]                # 在冻结状态下推进指定数量的游戏刻
+/tick rate [tps]                  # 更改游戏运行速率，默认值为20.0
+/tick warp [ticks] [cmd]          # 以尽可能快的速度运行游戏指定的ticks数
+/tick superHot                    # 启用Super Hot模式，只有在玩家移动时时间才前进
+```
+
+### /log
+
+切换各种Carpet日志记录器，信息显示在不同的UI位置。
+
+#### 用法
+
+```
+/log                              # 列出所有日志选项
+/log clear                        # 取消订阅所有日志
+/log counter [color]              # 订阅指定颜色的计数器日志
+/log fallingBlocks [brief/full]   # 记录下落方块的位置历史
+/log mobcaps [dimension/dynamic]  # 订阅指定维度的生物上限日志
+/log packets                      # 订阅数据包日志
+/log pathfinding [2/5/10]         # 订阅寻路日志
+/log projectiles [brief/full]     # 记录抛射物的位置历史
+/log tnt [brief/full]             # 记录TNT爆炸的详细信息
+/log tps                          # 订阅TPS和MSPT日志
+```
+
+### /player
+
+创建和控制假玩家，这些假玩家的行为几乎与真实玩家完全一致。
+
+#### 用法
+
+```
+/player <name> spawn              # 在当前位置生成指定名称的玩家
+/player <name> attack <mode>      # 玩家执行左键操作
+/player <name> use <mode>         # 玩家执行右键操作
+/player <name> mount              # 玩家骑乘附近的可骑乘实体
+/player <name> dismount           # 玩家取消骑乘
+/player <name> drop               # 玩家丢弃当前手持物品
+/player <name> dropStack          # 玩家丢弃整组物品
+/player <name> jump               # 玩家跳跃
+/player <name> kill               # 杀死玩家
+/player <name> look <direction>   # 玩家朝向指定方向
+/player <name> move <direction>   # 玩家向指定方向移动
+/player <your name> shadow        # 用假玩家替换你自己
+/player <name> sneak              # 玩家潜行
+/player <name> unsneak            # 玩家取消潜行
+/player <name> sprint             # 玩家冲刺
+/player <name> unsprint           # 玩家取消冲刺
+/player <name> stop               # 玩家停止移动并取消所有动作
+/player <name> swapHands          # 玩家交换主手和副手物品
+```
+
+## 工具类命令
+
+### /distance
+
+计算两点之间的距离。
+
+#### 用法
+
+```
+/distance from [start] to [end]   # 返回指定坐标之间的球面、圆柱和曼哈顿距离
+/distance from [start]            # 记住玩家的起始坐标
+/distance to [end]                # 计算到目标位置的距离
+```
+
+### /draw
+
+用方块构建简单的形状。
+
+#### 用法
+
+```
+/draw sphere [center] [radius] [block]                    # 用指定方块在指定中心坐标周围制作指定半径的球体
+/draw sphere [center] [radius] [block] replace [block/tag] # 用指定方块制作球体，但只替换指定方块/标签的方块
+```
+
+### /info
+
+获取方块的有用信息。
+
+#### 用法
+
+```
+/info block [coordinate]          # 获取指定坐标方块的信息
+/info block [coordinate] grep     # 获取指定坐标方块的特定信息
+```
+
+### /perimeterinfo
+
+获取坐标周围区域的各种信息。
+
+#### 用法
+
+```
+/perimeterinfo coordinate         # 返回指定坐标周围128格半径内的潜在生成空间
+/perimeterinfo coordinate [mob]   # 返回指定坐标周围128格半径内的潜在生成空间和指定生物的潜在生成空间
+```
+
+### /profile
+
+监控游戏性能。
+
+#### 用法
+
+```
+/profile health [ticks]           # 监控游戏性能
+/profile entities [ticks]         # 显示实体的CPU时间和计数
+```
+
+### /script
+
+Scarpet脚本命令。
+
+#### 用法
+
+```
+/script [options] [parameters]    # 运行或管理Scarpet脚本
+```
+
+## 参考资料
+
+::: info 相关链接
+
+* [Carpet官方命令文档](https://github.com/gnembon/fabric-carpet/wiki/Commands)
+  :::
+
+---
+
+---
+url: /carpet/vanilla-carpet/introduction/index.md
+---
+# Carpet基础介绍
+
+Carpet Mod是一个为原版Minecraft设计的功能强大的模组，它允许玩家从技术角度完全控制游戏。通过精心设计的改动，它消除了游戏中一些烦人的问题，并提供了一些原版缺少的内容，填补了原版游戏功能的空白。
+
+## Carpet的起源
+
+Carpet模组最初由gnembon开发，基于Fabric模组框架。它最初的设计理念是允许玩家放置地毯来获取游戏信息，因此得名"Carpet"。随着版本更新，Carpet已经发展成为一个功能丰富的技术模组。
+
+## Carpet的核心功能
+
+Carpet模组提供了一系列强大的功能，主要包括：
+
+| 功能类别 | 描述 |
+|---------|------|
+| 性能优化 | 通过加速测试和调整机制，帮助玩家快速迭代自动化设计，减少资源占用 |
+| 游戏机制改进 | 提供了一系列原版游戏中不具备的特性，如更灵活的方块放置、实体操作等 |
+| 调试与监控 | 增强了游戏内的数据监控功能，使玩家能够实时了解服务器状态、性能指标等关键信息 |
+
+## Carpet的主要用途
+
+Carpet一般多用于以下场景：
+
+::: tip 主要用途
+
+* 需要对游戏环境进行精细控制的服务器管理者
+* 深入探索游戏机制并通过模组实现高级自动化和优化的玩家
+* 技术型生存服务器（生电服）
+* 红石工程师和建筑大师
+  :::
+
+## Carpet生态系统
+
+Carpet拥有丰富的扩展生态系统，包括：
+
+* **Carpet Extra**：提供更多有趣的附加功能，包括自动合成、发射器放置方块，甚至剪羊毛等
+* **Scarpet应用商店**：可以浏览或贡献Scarpet应用程序
+* **Quick Carpet**：当最新快照有问题或主Carpet模组未及时更新时的最小化构建版本
+* **其他社区扩展**：由社区创建的其他Carpet扩展
+
+## 安装与使用
+
+Carpet模组需要Fabric作为支持环境。安装步骤如下：
+
+1. 下载并安装[Fabric Loader](https://fabricmc.net/use/)
+2. 下载[Carpet模组](https://github.com/gnembon/fabric-carpet)
+3. 将下载的.jar文件放入Minecraft的mods文件夹中
+4. 启动游戏并选择带有Fabric Loader的版本
+
+## Carpet与其他模组的关系
+
+::: warning 兼容性注意
+需要注意的是，在Fabric环境中，Carpet模组会与OptiFabric发生冲突（仅为部分版本）。根据GitHub Issue的作者原话，主要是由于OptiFine的更新导致的冲突，OptiFabric会对冲突进行修复。在1.19.2版本下运行正常。
+:::
+
+## 参考资料
+
+::: info 相关链接
+
+* [McMod Carpet模组页面](https://www.mcmod.cn/class/2361.html)
+* [Carpet GitHub仓库](https://github.com/gnembon/fabric-carpet)
+  :::
+
+---
+
+---
+url: /carpet/vanilla-carpet/rules/index.md
+---
+# Carpet规则分类
+
+Carpet模组通过规则系统来控制各种功能的开启与关闭。每个规则都有特定的分类和用途。以下是对Carpet模组中主要规则的分类介绍。
+
+## 规则分类总览
+
+Carpet规则按照功能领域分为多个类别，包括但不限于：
+
+| 分类 | 描述 |
+|------|------|
+| 性能优化类 | 提升游戏性能和效率的规则 |
+| 游戏机制类 | 修改或增强原版游戏机制的规则 |
+| 创造工具类 | 为创造模式玩家提供便利的规则 |
+| 红石控制类 | 影响红石和机械行为的规则 |
+| 生物行为类 | 改变生物行为和生成的规则 |
+| 命令增强类 | 扩展命令功能的规则 |
+| 实验性功能 | 实验性或测试中的功能规则 |
+
+## 性能优化类规则
+
+这类规则主要用于提升游戏性能或提供性能监控功能。
+
+### hopperCounters
+
+漏斗计数器，可以统计特定物品通过漏斗的数量。
+
+**应用场景：**
+
+* 统计自动化农场的产出
+* 监控资源收集效率
+
+### tickHealth
+
+监控游戏性能，显示每tick花费在各项任务上的时间。
+
+**应用场景：**
+
+* 分析服务器性能瓶颈
+* 优化大型红石机械
+
+## 游戏机制类规则
+
+这些规则修改或增强了原版游戏机制。
+
+### movableBlockEntities
+
+允许活塞推动方块实体（如箱子、熔炉等）。
+
+**应用场景：**
+
+* 实现移动存储系统
+* 构建移动机械结构
+
+### xpNoCooldown
+
+移除经验球拾取的冷却时间。
+
+**应用场景：**
+
+* 提高经验收集效率
+* 提升游戏流畅度
+
+### stackableShulkerBoxes
+
+允许潜影盒堆叠（在特定条件下）。
+
+**应用场景：**
+
+* 提升物品存储效率
+* 优化物品管理
+
+## 创造工具类规则
+
+为创造模式玩家提供便利的规则。
+
+### creativeNoClip
+
+创造模式玩家可以穿墙。
+
+**应用场景：**
+
+* 便于建筑和设计
+* 快速穿越建筑结构
+
+### instantCommandBlock
+
+即时执行命令方块中的命令。
+
+**应用场景：**
+
+* 快速测试命令效果
+* 提高命令方块调试效率
+
+## 红石控制类规则
+
+影响红石和机械行为的规则。
+
+### railPowerLimit
+
+修改铁轨充能范围限制。
+
+**应用场景：**
+
+* 扩展红石电路设计可能性
+* 优化铁路系统设计
+
+### chainStone
+
+锁链在长的一端会相互粘连，并且会粘在直接连接到它们的方块上。
+
+**应用场景：**
+
+* 创建复杂的连锁机械结构
+* 增强红石机械的连接性
+
+## 生物行为类规则
+
+改变生物行为和生成的规则。
+
+### superZombieDoctor
+
+增强僵尸村民治疗机制。
+
+**应用场景：**
+
+* 提高僵尸村民转化效率
+* 优化村庄管理
+
+### renewableCoral
+
+使珊瑚在特定条件下可再生。
+
+**应用场景：**
+
+* 实现珊瑚农场
+* 海底建筑资源再生
+
+## 命令增强类规则
+
+扩展命令功能的规则。
+
+### commandPlayer
+
+启用假玩家/机器人命令。
+
+**应用场景：**
+
+* 控制假玩家行为
+* 模拟真实玩家操作
+
+### commandLog
+
+启用日志显示命令。
+
+**应用场景：**
+
+* 实时监控服务器状态
+* 调试和分析游戏性能
+
+## 实验性功能规则
+
+实验性或测试中的功能规则。
+
+### antiCheatDisabled
+
+防止玩家因移动过快或"飞行"被踢出，更信任客户端定位。
+
+**应用场景：**
+
+* 开发和测试环境
+* 特殊游戏模式
+
+## 配置和使用
+
+### 命令设置
+
+Carpet规则可以通过命令进行设置：
+
+```
+/carpet [规则名] [值]
+```
+
+例如：
+
+```
+/carpet movableBlockEntities true
+```
+
+### 配置文件
+
+Carpet规则的配置文件通常保存在`config/carpet.conf`中，可以手动编辑以设置默认值。
+
+要将设置保存为默认值（重启后仍然有效）：
+
+```
+/carpet setDefault 规则名 true
+```
+
+| 配置方式 | 说明 |
+|----------|------|
+| 命令配置 | 临时设置，即时生效 |
+| 配置文件 | 永久配置，重启后依然有效 |
+
+## 参考资料
+
+::: info 相关链接
+
+* [Carpet官方规则文档](https://github.com/gnembon/fabric-carpet/wiki/Current-Available-Settings)
+* [Carpet Extra规则](https://github.com/gnembon/carpet-extra)
+  :::
+
+---
+
+---
+url: /friends/index.md
+description: 我的朋友们
+---
+# 友情链接
+:::: demo-wrapper title="如何添加友链？"
+::: info 提交 `friends.md` 或 `issue` 添加/申请友链~！
+:::
+::::
+
+---
+
+---
+url: /mcmmo/index.md
+---
+# MCMMO插件汉化文档
+::: info 使用说明
+本文档为MCMMO插件汉化文档，点击 `下方卡片` 快速跳转到相关章节。
+:::
+
+## 快捷方式
+
+## 玩家导航
+
+## 管理员(腐竹)导航
+
+***
+
+::: warning 免责声明
+本文档并非MCMMO官方文档，而是基于互联网上收集整理的资料汇编而成。由于MCMMO插件可能会更新，本文档内容可能与最新版本存在差异。如有不准确之处，欢迎通过[GitHub](https://github.com/zxbhello/Website)提交PR进行改进。
+:::
+
+## 参考资料
+
+::: info 相关链接
+
+* [MCMMO官方Wiki](https://wiki.mcmmo.org/)
+* [MCMMO GitHub仓库](https://github.com/mcMMO-Dev/mcMMO)
+* [MCMMO Spigot页面](https://www.spigotmc.org/resources/mcmmo.1447/)
+  :::
+
+---
+
+---
+url: /mcmmo/admins/commands/index.md
+---
+# MCMMO管理员指令
+
+::: tip 简介
+MCMMO为服务器管理员提供了强大的管理指令，用于管理玩家技能、经验倍率、数据库等。
+:::
+
+## 管理员指令列表
+
+### /mmoedit
+
+::: warning 管理指令
+
+* **描述**：编辑用户的MCMMO技能值
+* **别名**：无
+* **权限节点**：mcmmo.commands.mmoedit
+  :::
+
+### /xprate 或 /mcxprate
+
+::: warning 管理指令
+
+* **描述**：修改经验倍率或开始活动
+* **别名**：/mcxprate
+* **权限节点**：mcmmo.commands.xprate
+  :::
+
+### /mcpurge
+
+::: warning 管理指令
+
+* **描述**：清除技能等级为0或长期不活跃的用户
+* **别名**：无
+* **权限节点**：mcmmo.commands.mcpurge
+  :::
+
+### /mcremove
+
+::: warning 管理指令
+
+* **描述**：从MCMMO数据库中删除用户
+* **别名**：无
+* **权限节点**：mcmmo.commands.mcremove
+  :::
+
+### /mcgod
+
+::: warning 管理指令
+
+* **描述**：切换MCMMO上帝模式（无敌状态）
+* **别名**：无
+* **权限节点**：mcmmo.commands.mcgod
+  :::
+
+### /mcmmoreloadlocale 或 /mcreloadlocale
+
+::: warning 管理指令
+
+* **描述**：重新加载MCMMO本地化设置
+* **别名**：/mcreloadlocale
+* **权限节点**：mcmmo.commands.reloadlocale
+  :::
+
+### /mmoxpbar 或 /xpbarsettings
+
+* **描述**：更改经验条设置
+* **别名**：/xpbarsettings
+* **权限节点**：mcmmo.commands.mmoxpbar
+
+### /mcchatspy
+
+* **描述**：切换MCMMO队伍聊天监听（可以查看所有队伍聊天）
+* **别名**：无
+* **权限节点**：mcmmo.commands.mcchatspy
+
+### /mcrefresh
+
+* **描述**：刷新所有MCMMO能力的冷却时间
+* **别名**：无
+* **权限节点**：mcmmo.commands.mcrefresh
+
+### /addxp
+
+* **描述**：给用户添加MCMMO经验值
+* **别名**：无
+* **权限节点**：mcmmo.commands.addxp
+
+### /addlevels
+
+* **描述**：给用户添加MCMMO等级
+* **别名**：无
+* **权限节点**：mcmmo.commands.addlevels
+
+### /skillreset
+
+* **描述**：重置一个或所有技能等级
+* **别名**：无
+* **权限节点**：mcmmo.commands.skillreset
+
+### /mcconvert
+
+* **描述**：在不同数据库和公式类型之间转换
+* **别名**：无
+* **权限节点**：mcmmo.commands.mcconvert
+
+## 聊天管理指令
+
+### /adminchat 或 /ac 或 /a
+
+* **描述**：切换管理员聊天或发送管理员聊天消息
+* **别名**：/ac, /a
+* **权限节点**：mcmmo.chat.adminchat
+
+## 已移除的指令
+
+以下指令在旧版本中存在但在新版本中已被移除：
+
+| 指令 | 别名 | 描述 | 权限节点 |
+|------|------|------|----------|
+| /hardcore 或 /mchardcore |  | 修改MCMMO硬核百分比或切换硬核模式（已移除） | mcmmo.commands.hardcore |
+| /vampirism 或 /mcvampirism |  | 修改MCMMO吸血鬼百分比或切换吸血鬼模式（已移除） | mcmmo.commands.vampirism |
+| /mcfools 或 /macho 等 |  | 愚人节指令（已移除） | mcmmo.commands.mcfools |
+
+## 参考资料
+
+::: info 相关链接
+
+* [MCMMO官方Wiki - Commands](https://wiki.mcmmo.org/Commands)
+  :::
+
+---
+
+---
+url: /mcmmo/admins/config/index.md
+---
+# MCMMO高级配置
+
+::: tip 简介
+MCMMO提供了丰富的配置选项，允许服务器管理员根据自己的需求定制插件行为。
+:::
+
+## 配置文件位置
+
+::: info 配置目录
+MCMMO的配置文件位于服务器的以下目录中：
+
+```
+plugins/mcMMO/
+```
+
+:::
+
+主要配置文件包括：
+
+* `config.yml` - 主配置文件
+* `experience.yml` - 经验值配置
+* `treasures.yml` - 宝藏掉落配置
+* `repair.yml` - 修理配置
+* `salvage.yml` - 分解配置
+* `skills.yml` - 技能配置
+* `locale/` - 本地化文件目录
+
+## 主配置文件 (config.yml)
+
+::: details 点击展开主配置文件包含MCMMO的核心设置
+
+### 通用设置
+
+```yaml
+# 是否启用特定功能
+Skills:
+  # 是否启用特定技能
+  Mining:
+    Enabled: true
+  Woodcutting:
+    Enabled: true
+  # ...其他技能设置
+
+# 经验设置
+Experience:
+  # 经验倍率
+  Multiplier:
+    Global: 1.0
+  # PVP经验设置
+  PVP:
+    Rewards: true
+```
+
+### 能力设置
+
+```yaml
+# 能力设置
+Abilities:
+  # 是否启用右键激活能力
+  Activation:
+    Right_Click: true
+  # 冷却时间设置
+  Cooldowns:
+    Enabled: true
+```
+
+:::
+
+### 数据库设置
+
+MCMMO支持多种数据库后端：
+
+```yaml
+Database:
+  # 数据库类型 (FLATFILE, SQL)
+  Type: FLATFILE
+  # SQL数据库设置
+  SQL:
+    Host: localhost
+    Port: 3306
+    Database: mcmmo
+    Username: mcmmo
+    Password: password
+```
+
+## 经验值配置 (experience.yml)
+
+::: details 点击展开经验值配置文件允许您调整各种技能的经验获取
+
+```yaml
+# 每个技能的经验设置
+Skills:
+  Mining:
+    # 基础经验
+    Base_XP: 10
+    # 最大等级
+    Max_Level: 1000
+    # 等级公式
+    Formula:
+      XP_to_Level: (10 * (level + 1)) ^ 1.2
+  Woodcutting:
+    Base_XP: 10
+    Max_Level: 1000
+```
+
+:::
+
+## 宝藏配置 (treasures.yml)
+
+::: details 点击展开宝藏配置文件控制钓鱼等技能的掉落物
+
+```yaml
+Fishing:
+  # 不同稀有度的物品
+  Common:
+    - Item: LEATHER_BOOTS
+      Amount: 1
+    - Item: WOODEN_SHOVEL
+      Amount: 1
+  Uncommon:
+    - Item: STONE_SWORD
+      Amount: 1
+    - Item: GOLDEN_APPLE
+      Amount: 1
+  Rare:
+    - Item: IRON_SWORD
+      Amount: 1
+    - Item: BOW
+      Amount: 1
+```
+
+:::
+
+## 修理配置 (repair.yml)
+
+::: details 点击展开修理配置文件控制修理功能
+
+```yaml
+Repairables:
+  # 可修理的物品
+  IRON_SWORD:
+    # 修理所需材料
+    Material: IRON_INGOT
+    # 修理倍率
+    Repair_Material_Multiplier: 2
+    # 最大修理量
+    Maximum_Durability: 250
+```
+
+:::
+
+## 分解配置 (salvage.yml)
+
+::: details 点击展开分解配置文件控制分解功能
+
+```yaml
+Salvageables:
+  # 可分解的物品
+  IRON_SWORD:
+    # 分解所得材料
+    Material: IRON_INGOT
+    # 分解倍率
+    Material_Multiplier: 1
+    # 最大耐久度
+    Maximum_Durability: 250
+```
+
+:::
+
+## 本地化配置
+
+::: info 本地化配置
+MCMMO支持多语言本地化，配置文件位于`locale/`目录中。您可以修改这些文件来自定义插件显示的文本。
+:::
+
+## Hardcore模式和Vampirism模式
+
+::: warning 模式说明
+虽然这些模式的指令已被移除，但配置选项仍然可用：
+:::
+
+::: details 点击展开Hardcore和Vampirism模式配置
+
+```yaml
+# Hardcore模式设置
+Hardcore:
+  # 是否启用
+  Enabled: false
+  # 死亡时技能等级减少百分比
+  Death_Stat_Loss:
+    Percentage: 75.0
+    # 是否启用特定技能的损失
+    Mining: true
+    Woodcutting: true
+    # ...其他技能
+
+# Vampirism模式设置
+Vampirism:
+  # 是否启用
+  Enabled: false
+  # PVP中偷取经验百分比
+  Leech_Percentage: 5.0
+```
+
+:::
+
+## 性能优化设置
+
+::: details 点击展开性能优化设置
+
+```yaml
+# 性能优化
+Performance:
+  # 是否启用技能冷却优化
+  Cooldown_Reduction: true
+  # 是否启用经验计算优化
+  Experience_Calculation: true
+```
+
+:::
+
+## 参考资料
+
+::: info 相关链接
+
+* [MCMMO官方Wiki - Config](https://wiki.mcmmo.org/Config)
+  :::
+
+---
+
+---
+url: /mcmmo/admins/install/index.md
+---
+# MCMMO安装与配置指南
+
+::: tip 简介
+本指南将帮助服务器管理员（腐竹）正确安装和配置MCMMO插件。
+:::
+
+## 前置要求
+
+### Java和Minecraft版本
+
+::: warning 环境要求
+
+* 推荐使用最新版本的Java Minecraft
+* 使用兼容版本的Spigot、Paper或Folia
+  :::
+
+> MCMMO官方支持Spigot、Paper和Folia。对于这些平台之外的支持最多只是非官方的。
+
+现代版本的MCMMO期望您运行最新可用的Java Minecraft版本，但旧版本的MCMMO仍然可用，并且应该可以很好地支持旧版本。
+
+MCMMO是Spigot API的插件，这使得运行Spigot或Paper成为必需，其他Spigot/Paper的分支可能会工作，但对于那些想要无痛安装并让一切正常工作的用户，我们官方推荐坚持使用Spigot或Paper。
+
+历史上，非常旧版本的MCMMO直接针对CraftBukkit（Spigot的精神前身）运行，但这种情况不再存在，MCMMO如果不运行Spigot或Paper将无法工作。
+
+## 安装最新版MCMMO
+
+### 步骤
+
+::: info 安装流程
+
+1. 从以下来源获取最新版本的MCMMO：
+   * [SpigotMC](https://www.spigotmc.org/resources/mcmmo.1447/)
+   * [Polymart](https://polymart.org/resource/mcmmo.142)
+
+2. 将mcMMO.jar放置在服务器目录的`plugins`文件夹中：
+   ```
+   /path/to/your/spigot-or-paper-server/plugins/
+   ```
+
+3. 启动或重启服务器
+   :::
+
+## 升级MCMMO
+
+::: tip 升级说明
+升级MCMMO旨在尽可能简单，您永远不需要删除数据或配置。
+:::
+
+### 步骤
+
+::: info 升级流程
+
+1. 从SpigotMC或Polymart获取最新版本的MCMMO
+2. 确保您的Spigot或Paper服务器是最新的
+3. 将mcMMO.jar放置在服务器目录的`plugins`文件夹中
+4. 替换现有的mcMMO.jar
+   :::
+
+恭喜，您已升级MCMMO。请确保您运行的是兼容版本的Java Minecraft和Spigot/Paper。最新版本的MCMMO针对最新版本的Java Minecraft，因此可能不适用于旧版本。
+
+## 配置更新
+
+如果您已经运行MCMMO一段时间，您可能使用的是旧版本的配置。MCMMO会尽可能尊重用户配置设置，因此除非有必要保持MCMMO正常工作，否则不会修改配置。
+
+有时MCMMO会更新其默认配置文件值，在某些配置文件中，如果您不自己添加新值，它们就不存在。这适用于宝藏配置文件、修理配置文件和分解配置文件。
+
+### 更新MCMMO配置文件
+
+如果您是不自定义上述配置文件的服务器所有者，您可以简单地删除mcMMO目录中的.yml文件以重新生成具有最新默认值的文件。如果您是广泛自定义MCMMO安装的类型，那么您需要遵循每次发布的更新日志，并根据需要自己更新这些配置文件中的值。请注意不要删除mcMMO目录本身，因为那是默认保存玩家数据的地方。
+
+## 旧版本兼容性
+
+### 从MCMMO经典版升级
+
+如果您从MCMMO经典版升级，您可以遵循升级说明，一切应该正常工作。但是，一旦您执行此操作，您将无法回到MCMMO经典版，因为配置文件已更新为与MCMMO中的最新更改兼容。一个简单的解决方法是切换回经典版时删除.yml文件，经典版将生成新的文件。
+
+### 旧版本安装和前置要求
+
+在针对旧版本游戏使用MCMMO时，您必须确保使用与该游戏版本兼容的MCMMO版本，并且必须将其与该版本的Java Minecraft的最新版本的Spigot或Paper匹配。旧版本按原样提供，其中发现的任何错误/漏洞都保持原样。目前没有MCMMO开发人员致力于维护旧版本。
+
+* 获取与您使用的Java Minecraft版本兼容的MCMMO版本
+* 获取该版本Java Minecraft的最新Spigot或Paper软件
+* 将mcMMO.jar放置在旧版Spigot或Paper服务器的plugins目录中
+
+如果您在运行旧版本时遇到任何错误/问题，请确保您拥有最新版本的Spigot（来自BuildTools）或最新版本的Paper。如果问题仍然存在，您可能运气不好，因为旧版本按原样提供且不接收更新，但MCMMO源代码在GitHub上自由获取，因此具有编程背景的人可以分叉旧版本的代码库并自行修复问题。
+
+## 参考资料
+
+::: info 相关链接
+
+* [MCMMO官方Wiki - Installation](https://wiki.mcmmo.org/Installation)
+  :::
+
+---
+
+---
+url: /mcmmo/admins/permissions/index.md
+---
+# MCMMO权限管理
+
+::: tip 简介
+MCMMO使用权限节点系统来控制玩家可以访问的功能。正确配置权限可以确保玩家拥有适当的游戏体验，同时保护管理功能不被滥用。
+:::
+
+## 权限基础
+
+::: info 基础知识
+在进一步阅读之前，需要了解MCMMO权限节点被设置为默认值，这会自动确保每个玩家都能正常使用MCMMO，并为服务器操作员提供MCMMO内的管理工具。
+:::
+
+## 推荐权限设置
+
+::: tip 推荐配置
+推荐给玩家的权限是`mcmmo.defaults`，这使玩家可以访问除管理工具之外的所有内容。
+:::
+
+## 完整权限列表
+
+::: warning 权限来源
+权限的权威来源是plugin.yml，它是MCMMO源代码的一部分，当MCMMO编译时会打包在MCMMO.jar中，包含MCMMO的每个权限。
+:::
+
+## 玩家权限
+
+以下是玩家常用的权限节点：
+
+| 权限节点 | 描述 |
+|---------|------|
+| mcmmo.defaults | 访问除管理工具外的所有功能 |
+| mcmmo.commands.mcmmo | 使用/mcmmo指令 |
+| mcmmo.commands.mcstats | 使用/mcstats或/stats指令 |
+| mcmmo.commands.mcrank | 使用/mcrank指令 |
+| mcmmo.commands.mctop | 使用/mctop指令 |
+| mcmmo.commands.excavation | 使用/excavation指令 |
+| mcmmo.commands.herbalism | 使用/herbalism指令 |
+| mcmmo.commands.mining | 使用/mining指令 |
+| mcmmo.commands.woodcutting | 使用/woodcutting指令 |
+| mcmmo.commands.axes | 使用/axes指令 |
+| mcmmo.commands.archery | 使用/archery指令 |
+| mcmmo.commands.crossbows | 使用/crossbows指令 |
+| mcmmo.commands.swords | 使用/swords指令 |
+| mcmmo.commands.taming | 使用/taming指令 |
+| mcmmo.commands.tridents | 使用/tridents指令 |
+| mcmmo.commands.unarmed | 使用/unarmed指令 |
+| mcmmo.commands.acrobatics | 使用/acrobatics指令 |
+| mcmmo.commands.repair | 使用/repair指令 |
+| mcmmo.commands.fishing | 使用/fishing指令 |
+| mcmmo.commands.smelting | 使用/smelting指令 |
+| mcmmo.commands.alchemy | 使用/alchemy指令 |
+| mcmmo.commands.salvage | 使用/salvage指令 |
+| mcmmo.commands.maces | 使用/maces指令 |
+| mcmmo.commands.party | 使用/party指令 |
+| mcmmo.commands.ptp | 使用/ptp指令 |
+| mcmmo.chat.partychat | 使用队伍聊天 |
+| mcmmo.commands.mcability | 使用/mcability指令 |
+| mcmmo.commands.mcnotify | 使用/mcnotify指令 |
+| mcmmo.commands.mcscoreboard | 使用/mcscoreboard指令 |
+| mcmmo.commands.mmoxpbar | 使用/mmoxpbar指令 |
+
+## 管理员权限
+
+以下是管理员专用的权限节点：
+
+| 权限节点 | 描述 |
+|---------|------|
+| mcmmo.commands.mmoedit | 编辑用户的MCMMO技能值 |
+| mcmmo.commands.xprate | 修改经验倍率或开始活动 |
+| mcmmo.commands.mcpurge | 清除0级或长期不活跃的用户 |
+| mcmmo.commands.mcremove | 从MCMMO数据库中删除用户 |
+| mcmmo.commands.mcgod | 切换MCMMO上帝模式 |
+| mcmmo.commands.reloadlocale | 重新加载MCMMO本地化设置 |
+| mcmmo.commands.mcchatspy | 切换MCMMO队伍聊天监听 |
+| mcmmo.commands.mcrefresh | 刷新所有MCMMO能力冷却时间 |
+| mcmmo.commands.addxp | 添加MCMMO经验值给用户 |
+| mcmmo.commands.addlevels | 添加MCMMO等级给用户 |
+| mcmmo.commands.skillreset | 重置一个或所有技能等级 |
+| mcmmo.commands.mcconvert | 在不同数据库和公式类型之间转换 |
+| mcmmo.chat.adminchat | 使用管理员聊天 |
+
+## 特权权限
+
+MCMMO中包含特权权限，只要权限对玩家有效，就会给予玩家加成。
+
+## 参考资料
+
+::: info 相关链接
+
+* [MCMMO官方Wiki - Permissions](https://wiki.mcmmo.org/Permissions)
+  :::
+
+---
+
+---
+url: /mcmmo/players/combat/index.md
+---
+# MCMMO战斗类技能详解
+
+::: tip 简介
+战斗类技能是MCMMO中非常重要的技能类型，包括剑术、弓术、格斗、斧技、驯养等。这些技能通过造成或承受伤害来获得经验值。
+:::
+
+## Swords（剑术）
+
+剑术技能为使用剑进行战斗提供各种加成。
+
+### 经验获取方式
+
+使用剑对生物或玩家造成伤害可获得剑术经验。
+
+### 特殊能力
+
+#### Serrated Strikes（锯齿攻击）
+
+::: warning 主动技能
+
+* **激活方式**：手持剑右键
+* **效果**：释放范围攻击，对周围敌人造成额外25%伤害，并可能触发撕裂效果
+* **撕裂效果**：使敌人每2秒受到一次伤害，持续时间随技能等级提升而增加
+  :::
+
+#### Counter Attack（反击）
+
+::: info 被动能力
+
+* **效果**：在格挡状态下受到攻击时，有一定几率反射50%的伤害给攻击者
+  :::
+
+#### Rupture（撕裂）
+
+::: info 被动效果
+
+* **效果**：使敌人流血，每2秒受到伤害直到效果结束或死亡
+  :::
+
+## Axes（斧技）
+
+::: tip 简介
+斧技不仅可用于砍伐树木，还能在战斗中发挥巨大作用。
+:::
+
+### 经验获取方式
+
+使用斧头对生物或玩家造成伤害可获得斧技经验。
+
+### 特殊能力
+
+#### Skull Splitter（碎颅者）
+
+::: warning 主动技能
+
+* **激活方式**：手持斧头右键
+* **效果**：释放范围攻击，对周围敌人造成伤害
+* **机制**：伤害随技能等级提升而增加
+  :::
+
+#### Critical Strikes（暴击）
+
+::: info 被动能力
+
+* **效果**：攻击时有一定几率造成暴击，造成额外伤害
+  :::
+
+#### Armor Impact（冲击装甲）
+
+::: info 被动能力
+
+* **效果**：攻击时有一定几率削弱敌人的盔甲效果
+  :::
+
+#### Greater Impact（强力冲击）
+
+::: info 被动能力
+
+* **效果**：攻击时有一定几率击退敌人并造成额外伤害
+  :::
+
+## Archery（箭术）
+
+箭术技能增强使用弓箭进行远程战斗的能力。
+
+### 经验获取方式
+
+使用弓箭对生物或玩家造成伤害可获得箭术经验。
+
+### 特殊能力
+
+#### Daze（眩晕）
+
+* **PVP效果**：在PVP中击中对手时有一定几率使其迷惑，暂时改变视角
+
+#### Arrow Retrieval（箭矢回收）
+
+* **效果**：从被击败的敌人身上回收部分箭矢
+
+#### Skill Shot（技巧射击）
+
+* **效果**：根据射击距离提供额外伤害加成
+
+## Unarmed（格斗）
+
+格斗技能增强徒手战斗的能力。
+
+### 经验获取方式
+
+徒手对生物或玩家造成伤害可获得格斗经验。
+
+### 特殊能力
+
+#### Berserk（狂暴）
+
+* **激活方式**：徒手右键
+* **效果**：短时间内大幅提升攻击伤害，并能破坏某些方块
+
+#### Disarm（缴械）
+
+* **PVP效果**：攻击时有一定几率使对手掉落手中的物品
+
+#### Iron Arm（铁臂）
+
+* **被动能力**
+* **效果**：提升徒手攻击的伤害
+
+#### Steel Arm（钢臂）
+
+* **被动能力**
+* **效果**：高级的徒手攻击能力，伤害更高
+
+## Taming（驯养）
+
+驯养技能增强与驯服动物（主要是狼）协同作战的能力。
+
+### 经验获取方式
+
+与驯服的动物互动或使用驯服的动物战斗可获得驯养经验。
+
+### 特殊能力
+
+#### Gore（刺击）
+
+* **效果**：驯服的狼有一定几率对敌人造成额外伤害
+
+#### Sharpened Claws（锋利爪牙）
+
+* **效果**：提升驯服狼的攻击伤害
+
+#### Environmentally Aware（环境感知）
+
+* **效果**：驯服的动物会自动避开危险区域，如仙人掌和火
+
+#### Thick Fur（厚毛皮）
+
+* **效果**：减少驯服动物受到的伤害，包括摔落伤害
+
+#### Shock Proof（防震）
+
+* **效果**：减少驯服动物受到的爆炸伤害
+
+#### Call of the Wild（野性呼唤）
+
+* **激活方式**：使用特定物品召唤驯服的动物
+* **效果**：临时召唤狼、豹猫或马协助战斗
+
+## 参考资料
+
+::: info 相关链接
+
+* [MCMMO官方Wiki - Swords](https://wiki.mcmmo.org/Skills/Swords)
+* [MCMMO官方Wiki - Axes](https://wiki.mcmmo.org/Skills/Axes)
+* [MCMMO官方Wiki - Archery](https://wiki.mcmmo.org/Skills/Archery)
+* [MCMMO官方Wiki - Unarmed](https://wiki.mcmmo.org/Skills/Unarmed)
+* [MCMMO官方Wiki - Taming](https://wiki.mcmmo.org/Skills/Taming)
+  :::
+
+---
+
+---
+url: /mcmmo/players/commands/index.md
+---
+# MCMMO玩家指令
+
+::: tip 简介
+MCMMO为玩家提供了丰富的指令来查看技能信息、管理队伍和控制技能设置。
+:::
+
+## 基本信息指令
+
+### /mcmmo
+
+::: info 基本信息
+
+* **描述**：显示MCMMO插件的简要介绍和完整指令列表
+* **别名**：无
+* **权限节点**：无
+  :::
+
+### /mcstats 或 /stats
+
+::: info 技能信息
+
+* **描述**：显示你的MCMMO技能等级和经验
+* **别名**：/stats
+* **权限节点**：mcmmo.commands.mcstats
+  :::
+
+### /mcrank
+
+::: info 排名信息
+
+* **描述**：显示你的MCMMO排名
+* **别名**：无
+* **权限节点**：mcmmo.commands.mcrank
+  :::
+
+### /mctop
+
+::: info 排行榜
+
+* **描述**：显示MCMMO排行榜
+* **别名**：无
+* **权限节点**：mcmmo.commands.mctop
+  :::
+
+## 技能特定指令
+
+::: tip 技能详细信息
+这些指令用于查看特定技能的详细信息：
+:::
+
+| 指令 | 描述 | 权限节点 |
+|------|------|----------|
+| /excavation | 查看挖掘技能详细信息 | mcmmo.commands.excavation |
+| /herbalism | 查看草药学技能详细信息 | mcmmo.commands.herbalism |
+| /mining | 查看挖矿技能详细信息 | mcmmo.commands.mining |
+| /woodcutting | 查看伐木技能详细信息 | mcmmo.commands.woodcutting |
+| /axes | 查看斧技技能详细信息 | mcmmo.commands.axes |
+| /archery | 查看箭术技能详细信息 | mcmmo.commands.archery |
+| /crossbows | 查看弩技技能详细信息 | mcmmo.commands.crossbows |
+| /swords | 查看剑术技能详细信息 | mcmmo.commands.swords |
+| /taming | 查看驯养技能详细信息 | mcmmo.commands.taming |
+| /tridents | 查看三叉戟技能详细信息 | mcmmo.commands.tridents |
+| /unarmed | 查看格斗技能详细信息 | mcmmo.commands.unarmed |
+| /acrobatics | 查看杂技技能详细信息 | mcmmo.commands.acrobatics |
+| /repair | 查看修理技能详细信息 | mcmmo.commands.repair |
+| /fishing | 查看钓鱼技能详细信息 | mcmmo.commands.fishing |
+| /smelting | 查看熔炼技能详细信息 | mcmmo.commands.smelting |
+| /alchemy | 查看炼药学技能详细信息 | mcmmo.commands.alchemy |
+| /salvage | 查看分解技能详细信息 | mcmmo.commands.salvage |
+| /maces | 查看锤技技能详细信息 | mcmmo.commands.maces |
+
+## 队伍指令
+
+### /party
+
+* **描述**：创建或加入队伍
+* **别名**：无
+* **权限节点**：mcmmo.commands.party
+
+### /ptp \[玩家名]
+
+* **描述**：传送到队伍成员身边
+* **别名**：无
+* **权限节点**：mcmmo.commands.ptp
+* **示例**：`/ptp Steve` 传送到玩家Steve身边
+
+### /partychat 或 /pc 或 /p
+
+* **描述**：切换队伍聊天或发送队伍聊天消息
+* **别名**：/pc, /p
+* **权限节点**：mcmmo.chat.partychat
+* **用法**：
+  * `/partychat` 切换队伍聊天模式
+  * `/partychat [消息]` 发送一条队伍聊天消息
+
+## 设置指令
+
+### /mcability
+
+* **描述**：切换右键是否激活技能能力
+* **别名**：无
+* **权限节点**：mcmmo.commands.mcability
+
+### /mcnotify
+
+* **描述**：切换技能能力的聊天通知显示
+* **别名**：/notify
+* **权限节点**：mcmmo.commands.mcnotify
+
+### /mcscoreboard 或 /mcsb
+
+* **描述**：管理MCMMO计分板
+* **别名**：/mcsb
+* **权限节点**：mcmmo.commands.mcscoreboard
+
+### /mmoxpbar 或 /xpbarsettings
+
+* **描述**：更改经验条设置
+* **别名**：/xpbarsettings
+* **权限节点**：mcmmo.commands.mmoxpbar
+
+## 参考资料
+
+::: info 相关链接
+
+* [MCMMO官方Wiki - Commands](https://wiki.mcmmo.org/Commands)
+  :::
+
+---
+
+---
+url: /mcmmo/players/gathering/index.md
+---
+# MCMMO采集类技能详解
+
+::: tip 简介
+采集类技能是MCMMO中最基础的技能类型，包括挖矿、伐木、钓鱼、挖掘和草药学等。这些技能通过执行相应的采集动作来获得经验值。
+:::
+
+## Mining（挖矿）
+
+挖矿技能专注于挖掘石头和矿物，提供额外掉落和特殊能力。
+
+### 经验获取方式
+
+使用镐挖掘以下方块可以获得挖矿经验：
+
+* 石头
+* 煤矿石
+* 铁矿石
+* 金矿石
+* 钻石矿石
+* 红石矿石
+* 青金石矿石
+* 黑曜石
+* 苔石
+* 末地石
+* 荧石
+* 下界岩
+
+### 特殊能力
+
+#### Super Breaker（超级碎矿）
+
+::: warning 主动技能
+
+* **激活方式**：手持镐右键
+* **效果**：短时间内大幅提升挖掘速度，并且获得三倍掉落几率
+* **机制**：在激活状态下，镐的效率附魔等级会临时增加5级（例如效率3会变成效率8）
+* **持续时间**：基础2秒，每50级增加1秒（1000级时达到最高22秒）
+* **注意**：激活期间使用镐挖掘会消耗双倍耐久
+  :::
+
+#### Blast Mining（爆破挖矿）
+
+::: info 特殊机制
+
+* **激活方式**：手持镐潜行右键TNT
+* **效果**：远程引爆TNT，减少爆炸伤害并增加矿物掉落
+* **组成部分**：
+  1. Bigger Bombs（更大爆炸）- 增加爆炸半径
+  2. Demolitions Expert（爆破专家）- 减少TNT爆炸对玩家的伤害
+  3. 增加矿物掉落并减少废料掉落
+     :::
+
+## Woodcutting（伐木）
+
+伐木技能专注于砍伐树木，提供额外掉落和快速砍伐能力。
+
+### 经验获取方式
+
+破坏原木方块可以获得伐木经验。
+
+### 特殊能力
+
+#### Tree Feller（伐木工）
+
+* **激活方式**：手持斧头右键
+* **效果**：瞬间砍伐整棵树，所有原木同时掉落
+* **机制**：整棵树会在瞬间被砍倒，所有原木一次性掉落
+
+#### Leaf Blower（吹叶）
+
+* **解锁等级**：默认100级
+* **效果**：使用斧头击打树叶方块时，树叶会瞬间被破坏
+
+#### Double Drops（双倍掉落）
+
+* **效果**：砍伐原木时有一定几率获得双倍掉落
+
+## Fishing（钓鱼）
+
+钓鱼技能让钓鱼变得更加有趣，可以钓到各种宝藏和特殊物品。
+
+### 经验获取方式
+
+钓鱼获得鱼可以提升钓鱼技能经验。
+
+### 特殊能力
+
+#### Treasure Hunter（寻宝）
+
+* **解锁等级**：10级（复古模式100级）
+* **效果**：钓鱼时有一定几率获得宝藏物品，包括：
+  * 普通物品（皮革、木制工具等）
+  * 不常见物品（石制工具、金制物品等）
+  * 稀有物品（铁剑、铁装备等）
+  * 史诗物品（钻石、附魔书等）
+  * 传奇物品（钻石装备等）
+  * 神话物品（下界合金装备等）
+* **机制**：钓鱼等级越高，获得稀有物品的几率越大
+
+#### Ice Fishing（冰上钓鱼）
+
+* **效果**：允许在结冰的湖面上钓鱼，会在冰面上自动开洞
+
+#### Master Angler（钓鱼大师）
+
+* **解锁等级**：15级（复古模式150级）
+* **效果**：提高鱼咬钩的几率，坐在船上钓鱼效果更佳
+
+#### Shake（摇晃）
+
+* **解锁等级**：15级（复古模式150级）
+* **效果**：使用钓鱼竿钩住生物时，可以摇晃出该生物掉落的物品
+* **机制**：对生物造成其最大生命值1/4的伤害（最多10点伤害）
+
+#### Fisherman's Diet（渔夫饮食）
+
+* **解锁等级**：20级（复古模式200级）
+* **效果**：提高食用鱼类恢复的饥饿值
+
+#### Magic Hunter（魔法猎手）
+
+* **解锁等级**：20级（复古模式200级）
+* **效果**：钓鱼获得的物品有一定几率是附魔的
+
+## Excavation（挖掘）
+
+挖掘技能通过挖掘泥土类方块寻找宝藏。
+
+### 经验获取方式
+
+挖掘以下方块可以获得挖掘经验：
+
+* 泥土
+* 草方块
+* 沙子
+* 砂砾
+* 粘土
+* 雪块
+
+### 特殊能力
+
+#### 经验机制
+
+挖掘不同方块获得的经验不同，同时有一定几率获得宝藏物品。
+
+## Herbalism（草药学）
+
+草药学技能专注于收集植物和草药。
+
+### 经验获取方式
+
+收集以下植物可以获得草药学经验：
+
+* 小麦
+* 胡萝卜
+* 马铃薯
+* 甜菜根
+* 南瓜
+* 西瓜
+* 甘蔗
+* 藤蔓
+* 花朵
+* 蘑菇
+* 仙人掌
+* 树苗
+
+### 特殊能力
+
+#### Green Thumb（绿手指）
+
+* **效果**：收获作物时有一定几率使作物重新生长
+
+#### Double Drops（双倍掉落）
+
+* **效果**：收获植物时有一定几率获得双倍掉落
+
+#### Green Terra（绿色大地）
+
+* **激活方式**：手持锄头右键
+* **效果**：短时间内提升所有草药学相关能力的效果
+
+## 参考资料
+
+::: info 相关链接
+
+* [MCMMO官方Wiki - Mining](https://wiki.mcmmo.org/Skills/Mining)
+* [MCMMO官方Wiki - Woodcutting](https://wiki.mcmmo.org/Skills/Woodcutting)
+* [MCMMO官方Wiki - Fishing](https://wiki.mcmmo.org/Skills/Fishing)
+* [MCMMO官方Wiki - Excavation](https://wiki.mcmmo.org/Skills/Excavation)
+* [MCMMO官方Wiki - Herbalism](https://wiki.mcmmo.org/Skills/Herbalism)
+  :::
+
+---
+
+---
+url: /mcmmo/players/intro/index.md
+---
+# MCMMO基础介绍
+
+## 什么是MCMMO？
+
+::: tip 简介
+MCMMO是一个为Minecraft多人服务器设计的开源插件，由nossr50开发。它为原版Minecraft添加了类似RPG的游戏体验，包括技能等级提升、特殊能力、稀有掉落物、全新机制以及更深入的PVP体验。
+:::
+
+在MCMMO服务器上游戏不需要对客户端进行任何修改，只需要服务器端安装Spigot或CraftBukkit即可支持。
+
+## MCMMO的核心概念
+
+### 技能系统
+
+::: info 技能类型
+MCMMO包含多种技能类型，如挖掘、剑术、弓箭、杂技等。玩家通过不断练习这些技能来提高自己的能力，从而在游戏中获得优势。
+:::
+
+### 经验与等级
+
+::: info 成长机制
+当玩家使用特定技能时，他们将获得经验值，并且在达到一定经验值后会升级。这鼓励玩家积极尝试不同的游戏风格，并与其他玩家进行竞争。
+:::
+
+### 特殊能力
+
+::: warning 技能能力
+每种技能都拥有独特的主动或被动能力，这些能力在玩家达到一定等级后解锁。主动能力通常需要玩家手动激活，并具有冷却时间。
+:::
+
+### 掉落增强
+
+::: tip 稀有掉落
+MCMMO可以扩展原版的掉落规则，使玩家在进行日常活动时有机会获得稀有或强大的物品。
+:::
+
+## 16种主要技能
+
+::: details 点击展开MCMMO的16种主要技能
+
+1. **Acrobatics（杂技）** - 优雅地移动，提供战斗和环境伤害加成
+2. **Alchemy（炼药学）** - 酿造药水，提高酿造速度并添加新的药水类型
+3. **Archery（箭术）** - 使用弓箭进行战斗，提供伤害加成和特殊效果
+4. **Axes（斧技）** - 使用斧头进行战斗和砍伐，可破坏敌人盔甲
+5. **Crossbows（弩技）** - 使用弩进行战斗
+6. **Excavation（挖掘）** - 挖掘泥土和沙子寻找宝藏
+7. **Fishing（钓鱼）** - 钓鱼获得经验和稀有物品
+8. **Herbalism（草药学）** - 收集草药和植物
+9. **Maces（锤技）** - 使用锤子粉碎敌人
+10. **Mining（挖矿）** - 挖掘石头和矿物
+11. **Repair（修理）** - 修理工具和装备
+12. **Swords（剑术）** - 使用剑进行战斗
+13. **Taming（驯养）** - 驯养和指挥狼
+14. **Tridents（三叉戟）** - 使用三叉戟进行战斗
+15. **Unarmed（格斗）** - 徒手战斗
+16. **Woodcutting（伐木）** - 砍伐树木
+    :::
+
+## 如何提升技能
+
+每种技能都有其特定的提升方式：
+
+* **采集类技能**（挖矿、伐木等）通过执行相应动作获得经验
+* **战斗类技能**（剑术、弓术等）通过造成或承受伤害获得经验
+* **生产类技能**（修理、炼药等）通过执行制作和修复操作获得经验
+
+技能等级越高，获得的经验值越多，同时解锁的特殊能力也越强大。
+
+## 参考资料
+
+::: info 相关链接
+
+* [MCMMO官方Wiki - Home](https://wiki.mcmmo.org/)
+* [MCMMO官方Wiki - Skills](https://wiki.mcmmo.org/Skills)
+  :::
+
+---
+
+---
+url: /mcmmo/players/production/index.md
+---
+# MCMMO生产类技能详解
+
+::: tip
+生产类技能包括修理、炼药、分解等，这些技能帮助玩家维护和制作装备。
+:::
+
+## Repair（修理）
+
+修理技能允许玩家使用铁块修理损坏的工具和装备。
+
+### 经验获取方式
+
+使用MCMMO铁砧修理物品可获得修理经验。
+
+### 使用方法
+
+::: info
+
+1. 放置一个铁块（默认的MCMMO铁砧）
+2. 右键点击铁块打开修理界面
+3. 选择要修理的物品进行修理
+4. 每次修理消耗一个原材料（如修理铁剑消耗铁锭）
+   :::
+
+### 特殊能力
+
+#### Repair Mastery（修理精通）
+
+::: info 被动能力
+
+* **效果**：提升修理效果，修理量随技能等级提升而增加
+  :::
+
+#### Super Repair（超级修理）
+
+::: info 被动能力
+
+* **效果**：修理时有一定几率触发超级修理，效果翻倍
+  :::
+
+#### Arcane Forging（奥术锻造）
+
+::: warning
+
+* **解锁等级**：依赖于服务器配置
+* **效果**：修理附魔物品时有一定几率保持附魔
+* **机制**：
+  * 成功保持附魔
+  * 附魔等级降低（如效率V降为效率III）
+  * 附魔完全消失
+    :::
+
+## Alchemy（炼药学）
+
+::: tip
+炼药学技能增强酿造药水的能力。
+:::
+
+### 经验获取方式
+
+使用酿造台酿造药水可获得炼药学经验。
+
+### 特殊能力
+
+#### Catalysis（催化）
+
+* **效果**：大幅缩短药水酿造时间
+
+#### Concoctions（调和）
+
+* **效果**：解锁一些原本无法获得的特殊药水配方
+
+## Smelting（熔炼）
+
+熔炼技能增强熔炼矿物的能力。
+
+### 经验获取方式
+
+使用熔炉熔炼物品可获得熔炼经验。
+
+### 特殊能力
+
+#### Second Smelt（二次熔炼）
+
+* **效果**：熔炼矿物时有一定几率获得双倍产物
+
+#### Flux Mining（助熔挖矿）
+
+* **效果**：挖矿时有一定几率直接获得熔炼后的产物（如直接获得铁锭而非铁矿石）
+
+## Salvage（分解）
+
+分解技能允许玩家将不需要的装备分解为原材料。
+
+### 经验获取方式
+
+使用分解功能分解物品可获得分解经验。
+
+### 使用方法
+
+1. 放置一个金块（默认的分解台）
+2. 右键点击金块打开分解界面
+3. 选择要分解的物品进行分解
+4. 分解后获得制作该物品的原材料
+
+### 特殊能力
+
+#### Advanced Salvage（高级分解）
+
+* **效果**：分解时有一定几率获得完整原材料，而非部分材料
+
+#### Arcane Salvage（奥术分解）
+
+* **效果**：分解附魔物品时有一定几率获得附魔书
+
+## 参考资料
+
+::: info 相关链接
+
+* [MCMMO官方Wiki - Repair](https://wiki.mcmmo.org/Skills/Repair)
+* [MCMMO官方Wiki - Alchemy](https://wiki.mcmmo.org/Skills/Alchemy)
+* [MCMMO官方Wiki - Smelting](https://wiki.mcmmo.org/Skills/Smelting)
+* [MCMMO官方Wiki - Salvage](https://wiki.mcmmo.org/Skills/Salvage)
+  :::
+
+---
+
+---
+url: /nav/index.md
+---
+# 导航页
+
+---
+
+---
+url: /ZakoZakoCraft/index.md
+---
+:::: demo-wrapper
+
+# 服务器介绍
+
+* **定位** >
+  高版本公益群组服务器
+  公益性质的Minecraft多人游戏服务器，不以盈利为目的
+
+* **由来** >
+  我们来自另一个生存服务器，由于受不了服务器的神权，我们自己决定开一个公益群组服务器，
+  让玩家可以享受游戏带来的快乐。
+
+* **版本** >
+  JAVA 版（离线/正版）1.19–1.21.10
+  手机(FCL/HMCL-PE)电脑(PCL/HMCL)都能玩~！
+  ::::
+
+***
+
+---
+
+---
+url: /ZakoZakoCraft/Building/Axiom/index.md
+---
+# Axiom公理
+
+::: tip 模组介绍
+Axiom公理是一个为Minecraft建造打造的一体化编辑工具，通过融合3D软件功能，提供实时预览和精准调整工具，简化和增强建筑过程与潜力。
+:::
+
+## 注意事项
+
+::: warning 使用规范
+
+* 请在指定区域内使用Axiom功能
+* 避免在高峰时段进行资源密集型操作
+* 复杂操作分步骤进行
+* 发现bug请及时报告给管理员
+  :::
+
+## 教程
+
+::: info 教程资源
+Axiom 公理模组教程资源：
+
+1. [官方文档](https://github.com/AxiomMC/axiom/wiki)
+2. 官方 Discord 社区
+3. bilibili 教学视频
+   :::
+
+---
+
+---
+url: /ZakoZakoCraft/Building/overview/index.md
+---
+# ZakoZakoCraft建筑创造服
+
+#### 专业建筑服务器，提供纯净创造环境，支持大型建筑项目
+
+::: tip 服务器特色
+
+* 提供超大的地皮创造环境
+* 支持大型建筑项目开发
+* 配备专业建筑工具和模组
+* 拥有独立的世界和权限系统
+  :::
+
+## 核心功能
+
+::: info 功能概览
+
+1. **地皮系统** - 提供独立建筑区域，支持多人协作
+2. **Axiom公理** - 专业建筑辅助工具，提升建造效率
+3. **创世神** - 大型地形编辑工具，支持复杂地貌设计
+   :::
+
+---
+
+---
+url: /ZakoZakoCraft/Building/Plots/index.md
+---
+# 地皮系统
+
+::: tip 系统介绍
+地皮系统是建筑创造服的核心功能，为每位建筑师提供独立的建筑空间，支持个人创作和团队协作。
+:::
+
+## 系统功能
+
+### 地皮分配
+
+* 每位玩家可申请多个地皮
+* 地皮大小256x256
+* 支持不规则形状地皮合并
+
+### 权限管理
+
+* 地皮所有者可设置访问权限
+* 支持邀请协作者共同建设
+* 可设置不同用户的操作权限等级
+* 提供地皮转让功能
+
+### 地皮保护
+
+* 自动保护地皮内建筑不被破坏
+* 防止他人进入未授权地皮
+
+## 使用指南
+
+* 打开菜单即可
+
+::: warning 重要提醒
+
+* 请合理使用地皮资源，避免浪费
+* 长期不活跃/恶意卡服/影响整体观感的地皮可能会被回收
+* 地皮转让前请确认接收方信息
+* 发现地皮问题请及时联系管理员
+  :::
+
+---
+
+---
+url: /ZakoZakoCraft/Building/WorldEdit/index.md
+---
+# 创世神 (WorldEdit)
+
+::: tip 插件介绍
+创世神是Minecraft中最著名的地形编辑插件之一，提供强大的方块操作功能，支持大规模地形改造和建筑复制。
+:::
+
+## 核心功能
+
+### 区域选择
+
+* **点选工具** - 使用木斧选择区域的两个点
+* **扩展选择** - 支持向上、向下、向外扩展选择区域
+* **自然选择** - 可按自然特征（如树木、建筑物）自动选择
+
+### 方块操作
+
+* **替换方块** - 快速替换指定区域内的方块类型
+* **填充区域** - 用指定方块填充选择区域
+* **清除方块** - 清空选择区域内的所有方块
+* **复制粘贴** - 复制建筑结构并在其他位置粘贴
+
+### 地形生成
+
+* **自然地形** - 生成山脉、丘陵、洞穴等自然地貌
+* **几何形状** - 创建球体、圆柱体、金字塔等规则形状
+* **随机分布** - 在指定区域随机放置方块或结构
+
+## 使用指南
+
+### 基础指令
+
+::: info 常用指令列表
+
+* `//pos1` - 设置选择区域的第一个点
+* `//pos2` - 设置选择区域的第二个点
+* `//set <方块>` - 用指定方块填充选择区域
+* `//replace <原方块> <新方块>` - 替换指定方块
+* `//copy` - 复制选择区域
+* `//paste` - 粘贴已复制的内容
+* `//undo` - 撤销上一次操作
+* `//redo` - 重做被撤销的操作
+  :::
+
+### 高级功能
+
+1. **表达式使用** - 支持使用数学表达式生成复杂形状
+2. **生物群系编辑** - 可修改区域的生物群系类型
+3. **NBT数据操作** - 支持修改方块和实体的NBT数据
+4. **脚本支持** - 可编写脚本实现复杂自动化操作
+
+## 注意事项
+
+::: warning 安全规范
+
+* 大型操作前请确认选择区域无误
+* 避免同时进行多个大规模操作
+* 操作前建议备份重要建筑
+* 不要尝试修改服务器核心区域
+* 复杂操作建议分步进行
+* 大型复制粘贴操作可能需要较长时间
+* 频繁使用撤销/重做功能可能影响性能
+  :::
+
+## 学习资源
+
+::: tip 进阶学习
+
+* WorldEdit官方文档
+* 社区制作的教程和技巧分享
+* 服务器内管理员指导课程
+* 实践练习区域供玩家测试功能
+  :::
+
+---
+
+---
+url: /ZakoZakoCraft/Contributors/index.md
+---
+# 服务器名人堂
+::: tip 提示
+此页面收录了服务器的贡献者以及服内知名人士。正是因为他们的无私奉献与卓越贡献，服务器才得以持续发展与完善。
+
+*注：信息更新存在一定延迟，如有疑问请在群内询问。*
+:::
+
+## 贡献者（按时间顺序排列）
+
+| 贡献者 | 贡献内容 | 附加信息 |
+|--------|----------|----------|
+| ZXBHELLO | 服务器服主 | 承担服务器主要资金、运维、开发、管理工作 |
+| 糖君 | 服务器顾问 | 核心技术支持，遇到问题可优先咨询 |
+| Pine | 提供穿透服务 | 另一公益服服主，经常与ZXBHELLO探讨技术问题 |
+| 水人 | 资金赞助（9R） | 原YMY服务器玩家，现带领众多玩家迁移至本服 |
+
+***
+
+::: details 入选标准
+为确保名人堂的权威性与公正性，入选贡献者需满足以下条件之一：
+
+1. 对服务器发展做出重大贡献（如资金赞助、技术支援等）
+2. 在服务器社区中具有广泛影响力和良好声誉
+3. 长期积极参与服务器建设与维护工作
+
+我们将定期更新此名单，以表彰更多为服务器做出贡献的玩家。
+:::
+
+---
+
+---
+url: /ZakoZakoCraft/Creative/Axiom/index.md
+---
+# Axiom公理
+## 介绍
+
+[公理模组（Axiom）](https://modrinth.com/mod/axiom) 是一个为 Minecraft 建造打造的一体化编辑工具，它通过融合 3D 软件功能、提供实时预览和精准调整工具，来简化和增强建筑过程与潜力。
+
+::: tip 模组优势
+
+* 一体化编辑工具
+* 实时预览功能
+* 精准调整工具
+* 3D软件功能融合
+  :::
+
+## 教程
+
+::: info 教程资源
+Axiom 公理模组教程资源：
+
+1. [官方文档](https://github.com/AxiomMC/axiom/wiki)
+2. 官方 Discord 社区
+3. bilibili 教学视频
+   :::
+
+---
+
+---
+url: /ZakoZakoCraft/Creative/Carpet/index.md
+---
+# Carpet地毯
+## 介绍
+
+[地毯模组（Carpet Mod）](https://modrinth.com/mod/carpet)是以Fabric作为核心的功能性模组，此外它还有许多[附属模组](https://github.com/gnembon/fabric-carpet/wiki/List-of-Carpet-extensions)
+
+::: tip 模组特色
+
+* 强大的红石调试功能
+* 高级建筑辅助工具
+* 性能优化选项
+* 创造模式增强功能
+  :::
+
+## 教程
+
+::: warning 注意
+
+由于地毯功能过于强大，能够通过**实验创造服审核**的玩家一般都具有一定的使用基础或是学习能力，所以不在此过多赘述。
+
+:::
+
+::: info 学习资源
+建议新手玩家参考以下资源：
+
+1. [Carpet Mod 官方文档](https://github.com/gnembon/fabric-carpet/wiki)
+2. B站相关教学视频
+3. 服务器内的实践练习区域
+   :::
+
+---
+
+---
+url: /ZakoZakoCraft/Creative/overview/index.md
+---
+# ZakoZakoCraft实验创造服
+
+#### 永不删档，Fabric-1.21.8原版服务端，内置地毯全家桶，创世神，公理等生电/创电模组
+
+::: warning 重要说明
+为了保证服务器安全，目前**实验创造服**采取`单独审核制`，普通玩家仅有旁观权限。
+:::
+
+## 审核条件
+
+::: tip 审核标准
+
+1. **技术能力要求**
+   * 熟练掌握 Carpet 地毯模组使用
+   * 了解 Axiom 公理模组基本操作
+   * 具备一定的红石技能和基础知识
+
+2. **作品展示**
+   * 提供过往红石机器作品截图或链接
+   * 展示使用模组的创意项目案例
+
+3. **社区表现**
+   * 在其它子服有良好游戏记录
+   * 遵守服务器规则，无严重违规记录
+     :::
+
+## 服务器规则
+
+::: info 创造服规则
+
+* 允许必要的创造性MOD
+* 禁止建造影响服务器性能的大型机器(卡服机)
+* 禁止无序摆放机器(东一块西一块)
+* 禁止在未经授权的情况下触碰任何机器的开关(复制副本进行操作，未经原作者许可不得直接修改原型机)
+
+:::
+
+## 快捷方式
+
+::: tip 申请方式
+有意向的玩家请在主群联系管理员，提交相关作品和申请材料。
+:::
+
+---
+
+---
+url: /ZakoZakoCraft/faq/index.md
+---
+# 常见问题
+::: warning 重要提醒
+\==服主==并非您的==私人助理==，没有义务逐一解答所有问题，请优先查阅本文档寻找答案。服主通常不会直接回应游戏内的"服主为什么..."、"服主过来一下"等简单询问。遇到问题时，请先尝试==自行解决==，或向==其他玩家==请教是否遇到过类似情况。只有在确实无法解决的情况下，才向服主寻求帮助。
+:::
+
+## 注册与登录
+
+::: details Q：==审核文档==是必须填写的吗？
+A：不是，加入机制有`审核制`和`邀请制`两种方式，==邀请者==需要对==被邀请者==所做出的==不当行为==负责。
+:::
+
+::: details Q：服务器整合包中有什么内容？
+A：包含生电全家桶、元素周期表、各种优化模组，以及==提升游戏体验、与服务器功能联动==的模组（非必装）。
+:::
+
+::: details Q：不同的==路线==有什么区别？
+A：由于==流量晚高峰==可能会导致==延迟==增加（属于==正常现象==），所以==服务器==提供了多个==线路==以解决这个问题。
+:::
+
+::: details Q：用于==绑定==的==邮箱==能使用其他==邮箱==吗？
+A：不行，强制使用`==数字QQ邮箱==`，目的是更好地追踪==玩家==的==行为==（例如查处==违规行为==），以及防止==恶意机器人账号==。
+:::
+
+::: details Q：绑定时不小心输入了错误的邮箱怎么办？
+A：退出服务器等待10分钟再重试即可，服务器会==自动注销未注册成功的账号==。
+:::
+
+::: details Q：==忘记密码==了怎么办？
+A：使用==绑定==的==邮箱==，按照输入==错误密码==后的指示进行==重置密码==即可。
+:::
+
+::: details Q：我想更换绑定的邮箱该如何做？
+A：使用`/unregister <当前密码>`注销账号，再重新绑定新的QQ邮箱即可（游戏数据不会删除）。
+:::
+
+::: details Q：我可以一个邮箱绑定多个ID吗？
+A：可以，一个QQ邮箱最多可以绑定3个游戏ID。
+:::
+
+## 休闲生存服
+
+::: details Q：生存服如何获取金币？
+A：可以通过以下几种方式获取金币：
+
+* 每小时在线奖励：20金币+100经验值（最简单）
+* 在菜单中回收物资可获得金币（需要有物资）
+* 完成菜单中的收集挑战（量大管饱但耗时）
+* 在玩家市场出售其他玩家需要的资源（收益高但需看准商机）
+* 领取其他玩家的红包（随缘，你真打算这样赚金币？）
+* 向其他玩家出售劳动力（黑奴？）
+  :::
+
+::: details Q：==服务器==会开放==假人==（==假玩家==）吗？
+A：以后会不考虑。
+:::
+
+::: details Q：为什么有些==跨区块==的地方出现==断崖==？
+A：这是==服务器更新==的==残留现象==，属于==正常情况==，无需担心。
+:::
+
+::: details Q：==生存服==会==删档==吗？
+A：不会==删档==，但会定期清理==玩家====加载时长==不超过5分钟的==区块==（对==玩家活动==无影响）。
+:::
+
+::: details Q：服务器可以使用哪些类型的模组？
+A：可以使用优化视觉、性能或便捷性的模组。不过服务器目前只对==投影打印机、轻松放置==以及菜单中列出的==联动模组==提供技术支持，其他类型的模组不给予支持，请勿反馈相关问题。
+:::
+
+::: details Q：我应该如何与==其他玩家==相处？
+A：可以根据==个人喜好==选择==独居==或是==群居==，这将影响到你的==生存体验==。但不论选择哪种==模式==，请务必与==其他玩家====和谐相处==，避免产生==冲突==。
+:::
+
+::: details Q：如何创建和管理我的==领地==？
+A：使用`/dominion`==指令==可以打开==领地系统==界面，通过==图形界面==可以轻松创建和管理==领地==。==详细信息==请查看[==领地系统==](/ZakoZakoCraft/2.休闲生存服/1.领地系统.html)==文档==。
+:::
+
+::: details Q：==其他玩家==可以==破坏==或==拿走==我==领地==里的==东西==吗？
+A：不可以。一旦你建立了==领地==，只有你和你==授权==的==玩家==才能在==领地==内进行==破坏==和==拿取物品==等==操作==。
+:::
+
+::: details Q：==领地==可以设置哪些==权限==？
+A：你可以设置多种==权限==，包括但不限于：==放置方块==、==破坏方块==、==使用门==和==按钮==、==攻击生物==、==使用容器==等。在==领地管理界面==中可以==详细配置==。
+:::
+
+::: details Q：我可以拥有多个==领地==吗？
+A：可以，但需要消耗相应的==资源==来创建和维护多个==领地==。==具体限制==请查看==领地系统==文档。
+:::
+
+::: details Q：如何查看我的==金币余额==？
+A：使用`/balance`==指令==可以查看你的==金币余额==，也可以在==菜单==中查看。
+:::
+
+::: details Q：如何向==其他玩家==转账？
+A：使用`/pay <玩家名> <金额>`==指令==可以向==指定玩家==转账。
+:::
+
+::: details Q：==玩家市场==如何使用？
+A：使用`/ah`==指令==可以打开==玩家市场==，在==这里==你可以出售==物品==或购买==其他玩家==的==物品==。每次最多可以上架20件==商品==，收取3%的==手续费==（最低2==金币==）。
+:::
+
+::: details Q：==系统商店==的==商品价格==会变化吗？
+A：会的，==系统商店==采用==动态定价机制==，==价格==会根据==市场供需关系==波动。
+:::
+
+::: details Q：如何创建==公会==？
+A：使用`/guild create <公会名称>`==指令==可以创建一个==新的公会==，也可以通过==个人设置菜单==的==图形界面==操作。
+:::
+
+::: details Q：如何加入一个==已有==的==公会==？
+A：你需要获得==公会成员==的==邀请==，然后使用`/guild accept <公会名称>`==接受邀请==。
+:::
+
+::: details Q：==公会成员==之间有什么==特权==？
+A：==公会成员==可以共享==特定==的==权限==，参与==公会活动==和==公会战==，使用==公会商城==等功能。
+:::
+
+::: details Q：我可以同时属于多个公会吗？
+A：不可以，每个玩家只能属于一个公会。
+:::
+
+::: details Q：我可以使用==飞行功能==吗？
+A：可以，使用`/flyc`==指令==可以用==经验==和==金币==兑换==飞行时间==。注意==飞行==时要关注==能量剩余==，避免==高空坠落==。
+:::
+
+::: details Q：==服务器==支持哪些==红石机制==（==生电机制==）？
+A：==服务器==支持大部分==原版红石机制==，包括==TNT复制==、==重力方块复制==、==无头活塞==等。==详细信息==请查看==服务器公开配置项==。
+:::
+
+::: details Q：如何获得更好的==游戏性能==？
+A：建议使用==服务器==提供的==整合包==，其中包含了==优化模组==。同时，可以使用==服务器联动功能==。
+:::
+
+::: details Q：如何获得更远的==视距==？
+A：==服务器==目前提供的==视距==比同类型的==服务器==更远，并且保证==游玩体验==，如果你有更远的==视距==需求可以考虑安装[==区块缓存模组==](https://modrinth.com/mod/bobby)来实现。
+:::
+
+::: details Q：生存服务器有哪些公开的信息？
+A：以下是服务器的公开配置项：
+
+* 渲染距离：8
+* 模拟距离：6
+* 生物上限：60/p
+* 启用重力方块复制
+* 启用TNT复制
+* 启用地毯铁轨复制
+* 启用常量绊线
+* 启用虚空交易
+* 启用无头活塞
+* 启用剪刀反转方块方向
+* 启用跨线程伤害追踪（实验性）
+* 地图种子（使用`/seed`获取）
+* 服务器数据包:
+  * 1
+  * 2
+  * 3
+  * 4
+  * 5
+  * 6
+
+***
+
+::: tip ==其它疑问==
+如有==其他疑问==请在==群聊==中询问，或者查看==服务器规则==文档。
+:::
+
+---
+
+---
+url: /ZakoZakoCraft/function/CustomRecipes/index.md
+---
+::: tip 特色配方介绍
+服务器提供多种特色合成配方，让您的游戏体验更加丰富便捷。
+:::
+
+### 查阅方式：
+
+* 在ZakoZakoCraft菜单中点击`特色配方`
+* 输入命令 `/custom_recipe`
+
+![图片](/assets/ZakoZakoCraft/CustomRecipes.png)
+
+# 特色配方列表
+
+* 三叉戟
+* TNT矿车
+* 运输矿车
+* 动力矿车
+* 漏斗矿车
+* 火药
+* 火药块
+* 隐形物品展示框
+* 隐形荧光物品展示框
+* 命名牌
+* 钟
+* 发射器
+* 粘液球
+* 附魔金苹果
+* 鞘翅
+* 湿海绵
+* 龙息
+* 皮革
+
+::: warning 注意事项
+
+* 特色配方仅在本服务器生效
+  :::
+
+---
+
+---
+url: /ZakoZakoCraft/function/decoration/index.md
+---
+# 装饰系统
+## 装饰系统功能总览
+
+::: tip 指令参数说明
+以下指令参数 <> 表示必填项，\[] 表示选填项。
+:::
+
+| 类别 | 功能 | 指令/触发 | 补充触发 | 说明 |
+|------|------|-----------|----------|------|
+| 称号系统 | 自定义称号 | `/plt shop` | - | 设置个性化称号，支持颜色代码|
+| 动作姿态 | 坐下 | `/sit` | 空手对楼梯/台阶/地毯右键 | - |
+| 动作姿态 | 躺下 | `/lay` | - | - |
+| 动作姿态 | 趴下 | `/bellyflop` | - | - |
+| 动作姿态 | 旋转 | `/spin` | - | - |
+| 动作姿态 | 爬行 | `/crawl` | - | - |
+| 动作姿态 | 骑乘 | `/ride` | - | - |
+| 装饰功能 | 物品佩戴 | `/hat` | 菜单 | 将手持物品作为头饰 |
+| 装饰功能 | 横幅旗帜 | 潜行+放置旗帜 | - | 使用旗帜侧向摆放/增加大小 |
+
+## 注意事项
+
+::: warning 使用规范
+
+* 禁止使用冒犯性称号或文字
+* 个性化内容不得影响他人游戏体验
+  :::
+
+::: tip 装饰系统理念
+装饰系统旨在让玩家能够更好地表达个性，创造独特的游戏体验。
+:::
+
+---
+
+---
+url: /ZakoZakoCraft/function/dominion/index.md
+---
+# 领地系统
+::: info 注意
+Dominion 是一个完全开源、免费，专为高版本开发，面向未来的全新领地保护插件。插件目前处于快速的开发、迭代阶段。
+:::
+
+## 官方文档
+
+---
+
+---
+url: /ZakoZakoCraft/function/economy/index.md
+---
+# 经济系统
+## 经济系统功能总览
+
+::: tip 指令参数说明
+以下指令参数 <> 表示必填项，\[] 表示选填项。
+:::
+
+| 类别 | 功能 | 指令 | 说明 |
+|------|------|------|------|
+| 通用指令 | 查询余额 | `/balance [玩家名]` | 查询玩家的金币数量 |
+| 通用指令 | 转移金币 | `/pay <玩家名> <金额>` | 向玩家支付金币 |
+| 通用指令 | 福布斯榜 | `/baltop` | 生存服金币排行榜 |
+| 交易渠道 | 玩家交易 | `/trade` | 玩家间进行经验/金币/物品交易GUI |
+| 交易渠道 | 系统商店 | `/shop` | 官方商店，动态定价，价格随市场波动 |
+| 交易渠道 | 头颅商店 | `/hdb` | 出售装饰性头颅，用于建筑装饰 |
+| 交易渠道 | 快速出售 | `/sellgui` | 一键出售物品给系统，价格参考系统商店 |
+| 任务系统 | 收集任务 | `/collections` | 完成任务获取金币，内置排行榜 |
+
+## 注意事项
+
+::: warning 重要提醒
+
+* 禁止利用恶意复制漏洞
+* 发现漏洞请及时反馈
+* 交易请仔细确认物品与金额
+* 纠纷请及时联系管理员
+  :::
+
+::: info 经济系统理念
+经济系统旨在促进玩家之间的互动与交易，营造活跃的游戏经济环境。
+:::
+
+---
+
+---
+url: /ZakoZakoCraft/function/guild/index.md
+---
+# 工会系统
+::: info 提示
+PlayerGuild 是一个专为 Minecraft 设计的公会插件，让玩家可以创建和加入公会，与朋友一起建设和发展公会。
+:::
+
+## 简介
+
+PlayerGuild 是一个简单易用的公会插件，玩家可以通过图形界面（GUI）轻松管理公会事务，无需记忆复杂的指令。
+
+主要特性：
+
+* 可视化操作界面（GUI），简单直观
+* 公会成员管理
+* 公会升级系统
+* 公会战功能
+* 公会商城系统
+
+## 基本操作
+
+### 创建公会
+
+要创建一个新公会，您可以使用以下任一方法：
+
+1. 直接在游戏中输入指令：`/guild create <公会名称>`
+2. 通过图形界面操作（推荐）
+
+### 加入公会
+
+加入公会的方式有几种：
+
+* 接受公会成员的邀请
+* 申请加入公开的公会
+* 使用指令：`/guild accept <公会名称>` 接受邀请
+
+### 公会界面
+
+大部分公会操作都可以通过图形界面完成：
+
+* 输入 `/guild` 或 `/g` 打开公会主界面
+* 在界面中可以查看公会信息、管理成员、升级公会等
+
+## 主要功能
+
+### 公会成员管理
+
+* 邀请新成员：`/guild invite <玩家名>`
+* 踢出成员：`/guild kick <玩家名>`
+* 成员权限管理
+
+### 公会升级
+
+随着公会发展，您可以使用 `/guild up` 指令升级公会，解锁更多功能和特权。
+
+### 公会战
+
+公会可以参与公会战：
+
+* 同意参战：`/guild acceptPvp`
+* 拒绝参战：`/guild denyPvp`
+
+### 公会商城
+
+公会可以拥有自己的商城系统，方便成员间交易特定物品。
+
+## 常用指令
+
+| 指令 | 说明 |
+|------|------|
+| `/guild` 或 `/g` | 打开公会主界面 |
+| `/guild create <名称>` | 创建新公会 |
+| `/guild invite <玩家>` | 邀请玩家加入公会 |
+| `/guild accept <公会>` | 接受公会邀请 |
+| `/guild leave` | 离开当前公会 |
+| `/guild up` | 升级公会 |
+| `/guild list` 或 `/guild members` | 查看公会成员 |
+
+## 注意事项
+
+::: warning 温馨提示
+
+* 请友善对待公会成员，共同建设和谐的公会环境
+* 公会相关纠纷请联系服务器管理员处理
+* 离开公会前请妥善处理个人物品和贡献
+  :::
+
+::: info 小贴士
+大部分操作都可以通过图形界面完成，即使不熟悉指令也能轻松使用公会系统！
+:::
+
+---
+
+---
+url: /ZakoZakoCraft/function/overview/index.md
+---
+# ZakoZakoCraft休闲生存服
+
+#### 永不删档，持续更新，支持生电，主打娱乐养老玩法
+
+::: tip 服务器特色
+永不删档，持续更新，支持生电，主打娱乐养老玩法
+:::
+
+## 快捷方式
+
+***
+
+::: info 使用说明
+进入服务器后按菜单键即可浏览全部功能；本文仅汇总高频、高门槛及易忽略项，方便速查。
+:::
+
+---
+
+---
+url: /ZakoZakoCraft/function/services/index.md
+---
+# 实用功能
+## 实用功能总览
+
+::: tip 指令参数说明
+以下指令参数 <> 表示必填项，\[] 表示选填项。
+:::
+
+| 类别 | 功能 | 指令/获取方式 | 说明 |
+|------|------|---------------|------|
+| 基础服务 | 帮助指南 | 菜单 | 访问当前网页，含完整规则，新玩家必读 |
+| 基础服务 | 查询模式 | `/co i` | 查看方块操作记录，解决纠纷专用 |
+| 飞行与经验 | 能量飞行 | `/flyc` | 用经验或金币兑换飞行时间 |
+| 工具与配方 | 便携工具箱 | 系统商店购买权限 | 含小创世神、便携工作台、镜像仿制 |
+| 工具与配方 | 特殊配方 | 无指令 | 服务器独家合成配方，仅本服生效 |
+
+## 注意事项
+
+::: warning 安全提醒
+
+* 飞行注意能量剩余，避免高空坠落
+* 工具箱权限需购买
+  :::
+
+::: info 功能设计理念
+实用功能旨在提升玩家的游戏体验，让日常游玩更加便捷舒适。
+:::
+
+---
+
+---
+url: /ZakoZakoCraft/Games/overview/index.md
+---
+# ZakoZakoCraft娱乐游戏服
+
+#### 多样化小游戏服务器，提供丰富的娱乐体验
+
+::: info 地图资源
+
+* 娱乐游戏服专为喜欢轻松游戏体验的玩家设计，提供多种趣味小游戏，让您在忙碌的学习工作之余享受游戏的乐趣。
+* 本服务器使用来自 [wifi-left/Map-MiniGames](https://github.com/wifi-left/Map-MiniGames) 的优质地图资源，感谢地图制作者的贡献。
+  :::
+
+::: warning 游戏规则
+
+* 禁止使用任何作弊工具或修改客户端
+* 尊重其他玩家，禁止恶意破坏他人游戏体验
+* 遵守游戏内规则，维护公平竞技环境
+* 发现问题及时向管理员报告
+  :::
+
+---
+
+---
+url: /ZakoZakoCraft/getting-started/index.md
+---
+# 新手入门指南
+::: info 使用说明
+欢迎来到ZakoZakoCraft服务器！这是新手入门指南，点击 `下方卡片` 快速跳转到相关章节。
+:::
+
+## 快捷导航
+
+## 服务器分组导航
+
+***
+
+::: warning 注意事项
+本指南内容基于服务器当前运营情况整理。由于服务器可能会进行更新和调整，本文档内容可能与实际有所差异。如有发现错误或需要补充，请通过相关渠道反馈给我们。
+:::
+
+## 更多信息
+
+::: info 相关链接
+
+* [ZakoZakoCraft官网](https://doc.zakozako.top/ZakoZakoCraft/)
+* [QQ审核群](https://qm.qq.com/q/wGEB6fFybC)
+  :::
+
+---
+
+---
+url: /ZakoZakoCraft/join/index.md
+---
+# 加入服务器
+## 操作流程
+
+::: steps
+
+1. 填写审核问卷
+
+   问卷链接可在审核群中找到。填写问卷有助于我们了解您的游戏背景和意图，从而筛选出真诚的玩家，减少潜在恶意行为，提升整体社区质量。
+
+2. 加入主群
+
+   提交问卷后，请耐心等待审核。管理员通常会在2-6小时内审核并批准入群。群文件中包含服务器地址、客户端下载链接等重要资源，请务必下载查看。
+
+3. 安装客户端（可选）
+
+   您可以选择使用官方原版客户端或下载群内提供的整合包。整合包已预装优化模组并兼容反作弊插件，能提升游戏体验并确保与服务器的兼容性。
+
+4. 获取地址
+
+   服务器的主地址和备用地址均发布在审核群的公告中。如果主地址无法连接，请切换到备用地址进入服务器。
+
+5. 注册账号
+
+   进入服务器后，使用命令 `/register 您的QQ邮箱 您的QQ邮箱` 来注册账户。系统将向该邮箱发送一封包含初始密码的邮件，请及时查收并妥善保管。
+
+6. 登录与改密
+
+   使用命令 `/login 初始密码` 登录账户。登录后，请立即按照邮件中的指引修改初始密码，防止遗忘密码。
+
+7. 开始游戏
+
+   完成注册流程即表示您已阅读并同意遵守服务器的所有规则。请务必熟悉规则内容，享受愉快的游戏时光！
+
+:::
+
+***
+
+::: tip 提示
+如需了解更多常见问题，请查看 [常见问题](./3.常见问题.md)
+:::
+
+---
+
+---
+url: /ZakoZakoCraft/Preview/overview/index.md
+---
+# ZakoZakoCraft先行测试服
+
+#### 新功能预览服务器，体验最新特性和更新
+
+::: tip 服务器特色
+先行测试服是ZakoZakoCraft的实验性服务器，用于测试即将发布的新功能、插件和游戏机制，让核心玩家提前体验并提供反馈。
+:::
+
+## 服务器目的
+
+::: info 测试目标
+
+1. **新功能测试** - 测试即将上线的新插件和功能
+2. **稳定性验证** - 验证新版本的稳定性和性能
+3. **用户体验优化** - 收集玩家反馈，优化游戏体验
+4. **Bug发现与修复** - 在正式服上线前发现并修复潜在问题
+   :::
+
+## 注意事项
+
+::: danger 重要提醒
+
+* 该服仅能通过`/server TEST`命令访问
+* 默认游戏模式为创造模式
+* 测试服数据可能会随时重置
+* 新功能可能存在未知问题
+* 请勿在测试服进行重要建设
+* 未公开的功能请勿外传
+  :::
+
+---
+
+---
+url: /ZakoZakoCraft/Punishment/index.md
+---
+# 服务器封神榜
+::: danger 警告
+此页面记录了在服务器内或服务器聊天群中违反[服务器规则](/ZakoZakoCraft/1.从此处开始/2.服务器规则.html)并受到管理员处罚的玩家及其违规事由。
+
+*注：信息更新存在一定延迟，如有疑问请在群内询问。*
+:::
+
+## 违规记录
+
+目前暂无违规记录。
+
+***
+
+---
+
+---
+url: /ZakoZakoCraft/terms/index.md
+---
+# 服务器规则
+::: warning 重要提示
+请所有玩家在加入服务器前仔细阅读并理解本规则。游玩本服务器即表示您已完全理解并同意遵守以下所有规定。
+
+本规则适用于服务器内所有区域及QQ交流群等所有相关平台。
+:::
+
+## 第一章 总则
+
+### 第一条 服务器性质
+
+本服务器为公益性质的Minecraft多人游戏服务器，不以盈利为目的。
+
+### 第二条 适用范围
+
+本规则适用于所有服务器玩家、访客及参与相关社区活动的人员。
+
+### 第三条 基本原则
+
+1. 尊重他人，文明游戏
+2. 公平竞争，禁止作弊
+3. 保护环境，合理建设
+4. 遵守法律，健康游戏
+
+## 第二章 玩家行为规范
+
+### 第四条 禁止的客户端行为
+
+严禁使用任何非法客户端、模组或工具：
+
+**1. 作弊类程序/客户端**
+
+* 使用任何作弊程序和客户端
+* 在服务器内宣扬、售卖外挂
+* 使用作弊功能（包括但不限于飞行、高跳、手长、调速、自动挖矿、自动放置、自动攻击、杀戮光环、范围挖掘等修改游戏机制的功能）
+
+**2. 透视类模组**
+
+* 透视、ESP、矿物透视的材质包或mod功能
+* 任何可以显示隐藏物体或获取不应得信息的模组
+
+**3. 其他违规工具**
+
+* 鞘翅平飞、飞船、刀爆等违反游戏平衡的功能
+* 宏命令工具或自动化脚本
+* 任何修改游戏正常数据的mod和内存访问工具
+* 与正常游戏机制不符的第三方软件
+
+> 注：对于功能模组的合规性，管理组拥有最终解释权。如有疑问，请提前咨询管理员。
+
+### 第五条 禁止的游戏行为
+
+1. **破坏性行为**
+   * 通过漏洞故意破坏他人领地内建筑或设施
+   * 恶意纵火、爆炸等破坏服务器环境行为
+   * 刻意击杀其他玩家
+
+2. **不当建造行为**
+   * 建造严重影响服务器性能的机器（如无限刷怪塔、大型实体农场等）
+   * 建造违反社会公序良俗的建筑
+   * 大量放置光源或粒子效果造成视觉污染
+   * 搭建无意义结构（如高空水柱、跑跳搭方块）
+
+3. **经济系统违规**
+   * 利用系统漏洞获取不当利益
+   * 恶意刷取游戏资源
+   * 进行现实货币交易
+
+4. **与作弊玩家关联行为**
+   * 在明确知晓或者通过第三人知晓公会队友或同一游玩的玩家为作弊玩家时，应立即与之断绝关系并报告管理员
+   * 明知对方为作弊玩家仍与其组队、共享资源或故意利用其作弊优势，视为共同作弊
+
+### 第六条 言论及社交规范
+
+禁止以下言论和行为：
+
+* 传播广告、垃圾信息或无关内容
+* 发布非法、色情、暴力、政治敏感内容
+* 人身攻击、恶意辱骂或使用侮辱性语言
+* 刷屏、刷表情或其他干扰正常交流的行为
+* 开盒、人肉搜索等侵犯他人隐私的行为
+* 煽动群体对立、仇恨言论或歧视性言论
+* 挑衅、煽动他人违反服务器规则
+* 其他影响社区和谐稳定的行为
+
+### 第七条 账户管理规范
+
+1. 禁止共享账户
+2. 禁止恶意注册多个账户
+3. 应保护账户安全，如发现异常应立即报告管理员
+
+## 第三章 社区与交流规范
+
+### 第八条 群组交流规范
+
+1. QQ群等交流平台同样适用本规则
+2. 尊重他人观点，理性讨论
+3. 遵守群公告和管理员指示
+4. 不发布与服务器无关的内容
+
+### 第九条 举报与申诉
+
+1. 发现违规行为可通过以下方式向管理员举报：
+   * 游戏内直接联系管理员
+   * 在QQ群中@管理员
+   * 私信服主或管理员
+2. 举报时应提供尽可能详细的证据（如截图、视频等）
+3. 对处罚决定有异议可在处罚后24小时内提出申诉
+4. 举报和申诉需提供有效证据和理由
+5. 管理组将在48小时内对举报或申诉给予回复
+
+## 第四章 数据与隐私保护
+
+### 第十条 数据收集与使用
+
+为保障服务器正常运行和安全管理，我们会收集以下数据：
+
+* **身份验证数据**：登录IP地址、注册邮箱、加密密码
+* **游戏行为数据**：方块操作记录、发言内容、游戏行为日志
+* **必要游戏数据**：UUID、游戏名、经验等级等
+
+### 第十一条 隐私保护
+
+1. 收集的数据仅用于服务器运营和安全管理
+2. 未经玩家同意，不会向第三方透露个人信息
+3. 玩家可申请删除个人相关数据
+
+### 第十二条 数据安全
+
+1. 服务器会定期备份重要数据
+2. 因服务器原因导致的数据丢失，可申请合理补偿
+3. 玩家应妥善保管账户信息，避免被盗用
+4. 系统检测到数据异常时，管理组有权进行调查，并根据调查结果采取相应措施
+
+## 第五章 违规处理与申诉
+
+### 第十三条 违规处理程序
+
+对于违规行为，管理组将按以下梯度进行处理：
+
+1. **提醒警告** - 初次轻微违规
+2. **临时禁言** - 言论违规
+3. **数据回滚** - 财产侵害行为
+4. **临时封禁** - 严重违规或屡教不改
+5. **永久封禁** - 极端严重违规
+
+### 第十四条 处罚考量因素
+
+处罚时将综合考虑以下因素：
+
+* 违规行为的性质和严重程度
+* 违规次数和历史记录
+* 对他人和服务器的影响
+* 当事人的态度和补救措施
+
+### 第十五条 申诉程序
+
+1. 处罚决定后24小时内可提出申诉
+2. 申诉需通过指定渠道提交
+3. 需提供相关证据和理由
+4. 管理组将在48小时内给予回复
+5. 申诉期间原处罚决定仍然有效，除非管理组另有决定
+
+## 第六章 特殊条款
+
+### 第十六条 服务器资助
+
+1. 服务器为公益性质，完全免费游玩
+2. 赞助行为基于完全自愿原则
+3. 赞助者将获得相应标识，但不享有特殊权限
+
+### 第十七条 服务器变更
+
+1. 管理组有权根据需要调整服务器设置
+2. 重大变更将提前通知玩家
+3. 管理组保留临时调整规则的权利
+
+### 第十八条 争议处理
+
+1. 玩家间纠纷应优先协商解决
+2. 协商无果可申请管理员介入
+3. 管理组的决定为最终决定
+
+## 第七章 附则
+
+### 第十九条 规则解释权
+
+本规则的最终解释权归服务器管理组所有。
+
+### 第二十条 规则修订
+
+1. 管理组有权对本规则进行修订
+2. 修订后的规则将通过公告形式发布
+3. 修订后的规则自发布之日起生效
+
+### 第二十一条 生效日期
+
+本规则自发布之时起生效。
+
+***
+
+::: tip 温馨提示
+服务器由个人独立运营，服主承担了所有运维、开发、管理工作。请给予基本的尊重和理解，共同维护良好的游戏环境。
+:::
+
+*本规则最终解释权归ZakoZakoCraft服务器管理组所有*
+
+---
+
+---
+url: /ZakoZakoCraft/testing/index.md
+---
+# 测试功能
+::: warning
+本页面及子页面内容为==实验性内容==，仅供测试使用，==不保证==稳定性和可用性！！！
+:::
+
+## 快捷导航
+
+---
+
+---
+url: /ZakoZakoCraft/VLAN-Server-Connect/index.md
+---
+# 通过虚拟局域网加入服务器
+::: warning 提示
+通过此方式加入服务器仍为测试阶段，且操作对电脑熟练度要求较高。
+:::
+
+## 前言
+
+::: details 点击展开
+
+选择这种方式的主要原因在于，国内部分地区家庭宽带很难申请到公网 IP。在没有公网 IP 的情况下，无法直接连接服务器，这时就必须要借助内网穿透等技术。
+
+然而，无论是使用现成的商业化内网穿透服务，还是自己购买服务器自建节点，对于公益服务器来说都是一笔不小的开销。此外，对于规模稍大的服务器而言，内网穿透所提供的流量和带宽可能难以满足需求。
+
+与此同时，各大主流启动器为了方便普通玩家联机，也纷纷采用了 ET（EasyTier）的核心技术。如果能更无缝地使用启动器内置的 ET 模块，甚至连专用客户端都可以省去下载。
+
+正是在这样的背景下，EasyTier 这种 P2P 组网方案展现出了相当的可用性和独特优势。不过目前启动器使用了自有的协议，除非专门开发一个兼容该协议的客户端，否则暂时无法直接使用启动器自带的核心功能，同时也无法确保每次联机会生成相同的编码。
+
+除了上述问题之外，还存在例如跨网络连接质量不佳等情况。但总体而言，通过虚拟局域网的方式来连接服务器具有良好的前景，特别是在节约成本方面表现突出。至于跨网连接的质量问题，实际上可以通过多线路部署来有效缓解，无论如何都能在合理的预算范围内达到最优的规格标准。
+
+:::
+
+## 如何加入？
+
+::: steps
+
+1. ### 下载 EasyTierGame\[^脚注1]
+
+   * [Github](https://github.com/EasyTier/EasytierGame/releases)
+   * [加速地址](https://ghfast.top/https://github.com/EasyTier/EasytierGame/releases/download/1.5.2/easytier-game_windows_x86_64_1.5.2.zip)
+
+2. ### 配置参数
+
+   软件打开后在房间名处输入服务将器提供的节点、房间号和密码（群公告），设置自己加入网络的主机名称。
+
+3. ### 启动联机
+
+   点击启动按钮，看到左上角图标变成 **"联机成功"** 既表示已成功加入网络。
+
+4. ### 连接服务器
+
+   剩下的就跟正常进服务器一样了，在服务器地址填上服务器在虚拟局域网里的地址（群公告）即可。
+
+:::
+
+\[^脚注1]: 正常版本的 EasyTierGame 不兼容 Win7，如需使用请自行到发布页下载修复版本。
