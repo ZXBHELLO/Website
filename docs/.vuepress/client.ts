@@ -8,6 +8,8 @@ import { h } from 'vue'
 import { Layout } from 'vuepress-theme-plume/client'
 import PageContextMenu from 'vuepress-theme-plume/features/PageContextMenu.vue'
 
+import './custom.css'
+
 
 export default defineClientConfig({
   enhance({ app }) {

@@ -1,0 +1,56 @@
+@import url("https://chinese-fonts-cdn.deno.dev/packages/lxgwwenkaibright/dist/LXGWBright-Regular/result.css");
+@import url("https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@4.2.1/index.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Ysabeau:ital,wght@1,1..1000&display=swap");
+
+/* --- 字体设置 --- */
+
+:root {
+  --vp-font-family-base: "LXGW Bright", sans-serif;
+  --vp-font-family-mono: "Cascadia Code", monospace;
+  font-optical-sizing: auto;
+}
+
+/* 确保所有元素默认使用基础字体 */
+* {
+  font-family: var(--vp-font-family-base);
+}
+
+:root:where(:lang(zh)),
+:root:where(:lang(zh-CN)) {
+  --vp-font-family-base: "LXGW Bright", sans-serif;
+}
+
+/* --- 其他元素字体设置 --- */
+
+.tag-name,
+.blog-post-item-content .post-meta .tag-list,
+.blog-post-item-content .post-meta a,
+.vp-category-group .folder,
+.vp-doc-meta .tag {
+  font-family: "Ysabeau", sans-serif;
+}
+
+.vp-footer,
+.footer-message {
+  font-family: "Ysabeau", sans-serif;
+}
+
+.profile-info {
+  font-family: "Ysabeau", sans-serif;
+}
+
+/* --- 微调 --- */
+
+html {
+  font-size: 17px;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "liga" 1, "dlig" 1, "tnum";
+}
+
+.vp-doc div[class*="language-"] pre,
+.vp-doc div[class*="language-"] code {
+  font-weight: 350;
+  font-variant-ligatures: normal;
+}

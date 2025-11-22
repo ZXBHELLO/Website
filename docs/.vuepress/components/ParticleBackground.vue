@@ -448,4 +448,17 @@ onUnmounted(() => {
   -webkit-touch-callout: none;
   -webkit-user-drag: none;
 }
+
+@media print {
+  .particle-canvas {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .particle-canvas {
+    display: none;
+  }
+}
+
 </style>
