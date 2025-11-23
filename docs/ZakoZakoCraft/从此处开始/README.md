@@ -35,6 +35,6 @@ createTime: 2025/11/08 12:00:00
 ## 更多信息
 
 ::: info 相关链接
-- [ZakoZakoCraft官网](https://doc.zakozako.top/ZakoZakoCraft/)
+- [ZakoZakoCraft官网](https://doc.zxbhello.top/ZakoZakoCraft/)
 - [QQ审核群](https://qm.qq.com/q/wGEB6fFybC)
 :::
