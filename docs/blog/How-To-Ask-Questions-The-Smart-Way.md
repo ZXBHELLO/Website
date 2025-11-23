@@ -14,7 +14,7 @@ copyright:
   author:
     name: How-To-Ask-Questions-The-Smart-Way
     url: https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md
-  statement: 转载/引用需保留模板设计者信息
+  statement: 转载/引用需保留原作者信息
 permalink: /blog/How-To-Ask-Questions-The-Smart-Way/
 createTime: 2025/11/08
 ---
