@@ -32,7 +32,7 @@ const blog = defineCollection({
   // 文档集合所在目录，相对于 `docs`
   dir: 'articles',
   // 文档标题，它将用于在页面的面包屑导航中显示
-  title: 'Blog',
+  title: 'article',
   // 文章列表页的链接，如果 `linkPrefix` 未定义，它也将作为 相关的文章的 permalink 的前缀
   link: '/article/',
   // 启用标签页
