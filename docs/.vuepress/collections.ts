@@ -30,21 +30,25 @@ const blog = defineCollection({
   // post 类型，这里用于实现 博客功能
   type: 'post',
   // 文档集合所在目录，相对于 `docs`
-  dir: 'blog',
+  dir: 'articles',
   // 文档标题，它将用于在页面的面包屑导航中显示
   title: 'Blog',
   // 文章列表页的链接，如果 `linkPrefix` 未定义，它也将作为 相关的文章的 permalink 的前缀
-  link: '/blog/',
+  link: '/article/',
   // 启用标签页
   tags: true,
   // 启用归档页
   archives: true,
   // 启用分类页
   categories: true,
-  //   linkPrefix: '/article/', // 相关文章的链接前缀
-  postList: true, // 是否启用文章列表页
-  postCover: 'right', // 文档封面位置
-  pagination: 15, // 每页显示文章数量
+  // 相关文章的链接前缀
+  linkPrefix: '/article/',
+  // 是否启用文章列表页
+  postList: true,
+  // 文档封面位置
+  postCover: 'right',
+  // 每页显示文章数量
+  pagination: 10,
 })
 
 const ZakoZakoCraft = defineCollection({
@@ -166,7 +170,7 @@ const MCMMO = defineCollection({
         '生产技能',
         '玩家指令'
       ],
-      collapsed:false
+      collapsed: false
     },
     {
       text: '服主指南',
@@ -177,7 +181,7 @@ const MCMMO = defineCollection({
         '高级配置',
         '管理指令'
       ],
-      collapsed:false
+      collapsed: false
     }
   ],
   // 根据文件结构自动生成侧边栏
@@ -208,7 +212,7 @@ const Carpet = defineCollection({
         '规则分类',
         '指令'
       ],
-      collapsed:false
+      collapsed: false
     },
     {
       text: '附属模组',
@@ -218,7 +222,7 @@ const Carpet = defineCollection({
         'Carpet TIS Addition',
         '其他常用附属'
       ],
-      collapsed:false
+      collapsed: false
     }
   ],
   // 根据文件结构自动生成侧边栏

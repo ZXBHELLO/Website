@@ -6,7 +6,7 @@ tags:
   - VuePress
   - 粒子效果
   - 前端开发
-permalink: /blog/particle-guide/
+permalink: /article/particle-guide/
 createTime: 2025/11/15
 ---
 

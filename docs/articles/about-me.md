@@ -2,7 +2,7 @@
 title: 关于我
 author: ZXBHELLO
 date: 2025-10-05T00:00:00.000Z
-permalink: /blog/about-me/
+permalink: /article/about-me/
 categories:
   - 个人介绍
 tags:

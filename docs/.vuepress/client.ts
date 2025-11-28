@@ -1,18 +1,21 @@
-import { defineClientConfig } from 'vuepress/client'
+import { defineClientConfig } from '@vuepress/client'
 import NavPage from './components/NavPage.vue'
 import HideFooter from './components/HideFooter.vue'
 import ParticleBackground from './components/ParticleBackground.vue'
 import AppSetup from './components/AppSetup.vue'
 import AsideNav from './components/AsideNav.vue'
+// @ts-ignore
 import { h } from 'vue'
-import { Layout } from 'vuepress-theme-plume/client'
-import PageContextMenu from 'vuepress-theme-plume/features/PageContextMenu.vue'
+// @ts-ignore
+import Layout from 'vuepress-theme-plume/lib/client/layouts/Layout.vue'
+// @ts-ignore
+import PageContextMenu from 'vuepress-theme-plume/lib/client/features/PageContextMenu.vue'
 
 import './custom.css'
 
 
 export default defineClientConfig({
-  enhance({ app }) {
+  enhance({ app }: { app: any }) {
     // 注册自定义导航页面组件
     app.component('NavPage', NavPage)
     // 注册隐藏页脚组件，用于在特定页面隐藏VuePress默认页脚

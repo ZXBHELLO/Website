@@ -6,7 +6,7 @@ tags:
   - VuePress
   - 导航页
   - 前端开发
-permalink: /blog/nav-guide/
+permalink: /article/nav-guide/
 createTime: 2025/11/08
 ---
 
