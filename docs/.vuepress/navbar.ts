@@ -7,6 +7,11 @@
 import { isCallChain } from 'typescript'
 import { defineNavbarConfig } from 'vuepress-theme-plume'
 
+/**
+ * 定义网站的导航栏配置
+ * 
+ * @returns 导航栏配置对象，包含网站的主要导航项
+ */
 export default defineNavbarConfig([
   { text: '主页', icon: 'line-md:home-md-twotone', link: '/' },
   { text: '导航', icon: 'line-md:compass-twotone', link: '/nav/' },
@@ -14,17 +19,18 @@ export default defineNavbarConfig([
     text: '博客',
     icon: 'line-md:text-box-multiple-twotone',
     items: [
-      { text: '文章', link: '/blog/' },
-      { text: '标签', link: '/blog/tags/' },
-      { text: '分类', link: '/blog/categories/' },
-      { text: '归档', link: '/blog/archives/' },
+      { text: '文章', link: '/article/' },
+      { text: '标签', link: '/article/tags/' },
+      { text: '分类', link: '/article/categories/' },
+      { text: '归档', link: '/article/archives/' },
     ]
   },
-  { 
+  {
     text: '更多',
     icon: 'line-md:plus-circle-twotone',
     items: [
-      { text: '关于站主', link: '/blog/about-me/', icon: 'material-symbols:emoji-people-rounded' },
+      { text: '关于站主', link: '/article/about-me/', icon: 'material-symbols:emoji-people-rounded' },
       { text: '友情链接', link: '/friends/', icon: 'carbon:friendship' },
-    ] },
+    ]
+  },
 ])

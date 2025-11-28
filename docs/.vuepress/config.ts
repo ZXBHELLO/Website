@@ -17,12 +17,12 @@ import { viteBundler } from '@vuepress/bundler-vite'
 export default defineUserConfig({
   base: '/',
   lang: 'zh-CN',
-  title: 'ZXBHELLO Pages',
-  description: 'ZXBHELLO的文档/博客/日记',
+  title: 'ZakoWeb',
+  description: '杂鱼文档/ZXBHELLO的博客与文章',
 
   head: [
     // 配置站点图标
-    ['link', { rel: 'icon', type: 'image/png', href: 'https://theme-plume.vuejs.press/favicon-32x32.png' }],
+    ['link', { rel: 'icon', type: 'image/png', href: '/image.png' }],
     // 添加 Iconify 支持
     ['script', { src: 'https://code.iconify.design/2/2.1.2/iconify.min.js', async: 'true' }]
   ],
@@ -36,7 +36,7 @@ export default defineUserConfig({
 
   theme: plumeTheme({
     /* 添加您的部署域名, 有助于 SEO, 生成 sitemap */
-    hostname: 'http://doc.zxbhello.top',
+    hostname: 'http://www.zakozako.cc',
 
     /* 文档仓库配置，用于 editLink */
     docsRepo: 'https://github.com/ZXBHELLO/Website',
@@ -114,12 +114,12 @@ export default defineUserConfig({
       youtube: true,      // 启用嵌入 youtube视频 语法 @[youtube](video_id)
       codepen: true,      // 启用嵌入 codepen 语法 @[codepen](user/slash)
       codeSandbox: true,  // 启用嵌入 codeSandbox 语法 @[codeSandbox](id)
-      icon: { 
+      icon: {
         provider: 'iconify'  // 启用内置图标语法  ::icon-name::
       },
       table: true,        // 启用表格增强容器语法 ::: table （支持表头分组等增强功能）
       demo: true,         // 启用 demo 容器  ::: demo （支持代码演示）
-      math: {             
+      math: {
         type: 'katex'     // 使用 KaTeX 渲染数学公式
       },
       chartjs: true,      // 启用 chart.js 图表支持
