@@ -1,39 +1,70 @@
 {
-  "name": "zxbhello-pages",
+  // 项目名称，用于标识该 npm 包的名称
+  "name": "zakozako-network",
+  // 指定模块系统类型为 ES Module
   "type": "module",
-  "version": "1.0.0",
-  "description": "ZXBHELLO的文档/博客/日记",
+  // 项目的版本号，遵循语义化版本控制规范
+  "version": "1.1.0",
+  // 项目的描述信息，简要说明该项目的用途
+  "description": "杂鱼文档/ZXBHELLO的博客与日记",
+  // 指定使用的包管理器及其版本
   "packageManager": "pnpm@10.15.1",
+  // 项目作者信息，包括姓名和邮箱
   "author": "ZXBHELLO <zxbhello@gmail.com>",
+  // 项目的许可证类型
   "license": "MIT",
+  // 脚本命令定义区域，可以通过 npm run 执行
   "scripts": {
+    // 构建文档站点的命令，使用 vuepress 进行构建，并清理缓存和临时文件
     "docs:build": "vuepress build docs --clean-cache --clean-temp",
+    // 启动开发服务器的命令，用于本地开发预览
     "docs:dev": "vuepress dev docs",
+    // 启动开发服务器并清理缓存和临时文件的命令
     "docs:dev-clean": "vuepress dev docs --clean-cache --clean-temp",
+    // 使用 http-server 预览已构建的文档
     "docs:preview": "http-server docs/.vuepress/dist",
+    // 更新 VuePress 相关依赖的命令
     "vp-update": "pnpm dlx vp-update"
   },
+  // 开发依赖项，仅在开发环境中使用
   "devDependencies": {
+    // VuePress 的 Vite 构建工具
     "@vuepress/bundler-vite": "2.0.0-rc.26",
+    // 简单的静态文件服务器，用于预览构建后的网站
     "http-server": "^14.1.1",
+    // TypeScript 编译器
     "typescript": "^5.9.3",
+    // Vue.js 框架
     "vue": "^3.5.24",
+    // VuePress 核心库
     "vuepress": "2.0.0-rc.26",
+    // VuePress 主题 plume
     "vuepress-theme-plume": "1.0.0-rc.178"
   },
+  // pnpm 特定配置选项
   "pnpm": {
+    // 指定仅需要构建的依赖项列表
     "onlyBuiltDependencies": [
+      // 文件监视器依赖
       "@parcel/watcher",
+      // JavaScript 打包工具
       "esbuild"
     ]
   },
+  // 指定运行该项目所需的 Node.js 版本
   "engines": {
+    // 支持 Node.js 版本：20.6.0 及以上或 22.0.0 及以上
     "node": "^20.6.0 || >=22.0.0"
   },
+  // 生产环境依赖项，在项目运行时需要
   "dependencies": {
+    // 图表库，用于创建美观的图表
     "chart.js": "^4.5.1",
+    // 百度开源的图表库
     "echarts": "^6.0.0",
+    // 流程图绘制库
     "flowchart.ts": "^3.0.1",
+    // 触摸滑动库，用于创建轮播图等组件
     "swiper": "^12.0.3"
   }
 }
