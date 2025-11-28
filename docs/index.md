@@ -16,7 +16,7 @@ config:
         offset: 36
     full: true
     hero:
-      name: ZXBHELLO
+      name: ZakoWeb
       text: 个人主页 & 技术文档 & 项目仓库
       actions:
         -
