@@ -4,6 +4,10 @@ import HideFooter from './components/HideFooter.vue'
 import ParticleBackground from './components/ParticleBackground.vue'
 import AppSetup from './components/AppSetup.vue'
 import AsideNav from './components/AsideNav.vue'
+// 新增的页面加载组件
+import PageLoading from './components/PageLoading.vue'
+// 新增的外部链接警告组件
+import ExternalLinkWarning from './components/ExternalLinkWarning.vue'
 // @ts-ignore
 import { h } from 'vue'
 // @ts-ignore
@@ -22,6 +26,10 @@ export default defineClientConfig({
     app.component('ParticleBackground', ParticleBackground)
     // 注册侧边导航组件
     app.component('AsideNav', AsideNav)
+    // 注册页面加载组件
+    app.component('PageLoading', PageLoading)
+    // 注册外部链接警告组件
+    app.component('ExternalLinkWarning', ExternalLinkWarning)
   },
 
   setup() {
@@ -37,5 +45,5 @@ export default defineClientConfig({
     },
   },
 
-  rootComponents: [AppSetup],
+  rootComponents: [AppSetup, PageLoading, ExternalLinkWarning],
 })
