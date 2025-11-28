@@ -18,12 +18,11 @@ config:
     hero:
       name: ZXBHELLO
       text: 个人主页 & 技术文档 & 项目仓库
-      image: /plume.svg
       actions:
         -
           theme: alt
           text: 个人页
-          link: /blog/about-me/
+          link: /article/about-me/
         -
           theme: brand
           text: 导航页
