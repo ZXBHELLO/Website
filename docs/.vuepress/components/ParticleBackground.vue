@@ -48,15 +48,13 @@ class ParticleEffect {
 
   // 粒子系统配置参数
   config = {
-    baseDensity: 35,          // 基础粒子密度
-    maxParticles: 150,        // 最大粒子数量
-    particleSpeed: 0.4,       // 粒子移动速度
-    lineMaxDistance: 120,     // 粒子间连线的最大距离
-    lineOpacity: 0.4,         // 连线透明度
-    mouseRadius: 180,         // 鼠标影响半径
-    maxConnections: 4,        // 单个粒子最多连接数
-    mobileBaseDensity: 50,    // 移动端粒子密度（更高密度 = 更多粒子）
-    mobileMaxParticles: 200,  // 移动端最大粒子数量
+    baseDensity: 45,          // 基础粒子密度
+    maxParticles: 100,        // 最大粒子数量
+    particleSpeed: 0.3,       // 粒子移动速度
+    lineMaxDistance: 100,     // 粒子间连线的最大距离
+    lineOpacity: 0.3,         // 连线透明度
+    mouseRadius: 150,         // 鼠标影响半径
+    maxConnections: 3,        // 单个粒子最多连接数
   }
 
   // 粒子颜色数组
@@ -128,6 +126,13 @@ class ParticleEffect {
     this.canvas.width = window.innerWidth
     this.canvas.height = window.innerHeight
     this.createParticles(true)
+    
+    // 如果是移动设备，隐藏canvas
+    if (window.innerWidth < 768) {
+      this.canvas.style.display = 'none'
+    } else {
+      this.canvas.style.display = 'block'
+    }
   }
 
   /**
@@ -138,10 +143,16 @@ class ParticleEffect {
     if (reset) this.particles = []
 
     const isMobile = window.innerWidth < 768
+    
+    // 在移动设备上完全禁用粒子效果
+    if (isMobile) {
+      this.particles = []
+      return
+    }
 
     // 根据窗口宽度和设备类型计算粒子数量
-    let baseDensity = isMobile ? this.config.mobileBaseDensity : this.config.baseDensity
-    let maxParticles = isMobile ? this.config.mobileMaxParticles : this.config.maxParticles
+    let baseDensity = this.config.baseDensity
+    let maxParticles = this.config.maxParticles
 
     let particleCount = Math.floor(window.innerWidth / baseDensity)
     particleCount = Math.min(particleCount, maxParticles)
@@ -235,6 +246,9 @@ class ParticleEffect {
       // 连接附近的粒子
       let connections = 0
       for (let j = i + 1; j < this.particles.length; j++) {
+        // 优化：提前检查是否已达到最大连接数
+        if (connections >= this.config.maxConnections) break;
+        
         const distance = this.getDistance(
           this.particles[i].x,
           this.particles[i].y,
@@ -243,7 +257,7 @@ class ParticleEffect {
         )
 
         // 如果距离小于阈值且未达到最大连接数，则绘制连线
-        if (distance < this.config.lineMaxDistance && connections < this.config.maxConnections) {
+        if (distance < this.config.lineMaxDistance) {
           this.drawLine(
             this.particles[i].x,
             this.particles[i].y,
@@ -273,8 +287,10 @@ class ParticleEffect {
       }
     }
 
-    // 请求下一帧动画
-    this.animationFrame = requestAnimationFrame(this.animate)
+    // 使用节流优化动画性能
+    if (this.isRunning) {
+      this.animationFrame = requestAnimationFrame(this.animate)
+    }
   }
 
   /**
@@ -450,12 +466,6 @@ onUnmounted(() => {
 }
 
 @media print {
-  .particle-canvas {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
   .particle-canvas {
     display: none;
   }

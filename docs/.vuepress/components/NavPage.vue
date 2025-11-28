@@ -5,7 +5,7 @@
       <div class="m-nav-links">
         <a 
           v-for="item in group.items" 
-          :key="item.id"
+          :key="item.id || item.title"
           :href="item.url" 
           class="m-nav-link" 
           target="_blank" 
@@ -28,11 +28,14 @@
               :src="item.icon" 
               :alt="item.title" 
               loading="lazy" 
+              :onload="onImageLoad"
+              :onerror="onImageError"
+              :class="{ loaded: imageCache.has(item.icon) }"
             />
           </div>
           <div class="m-nav-link-content">
             <div class="m-nav-link-title">{{ item.title }}</div>
-            <div class="m-nav-link-desc">{{ item.description }}</div>
+            <div class="m-nav-link-desc">{{ item.description || '' }}</div>
           </div>
         </a>
       </div>
@@ -41,7 +44,56 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
 import { navData } from '../../nav/data.js'
+
+const imageCache = ref(new Set())
+
+const onImageLoad = (event) => {
+  const src = event.target.src
+  imageCache.value.add(src)
+  // 添加loaded类以触发动画
+  event.target.classList.add('loaded')
+}
+
+const onImageError = (event) => {
+  // 图片加载失败时隐藏它
+  event.target.style.display = 'none'
+}
+
+// 对于Iconify图标，我们添加一个处理函数
+onMounted(() => {
+  // 如果页面中有Iconify图标，尝试加载Iconify脚本
+  const hasIconifyIcons = document.querySelector('.iconify')
+  if (hasIconifyIcons && !window.Iconify) {
+    const script = document.createElement('script')
+    script.src = 'https://code.iconify.design/2/2.1.2/iconify.min.js'
+    script.async = true
+    script.onload = () => {
+      // 当Iconify加载完成后，渲染图标
+      if (window.Iconify) {
+        window.Iconify.scan()
+        // 为所有已渲染的图标添加loaded类
+        setTimeout(() => {
+          const icons = document.querySelectorAll('.iconify')
+          icons.forEach(icon => {
+            icon.classList.add('loaded')
+          })
+        }, 100)
+      }
+    }
+    document.head.appendChild(script)
+  } else if (hasIconifyIcons && window.Iconify) {
+    // 如果Iconify已经存在，直接渲染图标
+    window.Iconify.scan()
+    setTimeout(() => {
+      const icons = document.querySelectorAll('.iconify')
+      icons.forEach(icon => {
+        icon.classList.add('loaded')
+      })
+    }, 100)
+  }
+})
 </script>
 
 <style>
@@ -188,6 +240,17 @@ import { navData } from '../../nav/data.js'
   max-height: 32px;
   object-fit: contain;
   object-position: center;
+  /* 添加过渡效果使图片加载更平滑 */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.m-nav-link-icon img:not([src]) {
+  visibility: hidden;
+}
+
+.m-nav-link-icon img.loaded {
+  opacity: 1;
 }
 
 /* 添加 Iconify 图标支持 */
@@ -198,6 +261,13 @@ import { navData } from '../../nav/data.js'
   display: inline-block;
   max-width: 32px;
   max-height: 32px;
+  /* 添加过渡效果使图标加载更平滑 */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.m-nav-link-icon .iconify.loaded {
+  opacity: 1;
 }
 
 /* 确保所有文本元素都没有下划线 */

@@ -33,7 +33,7 @@ export const navData = [
         id: 'nav-doc',
         title: '使用同款导航页',
         description: '为你的Vuepress站点添加导航',
-        url: '/blog/nav-guide/',
+        url: '/article/nav-guide/',
         iconType: 'iconify',
         icon: 'material-symbols:article-outline',
         showIconBorder: true,
@@ -42,7 +42,7 @@ export const navData = [
         id: 'particle-effect',
         title: '动态粒子背景效果',
         description: '为站点添加炫彩粒子动画背景',
-        url: '/blog/particle-guide/',
+        url: '/article/particle-guide/',
         iconType: 'iconify',
         icon: 'geo:turf-concave',
         showIconBorder: true,
@@ -1669,7 +1669,7 @@ export const navData = [
       },
     ]
   },
-    {
+  {
     category: '导航示例',
     items: [
       {
