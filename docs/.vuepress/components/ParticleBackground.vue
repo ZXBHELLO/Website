@@ -45,22 +45,24 @@ class ParticleEffect {
   private resizeHandler: (() => void) | null = null      // 窗口大小变化处理函数
   private mouseMoveHandler: ((e: MouseEvent) => void) | null = null  // 鼠标移动处理函数
   private mouseOutHandler: (() => void) | null = null    // 鼠标离开窗口处理函数
+  private mediaQueryListener: ((e: MediaQueryListEvent) => void) | null = null // 媒体查询监听器
 
   // 粒子系统配置参数
   config = {
-    baseDensity: 45,          // 基础粒子密度
-    maxParticles: 100,        // 最大粒子数量
-    particleSpeed: 0.3,       // 粒子移动速度
-    lineMaxDistance: 100,     // 粒子间连线的最大距离
-    lineOpacity: 0.3,         // 连线透明度
-    mouseRadius: 150,         // 鼠标影响半径
-    maxConnections: 3,        // 单个粒子最多连接数
+    baseDensity: 80,          // 基础粒子密度
+    maxParticles: 200,        // 最大粒子数量
+    particleSpeed: 1,       // 粒子移动速度
+    lineMaxDistance: 0,     // 粒子间连线的最大距离
+    lineOpacity: 0.2,         // 连线透明度
+    mouseRadius: 0,         // 鼠标影响半径
+    maxConnections: 5,        // 单个粒子最多连接数
   }
 
   // 粒子颜色数组
   colors = ['#4CAF50', '#2196F3', '#E91E63', '#FFC107']
   // 连线颜色
   lineColor = '#CCCCCC'
+  lineRgbaColor = 'rgba(204, 204, 204, 0.6)'
   // 背景填充样式
   bgFillStyle = 'rgba(255, 255, 255, 0.02)'
 
@@ -71,7 +73,11 @@ class ParticleEffect {
    */
   constructor(canvas: HTMLCanvasElement, isDark = false) {
     this.canvas = canvas
-    this.ctx = canvas.getContext('2d')!
+    const ctx = canvas.getContext('2d')
+    if (!ctx) {
+      throw new Error('Failed to get canvas context')
+    }
+    this.ctx = ctx
     this.isDark = isDark
     this.updateThemeColors()
     this.init()
@@ -83,9 +89,11 @@ class ParticleEffect {
   updateThemeColors() {
     if (this.isDark) {
       this.lineColor = '#2F4F4F'
+      this.lineRgbaColor = 'rgba(47, 79, 79, 0.6)'
       this.bgFillStyle = 'rgba(0, 0, 0, 0.08)'
     } else {
-      this.lineColor = '#C0C0C0'
+      this.lineColor = '#FCFCFC'
+      this.lineRgbaColor = 'rgba(100, 100, 100, 0.6)'
       this.bgFillStyle = 'rgba(255, 255, 255, 0.02)'
     }
   }
@@ -120,6 +128,21 @@ class ParticleEffect {
   }
 
   /**
+   * 解绑事件监听器
+   */
+  unbindEvents() {
+    if (this.resizeHandler) {
+      window.removeEventListener('resize', this.resizeHandler)
+    }
+    if (this.mouseMoveHandler) {
+      window.removeEventListener('mousemove', this.mouseMoveHandler)
+    }
+    if (this.mouseOutHandler) {
+      window.removeEventListener('mouseout', this.mouseOutHandler)
+    }
+  }
+
+  /**
    * 调整canvas大小以适应窗口
    */
   resizeCanvas() {
@@ -140,8 +163,6 @@ class ParticleEffect {
    * @param reset 是否重置粒子数组
    */
   createParticles(reset = false) {
-    if (reset) this.particles = []
-
     const isMobile = window.innerWidth < 768
     
     // 在移动设备上完全禁用粒子效果
@@ -149,6 +170,8 @@ class ParticleEffect {
       this.particles = []
       return
     }
+
+    if (reset) this.particles = []
 
     // 根据窗口宽度和设备类型计算粒子数量
     let baseDensity = this.config.baseDensity
@@ -164,7 +187,7 @@ class ParticleEffect {
         y: Math.random() * this.canvas.height,
         vx: (Math.random() - 0.5) * this.config.particleSpeed,
         vy: (Math.random() - 0.5) * this.config.particleSpeed,
-        radius: Math.random() * 1.5 + 1,
+        radius: Math.random() * 3 + 2,
         color: this.colors[Math.floor(Math.random() * this.colors.length)],
       })
     }
@@ -203,12 +226,7 @@ class ParticleEffect {
    * @param y2 终点y坐标
    */
   drawLine(x1: number, y1: number, x2: number, y2: number) {
-    // 将十六进制颜色转换为 RGB
-    const hex = this.lineColor.replace('#', '')
-    const r = parseInt(hex.substring(0, 2), 16)
-    const g = parseInt(hex.substring(2, 4), 16)
-    const b = parseInt(hex.substring(4, 6), 16)
-    this.ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, 0.6)`
+    this.ctx.strokeStyle = this.lineRgbaColor
     this.ctx.lineWidth = 1.2
     this.ctx.beginPath()
     this.ctx.moveTo(x1, y1)
@@ -303,15 +321,7 @@ class ParticleEffect {
     }
 
     // 移除事件监听器
-    if (this.resizeHandler) {
-      window.removeEventListener('resize', this.resizeHandler)
-    }
-    if (this.mouseMoveHandler) {
-      window.removeEventListener('mousemove', this.mouseMoveHandler)
-    }
-    if (this.mouseOutHandler) {
-      window.removeEventListener('mouseout', this.mouseOutHandler)
-    }
+    this.unbindEvents()
   }
 }
 
@@ -362,8 +372,11 @@ const observeThemeChange = () => {
  * @param e MediaQueryListEvent事件对象
  */
 const handleMediaQueryChange = (e: MediaQueryListEvent) => {
-  if (e.matches !== isDarkMode.value && shouldShowParticles.value) {
-    initParticles()
+  if (shouldShowParticles.value) {
+    const newDarkMode = e.matches
+    if (newDarkMode !== isDarkMode.value) {
+      initParticles()
+    }
   }
 }
 
@@ -470,5 +483,4 @@ onUnmounted(() => {
     display: none;
   }
 }
-
 </style>
