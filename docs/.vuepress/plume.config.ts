@@ -9,7 +9,7 @@
  *
  * 特别的，请不要在两个配置文件中重复配置相同的项，当前文件的配置项会覆盖 `.vuepress/config.ts` 文件中的配置
  */
-
+// @ts-ignore
 import { defineThemeConfig } from 'vuepress-theme-plume'
 import navbar from './navbar'
 import collections from './collections'
@@ -44,8 +44,16 @@ export default defineThemeConfig({
 
   /* 站点页脚 */
   footer: {
-    message: '希望有朝一日能够成为人类...',
-    copyright: 'Copyright © 2024 ZXBHELLO',
+    message: '<div style="display:flex;justify-content:center;align-items:center;height:24px;">' +
+      '<span>希望有朝一日能够成为人类...</span>' +
+      '<span style="margin:0 10px">|</span>' +
+      '<a href="https://github.com/ZXBHELLO" target="_blank" style="color:var(--vp-c-brand);text-decoration:none;">GitHub</a>' +
+      '<span style="margin:0 10px">|</span>' +
+      '<a href="https://space.bilibili.com/1917782316" target="_blank" style="color:var(--vp-c-brand);text-decoration:none;">哔哩哔哩</a>' +
+      '</div>',
+    copyright: 'Copyright © 2024 ZXBHELLO | ' +
+      '本站由 <a href="https://vuepress.vuejs.org/" target="_blank" style="color:var(--vp-c-brand);text-decoration:none;">VuePress</a> ' +
+      '和 <a href="https://theme-plume.vuejs.press/" target="_blank" style="color:var(--vp-c-brand);text-decoration:none;">Plume</a> 强力驱动',
   },
 
   /**

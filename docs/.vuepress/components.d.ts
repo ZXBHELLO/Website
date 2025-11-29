@@ -20,5 +20,6 @@ declare module 'vue' {
     ParticleBackground: typeof import('./components/ParticleBackground.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ThemeTransition: typeof import('./components/ThemeTransition.vue')['default']
   }
 }

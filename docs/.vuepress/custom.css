@@ -54,3 +54,9 @@ html {
   font-weight: 350;
   font-variant-ligatures: normal;
 }
+
+/* --- 页脚透明背景 --- */
+.vp-footer {
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+}
