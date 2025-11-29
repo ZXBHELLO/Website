@@ -11,8 +11,15 @@
 
 
 import { defineUserConfig } from 'vuepress'
+// @ts-ignore
 import { plumeTheme } from 'vuepress-theme-plume'
 import { viteBundler } from '@vuepress/bundler-vite'
+// 引入 Element Plus 核心和样式
+import ElementPlus from 'element-plus'
+// 按需引入插件
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineUserConfig({
   base: '/',
@@ -25,6 +32,8 @@ export default defineUserConfig({
     ['link', { rel: 'icon', type: 'image/png', href: '/image.png' }],
     // 添加 Iconify 支持
     ['script', { src: 'https://code.iconify.design/2/2.1.2/iconify.min.js', async: true }],
+    // 引入 Element Plus 样式
+    ['link', { rel: 'stylesheet', href: 'https://unpkg.com/element-plus/dist/index.css' }]
 
   ],
 
@@ -32,10 +41,34 @@ export default defineUserConfig({
   port: 3000, // 默认端口为 8080，此处更改为 3000 以避免与本地其他服务（如前端开发服务器）冲突，便于维护
   host: '0.0.0.0',
 
-  bundler: viteBundler(),
+  bundler: viteBundler({
+    viteOptions: {
+      plugins: [
+        AutoImport({
+          // 自动导入 Element Plus 的 API（如 ElMessage、ElMessageBox）
+          resolvers: [ElementPlusResolver()],
+          // 生成类型声明文件（TS 项目必需，避免语法报错）
+          dts: '.vuepress/auto-imports.d.ts',
+          // 自动导入 Vue 核心 API（如 ref、watch，无需手动 import）
+          imports: ['vue'],
+        }),
+        Components({
+          // 自动导入 Element Plus 的组件（如 ElButton、ElTable）
+          resolvers: [ElementPlusResolver()],
+          // 生成组件声明文件
+          dts: '.vuepress/components.d.ts',
+          // 扫描自定义组件目录（Plume 自动注册该目录下的组件）
+          dirs: ['.vuepress/components'],
+          // 允许在 MD 文件中直接使用组件
+          extensions: ['vue'],
+        })
+      ]
+    }
+  }),
   shouldPrefetch: false, // 站点较大，页面数量较多时，不建议启用
 
   theme: plumeTheme({
+    // @ts-ignore
     /* 添加您的部署域名, 有助于 SEO, 生成 sitemap */
     hostname: 'https://www.zakozako.cc',
 
@@ -201,4 +234,9 @@ export default defineUserConfig({
      */
     llmstxt: true,
   }),
+  // @ts-ignore
+  enhance: ({ app }) => {
+    // 全局注册 Element Plus，让 MD 中可直接使用
+    app.use(ElementPlus)
+  },
 })

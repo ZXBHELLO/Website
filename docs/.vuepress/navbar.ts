@@ -4,7 +4,8 @@
  * Navbar 配置文件，它在 `.vuepress/plume.config.ts` 中被导入。
  */
 
-import { isCallChain } from 'typescript'
+
+// @ts-ignore
 import { defineNavbarConfig } from 'vuepress-theme-plume'
 
 /**
