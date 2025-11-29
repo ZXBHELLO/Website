@@ -30,7 +30,7 @@ export default defineUserConfig({
 
   // 开发服务器配置
   port: 3000, // 更改端口以避免冲突
-  host: '0.0.0.0',
+  host: '127.0.0.1',
 
   bundler: viteBundler(),
   shouldPrefetch: false, // 站点较大，页面数量较多时，不建议启用
