@@ -12,6 +12,9 @@ import ExternalLinkWarning from './components/ExternalLinkWarning.vue'
 import { h } from 'vue'
 // @ts-ignore
 import { Layout } from 'vuepress-theme-plume/client'
+// 引入 Element Plus
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 
 import './custom.css'
 
@@ -30,6 +33,8 @@ export default defineClientConfig({
     app.component('PageLoading', PageLoading)
     // 注册外部链接警告组件
     app.component('ExternalLinkWarning', ExternalLinkWarning)
+    // 注册 Element Plus
+    app.use(ElementPlus)
   },
 
   setup() {

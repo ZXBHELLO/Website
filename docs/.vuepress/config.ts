@@ -14,8 +14,6 @@ import { defineUserConfig } from 'vuepress'
 // @ts-ignore
 import { plumeTheme } from 'vuepress-theme-plume'
 import { viteBundler } from '@vuepress/bundler-vite'
-// 引入 Element Plus 核心和样式
-import ElementPlus from 'element-plus'
 // 按需引入插件
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -31,10 +29,7 @@ export default defineUserConfig({
     // 配置站点图标
     ['link', { rel: 'icon', type: 'image/png', href: '/image.png' }],
     // 添加 Iconify 支持
-    ['script', { src: 'https://code.iconify.design/2/2.1.2/iconify.min.js', async: true }],
-    // 引入 Element Plus 样式
-    ['link', { rel: 'stylesheet', href: 'https://unpkg.com/element-plus/dist/index.css' }]
-
+    ['script', { src: 'https://code.iconify.design/2/2.1.2/iconify.min.js', async: true }]
   ],
 
   // 开发服务器配置
@@ -54,7 +49,9 @@ export default defineUserConfig({
         }),
         Components({
           // 自动导入 Element Plus 的组件（如 ElButton、ElTable）
-          resolvers: [ElementPlusResolver()],
+          resolvers: [ElementPlusResolver({
+            importStyle: 'css'
+          })],
           // 生成组件声明文件
           dts: '.vuepress/components.d.ts',
           // 扫描自定义组件目录（Plume 自动注册该目录下的组件）
@@ -234,9 +231,4 @@ export default defineUserConfig({
      */
     llmstxt: true,
   }),
-  // @ts-ignore
-  enhance: ({ app }) => {
-    // 全局注册 Element Plus，让 MD 中可直接使用
-    app.use(ElementPlus)
-  },
 })

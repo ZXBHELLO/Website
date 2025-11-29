@@ -7,7 +7,7 @@ permalink: /ZakoZakoCraft/
 externalLinkIcon: true
 config:
   - type: hero
-    full: true
+    full: false
     backgroundImage: /
     hero:
       name: ZakoZakoCraft
@@ -24,27 +24,6 @@ config:
           link: /ZakoZakoCraft/terms/
   - type: custom
 ---
-
-<Swiper mode="carousel"
-  :height="200"
-  :slides-per-view="3"
-  :space-between="20"
-  :speed="5500"
-  :items="[
-  '/assets/ZakoZakoCraft/ExchangeImage/1.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/2.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/3.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/4.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/5.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/6.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/7.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/8.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/9.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/a.png',  
-  '/assets/ZakoZakoCraft/ExchangeImage/b.png',
-  '/assets/ZakoZakoCraft/ExchangeImage/c.png',
-]" effect="cards" />
-
 :::: demo-wrapper
 # 服务器介绍
 
@@ -60,6 +39,58 @@ config:
   JAVA 版（离线/正版）1.19–1.21.10
   手机(FCL/HMCL-PE)电脑(PCL/HMCL)都能玩~！
 ::::
+
+<CardGrid>
+  <Card> 
+    <Swiper :items="[
+      '/assets/ZakoZakoCraft/ExchangeImage/7.png',
+      '/assets/ZakoZakoCraft/ExchangeImage/8.png',
+      '/assets/ZakoZakoCraft/ExchangeImage/9.png',
+      '/assets/ZakoZakoCraft/ExchangeImage/a.png',  
+      '/assets/ZakoZakoCraft/ExchangeImage/b.png',
+      '/assets/ZakoZakoCraft/ExchangeImage/c.png',
+    ]"
+    effect="fade"
+    swipe="true"
+    pauseOnMouseEnter="true"
+    style="aspect-ratio: 16/9; width: 100%;"
+    />
+  </Card>
+  <Card> 
+    <Swiper :items="[
+      '/assets/ZakoZakoCraft/ExchangeImage/1.png',
+      '/assets/ZakoZakoCraft/ExchangeImage/2.png',
+      '/assets/ZakoZakoCraft/ExchangeImage/3.png',
+      '/assets/ZakoZakoCraft/ExchangeImage/4.png',
+      '/assets/ZakoZakoCraft/ExchangeImage/5.png',
+      '/assets/ZakoZakoCraft/ExchangeImage/6.png',
+    ]"
+    effect="fade"
+    swipe="true"
+    pauseOnMouseEnter="true"
+    style="aspect-ratio: 16/9; width: 100%;"
+    />
+  </Card> 
+</CardGrid>
+
+<style scoped>
+:deep(.swiper) {
+  aspect-ratio: 16/9;
+  width: 100%;
+  height: unset !important;
+}
+
+:deep(.swiper-slide) img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>
+
+<script setup>
+  import Swiper from 'vuepress-theme-plume/features/Swiper.vue'
+</script>
+
 
 <center>
   <h1>服务器特色</h1>
@@ -111,7 +142,3 @@ config:
 <center>
 《我的世界》和《Minecraft》是微软公司和 Mojang Synergies AB 的商标<br/>本站点及服务器与微软公司没有从属关系
 </center>
-
-<script setup>
-import Swiper from 'vuepress-theme-plume/features/Swiper.vue'
-</script>
