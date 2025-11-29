@@ -31,6 +31,7 @@ export default defineNavbarConfig([
     items: [
       { text: '关于站主', link: '/article/about-me/', icon: 'material-symbols:emoji-people-rounded' },
       { text: '友情链接', link: '/friends/', icon: 'carbon:friendship' },
+      { text: '留言板', link: '/comment/', icon: 'line-md:chat' },
     ]
   },
 ])
