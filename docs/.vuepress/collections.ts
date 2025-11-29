@@ -32,7 +32,7 @@ const blog = defineCollection({
   // 文档集合所在目录，相对于 `docs`
   dir: 'articles',
   // 文档标题，它将用于在页面的面包屑导航中显示
-  title: 'article',
+  title: '博客',
   // 文章列表页的链接，如果 `linkPrefix` 未定义，它也将作为 相关的文章的 permalink 的前缀
   link: '/article/',
   // 启用标签页
@@ -73,7 +73,6 @@ const ZakoZakoCraft = defineCollection({
         '加入服务器',
         '服务器规则',
         '常见问题',
-        '名人堂',
         '封神榜'
       ]
     },
@@ -231,16 +230,10 @@ const Carpet = defineCollection({
   sidebarCollapsed: false, // 侧边栏默认展开
 })
 
-/**
- * 导出所有的 collections
- * (blog 为博客示例，如果不需要博客功能，请删除)
- * (demoDoc 为参考示例，如果不需要它，请删除)
- */
-
 
 export default defineCollections([
-  blog,
   ZakoZakoCraft,
   MCMMO,
   Carpet,
+  blog,
 ])

@@ -24,7 +24,8 @@ export default defineUserConfig({
     // 配置站点图标
     ['link', { rel: 'icon', type: 'image/png', href: '/image.png' }],
     // 添加 Iconify 支持
-    ['script', { src: 'https://code.iconify.design/2/2.1.2/iconify.min.js', async: 'true' }]
+    ['script', { src: 'https://code.iconify.design/2/2.1.2/iconify.min.js', async: true }],
+
   ],
 
   // 开发服务器配置
@@ -37,6 +38,22 @@ export default defineUserConfig({
   theme: plumeTheme({
     /* 添加您的部署域名, 有助于 SEO, 生成 sitemap */
     hostname: 'http://www.zakozako.cc',
+
+    /**
+     * SEO 增强
+     * @see https://theme-plume.vuejs.press/guide/seo/
+     */
+    seo: true,
+
+    /**
+     * Sitemap 配置
+     * @see https://theme-plume.vuejs.press/guide/seo/#sitemap
+     */
+    sitemap: {
+      changefreq: 'daily',
+      priority: 0.8,
+      filename: 'sitemap.xml',
+    },
 
     /* 文档仓库配置，用于 editLink */
     docsRepo: 'https://github.com/ZXBHELLO/Website',
@@ -158,15 +175,27 @@ export default defineUserConfig({
      * @see https://theme-plume.vuejs.press/guide/features/comments/
      */
     comment: {
-      provider: 'Giscus', // "Artalk" | "Giscus" | "Twikoo" | "Waline"
+      provider: 'Waline', // "Artalk" | "Giscus" | "Twikoo" | "Waline"
       comment: true,
-      repo: 'ZXBHELLO/Website',
-      repoId: 'R_kgDOP8QvZw',
-      category: 'General',
-      categoryId: 'DIC_kwDOP8QvZ84CwQHv',
-      mapping: 'url',
-      reactionsEnabled: true,
-      inputPosition: 'top',
+      // Waline 配置
+      serverURL: 'https://waline.zakozako.cc',
+      locales: {
+        'zh-CN': {
+          placeholder: '欢迎留言分享你的想法...'
+        }
+      },
+      emoji: [
+        '//unpkg.com/@waline/emojis@1.1.0/weibo',
+        '//unpkg.com/@waline/emojis@1.1.0/alus',
+        '//unpkg.com/@waline/emojis@1.1.0/bilibili',
+        '//unpkg.com/@waline/emojis@1.1.0/qq',
+        '//unpkg.com/@waline/emojis@1.1.0/tieba',
+        '//unpkg.com/@waline/emojis@1.1.0/tw-emoji'
+      ],
+      meta: ['nick', 'mail', 'link'],
+      requiredMeta: ['nick'],
+      wordLimit: 0,
+      pageSize: 10,
     },
 
     /**
@@ -186,5 +215,5 @@ export default defineUserConfig({
      * @see https://theme-plume.vuejs.press/config/plugins/llmstxt/
      */
     llmstxt: true,
-  }),
+  } as any),
 })
