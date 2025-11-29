@@ -8,6 +8,8 @@
 :root {
   --vp-font-family-base: "LXGW WenKai", sans-serif;
   --vp-font-family-mono: "Cascadia Code", monospace;
+  /* 调整侧边栏宽度 */
+  --vp-sidebar-width: 15rem;
   font-optical-sizing: auto;
 }
 
@@ -59,4 +61,28 @@ html {
 .vp-footer {
   background-color: transparent !important;
   backdrop-filter: none !important;
+}
+
+/* --- 网格背景 --- */
+/*
+ * 为文档容器添加网格背景效果
+ * 使用 CSS 渐变创建交叉网格图案作为页面背景
+ */
+.vp-doc-container {
+  /* 定义网格背景颜色变量，默认为灰色半透明 */
+  --vp-doc-grid-bg: rgba(64, 64, 64, 0.1);
+
+  /* 创建水平和垂直方向的线性渐变形成网格效果 */
+  background-image:
+    linear-gradient(90deg, var(--vp-doc-grid-bg) 2%, transparent 0),
+    linear-gradient(1turn, var(--vp-doc-grid-bg) 2%, transparent 0);
+  background-position: 50%;
+  background-size: 22px 22px;
+  /* 设置网格大小与字体同高 */
+}
+
+/* 深色主题下的网格背景样式 */
+[data-theme="dark"] .vp-doc-container {
+  /* 在深色模式下调整网格背景颜色，提高可见性 */
+  --vp-doc-grid-bg: rgba(128, 128, 128, 0.1);
 }
