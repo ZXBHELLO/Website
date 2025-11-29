@@ -24,18 +24,31 @@ const loading = ref(true)
 const site = useSiteLocaleData()
 
 // 获取站点标题
-const siteTitle = site.value.title
+import { computed } from 'vue'
+
+// siteTitle 用于显示站点标题，若未设置则默认显示 'ZakoWeb'
+const siteTitle = computed(() => site.value.title)
 
 let timeoutId: number | null = null
 let minTimeoutId: number | null = null
-
 // 最小加载时间（毫秒）
+const MAX_LOADING_TIME = 800
 const MIN_LOADING_TIME = 800
 
+let loaded = false
+
+// 监听页面加载完成事件
+const handleLoad = () => {
+  loaded = true
+  // 如果已经达到最小加载时间，则隐藏加载动画
+  if (minTimeoutId === null) {
+    if (timeoutId) clearTimeout(timeoutId)
+    loading.value = false
+  }
+}
+
 onMounted(() => {
-  let loaded = false
-  
-  // 设置最小加载时间，确保加载动画至少显示一段时间
+  // 设置最小加载时间
   minTimeoutId = window.setTimeout(() => {
     if (loaded) {
       loading.value = false
@@ -48,29 +61,18 @@ onMounted(() => {
     loading.value = false
   }, 3000)
   
-  // 监听页面加载完成事件
-  const handleLoad = () => {
-    loaded = true
-    // 如果已经达到最小加载时间，则隐藏加载动画
-    if (minTimeoutId === null) {
-      if (timeoutId) clearTimeout(timeoutId)
-      loading.value = false
-    }
-  }
-  
   // 如果页面已经加载完成，则直接隐藏加载动画
   if (document.readyState === 'complete') {
     handleLoad()
   } else {
     window.addEventListener('load', handleLoad)
   }
-  
-  // 组件销毁时清理事件监听器
-  onUnmounted(() => {
-    window.removeEventListener('load', handleLoad)
-    if (timeoutId) clearTimeout(timeoutId)
-    if (minTimeoutId) clearTimeout(minTimeoutId)
-  })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('load', handleLoad)
+  if (timeoutId !== null) clearTimeout(timeoutId)
+  if (minTimeoutId !== null) clearTimeout(minTimeoutId)
 })
 </script>
 
@@ -115,6 +117,7 @@ onMounted(() => {
   border-radius: 50%;
   background: var(--vp-c-brand);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* 使用 var(--delay) 变量为每个点设置动画延迟，实现依次弹跳效果 */
   animation: bounce 1.5s var(--delay) infinite cubic-bezier(0.28, 0.84, 0.42, 1);
   transform: translateY(0);
 }

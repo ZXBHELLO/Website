@@ -29,31 +29,16 @@ export default defineUserConfig({
   ],
 
   // 开发服务器配置
-  port: 3000, // 更改端口以避免冲突
-  host: '127.0.0.1',
+  port: 3000, // 默认端口为 8080，此处更改为 3000 以避免与本地其他服务（如前端开发服务器）冲突，便于维护
+  host: '0.0.0.0',
 
   bundler: viteBundler(),
   shouldPrefetch: false, // 站点较大，页面数量较多时，不建议启用
 
   theme: plumeTheme({
     /* 添加您的部署域名, 有助于 SEO, 生成 sitemap */
-    hostname: 'http://www.zakozako.cc',
+    hostname: 'https://www.zakozako.cc',
 
-    /**
-     * SEO 增强
-     * @see https://theme-plume.vuejs.press/guide/seo/
-     */
-    seo: true,
-
-    /**
-     * Sitemap 配置
-     * @see https://theme-plume.vuejs.press/guide/seo/#sitemap
-     */
-    sitemap: {
-      changefreq: 'daily',
-      priority: 0.8,
-      filename: 'sitemap.xml',
-    },
 
     /* 文档仓库配置，用于 editLink */
     docsRepo: 'https://github.com/ZXBHELLO/Website',
@@ -215,5 +200,5 @@ export default defineUserConfig({
      * @see https://theme-plume.vuejs.press/config/plugins/llmstxt/
      */
     llmstxt: true,
-  } as any),
+  }),
 })
