@@ -148,3 +148,184 @@ html {
 [data-theme="dark"] .vp-link-card:hover {
   border: 1px solid rgba(151, 86, 86, 0.6) !important;
 }
+
+/* 加载渐入动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vp-doc {
+  opacity: 0;
+}
+
+.page-loaded .vp-doc {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* 为已有内容添加延迟动画 */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc p,
+.vp-doc ul,
+.vp-doc ol,
+.vp-doc .vp-card-grid,
+.vp-doc .vp-card-wrapper,
+.vp-doc .vp-link-card,
+.vp-doc center,
+.vp-doc hr {
+  opacity: 0;
+}
+
+.page-loaded .vp-doc h1,
+.page-loaded .vp-doc h2,
+.page-loaded .vp-doc h3,
+.page-loaded .vp-doc p,
+.page-loaded .vp-doc ul,
+.page-loaded .vp-doc ol,
+.page-loaded .vp-doc .vp-card-grid,
+.page-loaded .vp-doc .vp-card-wrapper,
+.page-loaded .vp-doc .vp-link-card,
+.page-loaded .vp-doc center,
+.page-loaded .vp-doc hr {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.page-loaded .vp-doc h1 {
+  animation-delay: 0.1s;
+}
+
+.page-loaded .vp-doc .vp-card-grid.cols-2:first-of-type {
+  animation-delay: 0.2s;
+}
+
+.page-loaded .vp-doc center:first-of-type {
+  animation-delay: 0.3s;
+}
+
+.page-loaded .vp-doc .vp-card-grid.cols-2:nth-of-type(2) {
+  animation-delay: 0.4s;
+}
+
+.page-loaded .vp-doc center:last-of-type {
+  animation-delay: 0.5s;
+}
+
+.page-loaded .vp-doc .vp-card-grid.cols-2:last-of-type {
+  animation-delay: 0.6s;
+}
+
+.page-loaded .vp-doc hr {
+  animation-delay: 0.7s;
+}
+
+.page-loaded .vp-doc center:last-of-type+div {
+  animation-delay: 0.7s;
+}
+
+/* 单独处理列表项 */
+.vp-doc li {
+  opacity: 0;
+}
+
+.page-loaded .vp-doc li {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.page-loaded .vp-doc li:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.page-loaded .vp-doc li:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.page-loaded .vp-doc li:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* 卡片组件动画延迟 */
+.page-loaded .vp-card-wrapper:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.page-loaded .vp-card-wrapper:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.page-loaded .vp-card-wrapper:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.page-loaded .vp-card-wrapper:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.page-loaded .vp-card-wrapper:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.page-loaded .vp-card-wrapper:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+.page-loaded .vp-link-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.page-loaded .vp-link-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.page-loaded .vp-link-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.page-loaded .vp-link-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* 为 hero-text 和 hero-name 及相关元素添加动画 */
+.hero-text,
+.hero-name,
+.hero-tagline,
+.site-name,
+.home-title {
+  opacity: 0;
+}
+
+.page-loaded .hero-text,
+.page-loaded .hero-name,
+.page-loaded .hero-tagline,
+.page-loaded .site-name,
+.page-loaded .home-title {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.page-loaded .hero-text {
+  animation-delay: 0.2s;
+}
+
+.page-loaded .hero-name {
+  animation-delay: 0.1s;
+}
+
+.page-loaded .hero-tagline {
+  animation-delay: 0.3s;
+}
+
+.page-loaded .site-name {
+  animation-delay: 0.15s;
+}
+
+.page-loaded .home-title {
+  animation-delay: 0.15s;
+}

@@ -44,6 +44,8 @@ const handleLoad = () => {
   if (minTimeoutId === null) {
     if (timeoutId) clearTimeout(timeoutId)
     loading.value = false
+    // 添加页面加载完成的类
+    document.body.classList.add('page-loaded')
   }
 }
 
@@ -52,6 +54,8 @@ onMounted(() => {
   minTimeoutId = window.setTimeout(() => {
     if (loaded) {
       loading.value = false
+      // 添加页面加载完成的类
+      document.body.classList.add('page-loaded')
     }
   }, MIN_LOADING_TIME)
   
@@ -59,6 +63,8 @@ onMounted(() => {
   timeoutId = window.setTimeout(() => {
     loaded = true
     loading.value = false
+    // 添加页面加载完成的类
+    document.body.classList.add('page-loaded')
   }, 3000)
   
   // 如果页面已经加载完成，则直接隐藏加载动画
@@ -151,11 +157,11 @@ onUnmounted(() => {
 
 /* 淡入淡出过渡效果 */
 .fade-enter-active {
-  transition: opacity 0.3s ease-out;
+  transition: opacity 0s ease-out;
 }
 
 .fade-leave-active {
-  transition: opacity 0.5s ease-in;
+  transition: opacity 0.3s ease-in;
 }
 
 .fade-enter-from,
