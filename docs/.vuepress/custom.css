@@ -63,6 +63,20 @@ html {
   backdrop-filter: none !important;
 }
 
+/* --- 侧边栏透明背景 --- */
+.vp-sidebar,
+.vp-sidebar .curtain {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: blur(5px) !important;
+}
+
+/* 深色主题下的侧边栏样式 */
+[data-theme="dark"] .vp-sidebar,
+[data-theme="dark"] .vp-sidebar .curtain {
+  background-color: rgba(30, 30, 30, 0.4) !important;
+  backdrop-filter: blur(5px) !important;
+}
+
 /* --- 网格背景 --- */
 /*
  * 为文档容器添加网格背景效果
@@ -91,4 +105,46 @@ html {
 .waline-powered-by,
 .wl-power {
   display: none !important;
+}
+
+/* 卡片容器样式 */
+.vp-card-wrapper,
+.vp-link-card {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  border: 1px solid rgba(60, 60, 60, 0.2) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* 卡片悬停效果 */
+.vp-card-wrapper:hover,
+.vp-link-card:hover {
+  background-color: rgba(240, 240, 240, 0.6) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* 链接卡片特殊悬停效果 */
+.vp-link-card:hover {
+  border: 1px solid rgba(71, 155, 210, 0.6) !important;
+}
+
+/* 深色主题下的卡片样式 */
+[data-theme="dark"] .vp-card-wrapper,
+[data-theme="dark"] .vp-link-card {
+  background-color: rgba(128, 128, 128, 0.1) !important;
+  border: 1px solid rgba(128, 128, 128, 0.2) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* 深色主题下的卡片悬停效果 */
+[data-theme="dark"] .vp-card-wrapper:hover,
+[data-theme="dark"] .vp-link-card:hover {
+  background-color: rgba(128, 128, 128, 0.2) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 10px rgba(128, 128, 128, 0.1) !important;
+}
+
+/* 深色主题下链接卡片特殊悬停效果 */
+[data-theme="dark"] .vp-link-card:hover {
+  border: 1px solid rgba(151, 86, 86, 0.6) !important;
 }
