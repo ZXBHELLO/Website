@@ -36,15 +36,9 @@
 .blog-post-item-content .post-meta .tag-list,
 .blog-post-item-content .post-meta a,
 .vp-category-group .folder,
-.vp-doc-meta .tag {
-  font-family: "Ysabeau", "Inter", "Roboto", sans-serif;
-}
-
+.vp-doc-meta .tag,
 .vp-footer,
-.footer-message {
-  font-family: "Ysabeau", "Inter", "Roboto", sans-serif;
-}
-
+.footer-message,
 .profile-info {
   font-family: "Ysabeau", "Inter", "Roboto", sans-serif;
 }
