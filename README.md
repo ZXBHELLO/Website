@@ -13,9 +13,6 @@
 - 动态粒子背景效果
 - 深色/浅色主题自动切换
 
-## 个人开发自定义组件
-- [通用导航页](https://doc.zxbhello.top/nav/guide/)
-
 ## 项目地址
 
 - [在线访问网站](http://doc.zxbhello.top)
