@@ -13,13 +13,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppSetup: typeof import('./components/AppSetup.vue')['default']
     AsideNav: typeof import('./components/AsideNav.vue')['default']
-    ElAlert: typeof import('element-plus/es')['ElAlert']
-    ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
-    ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
-    ElButton: typeof import('element-plus/es')['ElButton']
-    ElCarousel: typeof import('element-plus/es')['ElCarousel']
-    ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
-    ElDrawer: typeof import('element-plus/es')['ElDrawer']
     ExternalLinkWarning: typeof import('./components/ExternalLinkWarning.vue')['default']
     HideFooter: typeof import('./components/HideFooter.vue')['default']
     NavPage: typeof import('./components/NavPage.vue')['default']
