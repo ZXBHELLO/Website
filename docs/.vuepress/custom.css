@@ -86,3 +86,9 @@ html {
   /* 在深色模式下调整网格背景颜色，提高可见性 */
   --vp-doc-grid-bg: rgba(128, 128, 128, 0.1);
 }
+
+/* 隐藏 Waline 评论系统的 powered by 标签 */
+.waline-powered-by,
+.wl-power {
+  display: none !important;
+}

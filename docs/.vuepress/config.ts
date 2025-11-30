@@ -200,17 +200,22 @@ export default defineUserConfig({
         }
       },
       emoji: [
-        '//unpkg.com/@waline/emojis@1.1.0/weibo',
-        '//unpkg.com/@waline/emojis@1.1.0/alus',
         '//unpkg.com/@waline/emojis@1.1.0/bilibili',
-        '//unpkg.com/@waline/emojis@1.1.0/qq',
-        '//unpkg.com/@waline/emojis@1.1.0/tieba',
+        '//unpkg.com/@waline/emojis@1.1.0/weibo',
         '//unpkg.com/@waline/emojis@1.1.0/tw-emoji'
       ],
       meta: ['nick', 'mail', 'link'],
       requiredMeta: ['nick'],
       wordLimit: 0,
       pageSize: 10,
+      reaction: [
+        'http://unpkg.com/@waline/emojis@1.1.0/bilibili/bb_heart_eyes.png',
+        'http://unpkg.com/@waline/emojis@1.1.0/bilibili/bb_lovely.png',
+        'http://unpkg.com/@waline/emojis@1.1.0/bilibili/bb_clap.png',
+        'http://unpkg.com/@waline/emojis@1.1.0/bilibili/bb_dizzy_face.png',
+        'http://unpkg.com/@waline/emojis@1.1.0/bilibili/bb_vomit.png',
+        'http://unpkg.com/@waline/emojis@1.1.0/bilibili/bb_look_down.png'
+      ],
     },
 
     /**
