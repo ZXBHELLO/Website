@@ -1,7 +1,6 @@
 ---
 title: 我的世界服务器开服困境分析与解决方案
 createTime: 2025/12/01
-category: 踩坑实录 & 问题排查
 permalink: /articles/minecraft-server-challenges
 tags: 
   - Minecraft
@@ -9,6 +8,7 @@ tags:
   - 游戏运营
   - 技术指南
 ---
+
 
 ## 概述
 

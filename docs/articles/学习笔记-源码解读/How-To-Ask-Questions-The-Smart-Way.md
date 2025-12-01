@@ -1,7 +1,6 @@
 ---
 title: 提问的智慧 (How To Ask Questions The Smart Way)
 date: 2024-01-01T00:00:00.000Z
-category: 技术教程
 tags:
   - 提问
   - 智慧

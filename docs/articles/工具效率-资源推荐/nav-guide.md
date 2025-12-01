@@ -1,7 +1,6 @@
 ---
 title: 导航页配置教程
 date: 2024-01-01T00:00:00.000Z
-category: 技术教程
 tags:
   - VuePress
   - 导航页
