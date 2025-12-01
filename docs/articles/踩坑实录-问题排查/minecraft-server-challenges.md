@@ -1,7 +1,7 @@
 ---
 title: 我的世界服务器开服困境分析与解决方案
 createTime: 2025/12/01
-permalink: /articles/minecraft-server-challenges
+permalink: /articles/minecraft-server-challenges/
 tags: 
   - Minecraft
   - 服务器
