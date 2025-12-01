@@ -1,7 +1,6 @@
 ---
 title: 粒子背景效果配置教程
 date: 2025-11-15
-category: 技术教程
 tags:
   - VuePress
   - 粒子效果

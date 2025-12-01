@@ -2,9 +2,8 @@
 title: 关于我
 author: ZXBHELLO
 date: 2025-10-05T00:00:00.000Z
+category: 随笔分享 & 生活感悟
 permalink: /article/about-me/
-categories:
-  - 个人介绍
 tags:
   - 个人
   - 介绍
