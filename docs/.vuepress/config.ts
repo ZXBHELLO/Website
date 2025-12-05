@@ -14,10 +14,6 @@ import { defineUserConfig } from 'vuepress'
 // @ts-ignore
 import { plumeTheme } from 'vuepress-theme-plume'
 import { viteBundler } from '@vuepress/bundler-vite'
-// 按需引入插件
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineUserConfig({
   base: '/',
@@ -38,28 +34,7 @@ export default defineUserConfig({
 
   bundler: viteBundler({
     viteOptions: {
-      plugins: [
-        AutoImport({
-          // 自动导入 Element Plus 的 API（如 ElMessage、ElMessageBox）
-          resolvers: [ElementPlusResolver()],
-          // 生成类型声明文件（TS 项目必需，避免语法报错）
-          dts: '.vuepress/auto-imports.d.ts',
-          // 自动导入 Vue 核心 API（如 ref、watch，无需手动 import）
-          imports: ['vue'],
-        }),
-        Components({
-          // 自动导入 Element Plus 的组件（如 ElButton、ElTable）
-          resolvers: [ElementPlusResolver({
-            importStyle: 'css'
-          })],
-          // 生成组件声明文件
-          dts: '.vuepress/components.d.ts',
-          // 扫描自定义组件目录（Plume 自动注册该目录下的组件）
-          dirs: ['.vuepress/components'],
-          // 允许在 MD 文件中直接使用组件
-          extensions: ['vue'],
-        })
-      ]
+      plugins: []
     }
   }),
   shouldPrefetch: false, // 站点较大，页面数量较多时，不建议启用

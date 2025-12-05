@@ -17,8 +17,6 @@
     "@vuepress/bundler-vite": "2.0.0-rc.26",
     "http-server": "^14.1.1",
     "typescript": "^5.9.3",
-    "unplugin-auto-import": "^20.3.0",
-    "unplugin-vue-components": "^30.0.0",
     "vue": "^3.5.25",
     "vuepress": "2.0.0-rc.26",
     "vuepress-theme-plume": "1.0.0-rc.179"
@@ -33,11 +31,9 @@
     "node": "^20.6.0 || >=22.0.0"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.3.2",
     "@waline/client": "^3.8.0",
     "chart.js": "^4.5.1",
     "echarts": "^6.0.0",
-    "element-plus": "^2.11.9",
     "flowchart.ts": "^3.0.1",
     "swiper": "^12.0.3"
   }
