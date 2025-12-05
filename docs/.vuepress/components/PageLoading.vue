@@ -17,35 +17,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useSiteLocaleData } from '@vuepress/client'
 
 const loading = ref(true)
 const site = useSiteLocaleData()
 
-// 获取站点标题
-import { computed } from 'vue'
-
 // siteTitle 用于显示站点标题，若未设置则默认显示 'ZakoWeb'
 const siteTitle = computed(() => site.value.title)
 
-let timeoutId: number | null = null
-let minTimeoutId: number | null = null
+let timeoutId = 0
+let minTimeoutId = 0
 // 最小加载时间（毫秒）
-const MAX_LOADING_TIME = 800
+const MAX_LOADING_TIME = 3000
 const MIN_LOADING_TIME = 800
 
 let loaded = false
 
 // 监听页面加载完成事件
+const setPageLoadedClass = () => {
+  document.body.classList.add('page-loaded')
+}
+
 const handleLoad = () => {
   loaded = true
   // 如果已经达到最小加载时间，则隐藏加载动画
-  if (minTimeoutId === null) {
+  if (!minTimeoutId) {
     if (timeoutId) clearTimeout(timeoutId)
     loading.value = false
     // 添加页面加载完成的类
-    document.body.classList.add('page-loaded')
+    setPageLoadedClass()
   }
 }
 
@@ -55,7 +56,13 @@ onMounted(() => {
     if (loaded) {
       loading.value = false
       // 添加页面加载完成的类
-      document.body.classList.add('page-loaded')
+      setPageLoadedClass()
+    }
+    
+    // 清除最大超时，因为最小超时已经触发
+    if (timeoutId) {
+      clearTimeout(timeoutId)
+      timeoutId = 0
     }
   }, MIN_LOADING_TIME)
   
@@ -64,8 +71,8 @@ onMounted(() => {
     loaded = true
     loading.value = false
     // 添加页面加载完成的类
-    document.body.classList.add('page-loaded')
-  }, 3000)
+    setPageLoadedClass()
+  }, MAX_LOADING_TIME)
   
   // 如果页面已经加载完成，则直接隐藏加载动画
   if (document.readyState === 'complete') {
@@ -77,8 +84,8 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('load', handleLoad)
-  if (timeoutId !== null) clearTimeout(timeoutId)
-  if (minTimeoutId !== null) clearTimeout(minTimeoutId)
+  if (timeoutId) clearTimeout(timeoutId)
+  if (minTimeoutId) clearTimeout(minTimeoutId)
 })
 </script>
 

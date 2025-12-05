@@ -52,9 +52,9 @@ class ParticleEffect {
     baseDensity: 80,          // 基础粒子密度
     maxParticles: 200,        // 最大粒子数量
     particleSpeed: 1,       // 粒子移动速度
-    lineMaxDistance: 0,     // 粒子间连线的最大距离
+    lineMaxDistance: 100,     // 粒子间连线的最大距离
     lineOpacity: 0.2,         // 连线透明度
-    mouseRadius: 0,         // 鼠标影响半径
+    mouseRadius: 150,         // 鼠标影响半径
     maxConnections: 5,        // 单个粒子最多连接数
   }
 
@@ -153,8 +153,10 @@ class ParticleEffect {
     // 如果是移动设备，隐藏canvas
     if (window.innerWidth < 768) {
       this.canvas.style.display = 'none'
+      this.stopAnimation()
     } else {
       this.canvas.style.display = 'block'
+      this.startAnimation()
     }
   }
 
@@ -247,10 +249,42 @@ class ParticleEffect {
   }
 
   /**
+   * 开始动画
+   */
+  startAnimation() {
+    if (!this.isRunning) {
+      this.isRunning = true
+      this.animate()
+    }
+  }
+
+  /**
+   * 停止动画
+   */
+  stopAnimation() {
+    this.isRunning = false
+    if (this.animationFrame) {
+      cancelAnimationFrame(this.animationFrame)
+      this.animationFrame = null
+    }
+  }
+
+  /**
    * 动画循环函数
    */
   animate = () => {
     if (!this.isRunning) return
+
+    // 如果是移动设备且仍有粒子，则清空粒子数组
+    if (window.innerWidth < 768 && this.particles.length > 0) {
+      this.particles = []
+      return
+    }
+
+    // 如果不是移动设备但没有粒子，则创建粒子
+    if (window.innerWidth >= 768 && this.particles.length === 0) {
+      this.createParticles()
+    }
 
     // 清空 canvas，移除拖影效果
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
@@ -315,11 +349,7 @@ class ParticleEffect {
    * 销毁粒子效果，清理资源
    */
   destroy() {
-    this.isRunning = false
-    if (this.animationFrame) {
-      cancelAnimationFrame(this.animationFrame)
-    }
-
+    this.stopAnimation()
     // 移除事件监听器
     this.unbindEvents()
   }
@@ -412,6 +442,12 @@ watch(() => shouldShowParticles.value, (newVal) => {
         initParticles()
       }
     })
+  } else {
+    // 当 shouldShowParticles 变为 false 时，销毁粒子效果
+    if (particleEffect) {
+      particleEffect.destroy()
+      particleEffect = null
+    }
   }
 })
 

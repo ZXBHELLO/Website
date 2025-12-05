@@ -27,6 +27,8 @@ Thumbs.db
 # 临时文件
 *.tmp
 *.temp
+auto-imports.d.ts
+components.d.ts
 
 # 包管理器锁文件
 package-lock.json
