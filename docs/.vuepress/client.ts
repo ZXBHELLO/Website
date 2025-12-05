@@ -1,4 +1,4 @@
-import { defineClientConfig } from '@vuepress/client'
+import { defineClientConfig } from 'vuepress/client'
 import NavPage from './components/NavPage.vue'
 import HideFooter from './components/HideFooter.vue'
 import ParticleBackground from './components/ParticleBackground.vue'

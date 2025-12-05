@@ -9,10 +9,11 @@
  * 特别的，请不要在两个配置文件中重复配置相同的项，当前文件的配置项会被覆盖
  */
 
-
+// @ts-ignore
 import { defineUserConfig } from 'vuepress'
 // @ts-ignore
 import { plumeTheme } from 'vuepress-theme-plume'
+// @ts-ignore
 import { viteBundler } from '@vuepress/bundler-vite'
 
 export default defineUserConfig({
@@ -32,11 +33,8 @@ export default defineUserConfig({
   port: 3000, // 默认端口为 8080，此处更改为 3000 以避免与本地其他服务（如前端开发服务器）冲突，便于维护
   host: '0.0.0.0',
 
-  bundler: viteBundler({
-    viteOptions: {
-      plugins: []
-    }
-  }),
+  bundler: viteBundler({}),
+
   shouldPrefetch: false, // 站点较大，页面数量较多时，不建议启用
 
   theme: plumeTheme({
