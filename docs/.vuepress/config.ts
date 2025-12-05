@@ -27,7 +27,7 @@ export default defineUserConfig({
 
   head: [
     // 配置站点图标
-    ['link', { rel: 'icon', type: 'image/png', href: '/image.png' }],
+    ['link', { rel: 'icon', type: 'image/png', href: '/assets/site_icon_32x.png' }],
     // 添加 Iconify 支持
     ['script', { src: 'https://code.iconify.design/2/2.1.2/iconify.min.js', async: true }]
   ],

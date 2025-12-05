@@ -18,7 +18,7 @@ import collections from './collections'
  * @see https://theme-plume.vuejs.press/config/basic/
  */
 export default defineThemeConfig({
-  logo: '/image.png',
+  logo: '/assets/site_icon_32x.png',
 
   appearance: true,  // 配置 深色模式
 
@@ -48,11 +48,10 @@ export default defineThemeConfig({
       '<span>希望有朝一日能够成为人类...</span>' +
       '<span style="margin:0 10px">|</span>' +
       '<a href="https://github.com/ZXBHELLO" target="_blank" style="color:var(--vp-c-brand);text-decoration:none;">GitHub</a>' +
-      '<span style="margin:0 10px">|</span>' +
       '</span>',
     copyright: 'Copyright © 2024 ZXBHELLO | ' +
       '<a href="https://vuepress.vuejs.org/" target="_blank" style="color:var(--vp-c-brand);text-decoration:none;">VuePress</a> ' +
-      '和 <a href="https://theme-plume.vuejs.press/" target="_blank" style="color:var(--vp-c-brand);text-decoration:none;">Plume</a> 强力驱动',
+      '× <a href="https://theme-plume.vuejs.press/" target="_blank" style="color:var(--vp-c-brand);text-decoration:none;">Plume</a>',
   },
 
   /**
@@ -68,7 +67,7 @@ export default defineThemeConfig({
    * @see https://theme-plume.vuejs.press/config/basic/#profile
    */
   profile: {
-    avatar: '',
+    avatar: '/assets/profile.png',
     name: 'ZXBHELLO',
     description: '文档/博客/日记',
     circle: true,
