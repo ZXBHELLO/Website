@@ -29,8 +29,9 @@ const lang = useRouteLocale()
 
 /**
  * 计算属性，根据当前语言环境返回对应的文本内容
+ * 添加默认值以防止找不到对应语言的情况
  */
-const locale = computed(() => locales[lang.value])
+const locale = computed(() => locales[lang.value] || locales['/'])
 </script>
 
 <template>
@@ -38,21 +39,21 @@ const locale = computed(() => locales[lang.value])
   <div class="aside-nav-wrapper">
     <!-- GitHub Star 链接 -->
     <VPLink class="link" no-icon href="https://github.com/ZXBHELLO/Website">
-      <span class="vpi-github-star" />
+      <span class="vpi-github-star" aria-hidden="true" />
       <span class="link-text">{{ locale.star }}</span>
-      <span class="vpi-arrow-right" />
+      <span class="vpi-arrow-right" aria-hidden="true" />
     </VPLink>
     <!-- 问题反馈链接 -->
     <VPLink class="link" no-icon href="https://github.com/ZXBHELLO/Website/issues/new">
-      <span class="vpi-github-issue" />
+      <span class="vpi-github-issue" aria-hidden="true" />
       <span class="link-text">{{ locale.issue }}</span>
-      <span class="vpi-arrow-right" />
+      <span class="vpi-arrow-right" aria-hidden="true" />
     </VPLink>
     <!-- 赞助链接 -->
-    <VPLink class="link" href="/sponsor/">
-      <span class="vpi-bubble-tea" />
+    <VPLink class="link" no-icon href="/article/sponsor/">
+      <span class="vpi-bubble-tea" aria-hidden="true" />
       <span class="link-text">{{ locale.sponsor }}</span>
-      <span class="vpi-arrow-right" />
+      <span class="vpi-arrow-right" aria-hidden="true" />
     </VPLink>
   </div>
 </template>
