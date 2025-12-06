@@ -1,5 +1,5 @@
 ---
-title: HtmlPage 组件使用教程
+title: HtmlPage(网页嵌入) 组件使用教程
 date: 2025-12-07
 tags:
   - VuePress
