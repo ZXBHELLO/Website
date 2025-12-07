@@ -19,7 +19,7 @@ import { viteBundler } from '@vuepress/bundler-vite'
 export default defineUserConfig({
   base: '/',
   lang: 'zh-CN',
-  title: 'ZakoWeb',
+  title: 'Zako',
   description: '杂鱼文档/ZXBHELLO的博客与文章',
 
   head: [
