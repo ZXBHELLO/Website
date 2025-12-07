@@ -1,4 +1,8 @@
 ---
+title: nav-guide
+createTime: 2025/12/05 22:36:22
+permalink: /article/i4m248li/
+---
 title: 导航页配置教程
 date: 2024-01-01T00:00:00.000Z
 tags:
