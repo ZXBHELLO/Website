@@ -153,8 +153,6 @@ A: 当前版本只支持隐藏 `footer.vp-footer` 元素。如需自定义选择
 如果你想要改进这个项目，欢迎提交 PR！
 
 <!-- 转载/引用/使用需保留模板设计者信息 -->
-<div style="text-align: center; margin-top: 2rem; padding: 1rem; border-top: 1px solid var(--vp-c-divider);">
-  <p style="color: var(--vp-c-text-2); font-size: 0.9rem;">
-    本 HideFooter 组件由ZXBHELLO制作，引用、使用、转载请保留设计者信息。
-  </p>
-</div>
+::: center
+`本组件由ZXBHELLO制作，引用、使用、转载请保留设计者信息。`
+:::

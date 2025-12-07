@@ -315,10 +315,6 @@ export default defineClientConfig({
 **祝您使用愉快！** 如果这个教程对您有帮助，欢迎在 GitHub 上 Star ⭐ 或分享给其他人。
 
 <!-- 转载/引用/使用需保留模板设计者信息 -->
-<div style="text-align: center; margin-top: 2rem; padding: 1rem; border-top: 1px solid var(--vp-c-divider);">
-  <p style="color: var(--vp-c-text-2); font-size: 0.9rem;">
-    本<a href="https://github.com/ZXBHELLO/Website" target="_blank" rel="noopener noreferrer">背景粒子效果</a>由 
-    <a href="https://github.com/ZXBHELLO" target="_blank" rel="noopener noreferrer">ZXBHELLO</a> 
-    制作，引用、使用、转载请保留设计者信息。
-  </p>
-</div>
+::: center
+`本组件由ZXBHELLO制作，引用、使用、转载请保留设计者信息。`
+:::

@@ -110,8 +110,6 @@ A: HtmlPage 组件使用 iframe 原生支持跨域，但父页面无法通过 Ja
 如果你想要改进这个项目，欢迎提交 PR！
 
 <!-- 转载/引用/使用需保留模板设计者信息 -->
-<div style="text-align: center; margin-top: 2rem; padding: 1rem; border-top: 1px solid var(--vp-c-divider);">
-  <p style="color: var(--vp-c-text-2); font-size: 0.9rem;">
-    本 HtmlPage 组件由ZXBHELLO制作，引用、使用、转载请保留设计者信息。
-  </p>
-</div>
+::: center
+`本组件由ZXBHELLO制作，引用、使用、转载请保留设计者信息。`
+:::

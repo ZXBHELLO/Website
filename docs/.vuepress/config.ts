@@ -59,7 +59,7 @@ export default defineUserConfig({
     contributors: {
       mode: 'block',
     },
-    changelog: true,
+    changelog: false,
     copyright: 'CC-BY-NC-SA-4.0',
 
     /**
