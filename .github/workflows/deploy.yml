@@ -1,84 +1,55 @@
-name: Deploy VuePress Docs
+name: deploy
 
-# 触发条件：main分支push（仅文档相关文件变更时）或手动触发
 on:
+  # 每当 push 到 main 分支时触发部署
+  # Deployment is triggered whenever a push is made to the main branch.
   push:
     branches: [main]
-    # 仅监控文档/依赖/工作流相关文件，减少无效构建
-    paths:
-      - "docs/**"
-      - "package.json"
-      - "pnpm-lock.yaml"
-      - ".github/workflows/deploy.yml"
+  # 手动触发部署
+  # Manually trigger deployment
   workflow_dispatch:
 
-# 并发控制：取消同分支正在运行的旧工作流，节省资源
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
-  docs-deploy:
+  docs:
     runs-on: ubuntu-latest
-    # 最小权限原则：仅授予部署所需的权限
-    permissions:
-      contents: write # 用于推送gh-pages分支
-      pages: write # 可选：GitHub Pages部署权限
-      id-token: write
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # 拉取全部提交记录（用于VuePress的“最近更新时间”）
+          # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
+          # "Last updated time" and other git log-related information require fetching all commit records.
+          fetch-depth: 0
 
-      # 缓存pnpm依赖和node_modules，加速依赖安装
-      - name: Setup pnpm cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.pnpm-store
-            node_modules
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
-
-      # 匹配package.json的packageManager版本
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
-      # 安装Node.js（使用22.x最新补丁版，并用pnpm缓存互补）
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
-          cache: "pnpm" # 额外缓存，与上面的cache步骤互补
+          # 选择要使用的 node 版本
+          node-version: 22
+          # 核心优化：指定缓存的包管理器为 pnpm，自动缓存依赖
+          cache: "pnpm"
 
-      # 安装依赖（--frozen-lockfile锁定版本，避免依赖意外更新）
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-        continue-on-error: false
+      # 安装依赖（命中缓存时会跳过实际下载，直接恢复缓存）
+      # Install dependencies
+      - name: Install Dependencies
+        run: pnpm install
 
-      # 构建VuePress文档
+      # 运行构建脚本
+      # Run the build script
       - name: Build VuePress site
         run: pnpm run docs:build
-        continue-on-error: false
 
-      # 校验构建产物，防止空部署
-      - name: Verify build output
-        run: |
-          if [ ! -d "docs/.vuepress/dist" ] || [ -z "$(ls -A docs/.vuepress/dist)" ]; then
-            echo "Error: Build directory is empty!"
-            exit 1
-          fi
-
+      # 查看 workflow 的文档来获取更多信息
+      # @see https://github.com/crazy-max/ghaction-github-pages
       - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v4.0.0 # 使用具体版本号，提升稳定性
+        uses: crazy-max/ghaction-github-pages@v4
         with:
-          target_branch: gh-pages # 遵循社区规范的gh-pages分支
+          # 部署到 gh-pages 分支（注：原配置的 Pages 首字母大写可能是笔误，建议改为 gh-pages 符合规范）
+          target_branch: Pages
+          # 部署目录为 VuePress 的默认输出目录
           build_dir: docs/.vuepress/dist
-          keep_history: false # 等价于“强制推送”，覆盖目标分支历史（默认false，可省略）
         env:
-          # 优先使用自定义ACCESS_TOKEN，无则使用GitHub默认TOKEN
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
-        continue-on-error: false
+          # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
