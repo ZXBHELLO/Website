@@ -28,10 +28,8 @@ jobs:
         with:
           # 选择要使用的 node 版本
           node-version: 22
-          # 核心优化：指定缓存的包管理器为 pnpm，自动缓存依赖
-          cache: "pnpm"
 
-      # 安装依赖（命中缓存时会跳过实际下载，直接恢复缓存）
+      # 安装依赖
       # Install dependencies
       - name: Install Dependencies
         run: pnpm install
@@ -46,7 +44,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v4
         with:
-          # 部署到 gh-pages 分支（注：原配置的 Pages 首字母大写可能是笔误，建议改为 gh-pages 符合规范）
+          # 部署到 gh-pages 分支
           target_branch: Pages
           # 部署目录为 VuePress 的默认输出目录
           build_dir: docs/.vuepress/dist
