@@ -1,6 +1,6 @@
 ---
 title: HtmlPage(网页嵌入) 组件使用教程
-date: 2025-12-07
+lastUpdated: true
 tags:
   - VuePress
   - iframe

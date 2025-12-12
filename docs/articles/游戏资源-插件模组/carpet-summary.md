@@ -1,13 +1,12 @@
 ---
 title: Carpet指令速查
-date: 2025-12-07
+lastUpdated: true
 tags:
   - Minecraft
   - Carpet模组
   - Fabric模组
   - 游戏优化
 permalink: /article/carpet-summary/
-createTime: 2025/12/07
 ---
 
 ## Carpet 主模块指令

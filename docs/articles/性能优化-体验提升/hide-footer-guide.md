@@ -1,6 +1,6 @@
 ---
 title: HideFooter(可配置页脚隐藏) 组件配置教程
-date: 2025-12-07
+lastUpdated: true
 tags:
   - VuePress
   - 页脚控制

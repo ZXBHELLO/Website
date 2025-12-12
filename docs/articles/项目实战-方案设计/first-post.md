@@ -1,7 +1,7 @@
 ---
 title: 第一篇博客文章
 author: ZXBHELLO
-date: 2025-11-04T00:00:00.000Z
+lastUpdated: true
 permalink: /article/first-post/
 tags:
   - 示例

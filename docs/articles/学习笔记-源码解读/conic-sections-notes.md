@@ -1,11 +1,10 @@
 ---
 title: 圆锥曲线笔记
-date: 2025-12-01
+lastUpdated: true
 tags:
   - 数学
   - 圆锥曲线
   - 学习笔记
-createTime: 2025/12/06 02:50:20
 permalink: /article/conic-sections/
 ---
 

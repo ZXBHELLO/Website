@@ -1,6 +1,6 @@
 ---
 title: 赞助支持
-createTime: 2025/12/07 00:58:36
+lastUpdated: true
 permalink: /article/sponsor/
 ---
 

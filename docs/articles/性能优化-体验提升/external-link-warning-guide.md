@@ -1,6 +1,6 @@
 ---
 title: ExternalLinkWarning(外部链接警告弹窗) 组件配置教程
-date: 2025-12-07
+lastUpdated: true
 tags:
   - VuePress
   - 外链警告

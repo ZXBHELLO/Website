@@ -1,6 +1,6 @@
 ---
-title: 我的世界服务器开服困境分析与解决方案
-createTime: 2025/12/01
+title: 我的世界服务器开服困境分析
+lastUpdated: true
 permalink: /articles/minecraft-server-challenges/
 tags: 
   - Minecraft

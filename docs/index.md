@@ -16,19 +16,23 @@ config:
         offset: 36
     full: true
     hero:
-      name: ZakoWeb
-      text: 个人主页 & 技术文档 & 项目仓库
+      name: ZAKO
+      text: 生活随笔 & 技术文档 & 项目仓库
       actions:
-        -
-          theme: alt
-          text: 个人页
-          link: /article/about-me/
         -
           theme: brand
           text: 导航页
           link: /nav/
         -
           theme: alt
+          text: 个人页
+          link: /article/about-me/
+        -
+          theme: alt
           text: 企鹅群
           link: https://qm.qq.com/q/SPZEHOyWsw
+        -
+          theme: alt
+          text: 博客页
+          link: /article/
 ---

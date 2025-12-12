@@ -1,12 +1,11 @@
 ---
 title: 粒子背景效果配置教程
-date: 2025-11-15
+lastUpdated: true
 tags:
   - VuePress
   - 粒子效果
   - 前端开发
 permalink: /article/particle-guide/
-createTime: 2025/11/15
 ---
 
 # 粒子背景效果使用指南

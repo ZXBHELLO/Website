@@ -1,7 +1,7 @@
 ---
 title: 关于我
 author: ZXBHELLO
-date: 2025-10-05T00:00:00.000Z
+lastUpdated: true
 permalink: /article/about-me/
 tags:
   - 个人

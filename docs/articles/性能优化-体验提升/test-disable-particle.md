@@ -1,13 +1,12 @@
 ---
 title: 粒子效果禁用测试
-date: 2025-11-15
+lastUpdated: true
 disableParticle: true
 tags:
   - VuePress
   - 粒子效果
   - 前端开发
 permalink: /article/particle-disable-test/
-createTime: 2025/11/15
 ---
 
 ## 粒子效果禁用测试

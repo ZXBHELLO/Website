@@ -1,11 +1,10 @@
 ---
 title: Markdown 拓展语法
-date: 2025-12-07
+lastUpdated: true
 tags:
   - Markdown
   - 学习笔记
 permalink: /article/markdown/
-createTime: 2025/12/07
 ---
 
 
