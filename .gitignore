@@ -30,11 +30,6 @@ Thumbs.db
 auto-imports.d.ts
 components.d.ts
 
-# 包管理器锁文件
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
-
 # 调试和诊断文件
 npm-debug.log*
 yarn-debug.log*
