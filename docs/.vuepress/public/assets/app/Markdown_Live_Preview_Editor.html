@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>Markdown Live Editor</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;height:100vh;display:flex}
+#in,#out{width:50%;height:100%;padding:15px;border:none;font-size:16px;outline:none;resize:none}
+#in{background:#f8f9fa;border-right:1px solid #dee2e6}
+</style>
+</head>
+<body>
+<textarea id="in" placeholder="输入 Markdown…"></textarea>
+<iframe id="out"></iframe>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+const inEl = document.getElementById('in');
+const outEl = document.getElementById('out');
+function render(){
+  outEl.srcdoc = marked.parse(inEl.value) || '<p style="color:#999;margin-top:20px;text-align:center">实时预览</p>';
+}
+inEl.addEventListener('input', render);
+render();
+</script>
+</body>
+</html>

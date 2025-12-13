@@ -1,6 +1,6 @@
 ---
 title: AI-TOOLS
-createTime: 2025-10-07
+lastUpdated: true
 permalink: /app/AI-TOOLS/
 ---
 

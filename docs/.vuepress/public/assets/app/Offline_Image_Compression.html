@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>图片压缩工具</title>
+    <style>
+        :root {
+            --bg: #f5f7fa;
+            --panel: #fff;
+            --accent: #007bff;
+            --text: #333;
+            --border: #ddd;
+            /* 切换按钮变量 */
+            --btn-size: 40px;
+            --sun: #ffd43b;
+            --moon: #e2e8f0;
+            --transition: 0.6s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        [data-theme=dark] {
+            --bg: #1e1e2f;
+            --panel: #2d2d42;
+            --accent: #0d6efd;
+            --text: #f5f5f5;
+            --border: #444;
+            --sun: #ffd43b;
+            --moon: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            transition: background var(--transition), color var(--transition), border-color var(--transition);
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg);
+            color: var(--text);
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 420px;
+            background: var(--panel);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .1);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 10px
+        }
+
+        #dropArea {
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: border-color var(--transition);
+        }
+
+        #dropArea.dragover {
+            border-color: var(--accent)
+        }
+
+        #preview {
+            display: none;
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 10px
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap
+        }
+
+        label {
+            flex: 1 1 120px;
+            font-size: .9rem
+        }
+
+        input[type=range] {
+            flex: 1 1 120px;
+            accent-color: var(--accent)
+        }
+
+        button {
+            flex: 1 1 120px;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            background: var(--accent);
+            color: #fff;
+            cursor: pointer
+        }
+
+        button:disabled {
+            background: #888
+        }
+
+        #info {
+            font-size: .85rem;
+            text-align: center
+        }
+
+        /* ===== 主题切换按钮 ===== */
+        #themeToggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: var(--btn-size);
+            height: var(--btn-size);
+            border: none;
+            border-radius: 50%;
+            background: var(--panel);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform var(--transition), background var(--transition);
+        }
+
+        #themeToggle:hover {
+            transform: scale(1.1)
+        }
+
+        #themeToggle .icon {
+            width: 24px;
+            height: 24px;
+            position: relative;
+            transition: transform var(--transition);
+        }
+
+        #themeToggle .sun {
+            fill: var(--sun);
+            transition: opacity var(--transition);
+        }
+
+        #themeToggle .moon {
+            fill: var(--moon);
+            transition: opacity var(--transition);
+        }
+
+        body[data-theme=dark] .sun {
+            opacity: 0
+        }
+
+        body:not([data-theme=dark]) .moon {
+            opacity: 0
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 主题切换按钮 -->
+    <button id="themeToggle" title="切换主题">
+        <svg class="icon" viewBox="0 0 24 24">
+            <path class="sun"
+                d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12z" />
+            <path class="moon"
+                d="M21.752 15.002A9.72 9.72 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+        </svg>
+    </button>
+
+    <div class="card">
+        <h2>图片压缩工具</h2>
+        <div id="dropArea">
+            <p>拖拽图片到此处或 <input type="file" id="fileInput" accept="image/*" style="display:none" /></p>
+        </div>
+        <img id="preview" alt="预览" />
+        <div class="controls">
+            <label>质量：<span id="qualityVal">80</span>%</label>
+            <input type="range" id="quality" min="10" max="100" value="80" />
+            <button id="download" disabled>下载压缩图</button>
+        </div>
+        <p id="info">原始大小：<span id="origSize">-</span> → 压缩后：<span id="newSize">-</span></p>
+    </div>
+
+    <script>
+        /* ===== 主题切换 ===== */
+        const themeToggle = document.getElementById('themeToggle');
+        const saved = localStorage.getItem('theme');
+        if (saved) document.body.dataset.theme = saved;
+        themeToggle.addEventListener('click', () => {
+            const next = document.body.dataset.theme === 'dark' ? '' : 'dark';
+            document.body.dataset.theme = next;
+            localStorage.setItem('theme', next);
+        });
+
+        /* ===== 压缩逻辑（同之前） ===== */
+        const dropArea = document.getElementById('dropArea');
+        const fileInput = document.getElementById('fileInput');
+        const preview = document.getElementById('preview');
+        const quality = document.getElementById('quality');
+        const qualityVal = document.getElementById('qualityVal');
+        const downloadBtn = document.getElementById('download');
+        const origSizeEl = document.getElementById('origSize');
+        const newSizeEl = document.getElementById('newSize');
+
+        let imgObj = null;
+        let fileName = '';
+
+        /* 拖拽上传 */
+        ['dragenter', 'dragover'].forEach(evt => dropArea.addEventListener(evt, () => dropArea.classList.add('dragover')));
+        ['dragleave', 'drop'].forEach(evt => dropArea.addEventListener(evt, () => dropArea.classList.remove('dragover')));
+        dropArea.addEventListener('drop', e => {
+            e.preventDefault();
+            if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+        });
+        dropArea.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', () => handleFile(fileInput.files[0]));
+
+        function handleFile(file) {
+            if (!file.type.startsWith('image/')) return alert('请选择图片文件');
+            fileName = file.name.replace(/\.[^/.]+$/, '') + '_compressed.jpg';
+            const reader = new FileReader();
+            reader.onload = e => {
+                origSizeEl.textContent = (file.size / 1024).toFixed(1) + ' KB';
+                const img = new Image();
+                img.onload = () => {
+                    imgObj = img;
+                    preview.src = URL.createObjectURL(file);
+                    preview.style.display = 'block';
+                    downloadBtn.disabled = false;
+                    compress();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function compress() {
+            if (!imgObj) return;
+            const canvas = document.createElement('canvas');
+            canvas.width = imgObj.width;
+            canvas.height = imgObj.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(imgObj, 0, 0);
+            canvas.toBlob(blob => {
+                newSizeEl.textContent = (blob.size / 1024).toFixed(1) + ' KB';
+                downloadBtn.onclick = () => {
+                    const a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = fileName;
+                    a.style.display = 'none';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                };
+            }, 'image/jpeg', quality.value / 100);
+        }
+
+        quality.addEventListener('input', () => {
+            qualityVal.textContent = quality.value;
+            compress();
+        });
+    </script>
+</body>
+
+</html>

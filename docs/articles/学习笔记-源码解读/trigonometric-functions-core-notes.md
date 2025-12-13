@@ -6,6 +6,7 @@ tags:
   - 三角函数
   - 学习笔记
 permalink: /article/trigonometric-functions-notes/
+createTime: 2025/12/12 23:51:02
 ---
 
 > 由于我总是容易忘记三角函数相关的公式，而这些公式通常形态相似、容易混淆，所以我决定整理一份详细的笔记，帮助自己加深理解并方便日后查阅。

@@ -1,7 +1,7 @@
 ---
 title: AI Text to Speech
 pageLayout: page
-createTime: 2025-10-07
+lastUpdated: true
 permalink: /app/AI-TOOLS/AI-TTS/
 disableFooter: true
 ---

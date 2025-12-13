@@ -6,6 +6,7 @@ tags:
   - 粒子效果
   - 前端开发
 permalink: /article/particle-guide/
+createTime: 2025/12/12 23:51:02
 ---
 
 # 粒子背景效果使用指南

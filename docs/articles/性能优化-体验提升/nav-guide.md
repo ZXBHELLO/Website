@@ -2,6 +2,7 @@
 title: nav-guide
 lastUpdated: true
 permalink: /article/i4m248li/
+createTime: 2025/12/12 23:51:02
 ---
 title: 导航页配置教程
 date: 2024-01-01T00:00:00.000Z

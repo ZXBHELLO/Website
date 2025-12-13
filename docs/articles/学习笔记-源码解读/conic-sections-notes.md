@@ -6,6 +6,7 @@ tags:
   - 圆锥曲线
   - 学习笔记
 permalink: /article/conic-sections/
+createTime: 2025/12/12 23:51:02
 ---
 
 > 我的数学老师叫我们把立体几何学好就行了...圆锥曲线你不会别人也不会的QWQ...

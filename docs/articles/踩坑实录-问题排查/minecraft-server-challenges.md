@@ -2,11 +2,12 @@
 title: 我的世界服务器开服困境分析
 lastUpdated: true
 permalink: /articles/minecraft-server-challenges/
-tags: 
+tags:
   - Minecraft
   - 服务器
   - 游戏运营
   - 技术指南
+createTime: 2025/12/12 23:51:02
 ---
 
 

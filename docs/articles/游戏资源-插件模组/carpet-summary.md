@@ -7,6 +7,7 @@ tags:
   - Fabric模组
   - 游戏优化
 permalink: /article/carpet-summary/
+createTime: 2025/12/12 23:51:02
 ---
 
 ## Carpet 主模块指令

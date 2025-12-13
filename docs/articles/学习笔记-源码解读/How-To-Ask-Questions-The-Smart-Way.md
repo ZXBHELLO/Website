@@ -12,9 +12,11 @@ copyright:
   license: Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen
   author:
     name: How-To-Ask-Questions-The-Smart-Way
-    url: https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md
+    url: >-
+      https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md
   statement: 转载/引用需保留原作者信息
 permalink: /article/How-To-Ask-Questions-The-Smart-Way/
+createTime: 2025/12/12 23:51:02
 ---
 
 > 这篇文章转载于GITHUB，其中非常详细地阐述了如何正确提问。对于我来说，每次阅读都能有新的认识。由于网络问题加上国内互联网中有许多不规范的行为，因此我将其转载至我的文档，需要时直接甩文档链接就行，也不用担心网络异常等问题...
