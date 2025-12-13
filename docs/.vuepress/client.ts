@@ -8,6 +8,8 @@ import AsideNav from './components/AsideNav.vue'
 import PageLoading from './components/PageLoading.vue'
 // 新增的外部链接警告组件
 import ExternalLinkWarning from './components/ExternalLinkWarning.vue'
+// 新增的HTML页面组件
+import HtmlPage from './components/HtmlPage.vue'
 // @ts-ignore
 import { h } from 'vue'
 // @ts-ignore
@@ -29,6 +31,8 @@ export default defineClientConfig({
     app.component('PageLoading', PageLoading)
     // 注册外部链接警告组件
     app.component('ExternalLinkWarning', ExternalLinkWarning)
+    // 注册HTML页面组件
+    app.component('HtmlPage', HtmlPage)
     // 注册 Element Plus
     // app.use(ElementPlus)
   },

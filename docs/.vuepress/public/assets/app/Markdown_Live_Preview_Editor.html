@@ -1,27 +1,498 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
+
 <head>
-<meta charset="UTF-8"/>
-<title>Markdown Live Editor</title>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<style>
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;height:100vh;display:flex}
-#in,#out{width:50%;height:100%;padding:15px;border:none;font-size:16px;outline:none;resize:none}
-#in{background:#f8f9fa;border-right:1px solid #dee2e6}
-</style>
+  <meta charset="UTF-8" />
+  <title>增强版 Markdown 实时编辑器（可折叠输入框）</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+  <!-- Marked -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- GitHub Markdown CSS（亮色与暗色） -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css"
+    id="markdown-light">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-dark.min.css"
+    id="markdown-dark" disabled>
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    :root {
+      --bg-light: #f8f9fa;
+      --bg-dark: #272a2f;
+      --text-light: #212529;
+      --text-dark: #e0e0e0;
+      --border-light: #dee2e6;
+      --border-dark: #444;
+      --input-bg-light: #ffffff;
+      --input-bg-dark: #272a2f;
+      --toolbar-bg-light: rgba(255, 255, 255, 0.85);
+      --toolbar-bg-dark: rgba(30, 30, 30, 0.85);
+      --preview-bg-light: #ffffff;
+      --preview-bg-dark: #272a2f;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    #toolbar-container {
+      flex-shrink: 0;
+      border-bottom: 1px solid var(--border-light);
+      background: var(--toolbar-bg-light);
+      backdrop-filter: blur(10px);
+      transition: background 0.5s ease, border-color 0.5s ease;
+    }
+
+    body.dark #toolbar-container {
+      background: var(--toolbar-bg-dark);
+      border-bottom-color: var(--border-dark);
+    }
+
+    #toolbar {
+      padding: 12px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    @media (max-width: 768px) {
+      #toolbar {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 15px;
+        gap: 15px;
+      }
+
+      #toolbar.expanded {
+        display: flex;
+      }
+
+      .toolbar-group {
+        justify-content: center;
+      }
+    }
+
+    .toolbar-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #toolbar button {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease, transform 0.1s ease;
+    }
+
+    body.dark #toolbar button {
+      background: #333;
+      border-color: var(--border-dark);
+      color: #e0e0e0;
+    }
+
+    #toolbar button:hover {
+      background: #e9ecef;
+    }
+
+    body.dark #toolbar button:hover {
+      background: #444;
+    }
+
+    #toolbar button:active {
+      transform: scale(0.95);
+    }
+
+    #mobile-toggle {
+      display: none;
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      #mobile-toggle {
+        display: block;
+      }
+    }
+
+    #container {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @media (max-width: 768px) {
+      #container {
+        flex-direction: column;
+      }
+    }
+
+    #in {
+      width: 50%;
+      height: 100%;
+      padding: 20px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+      box-sizing: border-box;
+      overflow-y: auto;
+      background: var(--input-bg-light);
+      border-right: 1px solid var(--border-light);
+      font-family: "SF Mono", Monaco, "Cascadia Code", Consolas, monospace;
+      line-height: 1.6;
+      resize: none;
+      transition: width 0.4s ease, background 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+    }
+
+    body.dark #in {
+      background: var(--input-bg-dark);
+      border-right-color: var(--border-dark);
+      color: #e0e0e0;
+    }
+
+    /* 折叠状态 */
+    #in.collapsed {
+      width: 0;
+      padding: 20px 0;
+      border-right: none;
+    }
+
+    #out-container {
+      width: 50%;
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      background: var(--preview-bg-light);
+      transition: width 0.4s ease, background 0.5s ease;
+    }
+
+    body.dark #out-container {
+      background: var(--preview-bg-dark);
+    }
+
+    /* 预览区占满剩余空间 */
+    #out-container.full {
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+
+      #in,
+      #out-container {
+        width: 100%;
+        height: 50%;
+      }
+
+      #in.collapsed {
+        height: 0;
+        padding: 0;
+        border-bottom: none;
+      }
+
+      #out-container.full {
+        height: 100%;
+      }
+    }
+
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+      background: transparent;
+      transition: color 0.5s ease;
+    }
+
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      transition: background 0.5s ease;
+    }
+
+    body.dark ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  </style>
 </head>
+
 <body>
-<textarea id="in" placeholder="输入 Markdown…"></textarea>
-<iframe id="out"></iframe>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script>
-const inEl = document.getElementById('in');
-const outEl = document.getElementById('out');
-function render(){
-  outEl.srcdoc = marked.parse(inEl.value) || '<p style="color:#999;margin-top:20px;text-align:center">实时预览</p>';
-}
-inEl.addEventListener('input', render);
-render();
-</script>
+  <div id="toolbar-container">
+    <button id="mobile-toggle"><i class="bi bi-list"></i> 工具栏</button>
+
+    <div id="toolbar">
+      <div class="toolbar-group">
+        <button title="加粗" id="bold"><i class="bi bi-type-bold"></i></button>
+        <button title="斜体" id="italic"><i class="bi bi-type-italic"></i></button>
+        <button title="删除线" id="strikethrough"><i class="bi bi-type-strikethrough"></i></button>
+        <button title="内联代码" id="code"><i class="bi bi-code"></i></button>
+        <button title="代码块" id="codeblock"><i class="bi bi-code-square"></i></button>
+      </div>
+      <div class="toolbar-group">
+        <button title="链接" id="link"><i class="bi bi-link-45deg"></i></button>
+        <button title="图片" id="image"><i class="bi bi-image"></i></button>
+        <button title="H1" id="h1"><i class="bi bi-type-h1"></i></button>
+        <button title="H2" id="h2"><i class="bi bi-type-h2"></i></button>
+        <button title="H3" id="h3"><i class="bi bi-type-h3"></i></button>
+        <button title="引用" id="quote"><i class="bi bi-chat-quote"></i></button>
+      </div>
+      <div class="toolbar-group">
+        <button title="无序列表" id="ul"><i class="bi bi-list-ul"></i></button>
+        <button title="有序列表" id="ol"><i class="bi bi-list-ol"></i></button>
+        <button title="任务列表" id="task"><i class="bi bi-check-square"></i></button>
+        <button title="分割线" id="hr"><i class="bi bi-hr"></i></button>
+      </div>
+      <div class="toolbar-group">
+        <button title="复制 Markdown" id="copyBtn"><i class="bi bi-clipboard"></i></button>
+        <button title="折叠输入框" id="toggleInputBtn"><i class="bi bi-layout-sidebar-inset"></i></button>
+        <button title="全屏" id="fullscreenBtn"><i class="bi bi-fullscreen"></i></button>
+        <button title="暗色模式" id="darkToggleBtn"><i class="bi bi-moon-stars-fill"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="container">
+    <textarea id="in" placeholder="输入 Markdown 文本…"></textarea>
+    <div id="out-container">
+      <article class="markdown-body"></article>
+    </div>
+  </div>
+
+  <script>
+    // Marked 配置（无代码高亮）
+    marked.setOptions({
+      gfm: true,
+      breaks: true,
+      headerIds: true,
+      mangle: false,
+      highlight: null
+    });
+
+    const inEl = document.getElementById('in');
+    const outContainer = document.getElementById('out-container');
+    const markdownBody = outContainer.querySelector('.markdown-body');
+    const copyBtn = document.getElementById('copyBtn');
+    const darkToggleBtn = document.getElementById('darkToggleBtn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const toggleInputBtn = document.getElementById('toggleInputBtn');
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const toolbar = document.getElementById('toolbar');
+
+    const STORAGE_KEY = 'markdown-editor-content';
+    const DARK_PREF_KEY = 'markdown-editor-dark-preference';
+
+    // 恢复内容
+    if (localStorage.getItem(STORAGE_KEY)) {
+      inEl.value = localStorage.getItem(STORAGE_KEY);
+    }
+
+    function insertText(before, after = '', defaultText = '') {
+      const start = inEl.selectionStart;
+      const end = inEl.selectionEnd;
+      const selected = inEl.value.substring(start, end);
+      const insertContent = selected ? selected : defaultText;
+      const newText = before + insertContent + after;
+
+      inEl.value = inEl.value.substring(0, start) + newText + inEl.value.substring(end);
+
+      inEl.focus();
+      const cursorPos = start + before.length + insertContent.length;
+      inEl.setSelectionRange(cursorPos, cursorPos);
+
+      render();
+    }
+
+    // 快捷按钮绑定（保持不变）
+    document.getElementById('bold').addEventListener('click', () => insertText('**', '**', '粗体文本'));
+    document.getElementById('italic').addEventListener('click', () => insertText('*', '*', '斜体文本'));
+    document.getElementById('strikethrough').addEventListener('click', () => insertText('~~', '~~', '删除线文本'));
+    document.getElementById('code').addEventListener('click', () => insertText('`', '`', '内联代码'));
+
+    document.getElementById('link').addEventListener('click', () => {
+      const url = prompt('输入链接 URL：', 'https://');
+      if (url === null) return;
+      const text = prompt('输入链接文字（可选）：', '链接文字') || '链接文字';
+      insertText('[', `](${url})`, text);
+    });
+
+    document.getElementById('image').addEventListener('click', () => {
+      const url = prompt('输入图片 URL：', 'https://');
+      if (url === null) return;
+      const alt = prompt('输入图片描述（Alt 文字，可选）：', '图片描述') || '';
+      insertText('![', `](${url})`, alt);
+    });
+
+    document.getElementById('codeblock').addEventListener('click', () => {
+      const lang = prompt('输入代码语言（可选，如 javascript、python 等）：', '') || '';
+      insertText(`\`\`\`${lang}\n`, '\n```', '代码内容');
+    });
+
+    document.getElementById('h1').addEventListener('click', () => insertText('# ', '', '一级标题'));
+    document.getElementById('h2').addEventListener('click', () => insertText('## ', '', '二级标题'));
+    document.getElementById('h3').addEventListener('click', () => insertText('### ', '', '三级标题'));
+    document.getElementById('quote').addEventListener('click', () => insertText('> ', '', '引用内容'));
+    document.getElementById('ul').addEventListener('click', () => insertText('- ', '', '列表项'));
+    document.getElementById('ol').addEventListener('click', () => insertText('1. ', '', '列表项'));
+    document.getElementById('task').addEventListener('click', () => insertText('- [ ] ', '', '任务项'));
+    document.getElementById('hr').addEventListener('click', () => insertText('\n\n---\n\n'));
+
+    function render() {
+      const html = marked.parse(inEl.value);
+      markdownBody.innerHTML = html || '';
+
+      localStorage.setItem(STORAGE_KEY, inEl.value);
+
+      syncScroll();
+    }
+
+    function syncScroll() {
+      if (inEl.classList.contains('collapsed')) return;
+      const ratio = inEl.scrollTop / (inEl.scrollHeight - inEl.clientHeight);
+      const maxScroll = outContainer.scrollHeight - outContainer.clientHeight;
+      outContainer.scrollTop = ratio * maxScroll;
+    }
+
+    inEl.addEventListener('input', render);
+    inEl.addEventListener('scroll', syncScroll);
+
+    // 复制按钮
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(inEl.value);
+        copyBtn.innerHTML = '<i class="bi bi-check-lg"></i>';
+        setTimeout(() => copyBtn.innerHTML = '<i class="bi bi-clipboard"></i>', 2000);
+      } catch (err) {
+        alert('复制失败，请手动选择复制');
+      }
+    });
+
+    // 移动端工具栏
+    mobileToggle.addEventListener('click', () => {
+      toolbar.classList.toggle('expanded');
+      mobileToggle.innerHTML = toolbar.classList.contains('expanded')
+        ? '<i class="bi bi-x-lg"></i> 关闭工具栏'
+        : '<i class="bi bi-list"></i> 工具栏';
+    });
+
+    // 新增：折叠左侧输入框
+    toggleInputBtn.addEventListener('click', () => {
+      inEl.classList.toggle('collapsed');
+      outContainer.classList.toggle('full');
+
+      if (inEl.classList.contains('collapsed')) {
+        toggleInputBtn.innerHTML = '<i class="bi bi-layout-sidebar-inset-reverse"></i>';
+        toggleInputBtn.title = '展开输入框';
+      } else {
+        toggleInputBtn.innerHTML = '<i class="bi bi-layout-sidebar-inset"></i>';
+        toggleInputBtn.title = '折叠输入框';
+      }
+
+      // 折叠时停止同步滚动
+      if (!inEl.classList.contains('collapsed')) {
+        syncScroll();
+      }
+    });
+
+    // 全屏功能
+    fullscreenBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          alert(`无法进入全屏模式: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    });
+
+    document.addEventListener('fullscreenchange', () => {
+      if (document.fullscreenElement) {
+        fullscreenBtn.innerHTML = '<i class="bi bi-fullscreen-exit"></i>';
+        fullscreenBtn.title = '退出全屏';
+      } else {
+        fullscreenBtn.innerHTML = '<i class="bi bi-fullscreen"></i>';
+        fullscreenBtn.title = '全屏';
+      }
+    });
+
+    // 主题切换
+    function shouldBeDark() {
+      const manualPref = localStorage.getItem(DARK_PREF_KEY);
+      if (manualPref !== null) return manualPref === 'true';
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+
+    function applyTheme(isDark) {
+      document.body.classList.toggle('dark', isDark);
+
+      document.getElementById('markdown-light').disabled = isDark;
+      document.getElementById('markdown-dark').disabled = !isDark;
+
+      darkToggleBtn.innerHTML = isDark
+        ? '<i class="bi bi-sun-fill"></i>'
+        : '<i class="bi bi-moon-stars-fill"></i>';
+      darkToggleBtn.title = isDark ? '亮色模式' : '暗色模式';
+    }
+
+    darkToggleBtn.addEventListener('click', () => {
+      const willBeDark = !document.body.classList.contains('dark');
+      localStorage.setItem(DARK_PREF_KEY, willBeDark);
+      applyTheme(willBeDark);
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (localStorage.getItem(DARK_PREF_KEY) === null) {
+        applyTheme(e.matches);
+      }
+    });
+
+    // 初始化
+    applyTheme(shouldBeDark());
+    render();
+  </script>
 </body>
+
 </html>
