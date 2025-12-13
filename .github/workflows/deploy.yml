@@ -50,8 +50,7 @@ jobs:
 
       # 步骤4：安装项目依赖
       - name: 安装依赖 / Install Dependencies
-        run: pnpm install --frozen-lockfile
-        # 使用 --frozen-lockfile 确保依赖版本与锁文件严格一致
+        run: pnpm install
 
       # 步骤5：构建 VuePress 文档站点
       - name: 构建 VuePress 站点 / Build VuePress site
