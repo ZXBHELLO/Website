@@ -75,6 +75,33 @@ export const navData = [
         icon: 'line-md:iconify1',
         showIconBorder: true,
       },
+      {
+        id: 'HTML_CSS_JS_Live_Preview_Editor',
+        title: '实时网页编辑器',
+        description: '网页在线编辑与预览',
+        url: '/app/HTML_CSS_JS_Live_Preview_Editor/',
+        iconType: 'iconify',
+        icon: 'dashicons:html',
+        showIconBorder: true,
+      },
+      {
+        id: 'Markdown_Live_Preview_Editor',
+        title: '实时Markdown编辑器',
+        description: 'Markdown在线编辑与预览',
+        url: '/app/Markdown_Live_Preview_Editor/',
+        iconType: 'iconify',
+        icon: 'la:markdown',
+        showIconBorder: true,
+      },
+      {
+        id: 'Offline_Image_Compression',
+        title: '图片压缩工具',
+        description: '无后端的图片压缩工具',
+        url: '/app/Offline_Image_Compression/',
+        iconType: 'iconify',
+        icon: 'la:compress',
+        showIconBorder: true,
+      },
     ]
   },
   {

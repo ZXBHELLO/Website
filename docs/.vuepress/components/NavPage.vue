@@ -5,7 +5,7 @@
       <div class="m-nav-links">
         <a 
           v-for="(item, index) in group.items" 
-          :key="`${group.category}-${index}-${item.id || item.title || ''}`"
+          :key="index"
           :href="item.url" 
           class="m-nav-link" 
           target="_blank" 
@@ -30,7 +30,6 @@
               loading="lazy" 
               @load="onImageLoad"
               @error="onImageError"
-              :class="{ loaded: imageCache.has(item.icon) }"
             />
           </div>
           <div class="m-nav-link-content">
@@ -50,18 +49,14 @@ import { navData } from '../../nav/data.js'
 // 常量定义
 const LOAD_GROUP_COUNT = 6  // 增加初始加载数量
 const SCROLL_DEBOUNCE_DELAY = 50  // 减少防抖延迟
-const CHECK_LOAD_MORE_DELAY = 50  // 减少检查延迟
 const ICONIFY_SCRIPT_URL = 'https://code.iconify.design/2/2.1.2/iconify.min.js'
 const BOTTOM_THRESHOLD = 300  // 提前触发加载的距离
 
 // 性能优化：实现动态加载
 const visibleGroups = ref([])
-const imageCache = ref(new Set())
-const loadedGroups = ref(new Set()) // 记录已加载的分组
 let scrollTimer = null
 let iconifyScript = null
 let observer = null
-let checkLoadMoreTimer = null // 添加定时器引用
 
 // 使用 Intersection Observer 替代滚动事件监听
 const createObserver = () => {
@@ -128,11 +123,7 @@ const loadMoreGroups = () => {
   for (let i = 0; i < loadCount; i++) {
     const groupIndex = currentCount + i
     if (groupIndex < navData.length) {
-      // 检查是否已经加载过该分组
-      if (!loadedGroups.value.has(navData[groupIndex].category)) {
-        newGroups.push(navData[groupIndex])
-        loadedGroups.value.add(navData[groupIndex].category)
-      }
+      newGroups.push(navData[groupIndex])
     }
   }
   
@@ -146,36 +137,27 @@ const loadMoreGroups = () => {
 
 // 处理 Iconify 图标
 const processIconifyIcons = () => {
-  // 使用 requestAnimationFrame 确保 DOM 已更新并避免阻塞
-  requestAnimationFrame(() => {
-    const hasIconifyIcons = document.querySelectorAll('.iconify:not(.iconify-loaded)').length > 0
-    if (hasIconifyIcons) {
-      if (window.Iconify) {
-        // 如果Iconify已经存在，直接渲染图标
-        window.Iconify.scan()
-        // 为所有图标添加loaded类
-        addLoadedClassToIcons()
-      } else {
-        // 如果Iconify不存在，加载脚本
-        loadIconifyScript()
-      }
+  const hasIconifyIcons = document.querySelectorAll('.iconify:not(.iconify-loaded)').length > 0
+  if (hasIconifyIcons) {
+    if (window.Iconify) {
+      // 如果Iconify已经存在，直接渲染图标
+      window.Iconify.scan()
+      // 为所有图标添加loaded类
+      const icons = document.querySelectorAll('.iconify:not(.iconify-loaded)')
+      icons.forEach(icon => icon.classList.add('iconify-loaded'))
+    } else {
+      // 如果Iconify不存在，加载脚本
+      loadIconifyScript()
     }
-  })
-}
-
-// 为图标添加 loaded 类
-const addLoadedClassToIcons = () => {
-  requestAnimationFrame(() => {
-    const icons = document.querySelectorAll('.iconify:not(.iconify-loaded)')
-    icons.forEach(icon => {
-      icon.classList.add('iconify-loaded')
-    })
-  })
+  }
 }
 
 // 加载 Iconify 脚本
 const loadIconifyScript = () => {
-  // 总是尝试加载Iconify脚本，确保即使之前失败也能重新加载
+  // 如果脚本已经在加载或已存在，则直接返回
+  if (iconifyScript || window.Iconify) return
+  
+  // 创建并加载Iconify脚本
   iconifyScript = document.createElement('script')
   iconifyScript.src = ICONIFY_SCRIPT_URL
   iconifyScript.async = true
@@ -184,38 +166,22 @@ const loadIconifyScript = () => {
     if (window.Iconify) {
       window.Iconify.scan()
       // 为所有已渲染的图标添加loaded类
-      addLoadedClassToIcons()
+      const icons = document.querySelectorAll('.iconify:not(.iconify-loaded)')
+      icons.forEach(icon => icon.classList.add('iconify-loaded'))
     }
+    // 清理脚本引用
+    iconifyScript = null
   }
   // 错误处理，确保脚本加载失败时可以重试
   iconifyScript.onerror = () => {
     console.warn('Iconify script failed to load, retrying...')
     // 清理失败的脚本引用以便重试
-    if (iconifyScript) {
-      document.head.removeChild(iconifyScript)
-      iconifyScript = null
-    }
+    iconifyScript = null
   }
   document.head.appendChild(iconifyScript)
 }
 
-// 检查是否需要加载更多内容
-const checkLoadMore = () => {
-  const scrollY = window.scrollY || window.pageYOffset
-  const windowHeight = window.innerHeight
-  const documentHeight = document.documentElement.scrollHeight
-  
-  // 如果内容不足一屏，继续加载
-  if (documentHeight <= windowHeight + BOTTOM_THRESHOLD) {
-    loadMoreGroups()
-    // 使用循环替代递归
-    checkLoadMoreTimer = setTimeout(checkLoadMore, CHECK_LOAD_MORE_DELAY)
-  }
-}
-
 const onImageLoad = (event) => {
-  const src = event.target.src
-  imageCache.value.add(src)
   // 添加loaded类以触发动画
   event.target.classList.add('loaded')
 }
@@ -240,9 +206,6 @@ onMounted(() => {
   
   // 创建 Intersection Observer 或添加滚动事件监听器
   createObserver()
-  
-  // 检查是否需要加载更多内容
-  setTimeout(checkLoadMore, CHECK_LOAD_MORE_DELAY)
 })
 
 onUnmounted(() => {
@@ -257,10 +220,6 @@ onUnmounted(() => {
     clearTimeout(scrollTimer)
   }
   
-  if (checkLoadMoreTimer) {
-    clearTimeout(checkLoadMoreTimer)
-  }
-  
   // 清理 Iconify 脚本
   if (iconifyScript) {
     // 不要移除已成功加载的脚本，因为其他组件可能还在使用
@@ -273,10 +232,6 @@ onUnmounted(() => {
   if (sentinel) {
     sentinel.remove()
   }
-  
-  // 清理集合数据
-  loadedGroups.value.clear()
-  imageCache.value.clear()
 })
 </script>
 
@@ -338,28 +293,9 @@ onUnmounted(() => {
   font-weight: bold;
 }
 
-/* 添加边框和阴影过渡伪元素 */
-.m-nav-link::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 12px;
-  pointer-events: none;
-  transition: border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), /* 缩短过渡时间 */
-              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 1;
-  box-shadow: 0 0 0 rgba(80, 134, 161, 0);
-}
-
 /* 导航链接悬停效果 */
 .m-nav-link:hover {
   background: linear-gradient(135deg, rgba(80, 134, 161, 0.05) 0%, rgba(131, 208, 218, 0.05) 100%);
-}
-
-/* 悬停时边框和阴影淡入 */
-.m-nav-link:hover::before {
   border-color: var(--vp-c-brand-1);
   box-shadow: 0 8px 24px rgba(80, 134, 161, 0.2);
 }
