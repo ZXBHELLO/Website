@@ -549,8 +549,8 @@ export const navData = [
       {
         title: 'Stylus',
         url: 'https://stylus-lang.com/',
-        iconType: 'iconify',
-        icon: 'logos:stylus',
+        iconType: 'image',
+        icon: 'https://stylus-lang.com/logo.svg',
         showIconBorder: true,
         description: '富有表现力、动态且健壮的CSS',
       },
