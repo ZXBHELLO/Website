@@ -10,6 +10,8 @@ import PageLoading from './components/PageLoading.vue'
 import ExternalLinkWarning from './components/ExternalLinkWarning.vue'
 // 新增的HTML页面组件
 import HtmlPage from './components/HtmlPage.vue'
+// 可爱的幽灵组件
+import Ghost from './components/Ghost.vue'
 // @ts-ignore
 import { h } from 'vue'
 // @ts-ignore
@@ -33,6 +35,8 @@ export default defineClientConfig({
     app.component('ExternalLinkWarning', ExternalLinkWarning)
     // 注册HTML页面组件
     app.component('HtmlPage', HtmlPage)
+    // 注册可爱的幽灵组件
+    app.component('Ghost', Ghost)
     // 注册 Element Plus
     // app.use(ElementPlus)
   },
