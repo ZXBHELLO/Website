@@ -127,7 +127,6 @@ export const navData = [
       },
     ]
   },
-
   {
     category: '开发基础',
     items: [
@@ -1240,7 +1239,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'logos:vitest',
         showIconBorder: true,
-        description: '��Vite驱动的测试框架',
+        description: '由Vite驱动的测试框架',
       },
       {
         title: 'cypress',
@@ -1377,7 +1376,7 @@ export const navData = [
         iconType: 'iconify',
         icon: 'vscode-icons:file-type-c3',
         showIconBorder: true,
-        description: '基于D3的可��用图表库',
+        description: '基于D3的可重用图表库',
       },
       {
         title: 'D3',
@@ -1691,7 +1690,6 @@ export const navData = [
     category: '导航示例',
     items: [
       {
-        //不填ID���像也可以?
         title: 'iconfiy图标示例',
         description: '支持iconfiy图标',
         url: 'https://github.com/ZXBHELLO/Website',
@@ -1700,22 +1698,19 @@ export const navData = [
         showIconBorder: true,
       },
       {
-        //不填ID好像也可以?
         title: '没有描述的示例',
-        // description: '没有描述',
         url: 'https://github.com/ZXBHELLO/Website',
         iconType: 'iconify',
         icon: 'line-md:emoji-smile-wink',
         showIconBorder: true,
       },
       {
-        //不填ID好像也可以?
         title: '没有图标边框的示例',
         description: '这个示例图标不显示边框',
         url: 'https://github.com/ZXBHELLO/Website',
         iconType: 'iconify',
         icon: 'line-md:emoji-smile-wink',
-        showIconBorder: true,  //←这里禁用了
+        showIconBorder: false,  // 已修正为 false 以符合描述
       },
       {
         title: '没有图标的示例',
