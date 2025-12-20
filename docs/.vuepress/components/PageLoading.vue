@@ -1,4 +1,5 @@
 <template>
+  <!-- 恢复 transition，实现淡入 + 淡出动画 -->
   <transition name="fade" appear>
     <div v-if="loading" class="page-loading">
       <div class="loader">
@@ -22,70 +23,90 @@ import { useSiteLocaleData } from '@vuepress/client'
 
 const loading = ref(true)
 const site = useSiteLocaleData()
-
-// siteTitle 用于显示站点标题，若未设置则默认显示 'ZakoWeb'
 const siteTitle = computed(() => site.value.title)
 
-let timeoutId = 0
-let minTimeoutId = 0
-// 最小加载时间（毫秒）
-const MAX_LOADING_TIME = 3000
-const MIN_LOADING_TIME = 800
+const MIN_LOADING_TIME = 800   // 最小显示时间
+const MAX_LOADING_TIME = 8000  // 最大强制隐藏时间
 
-let loaded = false
+let minTimer: number | null = null
+let maxTimer: number | null = null
+let resourcesLoaded = false
 
-// 监听页面加载完成事件
-const setPageLoadedClass = () => {
+// 统一隐藏函数（仅改变响应式状态，淡出由 transition 控制）
+const hideLoading = () => {
+  if (!loading.value) return
+  loading.value = false
   document.body.classList.add('page-loaded')
 }
 
-const handleLoad = () => {
-  loaded = true
-  // 如果已经达到最小加载时间，则隐藏加载动画
-  if (!minTimeoutId) {
-    if (timeoutId) clearTimeout(timeoutId)
-    loading.value = false
-    // 添加页面加载完成的类
-    setPageLoadedClass()
+// 检查图片等资源是否加载完成（避免图片未加载完就隐藏）
+const checkResourcesLoaded = () => {
+  const images = document.querySelectorAll('img')
+  if (images.length === 0) return true
+  return Array.from(images).every(img => img.complete && img.naturalHeight !== 0)
+}
+
+// 标记页面资源就绪
+const markPageReady = () => {
+  if (resourcesLoaded) return
+  resourcesLoaded = true
+
+  // 如果最小时间已过，立即开始淡出
+  if (minTimer === null) {
+    hideLoading()
   }
 }
 
 onMounted(() => {
-  // 设置最小加载时间
-  minTimeoutId = window.setTimeout(() => {
-    if (loaded) {
-      loading.value = false
-      // 添加页面加载完成的类
-      setPageLoadedClass()
-    }
-    
-    // 清除最大超时，因为最小超时已经触发
-    if (timeoutId) {
-      clearTimeout(timeoutId)
-      timeoutId = 0
+  // 1. 最小显示时间
+  minTimer = window.setTimeout(() => {
+    minTimer = null
+    if (resourcesLoaded) {
+      hideLoading()
     }
   }, MIN_LOADING_TIME)
-  
-  // 设置最长加载时间，防止加载动画一直显示
-  timeoutId = window.setTimeout(() => {
-    loaded = true
-    loading.value = false
-    // 添加页面加载完成的类
-    setPageLoadedClass()
+
+  // 2. 最大强制隐藏（兜底）
+  maxTimer = window.setTimeout(() => {
+    console.warn('Loading timeout: 强制隐藏加载动画')
+    resourcesLoaded = true
+    hideLoading()
   }, MAX_LOADING_TIME)
-  
-  // 如果页面已经加载完成，则直接隐藏加载动画
-  if (document.readyState === 'complete') {
-    handleLoad()
-  } else {
-    window.addEventListener('load', handleLoad)
+
+  // 3. 多重就绪检测
+  const tryMarkReady = () => {
+    if (document.readyState === 'complete' && checkResourcesLoaded()) {
+      markPageReady()
+    }
   }
+
+  // 立即检查一次
+  tryMarkReady()
+
+  // DOM 加载完成
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', tryMarkReady, { once: true })
+  }
+
+  // 所有资源加载完成
+  window.addEventListener('load', () => {
+    setTimeout(markPageReady, 100)  // 稍微延后确保图片渲染
+  }, { once: true })
+
+  // 轮询保险
+  const interval = setInterval(() => {
+    if (checkResourcesLoaded() && document.readyState === 'complete') {
+      clearInterval(interval)
+      markPageReady()
+    }
+  }, 500)
+
+  window.addEventListener('load', () => clearInterval(interval), { once: true })
 })
 
 onUnmounted(() => {
-  window.removeEventListener('load', handleLoad)
-  if (timeoutId) clearTimeout(timeoutId)
-  if (minTimeoutId) clearTimeout(minTimeoutId)
+  if (minTimer !== null) clearTimeout(minTimer)
+  if (maxTimer !== null) clearTimeout(maxTimer)
 })
 </script>
 
@@ -101,6 +122,25 @@ onUnmounted(() => {
   justify-content: center;
   align-items: center;
   z-index: 9999;
+}
+
+/* 恢复优雅的淡入淡出动画 */
+.fade-enter-active {
+  transition: opacity 0.3s ease-out;
+}
+
+.fade-leave-active {
+  transition: opacity 0.3s ease-in;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* appear 选项使首次挂载也有淡入效果 */
+.fade-appear-active {
+  transition: opacity 0.3s ease-out;
 }
 
 .loader {
@@ -130,18 +170,12 @@ onUnmounted(() => {
   border-radius: 50%;
   background: var(--vp-c-brand);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* 使用 var(--delay) 变量为每个点设置动画延迟，实现依次弹跳效果 */
   animation: bounce 1.5s var(--delay) infinite cubic-bezier(0.28, 0.84, 0.42, 1);
-  transform: translateY(0);
 }
 
 @keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
 }
 
 .loading-text {
@@ -154,25 +188,10 @@ onUnmounted(() => {
 .loading-subtext {
   color: var(--vp-c-text-3);
   font-size: 14px;
-  margin-top: 0;
 }
 
 @keyframes pulse {
   from { opacity: 0.7; }
   to { opacity: 1; }
-}
-
-/* 淡入淡出过渡效果 */
-.fade-enter-active {
-  transition: opacity 0s ease-out;
-}
-
-.fade-leave-active {
-  transition: opacity 0.3s ease-in;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>
