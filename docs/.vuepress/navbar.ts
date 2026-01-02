@@ -20,10 +20,21 @@ export default defineNavbarConfig([
     text: '博客',
     icon: 'line-md:text-box-multiple-twotone',
     items: [
-      { text: '文章', link: '/article/' },
-      { text: '标签', link: '/article/tags/' },
-      { text: '分类', link: '/article/categories/' },
-      { text: '归档', link: '/article/archives/' },
+      { text: '文章', link: '/article/', icon: 'stash:article' },
+      { text: '标签', link: '/article/tags/', icon: 'mingcute:tag-2-line' },
+      { text: '分类', link: '/article/categories/', icon: 'line-md:folder-twotone' },
+      { text: '归档', link: '/article/archives/', icon: 'line-md:calendar-twotone' },
+    ]
+  },
+  {
+    text: '应用',
+    icon: 'line-md:grid-3-filled',
+    items: [
+      { text: 'OpenList云盘', link: '/app/Openlist/', icon: 'arcticons:baidu-netdisk' },
+      { text: '离线图片压缩', link: '/app/Offline_Image_Compression/', icon: 'line-md:cloud-alt-download-loop' },
+      { text: '2D红石编辑器', link: '/app/rseditor/', icon: 'fluent:calendar-edit-32-regular' },
+      { text: '在线Markdown编辑器', link: '/app/Markdown_Live_Preview_Editor/', icon: 'la:markdown' },
+      { text: '在线HTML编辑器', link: '/app/HTML_CSS_JS_Live_Preview_Editor/', icon: 'dashicons:html' },
     ]
   },
   {
