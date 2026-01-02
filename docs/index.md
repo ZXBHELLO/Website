@@ -25,10 +25,6 @@ config:
           link: /nav/
         -
           theme: alt
-          text: 个人页
-          link: /article/about-me/
-        -
-          theme: alt
           text: 企鹅群
           link: https://qm.qq.com/q/SPZEHOyWsw
         -
