@@ -202,7 +202,7 @@ onUnmounted(() => {
 .m-nav-header {
   position: sticky;
   top: var(--nav-header-top);
-  z-index: 100;
+  z-index: 1;
   background: var(--nav-bg);
   padding: 0.8rem 1.5rem 0.6rem;
   border-bottom: 1px solid var(--vp-c-divider);
