@@ -1,12 +1,20 @@
+/* 
+   优化建议：
+   请尽量将以下 @import 内容移动到 .vuepress/config.ts 的 head 配置中，
+   使用 <link rel="stylesheet"> 引入，性能会比 CSS @import 快很多。
+*/
 @import url("https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css");
 @import url("https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@4.2.1/index.min.css");
 @import url("https://fonts.googleapis.com/css2?family=Ysabeau:ital,wght@1,1..1000&display=swap");
 
-/* 自定义字体声明，确保 font-display: swap 避免 FOIT */
+/* --- 字体定义 --- */
+/* 使用 font-display: swap 避免文字隐形 (FOIT) */
 @font-face {
   font-family: 'LXGW WenKai';
   src: url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/fonts/LXGWWenKai-Regular.woff2') format('woff2');
   font-display: swap;
+  unicode-range: U+4E00-9FFF;
+  /* 仅对汉字生效，优化加载 */
 }
 
 @font-face {
@@ -15,146 +23,141 @@
   font-display: swap;
 }
 
-/* --- 字体设置 --- */
-
+/* --- 全局变量与基础设置 --- */
 :root {
-  --vp-font-family-base: "LXGW WenKai", "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  /* 字体栈优化：英文字体在前，中文字体在后 */
+  --vp-font-family-base: "Ysabeau", "LXGW WenKai", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --vp-font-family-mono: "Cascadia Code", "Consolas", "Monaco", monospace;
-  /* 调整侧边栏宽度 */
   --vp-sidebar-width: 15rem;
-  font-optical-sizing: auto;
+
+  /* 动画相关变量 */
+  --anim-dist: 15px;
+  --anim-duration: 0.4s;
 }
 
-/* 确保所有元素默认使用基础字体 */
-* {
+/* 
+   BUG修复：不要使用 * 选择器，否则会覆盖 Iconify 等图标字体 
+   只需设置 body，子元素会自动继承
+*/
+body {
   font-family: var(--vp-font-family-base);
-}
-
-/* --- 其他元素字体设置 --- */
-
-.tag-name,
-.blog-post-item-content .post-meta .tag-list,
-.blog-post-item-content .post-meta a,
-.vp-category-group .folder,
-.vp-doc-meta .tag,
-.vp-footer,
-.footer-message,
-.profile-info {
-  font-family: "Ysabeau", "Inter", "Roboto", sans-serif;
-}
-
-/* --- 微调 --- */
-
-html {
   font-size: 17px;
   font-weight: 400;
   text-rendering: optimizeLegibility;
   font-feature-settings: "liga" 1, "dlig" 1, "tnum";
+  -webkit-font-smoothing: antialiased;
 }
 
-.vp-doc div[class*="language-"] pre,
-.vp-doc div[class*="language-"] code {
-  font-weight: 350;
+/* 特殊字体区域 */
+.tag-name,
+.blog-post-item-content .post-meta,
+.vp-category-group .folder,
+.vp-doc-meta .tag,
+.vp-footer,
+.profile-info {
+  font-family: "Ysabeau", "Inter", sans-serif;
+}
+
+/* 代码块字体修正 */
+.vp-doc :is(pre, code) {
+  font-family: var(--vp-font-family-mono);
+  font-weight: 400;
+  /* 略微增加代码粗细以提升可读性 */
   font-variant-ligatures: normal;
 }
 
-/* --- 页脚透明背景 --- */
+/* --- 背景与毛玻璃优化 --- */
+
+/* 网格背景 */
+.vp-doc-container {
+  --vp-doc-grid-bg: rgba(64, 64, 64, 0.08);
+  /* 稍微调淡，减少视觉干扰 */
+  background-image:
+    linear-gradient(90deg, var(--vp-doc-grid-bg) 1px, transparent 0),
+    linear-gradient(1turn, var(--vp-doc-grid-bg) 1px, transparent 0);
+  background-position: 50%;
+  background-size: 24px 24px;
+}
+
+[data-theme="dark"] .vp-doc-container {
+  --vp-doc-grid-bg: rgba(128, 128, 128, 0.08);
+}
+
+/* 透明化组件 */
 .vp-footer {
   background-color: transparent !important;
   backdrop-filter: none !important;
 }
 
-/* --- 侧边栏透明背景 --- */
+/* 侧边栏 - 使用 CSS 变量便于维护 */
 .vp-sidebar,
 .vp-sidebar .curtain {
-  background-color: rgba(255, 255, 255, 0.4) !important;
-  backdrop-filter: blur(5px) !important;
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  /* 稍微增加不透明度以提升文字对比度 */
+  backdrop-filter: blur(8px) !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  /* 增加微妙边界 */
 }
 
-/* 深色主题下的侧边栏样式 */
-[data-theme="dark"] .vp-sidebar,
-[data-theme="dark"] .vp-sidebar .curtain {
-  background-color: rgba(30, 30, 30, 0.4) !important;
-  backdrop-filter: blur(5px) !important;
+[data-theme="dark"] :is(.vp-sidebar, .vp-sidebar .curtain) {
+  background-color: rgba(30, 30, 30, 0.6) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* --- 网格背景 --- */
-/*
- * 为文档容器添加网格背景效果
- * 使用 CSS 渐变创建交叉网格图案作为页面背景
- */
-.vp-doc-container {
-  /* 定义网格背景颜色变量，默认为灰色半透明 */
-  --vp-doc-grid-bg: rgba(64, 64, 64, 0.1);
-
-  /* 创建水平和垂直方向的线性渐变形成网格效果 */
-  background-image:
-    linear-gradient(90deg, var(--vp-doc-grid-bg) 2%, transparent 0),
-    linear-gradient(1turn, var(--vp-doc-grid-bg) 2%, transparent 0);
-  background-position: 50%;
-  background-size: 22px 22px;
-  /* 设置网格大小与字体同高 */
-}
-
-/* 深色主题下的网格背景样式 */
-[data-theme="dark"] .vp-doc-container {
-  /* 在深色模式下调整网格背景颜色，提高可见性 */
-  --vp-doc-grid-bg: rgba(128, 128, 128, 0.1);
-}
-
-/* 隐藏 Waline 评论系统的 powered by 标签 */
+/* 隐藏 Waline 标示 */
 .waline-powered-by,
 .wl-power {
   display: none !important;
 }
 
-/* 卡片容器样式 */
-.vp-card-wrapper,
-.vp-link-card {
-  background-color: rgba(255, 255, 255, 0.4) !important;
-  border: 1px solid rgba(60, 60, 60, 0.2) !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
-  transition: all 0.3s ease !important;
+/* --- 卡片样式优化 --- */
+
+/* 合并选择器，减少代码量 */
+:is(.vp-card-wrapper, .vp-link-card) {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(60, 60, 60, 0.1) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s !important;
+  will-change: transform;
+  /* 性能优化：提示浏览器提前准备动画 */
 }
 
-/* 卡片悬停效果 */
-.vp-card-wrapper:hover,
+[data-theme="dark"] :is(.vp-card-wrapper, .vp-link-card) {
+  background-color: rgba(60, 60, 60, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Hover 态 */
+:is(.vp-card-wrapper, .vp-link-card):hover {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-2px);
+  /* 物理上浮效果 */
+}
+
+[data-theme="dark"] :is(.vp-card-wrapper, .vp-link-card):hover {
+  background-color: rgba(80, 80, 80, 0.4) !important;
+}
+
+/* 链接卡片特殊边框 */
 .vp-link-card:hover {
-  background-color: rgba(240, 240, 240, 0.6) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0, 0, 0, 0.05) !important;
+  border-color: var(--vp-c-brand-1) !important;
 }
 
-/* 链接卡片特殊悬停效果 */
-.vp-link-card:hover {
-  border: 1px solid rgba(71, 155, 210, 0.6) !important;
-}
+/* --- 进场动画系统 --- */
 
-/* 深色主题下的卡片样式 */
-[data-theme="dark"] .vp-card-wrapper,
-[data-theme="dark"] .vp-link-card {
-  background-color: rgba(128, 128, 128, 0.1) !important;
-  border: 1px solid rgba(128, 128, 128, 0.2) !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
-  transition: all 0.3s ease !important;
-}
+/* 
+   BUG修复：
+   不要默认 opacity: 0。如果 JS 挂了，用户什么都看不到。
+   只有当 body 有 'page-loading' 类（加载中）时，我们才准备隐藏它们，
+   或者利用 'page-loaded' 做增量显示。
+   这里采用“默认可见，但如果有 loaded 类则重置动画”的策略，或者更安全的做法：
+*/
 
-/* 深色主题下的卡片悬停效果 */
-[data-theme="dark"] .vp-card-wrapper:hover,
-[data-theme="dark"] .vp-link-card:hover {
-  background-color: rgba(128, 128, 128, 0.2) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 10px rgba(128, 128, 128, 0.1) !important;
-}
-
-/* 深色主题下链接卡片特殊悬停效果 */
-[data-theme="dark"] .vp-link-card:hover {
-  border: 1px solid rgba(151, 86, 86, 0.6) !important;
-}
-
-/* 加载渐入动画 */
-@keyframes fadeIn {
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(var(--anim-dist));
   }
 
   to {
@@ -163,24 +166,10 @@ html {
   }
 }
 
-/* 向左渐入动画 */
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* 向右渐入动画 */
 @keyframes fadeInRight {
   from {
     opacity: 0;
-    transform: translateX(20px);
+    transform: translateX(calc(var(--anim-dist) * 1.5));
   }
 
   to {
@@ -189,294 +178,127 @@ html {
   }
 }
 
-.vp-doc {
-  opacity: 0;
+/* 只有当 body 拥有 page-loaded 类时，才触发内容区的动画 */
+.page-loaded .vp-doc>* {
+  animation: fadeInUp var(--anim-duration) ease-out backwards;
+  /* backwards 确保动画开始前元素是隐藏的(opacity:0)，
+     前提是元素默认样式没有 override opacity */
 }
 
-.page-loaded .vp-doc {
-  animation: fadeIn 0.4s ease-out forwards;
+/* 
+   简化选择器：
+   不再列出 h1, p, ul... 而是直接选择 .vp-doc 的直接子元素。
+   这更健壮，能覆盖未来可能添加的任何 HTML 标签。
+*/
+
+/* 基础延迟：前 5 个主要元素 */
+.page-loaded .vp-doc>*:nth-child(1) {
+  animation-delay: 0.05s;
 }
 
-/* 为已有内容添加延迟动画 */
-.vp-doc h1,
-.vp-doc h2,
-.vp-doc h3,
-.vp-doc p,
-.vp-doc ul,
-.vp-doc ol,
-.vp-doc .vp-card-grid,
-.vp-doc .vp-card-wrapper,
-.vp-doc .vp-link-card,
-.vp-doc center,
-.vp-doc hr,
-.vp-doc li {
-  opacity: 0;
-}
-
-.page-loaded .vp-doc h1,
-.page-loaded .vp-doc h2,
-.page-loaded .vp-doc h3,
-.page-loaded .vp-doc p,
-.page-loaded .vp-doc ul,
-.page-loaded .vp-doc ol,
-.page-loaded .vp-doc .vp-card-grid,
-.page-loaded .vp-doc .vp-card-wrapper,
-.page-loaded .vp-doc .vp-link-card,
-.page-loaded .vp-doc center,
-.page-loaded .vp-doc hr,
-.page-loaded .vp-doc li {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-.page-loaded .vp-doc h1 {
+.page-loaded .vp-doc>*:nth-child(2) {
   animation-delay: 0.1s;
 }
 
-.page-loaded .vp-doc .vp-card-grid.cols-2:first-of-type {
+.page-loaded .vp-doc>*:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.page-loaded .vp-doc>*:nth-child(4) {
   animation-delay: 0.2s;
 }
 
-.page-loaded .vp-doc center:first-of-type {
-  animation-delay: 0.3s;
+.page-loaded .vp-doc>*:nth-child(5) {
+  animation-delay: 0.25s;
 }
 
-.page-loaded .vp-doc .vp-card-grid.cols-2:nth-of-type(2) {
-  animation-delay: 0.4s;
+/* 针对特定组件的精细化延迟（如果有嵌套） */
+.page-loaded .vp-doc li:nth-child(-n+10),
+.page-loaded .vp-card-wrapper:nth-child(-n+10),
+.page-loaded .vp-link-card:nth-child(-n+10) {
+  animation: fadeInUp var(--anim-duration) ease-out backwards;
 }
 
-.page-loaded .vp-doc center:last-of-type {
-  animation-delay: 0.5s;
+/* 循环生成延迟 (手动模拟) - 减少了代码行数 */
+.page-loaded :is(li, .vp-card-wrapper, .vp-link-card):nth-child(1) {
+  animation-delay: 0.03s;
 }
 
-.page-loaded .vp-doc .vp-card-grid.cols-2:last-of-type {
-  animation-delay: 0.6s;
-}
-
-.page-loaded .vp-doc hr {
-  animation-delay: 0.7s;
-}
-
-.page-loaded .vp-doc center:last-of-type+div {
-  animation-delay: 0.7s;
-}
-
-/* 列表项动画延迟 - 支持前15个元素 */
-.page-loaded .vp-doc li:nth-child(-n+15) {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-.page-loaded .vp-doc li:nth-child(1) {
-  animation-delay: 0.1s;
-}
-
-.page-loaded .vp-doc li:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.page-loaded .vp-doc li:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-.page-loaded .vp-doc li:nth-child(4) {
-  animation-delay: 0.4s;
-}
-
-.page-loaded .vp-doc li:nth-child(5) {
-  animation-delay: 0.5s;
-}
-
-.page-loaded .vp-doc li:nth-child(6) {
-  animation-delay: 0.6s;
-}
-
-.page-loaded .vp-doc li:nth-child(7) {
-  animation-delay: 0.7s;
-}
-
-.page-loaded .vp-doc li:nth-child(8) {
-  animation-delay: 0.8s;
-}
-
-.page-loaded .vp-doc li:nth-child(9) {
-  animation-delay: 0.9s;
-}
-
-.page-loaded .vp-doc li:nth-child(10) {
-  animation-delay: 1.0s;
-}
-
-.page-loaded .vp-doc li:nth-child(11) {
-  animation-delay: 1.1s;
-}
-
-.page-loaded .vp-doc li:nth-child(12) {
-  animation-delay: 1.2s;
-}
-
-.page-loaded .vp-doc li:nth-child(13) {
-  animation-delay: 1.3s;
-}
-
-.page-loaded .vp-doc li:nth-child(14) {
-  animation-delay: 1.4s;
-}
-
-.page-loaded .vp-doc li:nth-child(15) {
-  animation-delay: 1.5s;
-}
-
-/* 卡片组件动画延迟 */
-.page-loaded .vp-card-wrapper:nth-child(-n+15) {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-.page-loaded .vp-card-wrapper:nth-child(1) {
-  animation-delay: 0.02s;
-}
-
-.page-loaded .vp-card-wrapper:nth-child(2) {
-  animation-delay: 0.04s;
-}
-
-.page-loaded .vp-card-wrapper:nth-child(3) {
+.page-loaded :is(li, .vp-card-wrapper, .vp-link-card):nth-child(2) {
   animation-delay: 0.06s;
 }
 
-.page-loaded .vp-card-wrapper:nth-child(4) {
-  animation-delay: 0.08s;
+.page-loaded :is(li, .vp-card-wrapper, .vp-link-card):nth-child(3) {
+  animation-delay: 0.09s;
 }
 
-.page-loaded .vp-card-wrapper:nth-child(5) {
-  animation-delay: 0.1s;
-}
-
-.page-loaded .vp-card-wrapper:nth-child(6) {
+.page-loaded :is(li, .vp-card-wrapper, .vp-link-card):nth-child(4) {
   animation-delay: 0.12s;
 }
 
-.page-loaded .vp-card-wrapper:nth-child(7) {
-  animation-delay: 0.14s;
+.page-loaded :is(li, .vp-card-wrapper, .vp-link-card):nth-child(5) {
+  animation-delay: 0.15s;
 }
 
-.page-loaded .vp-card-wrapper:nth-child(8) {
-  animation-delay: 0.16s;
-}
-
-.page-loaded .vp-card-wrapper:nth-child(9) {
+.page-loaded :is(li, .vp-card-wrapper, .vp-link-card):nth-child(6) {
   animation-delay: 0.18s;
 }
 
-.page-loaded .vp-card-wrapper:nth-child(10) {
-  animation-delay: 0.2s;
+.page-loaded :is(li, .vp-card-wrapper, .vp-link-card):nth-child(7) {
+  animation-delay: 0.21s;
 }
 
-.page-loaded .vp-card-wrapper:nth-child(11) {
-  animation-delay: 0.22s;
-}
-
-.page-loaded .vp-card-wrapper:nth-child(12) {
+.page-loaded :is(li, .vp-card-wrapper, .vp-link-card):nth-child(8) {
   animation-delay: 0.24s;
 }
 
-.page-loaded .vp-card-wrapper:nth-child(13) {
-  animation-delay: 0.26s;
+.page-loaded :is(li, .vp-card-wrapper, .vp-link-card):nth-child(9) {
+  animation-delay: 0.27s;
 }
 
-.page-loaded .vp-card-wrapper:nth-child(14) {
-  animation-delay: 0.28s;
+.page-loaded :is(li, .vp-card-wrapper, .vp-link-card):nth-child(10) {
+  animation-delay: 0.30s;
 }
 
-.page-loaded .vp-card-wrapper:nth-child(15) {
-  animation-delay: 0.3s;
+/* 首页 Hero 区域动画 */
+.page-loaded .VPhero :is(.text, .name, .tagline, .actions) {
+  animation: fadeInUp var(--anim-duration) ease-out backwards;
 }
 
-.page-loaded .vp-link-card:nth-child(-n+10) {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-.page-loaded .vp-link-card:nth-child(1) {
-  animation-delay: 0.02s;
-}
-
-.page-loaded .vp-link-card:nth-child(2) {
-  animation-delay: 0.04s;
-}
-
-.page-loaded .vp-link-card:nth-child(3) {
-  animation-delay: 0.06s;
-}
-
-.page-loaded .vp-link-card:nth-child(4) {
-  animation-delay: 0.08s;
-}
-
-.page-loaded .vp-link-card:nth-child(5) {
+.page-loaded .VPhero .name {
   animation-delay: 0.1s;
 }
 
-.page-loaded .vp-link-card:nth-child(6) {
-  animation-delay: 0.12s;
-}
-
-.page-loaded .vp-link-card:nth-child(7) {
-  animation-delay: 0.14s;
-}
-
-.page-loaded .vp-link-card:nth-child(8) {
-  animation-delay: 0.16s;
-}
-
-.page-loaded .vp-link-card:nth-child(9) {
-  animation-delay: 0.18s;
-}
-
-.page-loaded .vp-link-card:nth-child(10) {
+.page-loaded .VPhero .text {
   animation-delay: 0.2s;
 }
 
-/* 为 hero-text 和 hero-name 及相关元素添加动画 */
-.hero-text,
-.hero-name,
-.hero-tagline,
-.site-name,
-.home-title {
-  opacity: 0;
-}
-
-.page-loaded .hero-text,
-.page-loaded .hero-name,
-.page-loaded .hero-tagline,
-.page-loaded .site-name,
-.page-loaded .home-title {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-.page-loaded .hero-text {
-  animation-delay: 0.2s;
-}
-
-.page-loaded .hero-name {
-  animation-delay: 0.1s;
-}
-
-.page-loaded .hero-tagline {
+.page-loaded .VPhero .tagline {
   animation-delay: 0.3s;
 }
 
-.page-loaded .site-name {
-  animation-delay: 0.15s;
+.page-loaded .VPhero .actions {
+  animation-delay: 0.4s;
 }
 
-.page-loaded .home-title {
-  animation-delay: 0.15s;
-}
-
-/* 为 aside-container 添加从右向左渐入动画 */
-.aside-container {
-  opacity: 0;
-}
-
+/* 侧边栏进场 */
 .page-loaded .aside-container {
-  animation: fadeInRight 0.3s ease-out forwards;
-  animation-delay: 0.1s;
+  animation: fadeInRight var(--anim-duration) ease-out backwards;
+  animation-delay: 0.2s;
+}
+
+/* 
+   无障碍优化：
+   如果用户系统设置了“减弱动态效果”，则关闭所有自定义动画
+*/
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01s !important;
+    scroll-behavior: auto !important;
+  }
 }
