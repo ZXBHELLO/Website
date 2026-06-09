@@ -5,29 +5,13 @@
         <!-- 站点标题 -->
         <h1 class="site-title">{{ siteTitle || 'ZakoWeb' }}</h1>
         
-        <!-- 动画主体 -->
-        <div class="google-loader">
-          <div class="dot-wrapper">
-            <div class="dot" style="--delay: 0s"></div>
-            <div class="shadow" style="--delay: 0s"></div>
-          </div>
-          <div class="dot-wrapper">
-            <div class="dot" style="--delay: 0.2s"></div>
-            <div class="shadow" style="--delay: 0.2s"></div>
-          </div>
-          <div class="dot-wrapper">
-            <div class="dot" style="--delay: 0.4s"></div>
-            <div class="shadow" style="--delay: 0.4s"></div>
-          </div>
-          <div class="dot-wrapper">
-            <div class="dot" style="--delay: 0.6s"></div>
-            <div class="shadow" style="--delay: 0.6s"></div>
-          </div>
+        <!-- Glitch 风格加载动画 -->
+        <div class="loader">
+          <div data-glitch="Loading..." class="glitch">Loading...</div>
         </div>
 
         <!-- 加载文字 -->
         <div class="text-area">
-          <p class="loading-text">正在加载中...</p>
           <p class="loading-subtext">请稍等片刻，精彩即将呈现</p>
         </div>
       </div>
@@ -219,67 +203,66 @@ onUnmounted(() => {
   animation: slideUpFade 0.8s ease-out forwards;
 }
 
-/* 谷歌风格加载器容器 */
-.google-loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 30px;
-  height: 60px;
-}
-
-.dot-wrapper {
+/* Glitch 加载器容器 */
+.loader {
   position: relative;
-  width: 20px;
+  margin-bottom: 30px;
+  min-height: 60px;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
-/* 小球样式 */
-.dot {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--vp-c-brand, #3498db); 
-  /* 增加微妙的渐变，更有立体感 */
-  background-image: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.05) 100%);
-  /* 优化贝塞尔曲线，使跳动更有弹性 */
-  animation: jump 1.5s var(--delay) infinite cubic-bezier(0.28, 0.84, 0.42, 1);
-  will-change: transform;
+/* Glitch 效果核心样式 */
+.glitch {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--vp-c-brand, #3498db);
+  position: relative;
+  letter-spacing: 2px;
+  opacity: 0;
+  animation: slideUpFade 0.8s ease-out 0.2s forwards;
 }
 
-/* 阴影样式 */
-.shadow {
-  width: 20px;
-  height: 4px;
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
-  margin-top: 4px;
-  animation: shadow-scale 1.5s var(--delay) infinite cubic-bezier(0.28, 0.84, 0.42, 1);
-  filter: blur(2px);
-  will-change: transform, opacity;
+.glitch::before,
+.glitch::after {
+  content: attr(data-glitch);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--vp-c-bg);
 }
 
-/* 深色模式适配 */
-:root[class~="dark"] .shadow {
-  background: rgba(255, 255, 255, 0.15);
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff00c1;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 #00fff9;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+/* 深色模式下的 Glitch 颜色调整 */
+:root[class~="dark"] .glitch::before {
+  text-shadow: -2px 0 #ff006e;
+}
+
+:root[class~="dark"] .glitch::after {
+  text-shadow: -2px 0 #00f5d4;
 }
 
 /* 文本区域 */
 .text-area {
   text-align: center;
   opacity: 0;
-  animation: slideUpFade 0.8s ease-out 0.3s forwards;
-}
-
-.loading-text {
-  color: var(--vp-c-text-2);
-  font-size: 16px;
-  font-weight: 500;
-  margin: 0 0 6px 0;
-  letter-spacing: 0.5px;
+  animation: slideUpFade 0.8s ease-out 0.4s forwards;
 }
 
 .loading-subtext {
@@ -302,23 +285,180 @@ onUnmounted(() => {
   }
 }
 
-/* 优化后的小球跳动：更符合物理直觉的挤压与拉伸 */
-@keyframes jump {
-  0%, 100% { transform: translateY(0) scale(1.05, 0.95); } /* 落地挤压 */
-  10% { transform: translateY(0) scale(1.1, 0.9); } /* 蓄力 */
-  40% { transform: translateY(-35px) scale(0.9, 1.1); } /* 滞空拉伸 */
-  65% { transform: translateY(0) scale(1.05, 0.95); } /* 落地 */
-  75% { transform: translateY(-8px) scale(0.98, 1.02); } /* 小反弹 */
-  85% { transform: translateY(0) scale(1, 1); } /* 静止 */
+/* Glitch 动画关键帧 - 版本 1 */
+@keyframes glitch-anim {
+  0% {
+    clip: rect(12px, 9999px, 52px, 0);
+    transform: skew(0.65deg);
+  }
+  5% {
+    clip: rect(82px, 9999px, 12px, 0);
+    transform: skew(0.35deg);
+  }
+  10% {
+    clip: rect(32px, 9999px, 92px, 0);
+    transform: skew(0.15deg);
+  }
+  15% {
+    clip: rect(62px, 9999px, 22px, 0);
+    transform: skew(0.85deg);
+  }
+  20% {
+    clip: rect(12px, 9999px, 82px, 0);
+    transform: skew(0.25deg);
+  }
+  25% {
+    clip: rect(92px, 9999px, 42px, 0);
+    transform: skew(0.55deg);
+  }
+  30% {
+    clip: rect(22px, 9999px, 72px, 0);
+    transform: skew(0.45deg);
+  }
+  35% {
+    clip: rect(52px, 9999px, 12px, 0);
+    transform: skew(0.75deg);
+  }
+  40% {
+    clip: rect(82px, 9999px, 62px, 0);
+    transform: skew(0.15deg);
+  }
+  45% {
+    clip: rect(42px, 9999px, 92px, 0);
+    transform: skew(0.65deg);
+  }
+  50% {
+    clip: rect(12px, 9999px, 32px, 0);
+    transform: skew(0.35deg);
+  }
+  55% {
+    clip: rect(72px, 9999px, 52px, 0);
+    transform: skew(0.85deg);
+  }
+  60% {
+    clip: rect(22px, 9999px, 82px, 0);
+    transform: skew(0.25deg);
+  }
+  65% {
+    clip: rect(92px, 9999px, 22px, 0);
+    transform: skew(0.55deg);
+  }
+  70% {
+    clip: rect(32px, 9999px, 72px, 0);
+    transform: skew(0.45deg);
+  }
+  75% {
+    clip: rect(62px, 9999px, 12px, 0);
+    transform: skew(0.75deg);
+  }
+  80% {
+    clip: rect(12px, 9999px, 92px, 0);
+    transform: skew(0.15deg);
+  }
+  85% {
+    clip: rect(82px, 9999px, 42px, 0);
+    transform: skew(0.65deg);
+  }
+  90% {
+    clip: rect(42px, 9999px, 62px, 0);
+    transform: skew(0.35deg);
+  }
+  95% {
+    clip: rect(52px, 9999px, 32px, 0);
+    transform: skew(0.85deg);
+  }
+  100% {
+    clip: rect(22px, 9999px, 82px, 0);
+    transform: skew(0.25deg);
+  }
 }
 
-@keyframes shadow-scale {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  10% { transform: scale(1); opacity: 0.8; }
-  40% { transform: scale(0.5); opacity: 0.2; }
-  65% { transform: scale(1); opacity: 0.8; }
-  75% { transform: scale(0.8); opacity: 0.5; }
-  85% { transform: scale(1); opacity: 0.8; }
+/* Glitch 动画关键帧 - 版本 2 */
+@keyframes glitch-anim2 {
+  0% {
+    clip: rect(62px, 9999px, 22px, 0);
+    transform: skew(0.75deg);
+  }
+  5% {
+    clip: rect(12px, 9999px, 82px, 0);
+    transform: skew(0.25deg);
+  }
+  10% {
+    clip: rect(92px, 9999px, 42px, 0);
+    transform: skew(0.55deg);
+  }
+  15% {
+    clip: rect(32px, 9999px, 72px, 0);
+    transform: skew(0.45deg);
+  }
+  20% {
+    clip: rect(72px, 9999px, 12px, 0);
+    transform: skew(0.85deg);
+  }
+  25% {
+    clip: rect(22px, 9999px, 92px, 0);
+    transform: skew(0.15deg);
+  }
+  30% {
+    clip: rect(82px, 9999px, 32px, 0);
+    transform: skew(0.65deg);
+  }
+  35% {
+    clip: rect(42px, 9999px, 62px, 0);
+    transform: skew(0.35deg);
+  }
+  40% {
+    clip: rect(12px, 9999px, 52px, 0);
+    transform: skew(0.75deg);
+  }
+  45% {
+    clip: rect(52px, 9999px, 22px, 0);
+    transform: skew(0.25deg);
+  }
+  50% {
+    clip: rect(92px, 9999px, 82px, 0);
+    transform: skew(0.55deg);
+  }
+  55% {
+    clip: rect(32px, 9999px, 12px, 0);
+    transform: skew(0.45deg);
+  }
+  60% {
+    clip: rect(62px, 9999px, 72px, 0);
+    transform: skew(0.85deg);
+  }
+  65% {
+    clip: rect(22px, 9999px, 42px, 0);
+    transform: skew(0.15deg);
+  }
+  70% {
+    clip: rect(82px, 9999px, 92px, 0);
+    transform: skew(0.65deg);
+  }
+  75% {
+    clip: rect(42px, 9999px, 32px, 0);
+    transform: skew(0.35deg);
+  }
+  80% {
+    clip: rect(12px, 9999px, 62px, 0);
+    transform: skew(0.75deg);
+  }
+  85% {
+    clip: rect(72px, 9999px, 22px, 0);
+    transform: skew(0.25deg);
+  }
+  90% {
+    clip: rect(52px, 9999px, 82px, 0);
+    transform: skew(0.55deg);
+  }
+  95% {
+    clip: rect(92px, 9999px, 12px, 0);
+    transform: skew(0.45deg);
+  }
+  100% {
+    clip: rect(32px, 9999px, 52px, 0);
+    transform: skew(0.85deg);
+  }
 }
 
 /* Vue Transition Fade 效果 */
