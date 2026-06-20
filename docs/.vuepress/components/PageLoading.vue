@@ -24,7 +24,7 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useSiteLocaleData } from '@vuepress/client'
 
 // --- 配置项 ---
-const MIN_LOADING_TIME = 800   // 最小展示时间，防止闪烁
+const MIN_LOADING_TIME = 1000   // 最小展示时间，防止闪烁
 const MAX_LOADING_TIME = 8000  // 超时强制结束时间
 const POLL_INTERVAL = 200      // 资源检测轮询间隔
 
