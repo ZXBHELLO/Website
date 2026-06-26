@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>HTML/CSS/JS 实时编辑器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Ace Editor CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/ace-builds@latest/src-min-noconflict/ace.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ace-builds@latest/src-min-noconflict/ext-language_tools.js"></script>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            --bg-light: #f8f9fa;
+            --bg-dark: #1e1e1e;
+            --text-light: #212529;
+            --text-dark: #e0e0e0;
+            --border-light: #dee2e6;
+            --border-dark: #444c56;
+            --toolbar-bg-light: rgba(255, 255, 255, 0.92);
+            --toolbar-bg-dark: rgba(30, 30, 30, 0.92);
+            --editor-bg-light: #ffffff;
+            --editor-bg-dark: #1e1e1e;
+            --header-height: 46px;
+            --transition-duration: 0.45s;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-light);
+            color: var(--text-light);
+            transition: background var(--transition-duration) ease, color var(--transition-duration) ease;
+        }
+
+        body.dark {
+            background: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        #toolbar-container {
+            flex-shrink: 0;
+            border-bottom: 1px solid var(--border-light);
+            background: var(--toolbar-bg-light);
+            backdrop-filter: blur(12px);
+            transition: background var(--transition-duration) ease, border-color var(--transition-duration) ease;
+        }
+
+        body.dark #toolbar-container {
+            background: var(--toolbar-bg-dark);
+            border-bottom-color: var(--border-dark);
+        }
+
+        #toolbar {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            #toolbar {
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                padding: 15px;
+                gap: 15px;
+            }
+
+            #toolbar.expanded {
+                display: flex;
+            }
+        }
+
+        .toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #toolbar button {
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease, background var(--transition-duration) ease, border-color var(--transition-duration) ease, color var(--transition-duration) ease;
+        }
+
+        body.dark #toolbar button {
+            background: #333;
+            border-color: var(--border-dark);
+            color: #e0e0e0;
+        }
+
+        #toolbar button:hover {
+            background: #e9ecef;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        body.dark #toolbar button:hover {
+            background: #444;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        #mobile-toggle {
+            display: none;
+            width: 100%;
+            padding: 14px;
+            font-size: 18px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            #mobile-toggle {
+                display: block;
+            }
+        }
+
+        #container {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border-light);
+            transition: border-color var(--transition-duration) ease;
+        }
+
+        body.dark .panel {
+            border-right-color: var(--border-dark);
+        }
+
+        .panel.collapsed {
+            flex: 0;
+            width: 0;
+            min-width: 0;
+            overflow: hidden;
+            border: none;
+        }
+
+        .panel-header {
+            height: var(--header-height);
+            padding: 0 18px;
+            background: rgba(0, 0, 0, 0.07);
+            font-weight: bold;
+            font-size: 15px;
+            border-bottom: 1px solid var(--border-light);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            transition: background var(--transition-duration) ease, border-color var(--transition-duration) ease;
+        }
+
+        body.dark .panel-header {
+            background: rgba(255, 255, 255, 0.07);
+            border-bottom-color: var(--border-dark);
+        }
+
+        .editor-container {
+            flex: 1;
+            position: relative;
+            min-height: 0;
+            background: var(--editor-bg-light);
+            transition: background var(--transition-duration) ease;
+        }
+
+        body.dark .editor-container {
+            background: var(--editor-bg-dark);
+        }
+
+        .editor {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #preview-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            background: white;
+            transition: background var(--transition-duration) ease;
+        }
+
+        body.dark #preview-container {
+            background: #1e1e1e;
+        }
+
+        #preview {
+            flex: 1;
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="toolbar-container">
+        <button id="mobile-toggle"><i class="bi bi-list"></i> 工具栏</button>
+
+        <div id="toolbar">
+            <div class="toolbar-group">
+                <button title="显示/隐藏 CSS" id="toggleCss"><i class="bi bi-braces"></i></button>
+                <button title="显示/隐藏 JS" id="toggleJs"><i class="bi bi-code-slash"></i></button>
+                <button title="字体增大" id="fontUp"><i class="bi bi-zoom-in"></i></button>
+                <button title="字体减小" id="fontDown"><i class="bi bi-zoom-out"></i></button>
+                <button title="重置为默认模板" id="resetBtn"><i class="bi bi-arrow-counterclockwise"></i></button>
+            </div>
+            <div class="toolbar-group">
+                <button title="复制完整代码" id="copyBtn"><i class="bi bi-clipboard"></i></button>
+                <button title="下载为 HTML 文件" id="downloadBtn"><i class="bi bi-download"></i></button>
+                <button title="全屏" id="fullscreenBtn"><i class="bi bi-fullscreen"></i></button>
+                <button title="暗色模式" id="darkToggleBtn"><i class="bi bi-moon-stars-fill"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="container">
+        <div class="panel" id="html-panel" style="flex: 1;">
+            <div class="panel-header">HTML</div>
+            <div class="editor-container">
+                <div class="editor" id="html-editor"></div>
+            </div>
+        </div>
+
+        <div class="panel collapsed" id="css-panel">
+            <div class="panel-header">CSS</div>
+            <div class="editor-container">
+                <div class="editor" id="css-editor"></div>
+            </div>
+        </div>
+
+        <div class="panel collapsed" id="js-panel">
+            <div class="panel-header">JavaScript</div>
+            <div class="editor-container">
+                <div class="editor" id="js-editor"></div>
+            </div>
+        </div>
+
+        <div class="panel" id="preview-panel" style="flex: 1;">
+            <div class="panel-header">实时预览</div>
+            <div id="preview-container">
+                <iframe id="preview" sandbox="allow-scripts allow-modals"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const initWhenReady = () => {
+            if (typeof ace === 'undefined') {
+                requestAnimationFrame(initWhenReady);
+                return;
+            }
+
+            const editors = {};
+            let fontSize = 16;
+
+            ['html', 'css', 'js'].forEach(lang => {
+                const div = document.getElementById(`${lang}-editor`);
+                const editor = ace.edit(div);
+                editor.setTheme(document.body.classList.contains('dark') ? "ace/theme/monokai" : "ace/theme/chrome");
+                editor.session.setMode(`ace/mode/${lang === 'js' ? 'javascript' : lang}`);
+                editor.setOptions({
+                    fontSize: fontSize + 'px',
+                    showPrintMargin: false,
+                    tabSize: 2,
+                    useSoftTabs: true,
+                    enableBasicAutocompletion: true,
+                    enableLiveAutocompletion: true
+                });
+                editors[lang] = editor;
+            });
+
+            // 现代化默认模板
+            const defaultCode = {
+                html: `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>欢迎使用</title>
+</head>
+<body>
+  <main class="container">
+    <h1>HTML/CSS/JS 实时编辑器</h1>
+    <p class="subtitle">现代设计 · 实时预览 · 丝滑体验</p>
+    
+    <div class="card">
+      <h2>开始创作吧 ✨</h2>
+      <p>左侧编辑代码，右侧即时看到效果</p>
+      <p>支持暗色模式、字体调节、一键导出</p>
+    </div>
+
+    <div class="actions">
+      <button onclick="showAlert()">试试交互</button>
+    </div>
+  </main>
+</body>
+</html>`,
+                css: `/* 现代卡片式设计 */
+* { box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container {
+  text-align: center;
+  max-width: 680px;
+  width: 100%;
+}
+
+h1 {
+  font-size: 3.5rem;
+  margin: 0 0 16px 0;
+  font-weight: 700;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.subtitle {
+  font-size: 1.4rem;
+  opacity: 0.9;
+  margin-bottom: 48px;
+  font-weight: 400;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 32px;
+  margin: 32px 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+.card h2 {
+  margin: 0 0 16px 0;
+  font-size: 1.8rem;
+}
+
+.card p {
+  margin: 12px 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.actions button {
+  padding: 16px 40px;
+  font-size: 1.2rem;
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+  border: 2px solid white;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+.actions button:hover {
+  background: white;
+  color: #667eea;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+}`,
+                js: `function showAlert() {
+  alert("🎉 欢迎！\\n\\n这是一个现代化实时编辑器，支持：\\n• 平滑暗色切换\\n• 字体大小调节\\n• 一键复制/下载完整代码\\n\\n尽情创作吧！");
+}`
+            };
+
+            const STORAGE_KEY = 'html-css-js-editor-2025';
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                const data = JSON.parse(saved);
+                Object.keys(data.code || {}).forEach(k => editors[k]?.setValue(data.code[k] || defaultCode[k], -1));
+                fontSize = data.fontSize || 16;
+                Object.values(editors).forEach(ed => ed.setFontSize(fontSize + 'px'));
+                if (data.cssVisible === false) document.getElementById('css-panel').classList.add('collapsed');
+                if (data.jsVisible === false) document.getElementById('js-panel').classList.add('collapsed');
+            } else {
+                Object.keys(defaultCode).forEach(k => editors[k].setValue(defaultCode[k], -1));
+            }
+
+            function render() {
+                let html = editors.html.getValue();
+                const css = `<style>${editors.css.getValue()}</style>`;
+                const js = `<script>${editors.js.getValue()}<\/script>`;
+
+                html = html.replace(/<\/head>/i, css + '</head>') || html.replace('<head>', `<head>${css}`);
+                html = html.replace(/<\/body>/i, js + '</body>');
+
+                document.getElementById('preview').srcdoc = html;
+
+                localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                    code: { html: editors.html.getValue(), css: editors.css.getValue(), js: editors.js.getValue() },
+                    fontSize: fontSize,
+                    cssVisible: !document.getElementById('css-panel').classList.contains('collapsed'),
+                    jsVisible: !document.getElementById('js-panel').classList.contains('collapsed')
+                }));
+            }
+
+            let renderTimer;
+            Object.values(editors).forEach(ed => ed.session.on('change', () => {
+                clearTimeout(renderTimer);
+                renderTimer = setTimeout(render, 300);
+            }));
+
+            render();
+
+            const resizeEditors = () => Object.values(editors).forEach(ed => ed.resize());
+            window.addEventListener('resize', () => requestAnimationFrame(resizeEditors));
+
+            document.getElementById('toggleCss').onclick = () => {
+                document.getElementById('css-panel').classList.toggle('collapsed');
+                requestAnimationFrame(resizeEditors);
+            };
+
+            document.getElementById('toggleJs').onclick = () => {
+                document.getElementById('js-panel').classList.toggle('collapsed');
+                requestAnimationFrame(resizeEditors);
+            };
+
+            document.getElementById('fontUp').onclick = () => {
+                fontSize = Math.min(fontSize + 2, 32);
+                Object.values(editors).forEach(ed => ed.setFontSize(fontSize + 'px'));
+            };
+
+            document.getElementById('fontDown').onclick = () => {
+                fontSize = Math.max(fontSize - 2, 10);
+                Object.values(editors).forEach(ed => ed.setFontSize(fontSize + 'px'));
+            };
+
+            document.getElementById('copyBtn').onclick = async () => {
+                const fullCode = editors.html.getValue()
+                    .replace(/<\/head>/i, `<style>${editors.css.getValue()}</style></head>`)
+                    .replace(/<\/body>/i, `<script>${editors.js.getValue()}<\/script></body>`);
+                try {
+                    await navigator.clipboard.writeText(fullCode);
+                    const b = document.getElementById('copyBtn');
+                    b.innerHTML = '<i class="bi bi-check-lg"></i>';
+                    setTimeout(() => b.innerHTML = '<i class="bi bi-clipboard"></i>', 2000);
+                } catch { }
+            };
+
+            document.getElementById('downloadBtn').onclick = () => {
+                const fullHTML = editors.html.getValue()
+                    .replace(/<\/head>/i, `<style>${editors.css.getValue()}</style></head>`)
+                    .replace(/<\/body>/i, `<script>${editors.js.getValue()}<\/script></body>`);
+                const blob = new Blob([fullHTML], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'my-page.html';
+                a.click();
+                URL.revokeObjectURL(url);
+            };
+
+            // 新增：一键重置为默认现代化模板
+            document.getElementById('resetBtn').onclick = () => {
+                if (confirm('确定要重置为默认现代化模板吗？\\n当前所有代码和设置将被清除！')) {
+                    Object.keys(defaultCode).forEach(k => editors[k].setValue(defaultCode[k], -1));
+                    localStorage.removeItem(STORAGE_KEY);
+                    document.getElementById('css-panel').classList.add('collapsed');
+                    document.getElementById('js-panel').classList.add('collapsed');
+                    fontSize = 16;
+                    Object.values(editors).forEach(ed => ed.setFontSize('16px'));
+                    render();
+                }
+            };
+
+            document.getElementById('mobile-toggle').onclick = () => {
+                document.getElementById('toolbar').classList.toggle('expanded');
+                const b = document.getElementById('mobile-toggle');
+                b.innerHTML = document.getElementById('toolbar').classList.contains('expanded')
+                    ? '<i class="bi bi-x-lg"></i> 关闭工具栏'
+                    : '<i class="bi bi-list"></i> 工具栏';
+            };
+
+            const fsBtn = document.getElementById('fullscreenBtn');
+            fsBtn.onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+            document.onfullscreenchange = () => fsBtn.innerHTML = document.fullscreenElement ? '<i class="bi bi-fullscreen-exit"></i>' : '<i class="bi bi-fullscreen"></i>';
+
+            const darkBtn = document.getElementById('darkToggleBtn');
+            const DARK_KEY = 'html-css-js-editor-dark';
+            const applyDark = dark => {
+                document.body.classList.toggle('dark', dark);
+                Object.values(editors).forEach(ed => ed.setTheme(dark ? "ace/theme/monokai" : "ace/theme/chrome"));
+                darkBtn.innerHTML = dark ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
+            };
+            darkBtn.onclick = () => {
+                const will = !document.body.classList.contains('dark');
+                localStorage.setItem(DARK_KEY, will);
+                applyDark(will);
+            };
+
+            const isDark = localStorage.getItem(DARK_KEY) === 'true' ||
+                (!localStorage.getItem(DARK_KEY) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            if (isDark) document.body.classList.add('dark');
+            applyDark(isDark);
+
+            requestAnimationFrame(resizeEditors);
+        };
+
+        if (window.ace) initWhenReady();
+        else document.querySelector('script[src*="ace.js"]').onload = initWhenReady;
+    </script>
+</body>
+
+</html>
