@@ -14,6 +14,7 @@ import HtmlPage from './components/HtmlPage.vue'
 import { h } from 'vue'
 // @ts-ignore
 import { Layout } from 'vuepress-theme-plume/client'
+// @ts-ignore
 import './custom.css'
 
 

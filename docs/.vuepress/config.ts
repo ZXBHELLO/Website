@@ -163,34 +163,23 @@ export default defineUserConfig({
      * @see https://theme-plume.vuejs.press/guide/features/comments/
      */
     comment: {
-      provider: 'Waline', // "Artalk" | "Giscus" | "Twikoo" | "Waline"
+      provider: 'Giscus', // "Artalk" | "Giscus" | "Twikoo" | "Waline"
       comment: true,
-      // Waline 配置
-      serverURL: 'https://waline.zakozako.cc',
-      locales: {
-        'zh-CN': {
-          placeholder: '欢迎留言分享你的想法...'
-        }
-      },
-      emoji: [
-        '//unpkg.com/@waline/emojis@1.1.0/bilibili',
-        '//unpkg.com/@waline/emojis@1.1.0/weibo',
-        '//unpkg.com/@waline/emojis@1.1.0/tw-emoji'
-      ],
-      meta: ['nick', 'mail', 'link'],
-      requiredMeta: ['nick'],
-      wordLimit: 0,
-      pageSize: 10,
-      reaction: [
-        'http://unpkg.com/@waline/emojis@1.1.0/bilibili/bb_heart_eyes.png',
-        'http://unpkg.com/@waline/emojis@1.1.0/bilibili/bb_lovely.png',
-        'http://unpkg.com/@waline/emojis@1.1.0/bilibili/bb_clap.png',
-        'http://unpkg.com/@waline/emojis@1.1.0/bilibili/bb_dizzy_face.png',
-        'http://unpkg.com/@waline/emojis@1.1.0/bilibili/bb_vomit.png',
-        'http://unpkg.com/@waline/emojis@1.1.0/bilibili/bb_look_down.png'
-      ],
+      // Giscus 配置 - 请根据你的 GitHub 仓库信息修改以下参数
+      repo: 'ZXBHELLO/website',
+      repoId: 'R_kgDOP8QvZw',
+      category: 'Announcements',
+      categoryId: 'DIC_kwDOP8QvZ84CwQHu',
+      mapping: 'pathname',
+      strict: false,
+      reactionsEnabled: true,
+      // @ts-ignore
+      emitMetadata: false,
+      inputPosition: 'top',
+      theme: 'preferred_color_scheme',
+      lang: 'zh-CN',
+      loading: 'lazy',
     },
-
     /**
      * 资源链接替换
      * @see https://theme-plume.vuejs.press/guide/features/replace-assets/
