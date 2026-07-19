@@ -42,6 +42,3 @@ disableParticle: true
 
 
 <!-- 转载/引用/使用需保留模板设计者信息 -->
-::: center
-`本组件由ZXBHELLO制作，引用、使用、转载请保留设计者信息。`
-:::

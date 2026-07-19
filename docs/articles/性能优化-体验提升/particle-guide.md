@@ -315,6 +315,3 @@ export default defineClientConfig({
 **祝您使用愉快！** 如果这个教程对您有帮助，欢迎在 GitHub 上 Star ⭐ 或分享给其他人。
 
 <!-- 转载/引用/使用需保留模板设计者信息 -->
-::: center
-`本组件由ZXBHELLO制作，引用、使用、转载请保留设计者信息。`
-:::
