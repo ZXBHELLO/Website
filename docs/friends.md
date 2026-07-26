@@ -1,9 +1,10 @@
 ---
-friends: true
 title: 友情链接
-description: 我的朋友们
+pageLayout: friends
 permalink: /friends/
 contentPosition: after
+comments: false
+editLink: false
 list:
   -
     name: pengzhanbo
