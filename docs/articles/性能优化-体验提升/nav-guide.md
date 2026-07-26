@@ -29,8 +29,7 @@ createTime: 2025/11/08
 │   └── NavPage.vue      # 导航页面组件
 └── nav/
     ├── data.js          # 导航数据配置文件
-    ├── index.md         # 导航页面入口文件
-    └── guide.md         # 本指南文件
+    └── index.md         # 导航页面入口文件
 ```
 
 ### 2. 文件放置位置
