@@ -91,5 +91,5 @@ pnpm vp-update
 ## 🔗 链接
 
 - 🌐 **在线网站**: [https://www.zakozako.cc](https://www.zakozako.cc)
-- 📦 **GitHub 仓库**: [https://github.com/ZXBHELLO/Website](https://github.com/ZXBHELLO/Website)
+- 📦 **代码仓库**: [https://github.com/ZXBHELLO/Website](https://github.com/ZXBHELLO/Website)
 - 🎨 **主题来源**: [VuePress Theme Plume](https://github.com/pengzhanbo/vuepress-theme-plume)
