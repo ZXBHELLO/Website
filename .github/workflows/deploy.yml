@@ -41,16 +41,16 @@ jobs:
       - name: 安装 pnpm / Setup pnpm
         uses: pnpm/action-setup@v4
 
-      # 步骤3：配置 Node.js 环境并启用缓存
+      # 步骤3：配置 Node.js 环境（不启用 pnpm 缓存，避免依赖锁文件）
       - name: 配置 Node.js 环境 / Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22 # 使用 Node.js 22
-          cache: pnpm # 启用 pnpm 缓存，显著加速安装
+          # cache: pnpm   # ← 已注释，不再需要锁文件进行缓存
 
-      # 步骤4：安装项目依赖
+      # 步骤4：安装项目依赖（允许自动生成锁文件）
       - name: 安装依赖 / Install Dependencies
-        run: pnpm install
+        run: pnpm install # 不加 --frozen-lockfile，若无锁文件会自动生成
 
       # 步骤5：构建 VuePress 文档站点
       - name: 构建 VuePress 站点 / Build VuePress site
