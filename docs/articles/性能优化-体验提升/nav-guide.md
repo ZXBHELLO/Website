@@ -1,11 +1,6 @@
 ---
-title: nav-guide
+title: Nav(自定义导航页) 组件配置教程
 lastUpdated: true
-permalink: /article/i4m248li/
-createTime: 2025/12/12 23:51:02
----
-title: 导航页配置教程
-date: 2024-01-01T00:00:00.000Z
 tags:
   - VuePress
   - 导航页
@@ -14,7 +9,7 @@ permalink: /article/nav-guide/
 createTime: 2025/11/08
 ---
 
-# 导航页面使用指南
+# Nav(自定义导航页) 组件配置教程
 
 本文档将指导您如何在您的 VuePress 项目中添加和配置ZXBHELLO的自定义导航页面，包括组件安装、数据配置和样式自定义。
 

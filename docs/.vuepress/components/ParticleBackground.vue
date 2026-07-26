@@ -60,9 +60,9 @@ class ParticleEffect {
 
   config = {
     // 基础密度：每多少平方像素分配一个粒子 (越大粒子越少)
-    areaDensity: 8000, 
-    maxParticles: 150, // 限制最大数量，防止超大屏卡顿
-    particleSpeed: 0.8, //稍微降低速度，看起来更优雅
+    areaDensity: 10000, 
+    maxParticles: 150,
+    particleSpeed: 0.3,
     lineMaxDistance: 110,
     mouseRadius: 160,
     maxConnections: 5,

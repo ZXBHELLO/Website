@@ -140,13 +140,22 @@ const handleScroll = () => {
 
 const scrollToCategory = (cat) => {
   activeCategory.value = cat
-  nextTick(() => {
+  
+  // 使用 setTimeout 确保 DOM 完全更新
+  setTimeout(() => {
     const el = document.getElementById(`cat-${cat}`)
     if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - 80
-      window.scrollTo({ top, behavior: 'smooth' })
+      // 计算滚动位置，考虑固定导航栏的高度
+      const headerHeight = document.querySelector('.m-nav-header')?.offsetHeight || 80
+      const elementPosition = el.offsetTop
+      const offsetPosition = elementPosition - headerHeight - 20
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
     }
-  })
+  }, 300)
 }
 
 // --- Iconify（优化监听范围） ---
@@ -269,9 +278,9 @@ onUnmounted(() => {
   margin: 0 auto;
 }
 
-.m-nav-group { margin-bottom: 2rem; scroll-margin-top: calc(var(--vp-nav-height) + 100px); }
+.m-nav-group { margin-bottom: 2rem; scroll-margin-top: calc(var(--vp-nav-height) + 40px); }
 .m-nav-group-title {
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   font-weight: 600;
   margin-bottom: 0.8rem;
   color: var(--vp-c-text-1);
@@ -344,20 +353,20 @@ onUnmounted(() => {
 .m-nav-name {
   font-weight: 600;
   color: var(--vp-c-text-1);
-  font-size: 0.85rem;
+  font-size: 1rem;
   margin-bottom: 1px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .m-nav-desc {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: var(--vp-c-text-2);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  line-height: 1.3;
+  line-height: 1.2;
 }
 
 .stagger-enter-active { transition: all 0.3s ease; }

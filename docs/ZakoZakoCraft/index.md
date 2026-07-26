@@ -24,7 +24,7 @@ config:
           link: /ZakoZakoCraft/terms/
   - type: custom
 ---
-:::: demo-wrapper
+:::: window
 # 服务器介绍
 
 - **定位** >

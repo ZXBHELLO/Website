@@ -10,7 +10,7 @@ permalink: /article/external-link-warning-guide/
 createTime: 2025/12/07
 ---
 
-# ExternalLinkWarning 组件配置教程
+# ExternalLinkWarning(外部链接警告弹窗) 组件配置教程
 
 本文档将指导您如何在您的 VuePress 项目中集成 `ExternalLinkWarning` 组件，为所有外部链接提供安全警告功能，包括组件安装、配置说明和使用方法。
 
@@ -243,4 +243,4 @@ ExternalLinkWarning 组件可以与其他安全措施结合使用：
 
 如果你想要改进这个项目，欢迎提交 PR！
 
-<!-- 转载/引用/使用需保留模板设计者信息 --> 
+<!-- 转载/引用/使用需保留模板设计者信息 -->

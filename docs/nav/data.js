@@ -5,7 +5,7 @@ export const navData = [
       {
         id: 'zakozakocraft',
         title: '杂鱼服文档',
-        description: '高版本公益群组服务器',
+        description: '高版本公益MC服务器',
         url: '/ZakoZakoCraft/',
         iconType: 'iconify',
         icon: 'material-symbols:article-outline',
@@ -14,7 +14,7 @@ export const navData = [
       {
         id: 'carpet',
         title: 'Carpet模组文档',
-        description: 'Minecraft功能增强模组',
+        description: 'MC功能增强模组',
         url: '/article/carpet-summary/',
         iconType: 'iconify',
         icon: 'mdi:carpet',
@@ -22,8 +22,8 @@ export const navData = [
       },
       {
         id: 'nav-doc',
-        title: '使用同款导航页',
-        description: '为你的Vuepress站点添加导航',
+        title: '同款导航页',
+        description: '为Vuepress站点添加导航',
         url: '/article/nav-guide/',
         iconType: 'iconify',
         icon: 'material-symbols:article-outline',
@@ -31,8 +31,8 @@ export const navData = [
       },
       {
         id: 'particle-effect',
-        title: '动态粒子背景效果',
-        description: '为站点添加炫彩粒子动画背景',
+        title: '动态粒子背景',
+        description: '炫彩粒子动画背景',
         url: '/article/particle-guide/',
         iconType: 'iconify',
         icon: 'geo:turf-concave',
@@ -46,7 +46,7 @@ export const navData = [
       {
         id: 'moblaunch',
         title: 'MobLaunch',
-        description: 'MC实体投掷插件，支持Folia',
+        description: 'MC实体投掷插件 · 支持Folia',
         url: 'https://github.com/ZXBHELLO/MobLaunch',
         iconType: 'iconify',
         icon: 'fluent:box-multiple-20-filled',
@@ -59,8 +59,8 @@ export const navData = [
     items: [
       {
         id: 'redstone-editor',
-        title: 'MC 红石编辑器',
-        description: '在线红石机械设计器',
+        title: 'MC红石编辑器',
+        description: '在线红石机械设计',
         url: '/app/rseditor/',
         iconType: 'iconify',
         icon: 'fluent:calendar-edit-32-regular',
@@ -68,8 +68,8 @@ export const navData = [
       },
       {
         id: 'ai-tools',
-        title: 'AI 工具集',
-        description: '免费无限制的AI工具集合',
+        title: 'AI工具集',
+        description: '免费无限制AI工具',
         url: '/app/AI-TOOLS/',
         iconType: 'iconify',
         icon: 'line-md:iconify1',
@@ -78,7 +78,7 @@ export const navData = [
       {
         id: 'HTML_CSS_JS_Live_Preview_Editor',
         title: '实时网页编辑器',
-        description: '网页在线编辑与预览',
+        description: '网页在线编辑预览',
         url: '/app/HTML_CSS_JS_Live_Preview_Editor/',
         iconType: 'iconify',
         icon: 'dashicons:html',
@@ -87,7 +87,7 @@ export const navData = [
       {
         id: 'Markdown_Live_Preview_Editor',
         title: '实时Markdown编辑器',
-        description: 'Markdown在线编辑与预览',
+        description: 'Markdown在线编辑预览',
         url: '/app/Markdown_Live_Preview_Editor/',
         iconType: 'iconify',
         icon: 'la:markdown',
@@ -96,7 +96,7 @@ export const navData = [
       {
         id: 'Offline_Image_Compression',
         title: '图片压缩工具',
-        description: '无后端的图片压缩工具',
+        description: '无后端本地压缩',
         url: '/app/Offline_Image_Compression/',
         iconType: 'iconify',
         icon: 'la:compress',

@@ -102,12 +102,6 @@ const t = computed(() => LOCALES[lang.value] || LOCALES['/'])
   flex-shrink: 0;
 }
 
-/* 
- * SVG Data URI 优化：
- * 1. 移除了 fill/stroke 颜色定义，由 CSS currentColor 控制
- * 2. 这里的 --svg 变量仅定义形状
- */
-
 .icon-star {
   width: 1.3em; height: 1.3em;
   --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m12 1.5l3.1 6.3l6.9 1l-5 4.8l1.2 6.9l-6.2-3.2l-6.2 3.2L7 13.6L2 8.8l6.9-1z'/%3E%3C/svg%3E");

@@ -70,7 +70,8 @@ list:
         link: https://x.com/coolxiaom95
 ---
 
-:::: demo-wrapper title="如何添加友链？"
-::: info 提交 `friends.md` 或 `issue` 添加/申请友链~！
-:::
+:::: window title="如何添加友链？"
+- [Pull Request](https://github.com/ZXBHELLO/Website/pulls)
+- [Issue](https://github.com/ZXBHELLO/Website/issues)
+- [友链申请指南](/article/friend-link-guide/) 
 ::::

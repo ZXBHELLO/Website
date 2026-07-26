@@ -1,5 +1,5 @@
 ---
-title: 粒子背景效果配置教程
+title: ParticleBackground(粒子背景) 效果配置教程
 lastUpdated: true
 tags:
   - VuePress
@@ -9,7 +9,7 @@ permalink: /article/particle-guide/
 createTime: 2025/12/12 23:51:02
 ---
 
-# 粒子背景效果使用指南
+# ParticleBackground(粒子背景) 效果配置教程
 
 本文档将指导您如何在您的 VuePress 项目中集成动态粒子背景效果，包括组件安装、配置说明和样式自定义。
 ::: tip

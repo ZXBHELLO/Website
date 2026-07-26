@@ -3,20 +3,10 @@
    请尽量将以下 @import 内容移动到 .vuepress/config.ts 的 head 配置中，
    使用 <link rel="stylesheet"> 引入，性能会比 CSS @import 快很多。
 */
-@import url("https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css");
+@import url("https://fontsapi.zeoseven.com/414/main/result.css");
 @import url("https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@4.2.1/index.min.css");
-@import url("https://fonts.googleapis.com/css2?family=Ysabeau:ital,wght@1,1..1000&display=swap");
 
 /* --- 字体定义 --- */
-/* 使用 font-display: swap 避免文字隐形 (FOIT) */
-@font-face {
-  font-family: 'LXGW WenKai';
-  src: url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/fonts/LXGWWenKai-Regular.woff2') format('woff2');
-  font-display: swap;
-  unicode-range: U+4E00-9FFF;
-  /* 仅对汉字生效，优化加载 */
-}
-
 @font-face {
   font-family: 'Cascadia Code';
   src: url('https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@4.2.1/files/cascadia-code-cyrillic-ext-400-normal.woff2') format('woff2');
@@ -25,8 +15,8 @@
 
 /* --- 全局变量与基础设置 --- */
 :root {
-  /* 字体栈优化：英文字体在前，中文字体在后 */
-  --vp-font-family-base: "Ysabeau", "LXGW WenKai", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  /* 使用 WenYuan Rounded SC VF 作为主要字体 */
+  --vp-font-family-base: "WenYuan Rounded SC VF", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --vp-font-family-mono: "Cascadia Code", "Consolas", "Monaco", monospace;
   --vp-sidebar-width: 15rem;
 
@@ -40,9 +30,9 @@
    只需设置 body，子元素会自动继承
 */
 body {
-  font-family: var(--vp-font-family-base);
+  font-family: "WenYuan Rounded SC VF";
+  font-weight: normal;
   font-size: 17px;
-  font-weight: 400;
   text-rendering: optimizeLegibility;
   font-feature-settings: "liga" 1, "dlig" 1, "tnum";
   -webkit-font-smoothing: antialiased;
@@ -55,7 +45,7 @@ body {
 .vp-doc-meta .tag,
 .vp-footer,
 .profile-info {
-  font-family: "Ysabeau", "Inter", sans-serif;
+  font-family: "WenYuan Rounded SC VF", "Segoe UI", "Inter", sans-serif;
 }
 
 /* 代码块字体修正 */

@@ -9,7 +9,7 @@ permalink: /article/hide-footer-guide/
 createTime: 2025/12/07
 ---
 
-# HideFooter 组件配置教程
+# HideFooter(可配置页脚隐藏) 组件配置教程
 
 本文档将指导您如何在您的 VuePress 项目中使用 `HideFooter` 组件来控制页面页脚的显示与隐藏，包括组件安装、使用说明和配置方法。
 

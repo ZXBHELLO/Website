@@ -9,7 +9,7 @@ permalink: /article/html-page-guide/
 createTime: 2025/12/07
 ---
 
-# HtmlPage 组件使用指南
+# HtmlPage(网页嵌入) 组件使用教程
 
 本文档将指导您如何在您的 VuePress 项目中使用 `HtmlPage` 组件来嵌入HTML内容，包括组件安装、使用说明和高级配置。
 

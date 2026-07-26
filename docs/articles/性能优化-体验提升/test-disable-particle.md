@@ -1,5 +1,5 @@
 ---
-title: 粒子效果禁用测试
+title: ParticleBackground(粒子背景) 效果禁用测试
 lastUpdated: true
 disableParticle: true
 tags:
@@ -10,7 +10,7 @@ permalink: /article/particle-disable-test/
 createTime: 2025/12/12 23:51:02
 ---
 
-## 粒子效果禁用测试
+# ParticleBackground(粒子背景) 效果禁用测试
 
 这个页面已禁用粒子背景效果。你会注意到这个页面**没有**背景粒子动画。
 
