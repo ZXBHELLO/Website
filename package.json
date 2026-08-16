@@ -14,19 +14,46 @@
     "vp-update": "pnpm dlx vp-update"
   },
   "devDependencies": {
+    "@mathjax/src": "^4.1.3",
     "@vuepress/bundler-vite": "2.0.0-rc.30",
-    "@vuepress/client": "^2.0.0-rc.31",
+    "@vuepress/client": "2.0.0-rc.30",
     "http-server": "^14.1.1",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "vue": "^3.5.41",
-    "vuepress": "2.0.0-rc.31",
+    "vuepress": "2.0.0-rc.30",
     "vuepress-theme-plume": "1.0.0-rc.205"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
       "@parcel/watcher",
       "esbuild"
-    ]
+    ],
+    "overrides": {
+      "@mdit/plugin-attrs": "1.2.0",
+      "@mdit/plugin-footnote": "1.0.2",
+      "@mdit/plugin-img-lazyload": "1.1.0",
+      "@mdit/plugin-img-mark": "1.1.0",
+      "@mdit/plugin-img-size": "1.1.0",
+      "@mdit/plugin-figure": "1.2.0",
+      "@mdit/plugin-include": "1.1.0",
+      "@mdit/plugin-katex-slim": "1.1.0",
+      "@mdit/plugin-mathjax-slim": "1.2.0",
+      "@mdit/plugin-tex": "1.1.0",
+      "@mdit/plugin-mark": "2.0.2",
+      "@mdit/plugin-sub": "1.0.4",
+      "@mdit/plugin-sup": "1.0.4",
+      "@mdit/plugin-tasklist": "1.0.2",
+      "@mdit/helper": "1.1.0",
+      "@mdit/plugin-inline-rule": "2.2.0",
+      "markdown-it": "14.2.0"
+    },
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "markdown-it": "14",
+        "swiper": "14",
+        "katex": "0.18"
+      }
+    }
   },
   "engines": {
     "node": "^20.6.0 || >=22.0.0"
@@ -35,6 +62,7 @@
     "chart.js": "^4.5.1",
     "echarts": "^6.1.0",
     "flowchart.ts": "^3.0.1",
-    "swiper": "^12.2.0"
+    "swiper": "^14.1.0",
+    "vue-router": "^5.2.0"
   }
 }

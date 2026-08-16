@@ -5,10 +5,11 @@
 
 <script setup lang="ts">
 // @ts-nocheck
-import { onMounted, watch, nextTick } from 'vue'
-import { useRoute } from 'vue-router'
+import { onMounted, watch, nextTick, ref } from 'vue'
+import { useRouter } from '@vuepress/client'
 
-const route = useRoute()
+const router = useRouter()
+const currentPath = ref(router?.route?.path ?? window.location.pathname)
 
 /**
  * Details 容器折叠展开动画
@@ -129,7 +130,7 @@ onMounted(() => {
 
 // 监听路由变化，在新页面渲染完成后重新初始化
 watch(
-  () => route.path,
+  currentPath,
   () => {
     // 延迟等待 DOM 渲染
     setTimeout(() => {
@@ -137,4 +138,16 @@ watch(
     }, 150)
   }
 )
+
+// 订阅 router 变化更新 path
+if (router && typeof router.afterEach === 'function') {
+  router.afterEach((to: any) => {
+    currentPath.value = to.path
+  })
+} else {
+  // 兜底：使用 popstate 监听浏览器历史变化
+  window.addEventListener('popstate', () => {
+    currentPath.value = window.location.pathname
+  })
+}
 </script>
