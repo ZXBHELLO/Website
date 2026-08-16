@@ -34,6 +34,7 @@
   - [7.1 ParticleEffect 类](#71-particleeffect-类)
   - [7.2 NavPage 过滤与滚动逻辑](#72-navpage-过滤与滚动逻辑)
   - [7.3 ExternalLinkWarning 拦截器](#73-externallinkwarning-拦截器)
+  - [7.4 AppSetup Details 容器动画](#74-appsetup-details-容器动画)
 - [8. 内容模块职责](#8-内容模块职责)
 - [9. frontmatter 约定](#9-frontmatter-约定)
 - [10. 构建与部署流程](#10-构建与部署流程)
@@ -52,7 +53,7 @@
 |------|------|
 | 内容类型 | 博客文章、知识库文档、在线工具、导航页 |
 | 技术形态 | 静态站点生成（SSG），配置驱动 + 自定义组件扩展 |
-| 部署方式 | GitHub Actions 自动构建 → GitHub Pages |
+| 部署方式 | GitHub Actions 自动构建 → GitHub Pages（`Pages` 分支） |
 | 目标用户 | 站主本人（博客/日记）、MC 服务器玩家（指南）、开发者（在线工具） |
 
 ### 核心特性
@@ -60,10 +61,11 @@
 - **现代化界面**：深色/浅色主题自动切换，响应式设计适配移动端
 - **互动体验**：集成 Giscus 评论系统，支持 GitHub 在线编辑
 - **丰富功能**：支持 PDF、Bilibili/YouTube 视频嵌入、KaTeX 数学公式、Chart.js/ECharts 图表
-- **高效搜索**：本地搜索功能，快速定位内容
+- **高效搜索**：本地搜索（`provider: 'local'`），快速定位内容
 - **版本管理**：自动显示文档贡献者和更新时间
-- **性能优化**：粒子背景、页面加载动画、预加载策略优化
-- **自定义增强**：粒子背景、外部链接警告、页面加载动画、导航页等自研组件
+- **性能优化**：粒子背景、页面加载动画、`shouldPrefetch: false`、文件系统缓存
+- **自定义增强**：粒子背景、外部链接警告、页面加载动画、导航页、iframe 工具嵌入等自研组件
+- **AI 友好**：启用 `llmstxt` 插件，生成供大模型抓取的 `llms.txt`
 
 ---
 
@@ -102,8 +104,8 @@
 │navbar.ts│         │ NavPage     │          │ ZakoZakoCraft│
 │collecti │         │ Particle    │          │ articles    │
 │ons.ts   │         │ PageLoading │          │ app         │
-│client.ts│         │ ...         │          │ nav         │
-│custom.  │         │             │          │             │
+│client.ts│         │ AppSetup    │          │ nav         │
+│custom.  │         │ ...         │          │             │
 │css      │         └─────────────┘          └─────────────┘
 └─────────┘
 ```
@@ -112,7 +114,7 @@
 
 1. **配置层（`.vuepress/`）**：定义站点元信息、主题行为、导航结构、文档集合、客户端增强与全局样式。配置分两文件：`config.ts`（需重启生效）与 `plume.config.ts`（热更新），后者覆盖前者。
 
-2. **组件层（`.vuepress/components/`）**：8 个自定义 Vue 3 单文件组件，通过 `client.ts` 注册，提供粒子背景、页面加载动画、外部链接警告、导航页、iframe 嵌入等增强能力。
+2. **组件层（`.vuepress/components/`）**：8 个自定义 Vue 3 单文件组件，通过 `client.ts` 注册，提供粒子背景、页面加载动画、外部链接警告、导航页、iframe 嵌入、折叠容器动画等增强能力。
 
 3. **内容层（`docs/` 子目录）**：Markdown 文件按主题组织，通过 frontmatter 声明元信息，通过 `collections.ts` 聚合为博客（post 类型）或文档（doc 类型）集合。
 
@@ -124,36 +126,41 @@
 
 ## 3. 技术栈与依赖关系
 
-### 运行时核心依赖
+### 运行时核心依赖（devDependencies）
 
 | 依赖 | 版本 | 作用 |
 |------|------|------|
-| `vuepress` | 2.0.0-rc.31 | 静态站点生成器核心 |
+| `vuepress` | 2.0.0-rc.30 | 静态站点生成器核心 |
 | `vuepress-theme-plume` | 1.0.0-rc.205 | Plume 主题（提供博客、文档、评论等全套能力） |
 | `@vuepress/bundler-vite` | 2.0.0-rc.30 | Vite 打包器（替代默认 webpack） |
-| `@vuepress/client` | ^2.0.0-rc.31 | VuePress 客户端运行时 |
+| `@vuepress/client` | 2.0.0-rc.30 | VuePress 客户端运行时 |
 | `vue` | ^3.5.41 | Vue 3 框架 |
-| `typescript` | ^5.9.3 | TypeScript 支持 |
+| `typescript` | ^6.0.3 | TypeScript 支持（组件 `<script setup lang="ts">`） |
+| `@mathjax/src` | ^4.1.3 | MathJax 数学公式渲染源 |
+| `http-server` | ^14.1.1 | 本地预览构建产物（`docs:preview`） |
 
-### 功能性依赖
+### 运行时功能依赖（dependencies）
 
 | 依赖 | 版本 | 作用 |
 |------|------|------|
 | `chart.js` | ^4.5.1 | Chart.js 图表（通过 markdown 容器启用） |
 | `echarts` | ^6.1.0 | ECharts 图表（通过 markdown 容器启用） |
 | `flowchart.ts` | ^3.0.1 | Flowchart 流程图 |
-| `swiper` | ^12.2.0 | 轮播组件（用于 ZakoZakoCraft 首页图片展示） |
+| `swiper` | ^14.1.0 | 轮播组件（用于 ZakoZakoCraft 首页图片展示） |
+| `vue-router` | ^5.2.0 | Vue 路由（Plume 主题运行时依赖） |
 
-### 开发依赖
+### pnpm 特殊约束
 
-| 依赖 | 作用 |
-|------|------|
-| `http-server` | 本地预览构建产物 |
+`package.json` 中的 `pnpm` 字段声明了精细化的依赖治理策略：
+
+- **`onlyBuiltDependencies`**：仅允许 `@parcel/watcher`、`esbuild` 两个包执行构建脚本（安全 + 加速安装）。
+- **`overrides`**：将 `@mdit/plugin-*` 系列插件（`attrs`、`footnote`、`img-lazyload`、`katex-slim`、`tasklist` 等）及 `markdown-it@14.2.0` 锁定到指定版本，解决 markdown 插件间的版本冲突。
+- **`peerDependencyRules.allowedVersions`**：允许 `markdown-it@14`、`swiper@14`、`katex@0.18` 作为 peer 依赖的兼容版本，消除安装告警。
 
 ### 外部资源（CDN）
 
-- **Iconify**：`https://code.iconify.design/2/2.1.2/iconify.min.js` — 图标库
-- **字体**：`WenYuan Rounded SC VF`（霞鹜文楷衍生）+ `Cascadia Code`（代码字体）
+- **Iconify**：`https://code.iconify.design/2/2.1.2/iconify.min.js` — 图标库（`config.ts` head 引入，`NavPage` 动态加载）
+- **字体**：`WenYuan Rounded SC VF`（霞鹜文楷衍生，来自 `fontsapi.zeoseven.com`）+ `Cascadia Code`（代码字体，来自 `fontsource` CDN）
 
 ### 依赖关系图
 
@@ -162,11 +169,11 @@ VuePress 2 核心
   ├── @vuepress/bundler-vite (Vite 打包)
   ├── @vuepress/client (客户端运行时)
   └── vuepress-theme-plume (主题)
-        ├── 内置插件: search, comments, markdown 扩展, copyright...
+        ├── 内置插件: search, comments, markdown 扩展, copyright, llmstxt...
         └── 运行时组件: VPIcon, VPLink, Layout, Swiper, Card, LinkCard...
 
 自定义组件 (client.ts 注册)
-  ├── AppSetup → ParticleBackground (Canvas 粒子)
+  ├── AppSetup → ParticleBackground + Details 容器动画
   ├── PageLoading (加载动画)
   ├── ExternalLinkWarning (链接拦截)
   ├── HideFooter (页脚控制)
@@ -180,8 +187,8 @@ Markdown 内容
 
 ### 环境要求
 
-- **Node.js**: `^20.6.0 || >=22.0.0`
-- **pnpm**: `>=10.0.0`（项目指定 `pnpm@10.15.1`）
+- **Node.js**: `^20.6.0 || >=22.0.0`（`engines` 字段声明）
+- **pnpm**: `>=10.0.0`（项目通过 `packageManager` 指定 `pnpm@10.15.1`）
 
 ---
 
@@ -195,7 +202,7 @@ Website/
 ├── docs/                              # 主文档目录（VuePress 根）
 │   ├── .vuepress/                     # VuePress 核心配置
 │   │   ├── components/                # 自定义 Vue 组件 (8个)
-│   │   │   ├── AppSetup.vue           # 应用启动组件（注入粒子背景）
+│   │   │   ├── AppSetup.vue           # 应用启动组件（粒子背景 + Details 折叠动画）
 │   │   │   ├── AsideNav.vue           # 侧边导航（GitHub/Issue/赞助）
 │   │   │   ├── ExternalLinkWarning.vue# 外部链接警告弹窗
 │   │   │   ├── HideFooter.vue         # 按页面隐藏页脚
@@ -251,7 +258,9 @@ Website/
 │   └── message-board.md               # 留言板
 ├── .gitattributes                     # Git 换行符与二进制处理
 ├── .gitignore                         # Git 忽略规则
+├── CODE_WIKI.md                       # 本文档（代码知识库）
 ├── package.json                       # 项目依赖与脚本
+├── pnpm-lock.yaml                     # pnpm 锁文件
 └── README.md                          # 项目说明
 ```
 
@@ -277,12 +286,28 @@ VuePress Plume 主题采用 **双配置文件** 机制：
 | `base` | `'/'` | 站点部署根路径 |
 | `lang` | `'zh-CN'` | 站点语言 |
 | `title` | `'Zako'` | 站点标题 |
+| `description` | `'杂鱼文档/ZXBHELLO的博客与文章'` | 站点描述（SEO） |
+| `head` | favicon + iconify | 站点图标与 Iconify 脚本 |
 | `port` | `3000` | 开发服务器端口（避免与 8080 冲突） |
 | `host` | `'0.0.0.0'` | 监听所有网络接口 |
 | `shouldPrefetch` | `false` | 禁用预取（站点较大时提升性能） |
 | `bundler` | `viteBundler({})` | 使用 Vite 打包 |
+
+**主题入口 `plumeTheme({...})` 内配置**：
+
+| 配置项 | 值 | 说明 |
+|--------|-----|------|
 | `hostname` | `https://www.zakozako.cc` | 站点域名（SEO、sitemap） |
+| `docsRepo` | `https://github.com/ZXBHELLO/Website` | 文档仓库（editLink） |
+| `docsDir` | `docs` | 文档相对目录 |
+| `docsBranch` | `main` | 文档分支 |
+| `editLink` | `true` | 显示「编辑此页」链接 |
+| `contributors` | `mode: 'block'` | 显示贡献者（块级） |
+| `changelog` | `false` | 关闭变更日志 |
+| `copyright` | `'CC-BY-NC-SA-4.0'` | 版权协议 |
 | `cache` | `'filesystem'` | 文件系统缓存，加速编译 |
+| `search` | `provider: 'local'` | 本地搜索 |
+| `llmstxt` | `true` | 生成 llms.txt（供大模型抓取） |
 
 **Markdown 扩展能力**（通过 `markdown` 配置启用）：
 
@@ -293,23 +318,24 @@ VuePress Plume 主题采用 **双配置文件** 机制：
 - `math`（KaTeX 数学公式）
 - `chartjs`、`echarts`（图表支持）
 
-**评论系统**：使用 Giscus（基于 GitHub Discussions），配置了仓库 `ZXBHELLO/website` 及对应 `repoId`、`categoryId`。
+**评论系统**：使用 Giscus（基于 GitHub Discussions），配置了仓库 `ZXBHELLO/website` 及对应 `repoId`、`categoryId`、`mapping: 'pathname'` 等参数。
 
 ### 5.2 plume.config.ts — 主题配置
 
-**职责**：定义主题外观、社交链接、页脚、个人资料、过渡动画等可热更新配置。
+**职责**：定义主题外观、社交链接、页脚、个人资料、过渡动画等可热更新配置。同时导入 `navbar` 与 `collections`。
 
 **关键配置**：
 
 - `logo`：站点图标 `/assets/site_icon_32x.png`
 - `appearance`：`true`（启用深色模式切换）
 - `social`：GitHub、Bilibili、YouTube 三个社交链接
-- `navbarSocialInclude`：允许显示在导航栏的社交平台
+- `navbarSocialInclude`：允许显示在导航栏的社交平台（bilibili、youtube、github）
 - `copyright`：`true`（启用文章版权信息）
 - `prevPage` / `nextPage` / `createTime`：翻页与创建时间显示
-- `profile`：站主资料（头像、名称、描述、地区、组织）
-- `footer`：自定义页脚 HTML（含站主寄语与版权声明）
-- `transition`：页面跳转、文章列表、深色模式切换过渡动画（`circle-clip` 类型）
+- `profile`：站主资料（头像 `/assets/profile.png`、名称 `ZXBHELLO`、描述 `文档/博客/日记`、地区 China、组织 ZXBHELLO）
+- `footer`：自定义页脚 HTML（含站主寄语「希望有朝一日能够成为人类...」与版权声明）
+- `transition`：页面跳转、文章列表、深色模式切换过渡动画（`appearance: 'circle-clip'`）
+- `navbar`、`collections`：引用 [navbar.ts](#53-navbarts--导航栏配置) 与 [collections.ts](#54-collectionsts--文档集合配置)
 
 ### 5.3 navbar.ts — 导航栏配置
 
@@ -320,21 +346,21 @@ VuePress Plume 主题采用 **双配置文件** 机制：
 ```
 主页 (icon: line-md:home-md-twotone) → /
 导航 (icon: line-md:compass-twotone) → /nav/
-博客 (下拉)
+博客 (下拉, icon: line-md:text-box-multiple-twotone)
   ├── 文章 → /article/
   ├── 标签 → /article/tags/
   ├── 分类 → /article/categories/
   └── 归档 → /article/archives/
-应用 (下拉)
-  ├── OpenList云盘
-  ├── 离线图片压缩
-  ├── 2D红石编辑器
-  ├── 在线Markdown编辑器
-  └── 在线HTML编辑器
-更多 (下拉)
-  ├── 关于站主
-  ├── 友情链接
-  └── 留言板
+应用 (下拉, icon: line-md:grid-3-filled)
+  ├── OpenList云盘 → /app/Openlist/
+  ├── 离线图片压缩 → /app/Offline_Image_Compression/
+  ├── 2D红石编辑器 → /app/rseditor/
+  ├── 在线Markdown编辑器 → /app/Markdown_Live_Preview_Editor/
+  └── 在线HTML编辑器 → /app/HTML_CSS_JS_Live_Preview_Editor/
+更多 (下拉, icon: line-md:plus-circle-twotone)
+  ├── 关于站主 → /article/about-me/
+  ├── 友情链接 → /friends/
+  └── 留言板 → /comment/
 ```
 
 每个导航项支持 `text`、`icon`（Iconify 图标名）、`link` 字段，下拉菜单通过 `items` 数组定义。
@@ -357,15 +383,15 @@ VuePress Plume 主题采用 **双配置文件** 机制：
    - 标题：`博客`
    - 链接前缀：`/article/`
    - 启用：标签页、归档页、分类页、文章列表页
-   - 封面位置：右侧
+   - 封面位置：右侧（`postCover: 'right'`）
    - 分页：每页 10 篇
 
 2. **ZakoZakoCraft**（`type: 'doc'`）
    - 目录：`ZakoZakoCraft`
    - 标题：`ZakoZakoCraft Docs`
    - 链接前缀：`/ZakoZakoCraft/`
-   - 侧边栏：手动配置（7 个分组，部分默认折叠）
-   - 显示滚动条，默认展开
+   - 侧边栏：手动配置（7 个分组，默认折叠 `collapsed: true`）
+   - 显示滚动条（`sidebarScrollbar: true`），默认展开（`sidebarCollapsed: false`）
 
 > ⚠️ 关键约束：`doc` 类型集合中，Markdown 文件的 `permalink` 必须以 `linkPrefix` 开头，否则无法生成侧边栏。
 
@@ -383,20 +409,20 @@ VuePress Plume 主题采用 **双配置文件** 机制：
    - 在 `aside-outline-after` 插槽注入 `AsideNav` 组件（侧边栏大纲后显示 GitHub/Issue/赞助链接）
 
 3. **`rootComponents`**：注入 4 个根组件（全站生效）
-   - `AppSetup`（粒子背景）
+   - `AppSetup`（粒子背景 + 折叠容器动画）
    - `PageLoading`（加载动画）
    - `ExternalLinkWarning`（链接警告）
    - `HideFooter`（页脚控制）
 
 ### 5.6 custom.css — 全局样式
 
-**职责**：定义全局字体、背景、卡片样式、进场动画系统。
+**职责**：定义全局字体、背景、卡片样式、进场动画系统与折叠容器动画。
 
 **主要内容**：
 
-- **字体**：引入 `WenYuan Rounded SC VF`（正文）与 `Cascadia Code`（代码），通过 `@import` 加载
-- **全局变量**：`--vp-font-family-base`、`--vp-font-family-mono`、`--vp-sidebar-width`、动画变量
-- **背景**：文档容器网格背景、侧边栏毛玻璃效果
+- **字体**：通过 `@import` 引入 `WenYuan Rounded SC VF`（正文）与 `Cascadia Code`（代码），并定义 `@font-face`
+- **全局变量**：`--vp-font-family-base`、`--vp-font-family-mono`、`--vp-sidebar-width`、动画变量（`--anim-dist`、`--anim-duration`）
+- **背景**：文档容器网格背景（`background-attachment: fixed`）、侧边栏毛玻璃效果
 - **卡片样式**：`.vp-card-wrapper`、`.vp-link-card` 的背景、边框、hover 上浮效果
 - **进场动画系统**：
   - `fadeInUp` / `fadeInRight` 关键帧动画
@@ -404,6 +430,7 @@ VuePress Plume 主题采用 **双配置文件** 机制：
   - 前 5 个主要元素依次延迟（0.05s 递增）
   - 列表项、卡片前 10 个交错动画
   - Hero 区域元素分层进场
+- **折叠容器动画**：`details.hint-container` 的展开/收起样式（配合 AppSetup 的 JS 高度计算）
 - **无障碍**：`@media (prefers-reduced-motion: reduce)` 关闭所有动画
 
 > 💡 优化提示（代码注释）：`@import` 字体建议迁移到 `config.ts` 的 `head` 配置中用 `<link>` 引入，性能更优。
@@ -416,12 +443,21 @@ VuePress Plume 主题采用 **双配置文件** 机制：
 
 ### 6.1 AppSetup.vue
 
-**职责**：应用启动包装组件，作为根组件注入，内部渲染 `ParticleBackground`。
+**职责**：应用启动包装组件，作为根组件注入，承担**两项**职责：
 
-**实现**：极简，仅一个模板，渲染粒子背景组件。
+1. 渲染粒子背景组件 `ParticleBackground`
+2. 为 `details.hint-container` 折叠容器提供**展开/收起动画**（JS 辅助计算高度 + CSS 过渡）
+
+**Details 动画实现要点**：
+- `setupDetailsAnimation()`：查找所有 `.vp-doc details.hint-container`，为每个容器创建统一的内容包装器 `.details-content-wrapper`
+- 通过 `summary` 的 `click` 事件拦截，用 `requestAnimationFrame` + `transitionend` 实现平滑的高度过渡（0 → 真实高度 → auto）
+- 使用 `detailsEl.dataset.detailsAnimated` 标记避免重复处理
+- 挂载时初始化，并通过 `router.afterEach`（或 `popstate` 兜底）监听路由变化，新页面渲染后重新初始化
 
 ```
-AppSetup (rootComponent) → ParticleBackground
+AppSetup (rootComponent)
+  ├── <ParticleBackground /> (粒子背景)
+  └── setupDetailsAnimation() (折叠容器动画)
 ```
 
 ### 6.2 ParticleBackground.vue
@@ -491,7 +527,7 @@ AppSetup (rootComponent) → ParticleBackground
 - 遇到问题？（Issue 创建）
 - 喝杯奶茶（赞助页）
 
-**特性**：支持中英双语（`useRouteLocale`），使用 Plume 主题的 `VPIcon`、`VPLink` 组件。
+**特性**：支持中英双语（`useRouteLocale`，提供 `/` 与 `/en/` 两套文案），使用 Plume 主题的 `VPIcon`、`VPLink` 组件。
 
 ### 6.7 NavPage.vue
 
@@ -505,9 +541,9 @@ AppSetup (rootComponent) → ParticleBackground
 - **性能优化**：
   - `shallowRef` 包装导航数据（避免深响应式开销）
   - 滚动事件 `requestAnimationFrame` 节流
-  - 卡片 `content-visibility: auto`（虚拟渲染）
+  - 卡片 `content-visibility: auto` + `contain: content`（虚拟渲染）
   - 图片 `loading="lazy"` 懒加载 + 加载完成淡入
-  - `contain: strict` 限制重绘范围
+  - `contain: strict` 限制图标盒重绘范围
 
 **详细逻辑见** [7.2 NavPage 过滤与滚动逻辑](#72-navpage-过滤与滚动逻辑)。
 
@@ -518,7 +554,7 @@ AppSetup (rootComponent) → ParticleBackground
 **特性**：
 - 接收 `src` prop（必填）
 - 加载期间显示 Glitch 风格加载动画（复用 PageLoading 样式）
-- iframe `allow="clipboard-write; download"`（支持复制和下载）
+- iframe `allow="clipboard-write; download"`（支持复制和下载，用于 Alist 等）
 - `loading="lazy"` 懒加载
 - 加载完成后延迟 300ms 隐藏遮罩（确保内容渲染）
 
@@ -736,6 +772,36 @@ const urlParts = computed(() => {
 })
 ```
 
+### 7.4 AppSetup Details 容器动画
+
+**位置**：`docs/.vuepress/components/AppSetup.vue`
+
+**职责**：为 Plume 主题的 `details.hint-container`（提示容器）提供平滑的展开/收起动画。
+
+#### 实现流程
+
+```javascript
+function setupDetailsAnimation() {
+  nextTick(() => {
+    document.querySelectorAll('.vp-doc details.hint-container')
+      .forEach((detailsEl) => {
+        // 1. 跳过已处理元素（dataset.detailsAnimated 标记）
+        // 2. 创建统一内容包装器 .details-content-wrapper
+        // 3. 根据 open 状态设置初始高度/透明度/位移
+        // 4. 拦截 summary 的 click 事件：
+        //    - 展开：setAttribute('open') → 获取真实高度 → rAF 过渡到目标高度
+        //    - 收起：过渡到 0 → transitionend 后移除 open 属性
+      })
+  })
+}
+```
+
+#### 关键细节
+
+- **强制 reflow**：设置高度前读取 `offsetHeight`，确保过渡正确触发
+- **过渡结束处理**：监听 `transitionend`，展开完成后将高度设为 `auto`（适配响应式），收起完成后移除 `open` 属性
+- **路由联动**：`onMounted` 初始化一次，`router.afterEach`（或 `popstate` 兜底）监听路由变化，延迟 150ms 后重新初始化新页面的容器
+
 ---
 
 ## 8. 内容模块职责
@@ -792,6 +858,8 @@ const urlParts = computed(() => {
 ### nav（导航页）
 
 **实现方式**：`nav/index.md` 中使用 `<NavPage />` 组件，数据由 `nav/data.js` 提供。
+
+**数据结构**：数组项包含 `category`（分类名）与 `items`（导航项），每个导航项含 `id`、`title`、`description`、`url`、`iconType`（`iconify`/`image`/`none`）、`icon`、`showIconBorder` 字段。
 
 **数据规模**：200+ 导航条目，按 11 个分类组织：
 - 文档与教程、插件与模组、软件项目、配置文件
@@ -908,7 +976,7 @@ config:
 | 1 | `actions/checkout@v4` | 检出代码，`fetch-depth: 0` 拉取完整历史（用于最后更新时间） |
 | 2 | `pnpm/action-setup@v4` | 安装 pnpm |
 | 3 | `actions/setup-node@v4` | 配置 Node.js 22 |
-| 4 | `pnpm install` | 安装依赖（允许自动生成锁文件） |
+| 4 | `pnpm install` | 安装依赖（不启用缓存，允许自动生成锁文件） |
 | 5 | `pnpm run docs:build` | 构建 VuePress 站点 |
 | 6 | `crazy-max/ghaction-github-pages@v4` | 部署到 `Pages` 分支 |
 
@@ -925,6 +993,7 @@ docs/.vuepress/dist/    # 构建输出目录
 ├── index.html
 ├── assets/             # 编译后的 JS/CSS/图片
 ├── *.html              # 各页面 HTML
+├── llms.txt            # 大模型友好索引（llmstxt 插件生成）
 └── ...
 ```
 
@@ -970,7 +1039,7 @@ npm install -g pnpm
 ```bash
 pnpm docs:build
 pnpm docs:preview
-# 访问 http://localhost:8080
+# 访问 http-server 输出的地址（默认 8080）
 ```
 
 ---
@@ -997,16 +1066,17 @@ pnpm docs:preview
 3. **图片懒加载**：导航页图片 `loading="lazy"`
 4. **动画无障碍**：`prefers-reduced-motion: reduce` 时关闭动画
 5. **缓存策略**：`cache: 'filesystem'` 文件系统缓存加速重复构建
+6. **安全安装**：`onlyBuiltDependencies` 仅允许 `@parcel/watcher`、`esbuild` 执行构建脚本
 
 ### Git 约定
 
-1. **换行符**：`.gitattributes` 强制 `* text eol=lf`，图片等二进制文件标记为 `binary`
+1. **换行符**：`.gitattributes` 强制 `* text eol=lf`（`.txt` 除外用 crlf），图片等二进制文件标记为 `binary`
 2. **忽略规则**：`node_modules`、构建产物（`.cache`/`.temp`/`dist`）、环境变量、IDE 文件
 3. **部署分支**：`main`（源码）→ `Pages`（构建产物）
 
 ### 内容约定
 
-1. **Markdown 扩展语法**：支持 Plume 主题的容器语法（`::: tip`、`:::: window`）、组件语法（`<CardGrid>`、`<LinkCard>`、`<Swiper>`）
+1. **Markdown 扩展语法**：支持 Plume 主题的容器语法（`::: tip`、`:::: window`）、组件语法（`<CardGrid>`、`<LinkCard>`、`<Swiper>`、`<card>`）
 2. **图标语法**：`::icon-name::`（需 Iconify 支持，已在 `config.ts` head 引入脚本）
 3. **媒体嵌入**：`@[pdf](url)`、`@[bilibili](bid)`、`@[youtube](video_id)` 等
 4. **评论系统**：使用 Giscus，基于 GitHub Discussions，需仓库为 public 并启用 Discussions
