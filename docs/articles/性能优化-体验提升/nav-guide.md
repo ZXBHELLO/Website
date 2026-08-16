@@ -14,7 +14,7 @@ createTime: 2025/11/08
 本文档将指导您如何在您的 VuePress 项目中添加和配置ZXBHELLO的自定义导航页面，包括组件安装、数据配置和样式自定义。
 
 ::: tip
-你可以访问[ZXBHELLO的导航页](https://doc.zxbhello.top/nav/)，查看底部的示例。
+你可以访问[ZXBHELLO的导航页](/nav/)，查看底部的示例。
 :::
 
 ## 前置准备
