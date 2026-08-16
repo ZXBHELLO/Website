@@ -65,8 +65,11 @@ body {
   background-image:
     linear-gradient(90deg, var(--vp-doc-grid-bg) 1px, transparent 0),
     linear-gradient(1turn, var(--vp-doc-grid-bg) 1px, transparent 0);
-  background-position: 50%;
+  /* 从左上角 0,0 开始铺，确保坐标原点不因容器尺寸变化而相对偏移 */
+  background-position: 0 0;
   background-size: 24px 24px;
+  /* 固定到视口坐标，容器内容展开/折叠时网格纹丝不动 */
+  background-attachment: fixed;
 }
 
 [data-theme="dark"] .vp-doc-container {
@@ -277,10 +280,103 @@ body {
   animation-delay: 0.2s;
 }
 
-/* 
-   无障碍优化：
-   如果用户系统设置了“减弱动态效果”，则关闭所有自定义动画
+/* --- Details 容器折叠展开动画 --- */
+
+/*
+   Details 容器整体样式
+   动画由 JS 辅助计算高度，配合 CSS transition 实现平滑过渡
 */
+.vp-doc details.hint-container {
+  border-radius: var(--vp-radius, 8px);
+  /* 与卡片样式对齐：默认淡边框，悬停品牌色高亮 */
+  border: 1px solid rgba(60, 60, 60, 0.1);
+  /* 统一过渡：边框色 + 背景色 + 阴影 */
+  transition: border-color 0.3s ease, background-color 0.3s ease,
+    box-shadow 0.35s ease;
+}
+
+/* 深色模式下的默认边框 */
+[data-theme="dark"] .vp-doc details.hint-container {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 打开状态下的容器阴影效果 */
+.vp-doc details.hint-container[open] {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Hover 态：与卡片风格统一 —— 背景淡高亮 + 边框变品牌色 */
+.vp-doc details.hint-container:hover {
+  background-color: rgba(var(--vp-c-brand-1-rgb, 64, 158, 255), 0.06);
+  border-color: var(--vp-c-brand-1);
+}
+
+/*
+   JS 动态创建的内容包装器
+   高度由 JS 控制，CSS 只负责过渡动画
+*/
+.vp-doc details.hint-container>.details-content-wrapper {
+  overflow: hidden;
+  /* 高度 + 透明度 + 轻微位移，展开时内容从上方淡入滑出 */
+  transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.28s ease, transform 0.28s ease;
+}
+
+/*
+   Summary 点击区域样式
+*/
+.vp-doc details.hint-container>summary {
+  cursor: pointer;
+  transition: color 0.25s ease;
+  user-select: none;
+  /* 给 summary 添加 marker 位置，确保自定义 marker 位置与原生一致 */
+  list-style-position: inside;
+}
+
+/*
+   小三角 Marker 旋转动画
+   ---------------------------------------------------------
+   策略：隐藏原生 marker，用 summary::before 绘制视觉上
+   完全相同的三角形，然后加上旋转过渡。
+   这样既能保持折叠时外观与原来一模一样，又能获得旋转动画。
+*/
+
+/* 隐藏浏览器原生 marker（Chrome/Safari/Edge） */
+.vp-doc details.hint-container>summary::-webkit-details-marker {
+  display: none;
+}
+
+/* 隐藏 Firefox 的原生 marker */
+.vp-doc details.hint-container>summary {
+  list-style: none;
+}
+
+/* 用伪元素模拟原生三角形外观，大小、位置与视觉效果尽量还原 */
+.vp-doc details.hint-container>summary::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  /* 空心箭头三角形 */
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid currentColor;
+  /* 保持与原生 marker 一致的颜色透明度 */
+  opacity: 0.7;
+  /* 与右侧文字留间距，和原生 marker 视觉相同 */
+  margin-right: 6px;
+  vertical-align: 1px;
+  /* 旋转动画：过渡曲线与整体统一 */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: 50% 50%;
+}
+
+/* 展开时三角形顺时针旋转 90°，箭头朝下 */
+.vp-doc details.hint-container[open]>summary::before {
+  transform: rotate(90deg);
+}
+
+/* --- 无障碍：减弱动态效果 --- */
 @media (prefers-reduced-motion: reduce) {
 
   *,
@@ -290,5 +386,14 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01s !important;
     scroll-behavior: auto !important;
+  }
+
+  .vp-doc details.hint-container>.details-content-wrapper {
+    transition: none !important;
+    will-change: auto;
+  }
+
+  .vp-doc details.hint-container {
+    transition: none !important;
   }
 }
