@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<script>
+    (function() {
+        try {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark-mode');
+            }
+        } catch (e) { console.error("Error applying initial theme:", e); }
+    })();
+</script>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="shortcut icon" href="/favicon.ico">
+<title>Free AI 文本转音频</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   Apple Design System tokens (reference: 苹果 Design Library)
+   System Blue / system grays / HIG surfaces, light + dark
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+    --background: #ffffff;
+    --foreground: #1d1d1f;
+    --card: #ffffff;
+    --card-foreground: #1d1d1f;
+    --primary: #007aff;
+    --primary-foreground: #ffffff;
+    --secondary: #f2f2f7;
+    --secondary-foreground: #1d1d1f;
+    --muted: #f2f2f7;
+    --muted-foreground: #8e8e93;
+    --accent: #f7f7fa;
+    --accent-foreground: #1d1d1f;
+    --destructive: #ff3b30;
+    --success: #34c759;
+    --warning: #ff9500;
+    --border: #e5e5ea;
+    --input: #d1d1d6;
+    --ring: #007aff;
+    --ring-soft: rgba(0, 122, 255, 0.12);
+    --glow-a: rgba(0, 122, 255, 0.05);
+    --glow-b: rgba(88, 86, 214, 0.05);
+    --radius: 1.2rem;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 8px 24px -8px rgba(0, 0, 0, 0.08), 0 4px 8px -4px rgba(0, 0, 0, 0.05);
+    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+    --kbd-bg: #f2f2f7;
+    --divider-color: #e5e5ea;
+    --voice-alloy: #007aff;
+    --voice-echo: #5856d6;
+    --voice-fable: #af52de;
+    --voice-onyx: #8e8e93;
+    --voice-nova: #34c759;
+    --voice-shimmer: #64d2ff;
+    --voice-coral: #ff453a;
+    --voice-verse: #ff9f0a;
+    --voice-ballad: #bf5af2;
+    --voice-ash: #6e6e73;
+    --voice-sage: #30d158;
+    --voice-amuch: #ff9500;
+    --voice-dan: #48484a;
+    --voice-hypnosis: #5e5ce6;
+}
+
+html.dark-mode {
+    --background: #000000;
+    --foreground: #f5f5f7;
+    --card: #1c1c1e;
+    --card-foreground: #f5f5f7;
+    --primary: #2e8dff;
+    --primary-foreground: #000000;
+    --secondary: #1c1c1e;
+    --secondary-foreground: #f5f5f7;
+    --muted: #1c1c1e;
+    --muted-foreground: #8e8e93;
+    --accent: #2c2c2e;
+    --accent-foreground: #f5f5f7;
+    --destructive: #ff453a;
+    --success: #30d158;
+    --warning: #ff9f0a;
+    --border: #3a3a3c;
+    --input: #3a3a3c;
+    --ring: #2e8dff;
+    --ring-soft: rgba(46, 141, 255, 0.18);
+    --glow-a: rgba(46, 141, 255, 0.08);
+    --glow-b: rgba(94, 92, 230, 0.08);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.30);
+    --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.44), 0 2px 4px -2px rgba(0, 0, 0, 0.36);
+    --shadow-lg: 0 8px 24px -8px rgba(0, 0, 0, 0.50), 0 4px 8px -4px rgba(0, 0, 0, 0.40);
+    --kbd-bg: #2c2c2e;
+    --divider-color: #3a3a3c;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+}
+
+body {
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: 1.5;
+    padding: 0;
+    margin: 0;
+    background-image:
+        radial-gradient(circle at 80% 10%, var(--glow-a) 0%, transparent 600px),
+        radial-gradient(circle at 20% 90%, var(--glow-b) 0%, transparent 600px);
+    background-attachment: fixed;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+}
+
+header {
+    padding: 2rem 0 2.25rem;
+    text-align: center;
+    position: relative;
+}
+
+h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--foreground);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+}
+
+.description {
+    font-size: 1.05rem;
+    color: var(--muted-foreground);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.content {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    position: relative;
+}
+
+.text-input-section, .audio-output-section {
+    flex: 1;
+    width: 50%;
+}
+
+.card {
+    background-color: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--border);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.section-title {
+    font-size: 1.15rem;
+    font-weight: 650;
+    margin-bottom: 1rem;
+    color: var(--foreground);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    letter-spacing: -0.01em;
+}
+
+.section-title i {
+    margin-right: 0.75rem;
+    color: var(--primary);
+    font-size: 1.05rem;
+}
+
+textarea {
+    width: 100%;
+    min-height: 180px;
+    padding: 14px 16px;
+    border: 1px solid var(--input);
+    border-radius: 16px;
+    resize: vertical;
+    font-size: 15px;
+    margin-bottom: 0.5rem;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: 1.6;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--ring);
+    box-shadow: 0 0 0 4px var(--ring-soft);
+}
+
+.voice-style-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 10px;
+    margin-bottom: 1.25rem;
+}
+
+.voice-style-option {
+    min-width: 0;
+}
+
+.voice-style-option input[type="radio"] {
+    display: none;
+}
+
+.voice-style-option label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 14px 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+    background: var(--card);
+    text-align: center;
+    height: 100%;
+}
+
+.voice-style-option label:hover {
+    border-color: var(--input);
+}
+
+.voice-style-option input[type="radio"]:checked + label {
+    border-color: var(--ring);
+    background: var(--ring-soft);
+    box-shadow: 0 0 0 1px var(--ring);
+}
+
+.voice-style-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    background: var(--secondary);
+    border: 1px solid var(--border);
+}
+
+.voice-style-name {
+    font-weight: 600;
+    font-size: 0.82rem;
+    line-height: 1.2;
+}
+
+.voice-style-desc {
+    font-size: 0.7rem;
+    color: var(--muted-foreground);
+    line-height: 1.1;
+}
+
+.shortcut-hint kbd {
+    background: var(--kbd-bg);
+    padding: 0.1rem 0.35rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    margin: 0 0.15rem;
+    font-family: monospace;
+    color: var(--foreground);
+    font-size: 0.78rem;
+}
+
+.divider {
+    height: 1px;
+    background: var(--divider-color);
+    margin: 1.25rem 0;
+}
+
+.lang-toggle-container {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    background-color: var(--card);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    padding: 4px;
+    z-index: 10;
+    box-shadow: var(--shadow-sm);
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 28px;
+    width: 28px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.theme-switch i {
+    font-size: 15px;
+    color: var(--muted-foreground);
+    transition: transform 0.4s ease, opacity 0.3s ease;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.theme-switch i:hover {
+    color: var(--primary);
+}
+
+#theme-icon-sun {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg);
+}
+
+#theme-icon-moon {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+html.dark-mode #theme-icon-sun {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+html.dark-mode #theme-icon-moon {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg);
+}
+
+#api-token-toggle {
+    cursor: pointer;
+    color: var(--muted-foreground);
+    transition: color 0.3s;
+    position: relative;
+    font-size: 1rem;
+}
+
+#api-token-toggle:hover {
+    color: var(--primary);
+}
+
+#api-token-toggle.active {
+    color: var(--success);
+}
+
+#api-token-container {
+    display: none;
+    padding: 1rem 1.1rem;
+    background-color: var(--muted);
+    border-radius: 14px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+}
+
+#api-token-container p {
+    font-size: 0.9rem;
+    color: var(--muted-foreground);
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+}
+
+#api-token-container a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#api-token-container a:hover {
+    text-decoration: underline;
+}
+
+.input-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+#api-token-input {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--input);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    background-color: var(--background);
+    color: var(--foreground);
+    min-width: 0;
+}
+
+#api-token-input:focus {
+    outline: none;
+    border-color: var(--ring);
+    box-shadow: 0 0 0 4px var(--ring-soft);
+}
+
+.text-stats {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.88rem;
+    color: var(--muted-foreground);
+}
+
+.text-stat {
+    margin-right: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.text-stat i {
+    margin-right: 0.4rem;
+    color: var(--primary);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 24px;
+    border: none;
+    border-radius: 999px;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.18s ease, transform 0.18s ease;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    filter: brightness(0.94);
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.42;
+    filter: none;
+}
+
+.btn-success {
+    background: var(--success);
+    color: #ffffff;
+}
+
+.btn-danger {
+    background: var(--destructive);
+    color: #ffffff;
+}
+
+.btn-text {
+    background: none;
+    color: var(--primary);
+    padding: 0 6px;
+    height: auto;
+    box-shadow: none;
+}
+
+.btn-text:hover {
+    background: none;
+    text-decoration: underline;
+    filter: none;
+}
+
+.btn-sm {
+    height: 36px;
+    padding: 0 16px;
+    font-size: 13.5px;
+}
+
+.btn i {
+    margin-right: 0.4rem;
+}
+
+.btn .spinner {
+    display: inline-block;
+    width: 1.1rem;
+    height: 1.1rem;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    border-top-color: #ffffff;
+    animation: spin 1s linear infinite;
+    margin-left: 0.4rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.custom-audio-player {
+    width: 100%;
+    margin-top: 0.75rem;
+    border-radius: 16px;
+    background: var(--secondary);
+    border: 1px solid var(--border);
+    padding: 0.75rem;
+}
+
+audio {
+    width: 100%;
+    height: 56px;
+    border-radius: 28px;
+}
+
+html.dark-mode audio::-webkit-media-controls-panel {
+    background-color: var(--card);
+}
+
+html.dark-mode audio::-webkit-media-controls-enclosure {
+    background-color: var(--card);
+}
+
+html.dark-mode audio::-webkit-media-controls-play-button,
+html.dark-mode audio::-webkit-media-controls-current-time-display,
+html.dark-mode audio::-webkit-media-controls-time-remaining-display,
+html.dark-mode audio::-webkit-media-controls-mute-button,
+html.dark-mode audio::-webkit-media-controls-volume-slider,
+html.dark-mode audio::-webkit-media-controls-fullscreen-button {
+    filter: invert(1) grayscale(1) brightness(1.5);
+}
+
+.status {
+    margin-top: 1rem;
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-size: 0.92rem;
+    display: none;
+    animation: fadeInUp 0.4s ease;
+    font-weight: 500;
+    border-left: 3px solid var(--border);
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.status.success {
+    background-color: rgba(52, 199, 89, 0.12);
+    color: var(--success);
+    border-left-color: var(--success);
+    display: block;
+}
+
+.status.error {
+    background-color: rgba(255, 59, 48, 0.12);
+    color: var(--destructive);
+    border-left-color: var(--destructive);
+    display: block;
+}
+
+.status.warning {
+    background-color: rgba(255, 149, 0, 0.12);
+    color: var(--warning);
+    border-left-color: var(--warning);
+    display: block;
+}
+
+.loading {
+    display: none;
+    align-items: center;
+    margin: 1rem 0;
+    font-size: 0.92rem;
+    color: var(--muted-foreground);
+    gap: 8px;
+}
+
+.loading .spinner {
+    width: 1.1rem;
+    height: 1.1rem;
+    border: 2px solid var(--ring-soft);
+    border-radius: 50%;
+    border-top-color: var(--ring);
+    animation: spin 1s linear infinite;
+}
+
+.history-section {
+    margin-top: 1.25rem;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    gap: 1rem;
+}
+
+.history-warning {
+    background-color: rgba(255, 149, 0, 0.1);
+    border-left: 3px solid var(--warning);
+    padding: 0.6rem 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    font-size: 0.88rem;
+    color: var(--warning);
+    display: flex;
+    align-items: center;
+}
+
+.history-warning i {
+    margin-right: 0.5rem;
+}
+
+.history-container {
+    max-height: 360px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+    padding-right: 4px;
+}
+
+.history-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.history-container::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+}
+
+.history-container::-webkit-scrollbar-thumb {
+    background-color: var(--border);
+    border-radius: 10px;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0.6rem;
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.18s ease;
+    border-radius: 12px;
+}
+
+.history-item:hover {
+    background-color: var(--ring-soft);
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-info {
+    flex: 1;
+    min-width: 0;
+    padding-right: 1rem;
+}
+
+.history-timestamp {
+    font-size: 0.78rem;
+    color: var(--muted-foreground);
+    margin-bottom: 0.3rem;
+}
+
+.history-voice {
+    font-size: 0.92rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    color: var(--primary);
+    margin-bottom: 0.2rem;
+}
+
+.history-voice::before {
+    content: '';
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--voice-color, var(--primary));
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.history-text {
+    font-size: 0.88rem;
+    color: var(--muted-foreground);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.no-history {
+    color: var(--muted-foreground);
+    font-size: 0.92rem;
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    background: var(--ring-soft);
+    color: var(--primary);
+}
+
+.preview-container {
+    background: var(--secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.preview-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.preview-title {
+    font-size: 1.15rem;
+    font-weight: 650;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.01em;
+}
+
+.preview-title i {
+    margin-right: 0.75rem;
+    font-size: 1.3rem;
+    color: var(--primary);
+}
+
+.preview-icon {
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    width: 80px;
+    height: 80px;
+    opacity: 0.06;
+    transform: rotate(15deg);
+    color: var(--primary);
+}
+
+.preview-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    color: var(--muted-foreground);
+    border: 2px dashed var(--input);
+    border-radius: 14px;
+    font-size: 0.92rem;
+}
+
+.preview-placeholder i {
+    margin-bottom: 0.75rem;
+    font-size: 2.2rem;
+    opacity: 0.5;
+}
+
+.shortcut-hint {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0.9rem;
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.usage-tips {
+    background: var(--accent);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.25rem;
+    margin-top: 1.25rem;
+}
+
+.tips-title {
+    font-size: 1rem;
+    font-weight: 650;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+}
+
+.tips-title i {
+    margin-right: 0.5rem;
+    color: var(--primary);
+}
+
+.tips-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tips-list li {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 0.4rem;
+    font-size: 0.88rem;
+    color: var(--card-foreground);
+}
+
+.tips-list li::before {
+    content: "•";
+    color: var(--primary);
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.current-voice-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 0.6rem 0.75rem;
+    border-radius: 14px;
+}
+
+.current-voice-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.6rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.current-voice-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.current-voice-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.1rem;
+}
+
+.current-voice-desc {
+    font-size: 0.78rem;
+    color: var(--muted-foreground);
+}
+
+.input-section-title {
+    font-size: 1.05rem;
+    font-weight: 650;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.01em;
+}
+
+.input-section-title i {
+    margin-right: 0.5rem;
+    color: var(--primary);
+}
+
+@media (max-width: 1024px) {
+    .content { flex-direction: column; }
+    .text-input-section, .audio-output-section { width: 100%; }
+}
+
+@media (max-width: 768px) {
+    .container { padding: 1rem 0.8rem; }
+    h1 { font-size: 2rem; }
+    .description { font-size: 0.98rem; padding: 0 1rem; }
+    .card { padding: 1.1rem; }
+    textarea { min-height: 160px; }
+    .lang-toggle-container { top: 1rem !important; right: 1rem !important; }
+    .shortcut-hint { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<div class="lang-toggle-container">
+    <div class="theme-switch" id="theme-toggle" title="切换亮色/暗色模式">
+        <i class="fas fa-sun" id="theme-icon-sun"></i>
+        <i class="fas fa-moon" id="theme-icon-moon"></i>
+    </div>
+</div>
+<h1 data-lang-zh="Free AI 文本转音频">Free AI 文本转音频</h1>
+<p class="description">
+<span data-lang-zh="输入文本，选择语音风格，一键将文字转换为自然流畅的语音。">输入文本，选择语音风格，一键将文字转换为自然流畅的语音。</span><br>
+<span data-lang-zh="支持多种声音特征，帮您创建专业水准的音频内容。">支持多种声音特征，帮您创建专业水准的音频内容。</span>
+</p>
+</header>
+<div class="content">
+<section class="text-input-section">
+<div class="card">
+<h2 class="section-title">
+    <div><i class="fas fa-microphone-alt"></i><span data-lang-zh="语音生成">语音生成</span></div>
+    <i class="fas fa-key" id="api-token-toggle" title="设置API Token"></i>
+</h2>
+<div id="api-token-container">
+    <p data-lang-zh="此服务需要使用Pollinations AI的API Token。请前往官网获取免费的'seed'等级Token，然后粘贴到下方。">此服务需要使用Pollinations AI的API Token。请前往官网获取免费的'seed'等级Token，然后粘贴到下方。</p>
+    <p><a href="https://auth.pollinations.ai" target="_blank">https://auth.pollinations.ai</a></p>
+    <div class="input-group">
+        <input type="password" id="api-token-input" placeholder="Enter your API Token here">
+        <button id="save-token-btn" class="btn btn-sm"><i class="fas fa-save"></i> <span data-lang-zh="保存">保存</span></button>
+    </div>
+</div>
+<div class="input-section-title"><i class="fas fa-sliders"></i><span data-lang-zh="选择语音风格">选择语音风格</span></div>
+<p style="margin-bottom: 0.75rem; font-size: 0.92rem; color: var(--muted-foreground);">
+<span data-lang-zh="每种风格都有其独特的音色和表现力，选择最适合您内容的声音">每种风格都有其独特的音色和表现力，选择最适合您内容的声音</span>
+</p>
+<div class="voice-style-selector">
+<div class="voice-style-option">
+<input type="radio" id="voice-alloy" name="voiceStyle" value="openai-audio" data-voice="alloy" checked>
+<label for="voice-alloy">
+<span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-alloy);"></i></span>
+<span class="voice-style-name">Alloy</span><span class="voice-style-desc" data-lang-zh="平衡中性"></span>
+</label>
+</div>
+<div class="voice-style-option">
+<input type="radio" id="voice-echo" name="voiceStyle" value="openai-audio" data-voice="echo">
+<label for="voice-echo">
+<span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-echo);"></i></span>
+<span class="voice-style-name">Echo</span><span class="voice-style-desc" data-lang-zh="深沉有力"></span>
+</label>
+</div>
+<div class="voice-style-option">
+<input type="radio" id="voice-fable" name="voiceStyle" value="openai-audio" data-voice="fable">
+<label for="voice-fable">
+<span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-fable);"></i></span>
+<span class="voice-style-name">Fable</span><span class="voice-style-desc" data-lang-zh="温暖讲述"></span>
+</label>
+</div>
+<div class="voice-style-option">
+<input type="radio" id="voice-onyx" name="voiceStyle" value="openai-audio" data-voice="onyx">
+<label for="voice-onyx">
+<span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-onyx);"></i></span>
+<span class="voice-style-name">Onyx</span><span class="voice-style-desc" data-lang-zh="威严庄重"></span>
+</label>
+</div>
+<div class="voice-style-option">
+<input type="radio" id="voice-nova" name="voiceStyle" value="openai-audio" data-voice="nova">
+<label for="voice-nova">
+<span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-nova);"></i></span>
+<span class="voice-style-name">Nova</span><span class="voice-style-desc" data-lang-zh="友好专业"></span>
+</label>
+</div>
+<div class="voice-style-option">
+<input type="radio" id="voice-shimmer" name="voiceStyle" value="openai-audio" data-voice="shimmer">
+<label for="voice-shimmer">
+<span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-shimmer);"></i></span>
+<span class="voice-style-name">Shimmer</span><span class="voice-style-desc" data-lang-zh="轻快明亮"></span>
+</label>
+</div>
+<div class="voice-style-option">
+<input type="radio" id="voice-coral" name="voiceStyle" value="openai-audio" data-voice="coral">
+<label for="voice-coral">
+<span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-coral);"></i></span>
+<span class="voice-style-name">Coral</span><span class="voice-style-desc" data-lang-zh="温柔平静"></span>
+</label>
+</div>
+<div class="voice-style-option">
+<input type="radio" id="voice-verse" name="voiceStyle" value="openai-audio" data-voice="verse">
+<label for="voice-verse">
+<span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-verse);"></i></span>
+<span class="voice-style-name">Verse</span><span class="voice-style-desc" data-lang-zh="生动诗意"></span>
+</label>
+</div>
+<div class="voice-style-option">
+<input type="radio" id="voice-ballad" name="voiceStyle" value="openai-audio" data-voice="ballad">
+<label for="voice-ballad">
+<span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-ballad);"></i></span>
+<span class="voice-style-name">Ballad</span><span class="voice-style-desc" data-lang-zh="抒情柔和"></span>
+</label>
+</div>
+<div class="voice-style-option">
+<input type="radio" id="voice-ash" name="voiceStyle" value="openai-audio" data-voice="ash">
+<label for="voice-ash">
+<span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-ash);"></i></span>
+<span class="voice-style-name">Ash</span><span class="voice-style-desc" data-lang-zh="思考沉稳"></span>
+</label>
+</div>
+<div class="voice-style-option">
+<input type="radio" id="voice-sage" name="voiceStyle" value="openai-audio" data-voice="sage">
+<label for="voice-sage">
+<span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-sage);"></i></span>
+<span class="voice-style-name">Sage</span><span class="voice-style-desc" data-lang-zh="智慧老练"></span>
+</label>
+</div>
+<div class="voice-style-option">
+<input type="radio" id="voice-amuch" name="voiceStyle" value="openai-audio" data-voice="amuch">
+<label for="voice-amuch">
+<span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-amuch);"></i></span>
+<span class="voice-style-name">Amuch</span><span class="voice-style-desc" data-lang-zh="饱满自然"></span>
+</label>
+</div>
+<div class="voice-style-option">
+<input type="radio" id="voice-dan" name="voiceStyle" value="openai-audio" data-voice="dan">
+<label for="voice-dan">
+<span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-dan);"></i></span>
+<span class="voice-style-name">Dan</span><span class="voice-style-desc" data-lang-zh="男声稳重"></span>
+</label>
+</div>
+<div class="voice-style-option">
+<input type="radio" id="voice-hypnosis" name="voiceStyle" value="hypnosis-tracy">
+<label for="voice-hypnosis">
+<span class="voice-style-icon"><i class="fas fa-magic" style="color: var(--voice-hypnosis);"></i></span>
+<span class="voice-style-name">Hypnosis</span>
+<span class="voice-style-desc" data-lang-zh="催眠疗愈">催眠疗愈</span>
+</label>
+</div>
+</div>
+<div class="divider"></div>
+<div class="input-section-title"><i class="fas fa-pen-fancy"></i><span data-lang-zh="输入文本">输入文本</span></div>
+<textarea id="textInput" placeholder="使用ai回复生成对话。如需让AI照着念，可以在文本之前加上：请照着文本念"></textarea>
+<div class="text-stats">
+<div class="text-stat"><i class="fas fa-text-height"></i><span id="charCount"></span></div>
+<div class="text-stat"><i class="fas fa-clock"></i><span id="durationEstimate"></span></div>
+</div>
+<div style="display: flex; align-items: center;">
+<button id="generateBtn" class="btn">
+    <span id="generateBtnContent">
+        <i class="fas fa-play"></i>
+        <span id="generateBtnText" data-lang-zh="生成语音"></span>
+    </span>
+    <span id="generateBtnSpinner" class="spinner" style="display: none;"></span>
+</button>
+<div class="shortcut-hint"><span data-lang-zh="快捷键: "></span><kbd>Ctrl</kbd> + <kbd>Enter</kbd></div>
+</div>
+</div>
+<div class="usage-tips">
+<div class="tips-title"><i class="fas fa-lightbulb"></i><span data-lang-zh="使用小技巧">使用小技巧</span></div>
+<ul class="tips-list">
+    <li><span data-lang-zh="输入标点符号可增加语音的自然停顿和语调变化"></span></li>
+    <li><span data-lang-zh="不同语音风格适合不同场景，可以尝试多种风格找到最适合的"></span></li>
+    <li><span data-lang-zh="大段文本可划分为多个段落，生成后再合并，效果更佳"></span></li>
+    <li><span data-lang-zh="特殊专业术语可能需要加注音或替换为更通用的表达"></span></li>
+</ul>
+</div>
+</section>
+<section class="audio-output-section">
+<div class="card">
+<div class="preview-container">
+<div class="preview-icon"><i class="fas fa-headphones-alt fa-5x"></i></div>
+<div class="preview-header"><h3 class="preview-title"><i class="fas fa-play-circle"></i><span data-lang-zh="音频预览"></span></h3></div>
+<div id="currentVoiceContainer" style="display: none;" class="current-voice-info">
+<div class="current-voice-icon" id="currentVoiceIcon"><i class="fas fa-microphone"></i></div>
+<div class="current-voice-details"><div class="current-voice-name" id="currentVoiceName"></div><div class="current-voice-desc" id="currentVoiceDesc"></div></div>
+</div>
+<div id="audioContainer" style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+<div class="preview-placeholder" id="noAudioMessage"><i class="fas fa-music"></i><span data-lang-zh="尚未生成语音"></span></div>
+</div>
+</div>
+<div id="downloadContainer" style="display: none;">
+<button id="downloadBtn" class="btn btn-success"><i class="fas fa-download"></i><span data-lang-zh="下载音频文件"></span></button>
+</div>
+<div class="loading" id="loadingIndicator"><span class="spinner"></span> <span data-lang-zh="正在生成语音..."></span></div>
+<div id="statusMessage" class="status"></div>
+</div>
+<div class="card history-section">
+<div class="history-header">
+<h2 class="section-title"><i class="fas fa-history"></i><span data-lang-zh="历史记录"></span><span class="badge" data-lang-zh="最近10条"></span></h2>
+<button id="clearHistoryBtn" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i><span data-lang-zh="清空记录"></span></button>
+</div>
+<div class="history-warning"><i class="fas fa-exclamation-triangle"></i><span data-lang-zh="生成记录链接刷新后重置，请注意下载"></span></div>
+<div class="history-container" id="historyContainer"><div id="historyList"><p class="no-history" data-lang-zh="暂无历史记录"></p></div></div>
+</div>
+</section>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const textInput = document.getElementById('textInput');
+const generateBtn = document.getElementById('generateBtn');
+const generateBtnContent = document.getElementById('generateBtnContent');
+const generateBtnText = document.getElementById('generateBtnText');
+const generateBtnSpinner = document.getElementById('generateBtnSpinner');
+const downloadBtn = document.getElementById('downloadBtn');
+const audioContainer = document.getElementById('audioContainer');
+const noAudioMessage = document.getElementById('noAudioMessage');
+const downloadContainer = document.getElementById('downloadContainer');
+const loadingIndicator = document.getElementById('loadingIndicator');
+const statusMessage = document.getElementById('statusMessage');
+const historyList = document.getElementById('historyList');
+const charCount = document.getElementById('charCount');
+const durationEstimate = document.getElementById('durationEstimate');
+const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+const currentVoiceContainer = document.getElementById('currentVoiceContainer');
+const currentVoiceIcon = document.getElementById('currentVoiceIcon');
+const currentVoiceName = document.getElementById('currentVoiceName');
+const currentVoiceDesc = document.getElementById('currentVoiceDesc');
+const apiTokenToggle = document.getElementById('api-token-toggle');
+const apiTokenContainer = document.getElementById('api-token-container');
+const apiTokenInput = document.getElementById('api-token-input');
+const saveTokenBtn = document.getElementById('save-token-btn');
+const themeToggle = document.getElementById('theme-toggle'); 
+
+const MAX_HISTORY_ITEMS = 10;
+const CHARS_PER_MINUTE = 150;
+const voiceDescriptions = {
+    'alloy': { zh: '平衡中性', en: 'Balanced' }, 'echo': { zh: '深沉有力', en: 'Deep' }, 'fable': { zh: '温暖讲述', en: 'Narrative' },
+    'onyx': { zh: '威严庄重', en: 'Authoritative' }, 'nova': { zh: '友好专业', en: 'Friendly' }, 'shimmer': { zh: '轻快明亮', en: 'Bright' },
+    'coral': { zh: '温柔平静', en: 'Gentle' }, 'verse': { zh: '生动诗意', en: 'Lively' }, 'ballad': { zh: '抒情柔和', en: 'Melodious' },
+    'ash': { zh: '思考沉稳', en: 'Thoughtful' }, 'sage': { zh: '智慧老练', en: 'Wise' }, 'amuch': { zh: '饱满自然', en: 'Full-bodied' },
+    'dan': { zh: '男声稳重', en: 'Steady Male' }, 'hypnosis-tracy': { zh: '催眠疗愈', en: 'Hypnotic' },
+};
+const voiceColors = { 
+    'alloy': '#007aff', 'echo': '#5856d6', 'fable': '#af52de', 'onyx': '#8e8e93', 'nova': '#34c759', 'shimmer': '#64d2ff',
+    'coral': '#ff453a', 'verse': '#ff9f0a', 'ballad': '#bf5af2', 'ash': '#6e6e73', 'sage': '#30d158', 'amuch': '#ff9500',
+    'dan': '#48484a', 'hypnosis-tracy': '#5e5ce6'
+};
+let audioBlob = null;
+let history = [];
+
+function applyTheme(theme) {
+    document.documentElement.classList.toggle('dark-mode', theme === 'dark');
+    localStorage.setItem('theme', theme);
+}
+themeToggle.addEventListener('click', () => {
+    const isDarkMode = document.documentElement.classList.contains('dark-mode');
+    applyTheme(isDarkMode ? 'light' : 'dark');
+});
+
+function updateTextStats() {
+    const text = textInput.value.trim();
+    const count = text.length;
+    const lang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+    charCount.textContent = lang === 'en' ? `Characters: ${count}` : `字符数: ${count}`;
+    const durationSeconds = Math.max(0, Math.round((count / CHARS_PER_MINUTE) * 60));
+    durationEstimate.textContent = lang === 'en' ? `Est. Duration: ${durationSeconds} sec` : `估计时长: ${durationSeconds} 秒`;
+}
+function setButtonState(state) {
+    const lang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+    if (state === 'loading') {
+        generateBtn.disabled = true;
+        generateBtnContent.style.display = 'none';
+        generateBtnText.textContent = lang === 'en' ? 'Generating...' : '正在生成...';
+        generateBtnSpinner.style.display = 'inline-block';
+    } else { 
+        generateBtn.disabled = false;
+        generateBtnContent.style.display = 'inline-flex';
+        generateBtnSpinner.style.display = 'none';
+        const currentText = generateBtnText.getAttribute(`data-lang-${lang}`);
+        if (currentText) generateBtnText.textContent = currentText;
+    }
+}
+async function generateAudio() {
+    const text = textInput.value.trim();
+    const selectedOption = document.querySelector('.voice-style-option input[type="radio"]:checked');
+    const apiToken = localStorage.getItem('pollinationsApiToken');
+    const lang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+    if (!apiToken) {
+        showStatus(lang === 'en' ? 'API Token is not set. Please set your token first.' : 'API Token未设置，请先点击右上角的钥匙图标进行设置。', 'warning');
+        apiTokenContainer.style.display = 'block';
+        return;
+    }
+    if (!text) {
+        showStatus(lang === 'en' ? 'Please enter some text.' : '请输入文本内容', 'error');
+        return;
+    }
+    setButtonState('loading');
+    statusMessage.style.display = 'none';
+    loadingIndicator.style.display = 'flex';
+    try {
+        const model = selectedOption.value;
+        const voice = selectedOption.dataset.voice;
+        let url = `https://text.pollinations.ai/${encodeURIComponent(text)}?model=${model}&token=${apiToken}`;
+        if (voice) {
+            url += `&voice=${voice}`;
+        }
+        
+        const response = await fetch(url);
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({ error: `${response.status} ${response.statusText}` }));
+            throw new Error(errorData.error);
+        }
+        
+        audioBlob = await response.blob();
+        if (audioBlob.type !== 'audio/mpeg') {
+            throw new Error(lang === 'en' ? 'Invalid audio file received.' : '收到无效的音频文件。');
+        }
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const audioElement = document.createElement('audio');
+        audioElement.id = 'audioElement';
+        audioElement.controls = true;
+        audioElement.autoplay = true;
+        audioElement.src = audioUrl;
+        
+        audioContainer.innerHTML = '';
+        audioContainer.appendChild(audioElement);
+        noAudioMessage.style.display = 'none';
+        downloadContainer.style.display = 'block';
+        updateCurrentVoiceDisplay(voice || model);
+        addHistoryItem(text, voice || model, audioBlob);
+        showStatus(lang === 'en' ? 'Audio generated successfully!' : '语音生成成功！', 'success');
+        
+    } catch (error) {
+        console.error('Error generating audio:', error);
+        showStatus(`${lang === 'en' ? 'Error: ' : '错误: '}${error.message}`, 'error');
+    } finally {
+        setButtonState('idle'); 
+        loadingIndicator.style.display = 'none';
+    }
+}
+function updateCurrentVoiceDisplay(voiceOrModel) {
+    const lang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+    const voiceName = voiceOrModel.charAt(0).toUpperCase() + voiceOrModel.slice(1).replace('-tracy', ' Tracy');
+    const voiceDesc = voiceDescriptions[voiceOrModel] ? (lang === 'en' ? voiceDescriptions[voiceOrModel].en : voiceDescriptions[voiceOrModel].zh) : '';
+    const voiceColor = voiceColors[voiceOrModel.replace(' ', '-').toLowerCase()] || '#007AFF';
+    currentVoiceName.textContent = voiceName;
+    currentVoiceDesc.textContent = voiceDesc;
+    currentVoiceIcon.style.backgroundColor = voiceColor;
+    currentVoiceContainer.style.display = 'flex';
+}
+function downloadAudio(blob, filename) {
+    const lang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+    if (!blob) {
+        showStatus(lang === 'en' ? 'No audio to download.' : '没有可下载的音频', 'error');
+        return;
+    }
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename || `audio_${Date.now()}.mp3`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+}
+function addHistoryItem(text, voice, blob) {
+    const previewText = text.substring(0, 30) + (text.length > 30 ? '...' : '');
+    const historyItem = { id: Date.now(), timestamp: new Date(), voice: voice, text: text, previewText: previewText, blob: blob };
+    history.unshift(historyItem);
+    if (history.length > MAX_HISTORY_ITEMS) history.pop();
+    saveHistory();
+    updateHistoryUI();
+}
+function downloadHistoryItem(id) {
+    const lang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+    const item = history.find(h => h.id === id);
+    if (item && item.blob) {
+        const sanitizedText = item.previewText.replace(/[^\w\u4e00-\u9fa5]/g, '');
+        downloadAudio(item.blob, `${item.voice}_${sanitizedText}.mp3`);
+    } else {
+        showStatus(lang === 'en' ? 'Cannot download, audio data is missing. Please regenerate.' : '无法下载，音频数据已丢失，请重新生成。', 'error');
+    }
+}
+function updateHistoryUI() {
+    const lang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+    if (history.length === 0) {
+        const noHistoryText = lang === 'en' ? 'No history records' : '暂无历史记录';
+        historyList.innerHTML = `<p class="no-history" data-lang-zh="暂无历史记录">${noHistoryText}</p>`;
+        return;
+    }
+    historyList.innerHTML = '';
+    history.forEach(item => {
+        const historyItemEl = document.createElement('div');
+        historyItemEl.className = 'history-item';
+        const date = new Date(item.timestamp);
+        const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+        const downloadText = lang === 'en' ? 'Download' : '下载';
+        historyItemEl.innerHTML = `
+            <div class="history-info">
+                <div class="history-timestamp">${formattedDate}</div>
+                <div class="history-voice" style="--voice-color: ${voiceColors[item.voice] || '#007AFF'};">${item.voice}</div>
+                <div class="history-text">${item.previewText}</div>
+            </div>
+            <button class="btn btn-text history-download" data-id="${item.id}">
+                <i class="fas fa-download"></i> <span data-lang-zh="下载">${downloadText}</span>
+            </button>`;
+        historyList.appendChild(historyItemEl);
+    });
+    document.querySelectorAll('.history-download').forEach(btn => btn.addEventListener('click', e => downloadHistoryItem(parseInt(e.currentTarget.dataset.id))));
+}
+function clearHistory() {
+    const lang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+    const confirmMessage = lang === 'en' ? 'Are you sure you want to clear all history? This action cannot be undone.' : '确定要清空所有历史记录吗？这个操作不可撤销。';
+    if (confirm(confirmMessage)) {
+        history = [];
+        localStorage.removeItem('audioGeneratorHistory');
+        updateHistoryUI();
+        showStatus(lang === 'en' ? 'History cleared.' : '历史记录已清空', 'success');
+    }
+}
+function saveHistory() {
+    localStorage.setItem('audioGeneratorHistory', JSON.stringify(history.map(item => ({...item, blob: null }))));
+}
+function loadHistory() {
+    const savedHistory = localStorage.getItem('audioGeneratorHistory');
+    if (savedHistory) {
+      try { 
+        history = JSON.parse(savedHistory).map(item => ({...item, timestamp: new Date(item.timestamp), blob: null }));
+      } catch (e) {
+        console.error("Could not parse history, resetting.", e);
+        localStorage.removeItem('audioGeneratorHistory');
+       }
+    }
+}
+function showStatus(message, type) {
+    statusMessage.textContent = message;
+    statusMessage.className = `status ${type}`;
+    setTimeout(() => { statusMessage.className = 'status'; }, 6000);
+}
+apiTokenToggle.addEventListener('click', () => {
+    apiTokenContainer.style.display = apiTokenContainer.style.display === 'block' ? 'none' : 'block';
+});
+saveTokenBtn.addEventListener('click', () => {
+    const lang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+    const token = apiTokenInput.value.trim();
+    if (token) {
+        localStorage.setItem('pollinationsApiToken', token);
+        showStatus(lang === 'en' ? 'API Token saved successfully!' : 'API Token 保存成功！', 'success');
+        apiTokenContainer.style.display = 'none';
+        apiTokenToggle.classList.add('active');
+        apiTokenInput.value = ''; 
+    } else {
+        localStorage.removeItem('pollinationsApiToken');
+        showStatus(lang === 'en' ? 'API Token removed.' : 'API Token 已移除。', 'warning');
+        apiTokenToggle.classList.remove('active');
+    }
+});
+generateBtn.addEventListener('click', generateAudio);
+downloadBtn.addEventListener('click', () => {
+    if (audioBlob) {
+        const selectedOption = document.querySelector('.voice-style-option input[type="radio"]:checked');
+        const voice = selectedOption.dataset.voice || selectedOption.value;
+        const text = textInput.value.trim().substring(0, 20).replace(/[^\w\u4e00-\u9fa5]/g, '');
+        downloadAudio(audioBlob, `${voice}_${text}.mp3`);
+    }
+});
+textInput.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        generateAudio();
+    }
+});
+textInput.addEventListener('input', updateTextStats);
+clearHistoryBtn.addEventListener('click', clearHistory);
+(function init() {
+    loadHistory();
+    document.documentElement.lang = 'zh-CN';
+    
+    const savedToken = localStorage.getItem('pollinationsApiToken');
+    if (savedToken) {
+        apiTokenToggle.classList.add('active');
+    }
+    updateTextStats();
+    updateHistoryUI();
+})();
+});
+</script>
+</body>
+</html>
