@@ -1,0 +1,211 @@
+---
+title: LocalSend局域网文件传输工具
+lastUpdated: true
+tags:
+  - 工具效率
+  - 文件传输
+  - 开源
+createTime: 2026/08/17
+permalink: /article/LocalSend/
+---
+
+# LocalSend局域网文件传输工具
+在日常办公与跨设备协作中，文件在手机与电脑之间、不同操作系统之间互传一直是个高频却难言顺畅的需求。微信传文件有大小限制且依赖外网，QQ同样存在速度瓶颈，蓝牙传输缓慢且不稳定，U盘需要来回插拔，云盘则要求账号登录并消耗上行带宽。LocalSend作为一款开源跨平台局域网文件传输工具，提供了一个近乎理想的开源版AirDrop方案，让同一局域网内的设备能够点对点直传任意文件，无需互联网、无需账号、无速度限制。
+
+![LocalSend](/assets/software/localsend.png)
+
+## 一、LocalSend简介
+LocalSend是一款基于MIT协议开源的跨平台局域网文件传输工具，民间常被昵称为"LS小黄鸭"（源自其图标与首字母LS）。项目由独立开发者Tien Do Nhuan发起，代码完全公开在GitHub上，任何人均可审查、贡献或二次开发。
+
+它的核心定位是解决跨设备文件传输中长期存在的几类痛点：
+
+- **商业工具的限速与限制**：微信文件传输单文件上限100MB，且需经过腾讯服务器中转，速度受外网带宽制约；QQ的文件传输同样存在速度波动。
+- **蓝牙传输的低效**：蓝牙协议带宽有限，传输几十兆的文件往往需要数分钟，且配对流程繁琐。
+- **云盘的中转成本**：网盘需要上传到远端服务器再下载，消耗双向带宽，且多数需要登录账号、忍受广告或限速。
+- **系统壁垒**：苹果生态有AirDrop，但跨到Windows或Android便失效；Windows的"就近共享"对Mac和旧版系统支持有限。
+
+LocalSend通过局域网点对点直传的方式，把上述问题一次性解决：只要两台设备处于同一WiFi网络，即可像AirDrop一样秒传文件，且完全开源、免费、无广告。
+
+## 二、主要功能特点
+
+### 1. 无需互联网，数据不外传
+LocalSend的所有传输都在本地局域网内完成，不依赖任何外部服务器。这意味着：
+
+- 断网环境下依然可以正常使用，只要路由器或热点在工作即可
+- 文件不会经过任何第三方服务器，从物理上杜绝了数据泄露的可能
+- 传输速度只受限于本地WiFi带宽，不会被运营商或云服务商限速
+
+### 2. 端到端加密
+每次传输都会建立TLS/SSL加密通道，采用与HTTPS相同的安全标准：
+
+- 传输内容在发送方加密，仅在接收方解密
+- 即使局域网内存在嗅探设备，也无法还原文件内容
+- 首次配对时会显示设备指纹，可手动确认防止中间人攻击
+
+### 3. 跨平台互传
+LocalSend覆盖了主流的桌面与移动操作系统，支持任意两平台之间互传：
+
+- Windows 7及以上
+- macOS 11及以上
+- Linux（提供AppImage、deb、rpm等多种格式）
+- Android 5.0及以上
+- iOS 12及以上
+
+无论你是从iPhone传照片到Windows电脑，还是从Android手机传文档到Mac，都能直接完成，无需关心系统差异。
+
+### 4. 去中心化的点对点架构
+LocalSend没有中心服务器，所有设备在局域网内平等地广播与发现彼此：
+
+- 发送方与接收方直接建立连接，不经过任何中转节点
+- 类似开源版AirDrop的体验，但没有平台锁定
+- 即使断开外网，只要局域网通就能用
+
+### 5. 自动发现附近设备
+在同一局域网下，LocalSend会通过mDNS（多播DNS）协议自动发现并显示附近运行LocalSend的设备：
+
+- 设备列表实时刷新，新设备上线会自动出现
+- 可为设备自定义别名，方便识别
+- 支持手动输入IP地址连接，应对自动发现失效的特殊网络环境
+
+### 6. 多文件类型支持
+LocalSend对文件类型没有任何限制，只要是操作系统支持的文件均可传输：
+
+- 图片（JPG、PNG、HEIC、RAW等）
+- 视频（MP4、MOV、MKV等）
+- 文档（PDF、Office、TXT等）
+- 压缩包（ZIP、RAR、7Z等）
+- 文本片段（可直接发送剪贴板内容）
+- 安装包、备份文件等任意格式
+
+### 7. 极速传输
+由于直接利用WiFi链路带宽，LocalSend在5GHz WiFi环境下实测速度可达数十MB/s，传输几个GB的大文件也只需数秒到数十秒：
+
+- 无云端中转，不消耗外网上下行带宽
+- 不会像蓝牙那样因协议瓶颈而变慢
+- 大文件传输稳定性远优于商业IM工具
+
+### 8. 无需注册，安装即用
+LocalSend不需要任何账号：
+
+- 下载安装后打开即可使用
+- 没有登录、绑定、激活等流程
+- 没有广告、推送、弹窗或追踪埋点
+
+### 9. 开源透明
+项目代码以MIT协议发布在GitHub：
+
+- 任何人都可以审查代码，确认没有后门或数据收集行为
+- 社区可以提交Issue、Pull Request参与改进
+- 可自行编译构建，或fork出定制版本
+
+## 三、适用场景
+
+### 1. 手机与电脑互传
+最典型的场景：把手机拍的照片或录制的视频传到电脑上备份或编辑，或把电脑上的文档传到手机查看。相比数据线连接或微信文件传输，LocalSend更快捷且无大小限制。
+
+### 2. 跨操作系统传输
+团队中常存在Mac与Windows混用的情况，LocalSend可以绕过系统壁垒，让两种设备之间直接互传文件，无需借助U盘或云盘中转。Android与iOS之间同样可以直接传输。
+
+### 3. 无网络环境
+出差、旅行或在内网隔离的办公环境中，只要有一台路由器或手机热点，就能在设备之间传文件，完全不依赖互联网。
+
+### 4. 大文件传输
+传输系统镜像、视频素材、设计源文件等大文件时，LocalSend能充分利用WiFi带宽，避免云盘上传慢、下载慢的问题，也不会受到IM工具的文件大小限制。
+
+### 5. 隐私敏感场景
+对于合同、财务数据、个人照片等不便经过云端的内容，LocalSend的点对点加密传输提供了更高的隐私保障，数据始终在本地网络内流转。
+
+## 四、安装与基础使用
+
+### 1. 各平台安装方式
+
+#### Windows
+- 访问官网或GitHub Releases页面下载`.exe`安装包
+- 双击安装，按向导完成即可
+- 也提供便携版（Portable），解压即用，无需安装
+
+#### macOS
+- 从GitHub Releases下载`.dmg`文件
+- 打开后将LocalSend拖入Applications文件夹
+- 首次打开时若提示无法验证开发者，可在"系统设置 - 隐私与安全性"中点击"仍要打开"
+- 也可通过Homebrew安装：`brew install --cask localsend`
+
+#### Linux
+- 提供AppImage、deb、rpm、pacman等多种格式，按发行版选择
+- AppImage方式：下载后赋予执行权限即可运行
+  ```bash
+  chmod +x LocalSend-*.AppImage
+  ./LocalSend-*.AppImage
+  ```
+- deb方式（Debian/Ubuntu）：`sudo dpkg -i localsend_*.deb`
+- 也可通过Flathub安装：`flatpak install flathub app.localsend.localsend_app`
+
+#### Android
+- 在Google Play或F-Droid搜索"LocalSend"安装
+- 也可从GitHub Releases下载APK直接安装
+
+#### iOS
+- 在App Store搜索"LocalSend"免费下载
+
+### 2. 配对与传输流程
+1. 确保发送方与接收方连接到**同一WiFi网络**
+2. 在两台设备上分别打开LocalSend
+3. 在发送方设备上，切换到"发送"标签页，附近设备会自动列出
+4. 选中目标设备，点击后选择要发送的文件（或直接拖入窗口）
+5. 接收方设备会弹出确认提示，点击"接受"即可开始传输
+6. 传输完成后，接收方可选择保存位置或直接打开文件
+
+接收方也可预先切换到"接收"标签页，等待发送请求。
+
+## 五、使用技巧
+
+### 1. 文本片段传输
+除了文件，LocalSend还支持直接发送文本片段：
+
+- 在发送页面选择"文本"选项
+- 粘贴或输入内容后发送
+- 接收方会直接显示文本，可复制到剪贴板
+
+这非常适合在手机和电脑之间传递长链接、验证码或一段代码，比微信文件传输助手更直接。
+
+### 2. 多文件批量发送
+LocalSend支持一次选择多个文件批量发送：
+
+- 在文件选择器中按住Ctrl（Windows/Linux）或Command（macOS）多选
+- 或直接将多个文件拖入LocalSend窗口
+- 接收方一次确认即可接收全部文件，无需逐个点击
+
+### 3. 快捷键操作
+桌面端提供常用快捷键以提升效率：
+
+- Windows/Linux下，多数操作可通过Tab键在"发送"与"接收"标签页之间切换
+- 支持全局快捷唤起（可在设置中自定义）
+- 拖拽文件到窗口任意位置即可触发发送
+
+### 4. 防火墙与网络设置
+若出现设备无法互相发现的情况，通常与防火墙或网络隔离有关：
+
+- **Windows防火墙**：首次启动时会弹出防火墙授权提示，需允许LocalSend通过专用网络；若已误拒，可在"控制面板 - Windows Defender防火墙 - 允许应用通过防火墙"中重新启用
+- **macOS防火墙**：在"系统设置 - 网络 - 防火墙"中允许LocalSend接收传入连接
+- **路由器设置**：部分路由器开启了"AP隔离"或"客户端隔离"，会阻止设备之间通信，需在路由器后台关闭该选项
+- **手动连接**：若自动发现失效，可在发送方手动输入接收方显示的IP地址进行连接
+
+### 5. 自定义设备别名
+在设置中可为每台设备设置易识别的别名（如"办公笔记本""小米手机"），方便在多设备环境中快速选择目标，避免混淆。
+
+### 6. 接收行为配置
+可在设置中调整接收策略：
+
+- 设置默认保存目录，避免每次传输都手动选择
+- 选择"自动接受"以跳过确认步骤（仅在受信任的私人网络中建议开启）
+- 开启"接收后自动打开"可直接预览文件
+
+## 附：相关资源
+- 官方网站：[https://localsend.org](https://localsend.org)
+- GitHub仓库：[https://github.com/localsend/localsend](https://github.com/localsend/localsend)
+- Windows下载：[https://github.com/localsend/localsend/releases](https://github.com/localsend/localsend/releases)
+- macOS下载：[https://github.com/localsend/localsend/releases](https://github.com/localsend/localsend/releases)
+- Android（Google Play）：[https://play.google.com/store/apps/details?id=app.localsend.app](https://play.google.com/store/apps/details?id=app.localsend.app)
+- Android（F-Droid）：[https://f-droid.org/packages/app.localsend.app/](https://f-droid.org/packages/app.localsend.app/)
+- iOS（App Store）：[https://apps.apple.com/app/localsend/id1661733229](https://apps.apple.com/app/localsend/id1661733229)
+- Flathub（Linux）：[https://flathub.org/apps/app.localsend.localsend_app](https://flathub.org/apps/app.localsend.localsend_app)

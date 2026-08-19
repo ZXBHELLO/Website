@@ -6,33 +6,100 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="shortcut" href="/favicon.ico">
     <title data-i18n-key="pageTitle">Free AI 绘画生成器</title>
+    <script>
+        (function() {
+            try {
+                var t = localStorage.getItem('theme');
+                if (t === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ═══════════════════════════════════════════════════════════════
+           Apple Design System tokens (reference: 苹果 Design Library)
+           System Blue / system grays / HIG surfaces, light + dark
+           ═══════════════════════════════════════════════════════════════ */
         :root {
-            --primary-color: #00a8ff;
-            --secondary-color: #0097e6;
-            --bg-color: #0c1824;
-            --card-bg: #1a2634;
-            --text-color: #e4f1fe;
-            --accent-color: #00e4ff;
-            --error-color: #ff3838;
-            --success-color: #32ff7e;
+            --background: #ffffff;
+            --foreground: #1d1d1f;
+            --card: #ffffff;
+            --card-foreground: #1d1d1f;
+            --primary: #007aff;
+            --primary-foreground: #ffffff;
+            --secondary: #f2f2f7;
+            --secondary-foreground: #1d1d1f;
+            --muted: #f2f2f7;
+            --muted-foreground: #8e8e93;
+            --accent: #f7f7fa;
+            --accent-foreground: #1d1d1f;
+            --destructive: #ff3b30;
+            --success: #34c759;
+            --border: #e5e5ea;
+            --input: #d1d1d6;
+            --ring: #007aff;
+            --ring-soft: rgba(0, 122, 255, 0.12);
+            --glow-a: rgba(0, 122, 255, 0.05);
+            --glow-b: rgba(88, 86, 214, 0.05);
+            --radius: 1.2rem;
+            --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 8px 24px -8px rgba(0, 0, 0, 0.08), 0 4px 8px -4px rgba(0, 0, 0, 0.05);
+            --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --background: #000000;
+            --foreground: #f5f5f7;
+            --card: #1c1c1e;
+            --card-foreground: #f5f5f7;
+            --primary: #2e8dff;
+            --primary-foreground: #000000;
+            --secondary: #1c1c1e;
+            --secondary-foreground: #f5f5f7;
+            --muted: #1c1c1e;
+            --muted-foreground: #8e8e93;
+            --accent: #2c2c2e;
+            --accent-foreground: #f5f5f7;
+            --destructive: #ff453a;
+            --success: #30d158;
+            --border: #3a3a3c;
+            --input: #3a3a3c;
+            --ring: #2e8dff;
+            --ring-soft: rgba(46, 141, 255, 0.18);
+            --glow-a: rgba(46, 141, 255, 0.08);
+            --glow-b: rgba(94, 92, 230, 0.08);
+            --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.30);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.36), 0 1px 3px -1px rgba(0, 0, 0, 0.36);
+            --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.44), 0 2px 4px -2px rgba(0, 0, 0, 0.36);
+            --shadow-lg: 0 8px 24px -8px rgba(0, 0, 0, 0.50), 0 4px 8px -4px rgba(0, 0, 0, 0.40);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            font-family: var(--font-sans);
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--background);
+            color: var(--foreground);
             min-height: 100vh;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 168, 255, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 228, 255, 0.1) 0%, transparent 20%);
+            background-image:
+                radial-gradient(circle at 10% 20%, var(--glow-a) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, var(--glow-b) 0%, transparent 30%);
+            background-attachment: fixed;
             padding: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
@@ -43,104 +110,61 @@
 
         header {
             display: flex;
-            justify-content: space-between; 
-            align-items: center; 
-            gap: 15px;
+            justify-content: center;
+            align-items: center;
             margin-bottom: 30px;
             position: relative;
         }
 
-        .header-left {
-            flex-shrink: 0; 
-        }
-        
         .header-center {
             text-align: center;
-            flex-grow: 1; 
         }
-        
+
         .header-right {
-           flex-shrink: 0; 
-        }
-
-        .home-link-btn {
-            display: inline-block;
-            padding: 6px 14px;
-            font-size: 0.85rem;
-            color: rgba(228, 241, 254, 0.7);
-            background-color: rgba(26, 38, 52, 0.5);
-            border: 1px solid rgba(0, 168, 255, 0.2);
-            border-radius: 20px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            white-space: nowrap; 
-        }
-
-        .home-link-btn:hover {
-            color: var(--text-color);
-            background-color: rgba(0, 168, 255, 0.15);
-            border-color: rgba(0, 168, 255, 0.4);
-        }
-
-        .lang-switcher {
-            background-color: rgba(26, 38, 52, 0.5);
-            border: 1px solid rgba(0, 168, 255, 0.2);
-            border-radius: 20px;
-            padding: 4px;
+            position: absolute;
+            right: 0;
+            top: 0;
             display: flex;
-            gap: 5px;
-            backdrop-filter: blur(5px);
+            align-items: center;
+            gap: 10px;
         }
 
-        .lang-switcher span {
-            padding: 5px 12px;
-            font-size: 0.9rem;
-            font-weight: 500;
+        .theme-toggle {
+            width: 36px;
+            height: 36px;
+            background-color: var(--card);
+            color: var(--muted-foreground);
+            border: 1px solid var(--border);
+            border-radius: 50%;
             cursor: pointer;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            color: rgba(228, 241, 254, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            box-shadow: var(--shadow-xs);
+            transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
         }
 
-        .lang-switcher span.active {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            box-shadow: 0 0 10px rgba(0, 228, 255, 0.5);
-        }
-
-        .lang-switcher span:not(.active):hover {
-             color: var(--text-color);
-             background-color: rgba(0, 168, 255, 0.1);
+        .theme-toggle:hover {
+            color: var(--primary);
+            border-color: var(--ring);
+            transform: scale(1.05);
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.4rem;
             margin-bottom: 10px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            position: relative;
-            display: inline-block;
-        }
-
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            color: var(--foreground);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
         }
 
         .subtitle {
-            color: rgba(228, 241, 254, 0.7);
-            font-size: 1.1rem;
+            color: var(--muted-foreground);
+            font-size: 1.02rem;
         }
-        
+
         .main-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -153,104 +177,348 @@
             }
 
             h1 {
-                font-size: 1.5rem; 
+                font-size: 1.6rem;
             }
             .subtitle {
                 font-size: 0.9rem;
             }
             header {
-                gap: 10px; 
+                gap: 10px;
             }
         }
-        
+
         @media (max-width: 480px) {
-             h1 {
-                font-size: 1.2rem; 
+            h1 {
+                font-size: 1.25rem;
             }
-             .subtitle {
-                display: none; 
+            .subtitle {
+                display: none;
             }
         }
-        
-        .control-panel { background-color: var(--card-bg); border-radius: 15px; padding: 25px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden; }
-        .control-panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--accent-color); }
-        input[type="text"], input[type="number"], textarea, select { width: 100%; padding: 12px 15px; border-radius: 8px; border: 1px solid rgba(0, 168, 255, 0.3); background-color: rgba(26, 38, 52, 0.8); color: var(--text-color); font-size: 1rem; transition: all 0.3s ease; }
-        input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 2px rgba(0, 228, 255, 0.2); }
-        textarea { min-height: 100px; resize: vertical; }
-        .checkbox-group { display: flex; align-items: center; margin-bottom: 15px; }
-        .checkbox-group input[type="checkbox"] { margin-right: 10px; accent-color: var(--accent-color); width: 18px; height: 18px; }
-        button { background: linear-gradient(45deg, var(--primary-color), var(--accent-color)); color: white; border: none; padding: 12px 25px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0, 168, 255, 0.4); }
-        button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 228, 255, 0.5); }
-        button:active { transform: translateY(1px); }
-        button i { margin-right: 8px; }
-        .button-group { display: flex; gap: 15px; margin-top: 20px; }
-        .preview-panel { background-color: var(--card-bg); border-radius: 15px; padding: 25px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); display: flex; flex-direction: column; position: relative; overflow: hidden; }
-        .preview-panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent-color), var(--primary-color)); }
-        .image-container { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 300px; background-color: rgba(12, 24, 36, 0.5); border-radius: 10px; margin-bottom: 20px; position: relative; overflow: hidden; }
-        .image-container img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; }
-        .loading-indicator { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(12, 24, 36, 0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; }
-        .loading-indicator div:last-child { margin-top: 15px; }
-        .spinner { width: 50px; height: 50px; border: 3px solid rgba(0, 228, 255, 0.3); border-radius: 50%; border-top-color: var(--accent-color); animation: spin 1s ease-in-out infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .image-info { background-color: rgba(26, 38, 52, 0.8); padding: 15px; border-radius: 10px; font-size: 0.9rem; max-height: 150px; overflow-y: auto; }
-        .image-info pre { white-space: pre-wrap; word-break: break-all; }
-        .image-actions { display: flex; gap: 10px; margin-top: 15px; }
-        .image-actions button { flex: 1; padding: 10px; }
-        .notification { position: fixed; top: 20px; right: 20px; padding: 15px 25px; border-radius: 8px; color: white; font-weight: 500; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); z-index: 1000; transform: translateX(150%); transition: transform 0.3s ease; }
-        .notification.show { transform: translateX(0); }
-        .notification.error { background-color: var(--error-color); }
-        .notification.success { background-color: var(--success-color); }
-        .glow-effect { position: absolute; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%); opacity: 0.1; filter: blur(20px); animation: float 8s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(30px, -30px); } }
-        .model-info { margin-top: 10px; font-size: 0.85rem; color: rgba(228, 241, 254, 0.6); }
-        .parameter-tips { font-size: 0.85rem; color: rgba(228, 241, 254, 0.6); margin-top: 5px; }
-        .tech-decoration { position: absolute; font-family: monospace; color: rgba(0, 228, 255, 0.2); pointer-events: none; user-select: none; z-index: -1; }
-        .tech-decoration.top-left { top: 20px; left: 20px; font-size: 0.8rem; }
-        .tech-decoration.bottom-right { bottom: 20px; right: 20px; font-size: 0.8rem; text-align: right; }
-        .history-panel { margin-top: 30px; background-color: var(--card-bg); border-radius: 15px; padding: 25px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden; }
-        .history-panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent-color), var(--primary-color), var(--accent-color)); }
-        .history-title { margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
-        .history-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
-        .history-item { background-color: rgba(26, 38, 52, 0.8); border-radius: 10px; overflow: hidden; transition: transform 0.3s ease; cursor: pointer; position: relative; }
-        .history-item:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }
-        .history-item img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
-        .history-item-info { padding: 10px; font-size: 0.8rem; }
-        .history-item-prompt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 5px; }
-        .history-item-model { color: var(--accent-color); }
-        .empty-history { text-align: center; padding: 30px; color: rgba(228, 241, 254, 0.5); }
-        @media (max-width: 768px) { .container { padding: 10px; } .main-content { gap: 20px; } .control-panel, .preview-panel, .history-panel { padding: 15px; } .button-group { flex-direction: column; } .history-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); } }
-        ::-webkit-scrollbar { display: none; } .no-scrollbar { scrollbar-width: none; } .no-scrollbar::-webkit-scrollbar { display: none; }
+
+        .control-panel,
+        .preview-panel,
+        .history-panel {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 13.5px;
+            color: var(--secondary-foreground);
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 14px;
+            border: 1px solid var(--input);
+            background-color: var(--background);
+            color: var(--foreground);
+            font-size: 0.98rem;
+            font-family: var(--font-sans);
+            transition: border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--ring);
+            box-shadow: 0 0 0 4px var(--ring-soft);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+            accent-color: var(--primary);
+            width: 18px;
+            height: 18px;
+        }
+
+        button {
+            background: var(--primary);
+            color: var(--primary-foreground);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 999px;
+            font-size: 0.98rem;
+            font-weight: 600;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            transition: filter 0.18s ease, transform 0.18s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        button:hover {
+            filter: brightness(0.94);
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        button i {
+            margin-right: 8px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .preview-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .image-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            background-color: var(--muted);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .loading-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: color-mix(in srgb, var(--background) 82%, transparent);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .loading-indicator div:last-child {
+            margin-top: 15px;
+            color: var(--muted-foreground);
+            font-size: 0.92rem;
+        }
+
+        .spinner {
+            width: 44px;
+            height: 44px;
+            border: 3px solid var(--ring-soft);
+            border-radius: 50%;
+            border-top-color: var(--ring);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .image-info {
+            background-color: var(--muted);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 14px;
+            font-size: 0.88rem;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .image-info pre {
+            white-space: pre-wrap;
+            word-break: break-all;
+            color: var(--secondary-foreground);
+        }
+
+        .image-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .image-actions button {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 14px 22px;
+            border-radius: 999px;
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 0.92rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background-color: var(--destructive);
+        }
+
+        .notification.success {
+            background-color: var(--success);
+        }
+
+        .model-info {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: var(--muted-foreground);
+        }
+
+        .parameter-tips {
+            font-size: 0.85rem;
+            color: var(--muted-foreground);
+            margin-top: 5px;
+        }
+
+        .history-panel {
+            margin-top: 30px;
+        }
+
+        .history-title {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-title h3 {
+            font-size: 1.15rem;
+            font-weight: 650;
+            letter-spacing: -0.01em;
+        }
+
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .history-item {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+            position: relative;
+            box-shadow: var(--shadow-xs);
+        }
+
+        .history-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--ring);
+        }
+
+        .history-item img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            display: block;
+        }
+
+        .history-item-info {
+            padding: 10px 12px;
+            font-size: 0.8rem;
+        }
+
+        .history-item-prompt {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 5px;
+        }
+
+        .history-item-model {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 30px;
+            color: var(--muted-foreground);
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .main-content { gap: 20px; }
+            .control-panel, .preview-panel, .history-panel { padding: 18px; }
+            .button-group { flex-direction: column; }
+            .history-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--input); }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="tech-decoration top-left">...</div>
-        <div class="tech-decoration bottom-right">...</div>
-        <div class="glow-effect" style="top: 10%; left: 20%;"></div>
-        <div class="glow-effect" style="bottom: 30%; right: 10%;"></div>
-      
         <header>
-            <div class="header-left">
-                <a href="https://freeai.aihub.ren" class="home-link-btn">
-                    <span data-i18n-key="homeButton">返回首页</span>
-                </a>
-            </div>
-            
             <div class="header-center">
                 <h1 data-i18n-key="mainHeading">Free AI绘画生成器</h1>
                 <p class="subtitle" data-i18n-key="subtitle">基于Pollinations AI的高级图像生成系统</p>
             </div>
-            
             <div class="header-right">
-                <div class="lang-switcher">
-                    <span id="lang-zh" data-lang="zh-CN">中</span>
-                    <span id="lang-en" data-lang="en-US">EN</span>
-                </div>
+                <button class="theme-toggle" id="themeToggle" title="切换亮/暗模式"><i class="fas fa-sun"></i></button>
             </div>
         </header>
-      
+
         <div class="main-content">
             <div class="control-panel">
                 <div class="form-group">
@@ -295,34 +563,46 @@
                     <div class="checkbox-group"><input type="checkbox" id="nologo"><label for="nologo" style="display: inline;" data-i18n-key="noLogoLabel">移除水印</label></div>
                     <div class="checkbox-group"><input type="checkbox" id="safe" checked><label for="safe" style="display: inline;" data-i18n-key="safeModeLabel">安全模式 (过滤不适内容)</label></div>
                 </div>
-                <div class="button-group"><button id="generate-btn" style="flex: 2;"><i>🎨</i> <span data-i18n-key="generateButton">生成图像</span></button><button id="clear-btn" style="background: rgba(255, 255, 255, 0.1); box-shadow: none;"><i>🗑️</i> <span data-i18n-key="clearButton">清空</span></button></div>
+                <div class="button-group"><button id="generate-btn" style="flex: 2;"><i>🎨</i> <span data-i18n-key="generateButton">生成图像</span></button><button id="clear-btn" style="background: var(--secondary); color: var(--secondary-foreground); box-shadow: none;"><i>🗑️</i> <span data-i18n-key="clearButton">清空</span></button></div>
             </div>
             <div class="preview-panel">
-                <h3 style="margin-bottom: 15px;" data-i18n-key="previewTitle">图像预览</h3>
+                <h3 style="margin-bottom: 15px; font-weight: 650;" data-i18n-key="previewTitle">图像预览</h3>
                 <div class="image-container">
                     <div id="loading" class="loading-indicator" style="display: none;"><div class="spinner"></div><div data-i18n-key="loadingText">正在生成图像...</div></div>
                     <img id="preview-image" style="display: none;">
-                    <div id="placeholder-text" style="color: rgba(228, 241, 254, 0.5); text-align: center;" data-i18n-key="placeholderText">点击"生成图像"按钮开始创作</div>
+                    <div id="placeholder-text" style="color: var(--muted-foreground); text-align: center; font-size: 0.95rem;" data-i18n-key="placeholderText">点击"生成图像"按钮开始创作</div>
                 </div>
                 <div class="image-info" id="image-info" style="display: none;"><pre id="image-details"></pre></div>
                 <div class="image-actions" id="image-actions" style="display: none;"><button id="download-btn"><i>💾</i> <span data-i18n-key="downloadButton">下载图像</span></button><button id="copy-prompt-btn"><i>📋</i> <span data-i18n-key="copyPromptButton">复制提示词</span></button></div>
             </div>
         </div>
         <div class="history-panel">
-            <div class="history-title"><h3 data-i18n-key="historyTitle">历史记录</h3><button id="clear-history-btn" style="background: rgba(255, 255, 255, 0.1); box-shadow: none; padding: 8px 15px;" data-i18n-key="clearHistoryButton">清空历史</button></div>
+            <div class="history-title"><h3 data-i18n-key="historyTitle">历史记录</h3><button id="clear-history-btn" style="background: var(--secondary); color: var(--secondary-foreground); box-shadow: none; padding: 8px 16px; font-size: 0.88rem;" data-i18n-key="clearHistoryButton">清空历史</button></div>
             <div class="history-grid" id="history-container"><div class="empty-history" id="empty-history" data-i18n-key="emptyHistoryText">您的创作历史将显示在这里</div></div>
         </div>
     </div>
-    <p style="text-align: center; padding: 2px 0;  color: inherit; font-family: 'Arial', sans-serif; font-size: 12px; line-height: 1.6; margin-top: 3px;">
-      <span style="display: inline-block; position: relative; vertical-align: middle;">© 2025 <a href="https://other.azad.asia" target="_blank" style="text-decoration: none;  color: inherit; transition: color 0.3s ease;" data-i18n-key="footerLab">Azad的实验室</a></span> |
-      <span style="display: inline-block; position: relative; vertical-align: middle;"><i class="fas fa-brain" style="margin-right: 5px;"></i> <span data-i18n-key="footerBasedOn">基于 Pollinations.AI</span></span> |
-      <span style="display: inline-block; position: relative; vertical-align: middle;"><a href="https://home.azad.asia/dashang" target="_blank" style="text-decoration: none; color: inherit; transition: color 0.3s ease;"><i class="fas fa-coffee" style="margin-right: 5px;"></i><span data-i18n-key="footerCoffee">请站长喝咖啡</span></a></span>
-    </p>
     <div class="notification" id="notification"></div>
     <script>
-        const translations = { 'zh-CN': { pageTitle: 'Free AI 绘画生成器', mainHeading: 'Free AI 绘画生成器', subtitle: '基于Pollinations AI的高级图像生成系统', homeButton: '返回首页', promptLabel: '提示词 (Prompt)', promptPlaceholder: '描述你想要生成的图像内容...', promptTip: '提示：使用详细、具体的描述可以获得更好的结果。尝试描述风格、场景、颜色等细节。', negPromptLabel: '负面提示词 (Negative Prompt)', negPromptPlaceholder: '描述你不希望出现在图像中的内容...', negPromptTip: '提示：用于排除不想要的元素，如"模糊的、低质量的"等。', modelLabel: '模型选择', widthLabel: '宽度', heightLabel: '高度', dimensionTip: '提示：推荐使用8的倍数，最大尺寸取决于模型限制。', seedLabel: '种子值 (Seed)', randomButton: '随机', seedTip: '提示：使用相同的种子值可以生成相似的图像，-1表示随机种子。', noLogoLabel: '移除水印', safeModeLabel: '安全模式 (过滤不适内容)', generateButton: '生成图像', clearButton: '清空', previewTitle: '图像预览', loadingText: '正在生成图像...', placeholderText: '点击"生成图像"按钮开始创作', downloadButton: '下载图像', copyPromptButton: '复制提示词', historyTitle: '历史记录', clearHistoryButton: '清空历史', emptyHistoryText: '您的创作历史将显示在这里', notificationPromptMissing: '请输入提示词', notificationImageFailed: '图像生成失败，请重试', notificationError: '发生错误: ', notificationImageOpened: '图像已在新窗口打开', notificationCopied: '提示词已复制到剪贴板', notificationCopyFailed: '复制失败: ', notificationHistoryCleared: '历史记录已清空', confirmClearHistory: '确定要清空所有历史记录吗？此操作不可撤销。', footerLab: "Azad的实验室", footerBasedOn: "基于 Pollinations.AI", footerCoffee: "请站长喝咖啡" }, 'en-US': { pageTitle: 'Free AI Image Generator', mainHeading: 'Free AI Image Generator', subtitle: 'Advanced Image Generation System based on Pollinations AI', homeButton: 'Home Page', promptLabel: 'Prompt', promptPlaceholder: 'Describe the image you want to create...', promptTip: 'Tip: Detailed, specific descriptions yield better results. Try describing style, scene, colors, etc.', negPromptLabel: 'Negative Prompt', negPromptPlaceholder: 'Describe what you don\'t want to see in the image...', negPromptTip: 'Tip: Use this to exclude unwanted elements, like "blurry, low quality".', modelLabel: 'Model Selection', widthLabel: 'Width', heightLabel: 'Height', dimensionTip: 'Tip: Multiples of 8 are recommended. Max size depends on the model.', seedLabel: 'Seed', randomButton: 'Random', seedTip: 'Tip: Same seed produces similar images. -1 means a random seed.', noLogoLabel: 'Remove Watermark', safeModeLabel: 'Safe Mode (Filter sensitive content)', generateButton: 'Generate Image', clearButton: 'Clear', previewTitle: 'Image Preview', loadingText: 'Generating image...', placeholderText: 'Click the "Generate Image" button to start creating', downloadButton: 'Download Image', copyPromptButton: 'Copy Prompt', historyTitle: 'History', clearHistoryButton: 'Clear History', emptyHistoryText: 'Your creation history will be displayed here', notificationPromptMissing: 'Please enter a prompt', notificationImageFailed: 'Image generation failed, please try again', notificationError: 'An error occurred: ', notificationImageOpened: 'Image opened in a new tab', notificationCopied: 'Prompt copied to clipboard', notificationCopyFailed: 'Copy failed: ', notificationHistoryCleared: 'History has been cleared', confirmClearHistory: 'Are you sure you want to clear all history? This action cannot be undone.', footerLab: "Azad's Lab", footerBasedOn: "Based on Pollinations.AI", footerCoffee: "Buy me a coffee" } }; function translatePage(lang){ document.documentElement.lang = lang; document.querySelectorAll('[data-i18n-key]').forEach(el => { const key = el.getAttribute('data-i18n-key'); const translation = translations[lang][key]; if (translation){ if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA'){ if (el.placeholder){ el.placeholder = translation; } } else if(el.hasAttribute('data-i18n-key')){ const textNode = Array.from(el.childNodes).find(node => node.nodeType === Node.TEXT_NODE || node.nodeType === Node.ELEMENT_NODE && node.tagName == 'SPAN'); if(textNode){ if(textNode.nodeType === Node.TEXT_NODE){ textNode.textContent = ' ' + translation; } else { textNode.textContent = translation; } } else{ el.textContent = translation; } } else { el.textContent = translation; } } }); updateModelInfoText(lang); } function setLanguage(lang){ localStorage.setItem('preferredLanguage', lang); translatePage(lang); document.getElementById('lang-zh').classList.toggle('active', lang === 'zh-CN'); document.getElementById('lang-en').classList.toggle('active', lang === 'en-US'); }
-        document.addEventListener('DOMContentLoaded', function() { const promptInput = document.getElementById('prompt'); const negativePromptInput = document.getElementById('negative-prompt'); const modelSelect = document.getElementById('model'); const modelInfo = document.getElementById('model-info'); const widthInput = document.getElementById('width'); const heightInput = document.getElementById('height'); const seedInput = document.getElementById('seed'); const randomSeedBtn = document.getElementById('random-seed'); const noLogoCheckbox = document.getElementById('nologo'); const safeCheckbox = document.getElementById('safe'); const generateBtn = document.getElementById('generate-btn'); const clearBtn = document.getElementById('clear-btn'); const previewImage = document.getElementById('preview-image'); const placeholderText = document.getElementById('placeholder-text'); const loadingIndicator = document.getElementById('loading'); const imageInfo = document.getElementById('image-info'); const imageDetails = document.getElementById('image-details'); const imageActions = document.getElementById('image-actions'); const downloadBtn = document.getElementById('download-btn'); const copyPromptBtn = document.getElementById('copy-prompt-btn'); const historyContainer = document.getElementById('history-container'); const emptyHistory = document.getElementById('empty-history'); const clearHistoryBtn = document.getElementById('clear-history-btn'); const notification = document.getElementById('notification'); document.getElementById('lang-zh').addEventListener('click', () => setLanguage('zh-CN')); document.getElementById('lang-en').addEventListener('click', () => setLanguage('en-US')); const modelDescriptions = { 'zh-CN': { 'flux': 'Flux: 通用型模型，适合大多数场景', 'FLUX-3D': 'FLUX-3D: 专为3D渲染风格优化的模型', 'FLUX-PRO': 'FLUX-PRO: 提供专业级质量的高级模型', 'Flux-realism': 'Flux-realism: 专注于写实风格的图像生成', 'Flux-anime': 'Flux-anime: 优化用于生成动漫风格的图像', 'Flux-cablyai': 'Flux-cablyai: 具有特殊艺术风格的模型', 'turbo': 'Turbo: 快速生成模型，速度优先' }, 'en-US': { 'flux': 'Flux: General-purpose model, suitable for most scenarios', 'FLUX-3D': 'FLUX-3D: Optimized model for 3D rendering style', 'FLUX-PRO': 'FLUX-PRO: Advanced model providing professional-grade quality', 'Flux-realism': 'Flux-realism: Focuses on generating realistic style images', 'Flux-anime': 'Flux-anime: Optimized for generating anime style images', 'Flux-cablyai': 'Flux-cablyai: A model with a special artistic style', 'turbo': 'Turbo: Fast generation model, prioritizing speed' } }; window.updateModelInfoText = function(lang){ const currentLang = lang || localStorage.getItem('preferredLanguage') || 'zh-CN'; modelInfo.textContent = modelDescriptions[currentLang][modelSelect.value] || ''; }
-        const savedLang = localStorage.getItem('preferredLanguage') || 'zh-CN'; setLanguage(savedLang); modelSelect.addEventListener('change', function(){ updateModelInfoText(); }); randomSeedBtn.addEventListener('click', () => { seedInput.value = Math.floor(Math.random() * 2147483647); }); clearBtn.addEventListener('click', () => { promptInput.value = ''; negativePromptInput.value = 'worst quality, blurry'; seedInput.value = -1; previewImage.style.display = 'none'; placeholderText.style.display = 'block'; imageInfo.style.display = 'none'; imageActions.style.display = 'none'; }); generateBtn.addEventListener('click', async function(){ const prompt = promptInput.value.trim(); if (!prompt){ showNotification(translations[document.documentElement.lang].notificationPromptMissing, 'error'); return; } loadingIndicator.style.display = 'flex'; placeholderText.style.display = 'none'; previewImage.style.display = 'none'; imageInfo.style.display = 'none'; imageActions.style.display = 'none'; const params = { prompt: prompt, model: modelSelect.value, width: widthInput.value, height: heightInput.value, seed: seedInput.value === '-1' ? Math.floor(Math.random() * 2147483647) : seedInput.value, nologo: noLogoCheckbox.checked, safe: safeCheckbox.checked, negative_prompt: negativePromptInput.value }; try { let url = `https://image.pollinations.ai/prompt/${encodeURIComponent(params.prompt)}`; url += `?width=${params.width}&height=${params.height}&seed=${params.seed}&model=${params.model}`; if (params.negative_prompt) url += `&negative_prompt=${encodeURIComponent(params.negative_prompt)}`; if (params.nologo) url += '&nologo=true'; if (!params.safe) url += '&safe=false'; previewImage.onload = () => { loadingIndicator.style.display = 'none'; previewImage.style.display = 'block'; imageInfo.style.display = 'block'; imageActions.style.display = 'flex'; const details = { prompt: params.prompt, model: params.model, dimensions: `${params.width}x${params.height}`, seed: params.seed, negative_prompt: params.negative_prompt || '无', generated_at: new Date().toLocaleString() }; imageDetails.textContent = JSON.stringify(details, null, 2); addToHistory(url, details); }; previewImage.onerror = () => { loadingIndicator.style.display = 'none'; placeholderText.style.display = 'block'; showNotification(translations[document.documentElement.lang].notificationImageFailed, 'error'); }; previewImage.src = url; } catch (error){ loadingIndicator.style.display = 'none'; placeholderText.style.display = 'block'; showNotification(translations[document.documentElement.lang].notificationError + error.message, 'error'); } }); downloadBtn.addEventListener('click', () => { if (previewImage.src){ window.open(previewImage.src, '_blank'); showNotification(translations[document.documentElement.lang].notificationImageOpened, 'success'); } }); copyPromptBtn.addEventListener('click', () => { navigator.clipboard.writeText(promptInput.value) .then(() => showNotification(translations[document.documentElement.lang].notificationCopied, 'success')) .catch(err => showNotification(translations[document.documentElement.lang].notificationCopyFailed + err, 'error')); }); function showNotification(message, type){ notification.textContent = message; notification.className = 'notification ' + type; notification.classList.add('show'); setTimeout(() => notification.classList.remove('show'), 3000); } function addToHistory(imageUrl, details){ const existingItems = Array.from(historyContainer.querySelectorAll('.history-item img')); if(existingItems.some(img => img.src === imageUrl)){ const itemToMove = existingItems.find(img => img.src === imageUrl).parentElement; historyContainer.insertBefore(itemToMove, historyContainer.firstChild); saveHistory(); return; } emptyHistory.style.display = 'none'; const historyItem = document.createElement('div'); historyItem.className = 'history-item'; historyItem.innerHTML = ` <img src="${imageUrl}" alt="AI生成图像"> <div class="history-item-info"> <div class="history-item-prompt">${details.prompt}</div> <div class="history-item-model">${details.model}</div> </div>`; historyItem.addEventListener('click', () => loadFromHistory(imageUrl, details)); historyContainer.insertBefore(historyItem, historyContainer.firstChild); saveHistory(); } function loadFromHistory(imageUrl, details){ previewImage.src = imageUrl; previewImage.style.display = 'block'; placeholderText.style.display = 'none'; imageInfo.style.display = 'block'; imageActions.style.display = 'flex'; imageDetails.textContent = JSON.stringify(details, null, 2); promptInput.value = details.prompt; modelSelect.value = details.model; updateModelInfoText(); const dimensions = details.dimensions.split('x'); widthInput.value = dimensions[0]; heightInput.value = dimensions[1]; seedInput.value = details.seed; if (details.negative_prompt && details.negative_prompt !== '无'){ negativePromptInput.value = details.negative_prompt; } } function saveHistory(){ const historyItems = historyContainer.querySelectorAll('.history-item'); const history = []; const maxHistory = 20; for (let i = 0; i < Math.min(historyItems.length, maxHistory); i++){ const item = historyItems[i]; const img = item.querySelector('img'); const prompt = item.querySelector('.history-item-prompt').textContent; const model = item.querySelector('.history-item-model').textContent; const urlParams = new URL(img.src).searchParams; history.push({ imageUrl: img.src, details: { prompt: prompt, model: model, dimensions: `${urlParams.get('width')}x${urlParams.get('height')}`, seed: urlParams.get('seed'), negative_prompt: urlParams.get('negative_prompt') || '无', generated_at: new Date().toLocaleString() } }); } localStorage.setItem('aiDrawingHistory', JSON.stringify(history)); } function loadHistory(){ const history = JSON.parse(localStorage.getItem('aiDrawingHistory') || '[]'); if (history.length > 0){ emptyHistory.style.display = 'none'; history.forEach(item => { const historyItem = document.createElement('div'); historyItem.className = 'history-item'; historyItem.innerHTML = `<img src="${item.imageUrl}" alt="AI生成图像"><div class="history-item-info"><div class="history-item-prompt">${item.details.prompt}</div><div class="history-item-model">${item.details.model}</div></div>`; historyItem.addEventListener('click', () => loadFromHistory(item.imageUrl, item.details)); historyContainer.appendChild(historyItem); }); } } clearHistoryBtn.addEventListener('click', () => { if (confirm(translations[document.documentElement.lang].confirmClearHistory)){ historyContainer.innerHTML = ''; historyContainer.appendChild(emptyHistory); emptyHistory.style.display = 'block'; localStorage.removeItem('aiDrawingHistory'); showNotification(translations[document.documentElement.lang].notificationHistoryCleared, 'success'); } }); loadHistory(); document.addEventListener('keydown', e => { if (e.ctrlKey && e.key === 'Enter') generateBtn.click(); }); });
+        const translations = { 'zh-CN': { pageTitle: 'Free AI 绘画生成器', mainHeading: 'Free AI 绘画生成器', subtitle: '基于Pollinations AI的高级图像生成系统', promptLabel: '提示词 (Prompt)', promptPlaceholder: '描述你想要生成的图像内容...', promptTip: '提示：使用详细、具体的描述可以获得更好的结果。尝试描述风格、场景、颜色等细节。', negPromptLabel: '负面提示词 (Negative Prompt)', negPromptPlaceholder: '描述你不希望出现在图像中的内容...', negPromptTip: '提示：用于排除不想要的元素，如"模糊的、低质量的"等。', modelLabel: '模型选择', widthLabel: '宽度', heightLabel: '高度', dimensionTip: '提示：推荐使用8的倍数，最大尺寸取决于模型限制。', seedLabel: '种子值 (Seed)', randomButton: '随机', seedTip: '提示：使用相同的种子值可以生成相似的图像，-1表示随机种子。', noLogoLabel: '移除水印', safeModeLabel: '安全模式 (过滤不适内容)', generateButton: '生成图像', clearButton: '清空', previewTitle: '图像预览', loadingText: '正在生成图像...', placeholderText: '点击"生成图像"按钮开始创作', downloadButton: '下载图像', copyPromptButton: '复制提示词', historyTitle: '历史记录', clearHistoryButton: '清空历史', emptyHistoryText: '您的创作历史将显示在这里', notificationPromptMissing: '请输入提示词', notificationImageFailed: '图像生成失败，请重试', notificationError: '发生错误: ', notificationImageOpened: '图像已在新窗口打开', notificationCopied: '提示词已复制到剪贴板', notificationCopyFailed: '复制失败: ', notificationHistoryCleared: '历史记录已清空', confirmClearHistory: '确定要清空所有历史记录吗？此操作不可撤销。' } };
+        document.addEventListener('DOMContentLoaded', function() { const promptInput = document.getElementById('prompt'); const negativePromptInput = document.getElementById('negative-prompt'); const modelSelect = document.getElementById('model'); const modelInfo = document.getElementById('model-info'); const widthInput = document.getElementById('width'); const heightInput = document.getElementById('height'); const seedInput = document.getElementById('seed'); const randomSeedBtn = document.getElementById('random-seed'); const noLogoCheckbox = document.getElementById('nologo'); const safeCheckbox = document.getElementById('safe'); const generateBtn = document.getElementById('generate-btn'); const clearBtn = document.getElementById('clear-btn'); const previewImage = document.getElementById('preview-image'); const placeholderText = document.getElementById('placeholder-text'); const loadingIndicator = document.getElementById('loading'); const imageInfo = document.getElementById('image-info'); const imageDetails = document.getElementById('image-details'); const imageActions = document.getElementById('image-actions'); const downloadBtn = document.getElementById('download-btn'); const copyPromptBtn = document.getElementById('copy-prompt-btn'); const historyContainer = document.getElementById('history-container'); const emptyHistory = document.getElementById('empty-history'); const clearHistoryBtn = document.getElementById('clear-history-btn'); const notification = document.getElementById('notification'); const modelDescriptions = { 'zh-CN': { 'flux': 'Flux: 通用型模型，适合大多数场景', 'FLUX-3D': 'FLUX-3D: 专为3D渲染风格优化的模型', 'FLUX-PRO': 'FLUX-PRO: 提供专业级质量的高级模型', 'Flux-realism': 'Flux-realism: 专注于写实风格的图像生成', 'Flux-anime': 'Flux-anime: 优化用于生成动漫风格的图像', 'Flux-cablyai': 'Flux-cablyai: 具有特殊艺术风格的模型', 'turbo': 'Turbo: 快速生成模型，速度优先' } }; window.updateModelInfoText = function(){ modelInfo.textContent = modelDescriptions['zh-CN'][modelSelect.value] || ''; }
+        document.documentElement.lang = 'zh-CN'; updateModelInfoText(); modelSelect.addEventListener('change', function(){ updateModelInfoText(); }); randomSeedBtn.addEventListener('click', () => { seedInput.value = Math.floor(Math.random() * 2147483647); }); clearBtn.addEventListener('click', () => { promptInput.value = ''; negativePromptInput.value = 'worst quality, blurry'; seedInput.value = -1; previewImage.style.display = 'none'; placeholderText.style.display = 'block'; imageInfo.style.display = 'none'; imageActions.style.display = 'none'; }); generateBtn.addEventListener('click', async function(){ const prompt = promptInput.value.trim(); if (!prompt){ showNotification(translations['zh-CN'].notificationPromptMissing, 'error'); return; } loadingIndicator.style.display = 'flex'; placeholderText.style.display = 'none'; previewImage.style.display = 'none'; imageInfo.style.display = 'none'; imageActions.style.display = 'none'; const params = { prompt: prompt, model: modelSelect.value, width: widthInput.value, height: heightInput.value, seed: seedInput.value === '-1' ? Math.floor(Math.random() * 2147483647) : seedInput.value, nologo: noLogoCheckbox.checked, safe: safeCheckbox.checked, negative_prompt: negativePromptInput.value }; try { let url = `https://image.pollinations.ai/prompt/${encodeURIComponent(params.prompt)}`; url += `?width=${params.width}&height=${params.height}&seed=${params.seed}&model=${params.model}`; if (params.negative_prompt) url += `&negative_prompt=${encodeURIComponent(params.negative_prompt)}`; if (params.nologo) url += '&nologo=true'; if (!params.safe) url += '&safe=false'; previewImage.onload = () => { loadingIndicator.style.display = 'none'; previewImage.style.display = 'block'; imageInfo.style.display = 'block'; imageActions.style.display = 'flex'; const details = { prompt: params.prompt, model: params.model, dimensions: `${params.width}x${params.height}`, seed: params.seed, negative_prompt: params.negative_prompt || '无', generated_at: new Date().toLocaleString() }; imageDetails.textContent = JSON.stringify(details, null, 2); addToHistory(url, details); }; previewImage.onerror = () => { loadingIndicator.style.display = 'none'; placeholderText.style.display = 'block'; showNotification(translations['zh-CN'].notificationImageFailed, 'error'); }; previewImage.src = url; } catch (error){ loadingIndicator.style.display = 'none'; placeholderText.style.display = 'block'; showNotification(translations['zh-CN'].notificationError + error.message, 'error'); } }); downloadBtn.addEventListener('click', () => { if (previewImage.src){ window.open(previewImage.src, '_blank'); showNotification(translations['zh-CN'].notificationImageOpened, 'success'); } }); copyPromptBtn.addEventListener('click', () => { navigator.clipboard.writeText(promptInput.value) .then(() => showNotification(translations['zh-CN'].notificationCopied, 'success')) .catch(err => showNotification(translations['zh-CN'].notificationCopyFailed + err, 'error')); }); function showNotification(message, type){ notification.textContent = message; notification.className = 'notification ' + type; notification.classList.add('show'); setTimeout(() => notification.classList.remove('show'), 3000); } function addToHistory(imageUrl, details){ const existingItems = Array.from(historyContainer.querySelectorAll('.history-item img')); if(existingItems.some(img => img.src === imageUrl)){ const itemToMove = existingItems.find(img => img.src === imageUrl).parentElement; historyContainer.insertBefore(itemToMove, historyContainer.firstChild); saveHistory(); return; } emptyHistory.style.display = 'none'; const historyItem = document.createElement('div'); historyItem.className = 'history-item'; historyItem.innerHTML = ` <img src="${imageUrl}" alt="AI生成图像"> <div class="history-item-info"> <div class="history-item-prompt">${details.prompt}</div> <div class="history-item-model">${details.model}</div> </div>`; historyItem.addEventListener('click', () => loadFromHistory(imageUrl, details)); historyContainer.insertBefore(historyItem, historyContainer.firstChild); saveHistory(); } function loadFromHistory(imageUrl, details){ previewImage.src = imageUrl; previewImage.style.display = 'block'; placeholderText.style.display = 'none'; imageInfo.style.display = 'block'; imageActions.style.display = 'flex'; imageDetails.textContent = JSON.stringify(details, null, 2); promptInput.value = details.prompt; modelSelect.value = details.model; updateModelInfoText(); const dimensions = details.dimensions.split('x'); widthInput.value = dimensions[0]; heightInput.value = dimensions[1]; seedInput.value = details.seed; if (details.negative_prompt && details.negative_prompt !== '无'){ negativePromptInput.value = details.negative_prompt; } } function saveHistory(){ const historyItems = historyContainer.querySelectorAll('.history-item'); const history = []; const maxHistory = 20; for (let i = 0; i < Math.min(historyItems.length, maxHistory); i++){ const item = historyItems[i]; const img = item.querySelector('img'); const prompt = item.querySelector('.history-item-prompt').textContent; const model = item.querySelector('.history-item-model').textContent; const urlParams = new URL(img.src).searchParams; history.push({ imageUrl: img.src, details: { prompt: prompt, model: model, dimensions: `${urlParams.get('width')}x${urlParams.get('height')}`, seed: urlParams.get('seed'), negative_prompt: urlParams.get('negative_prompt') || '无', generated_at: new Date().toLocaleString() } }); } localStorage.setItem('aiDrawingHistory', JSON.stringify(history)); } function loadHistory(){ const history = JSON.parse(localStorage.getItem('aiDrawingHistory') || '[]'); if (history.length > 0){ emptyHistory.style.display = 'none'; history.forEach(item => { const historyItem = document.createElement('div'); historyItem.className = 'history-item'; historyItem.innerHTML = `<img src="${item.imageUrl}" alt="AI生成图像"><div class="history-item-info"><div class="history-item-prompt">${item.details.prompt}</div><div class="history-item-model">${item.details.model}</div></div>`; historyItem.addEventListener('click', () => loadFromHistory(item.imageUrl, item.details)); historyContainer.appendChild(historyItem); }); } } clearHistoryBtn.addEventListener('click', () => { if (confirm(translations['zh-CN'].confirmClearHistory)){ historyContainer.innerHTML = ''; historyContainer.appendChild(emptyHistory); emptyHistory.style.display = 'block'; localStorage.removeItem('aiDrawingHistory'); showNotification(translations['zh-CN'].notificationHistoryCleared, 'success'); } }); loadHistory(); document.addEventListener('keydown', e => { if (e.ctrlKey && e.key === 'Enter') generateBtn.click(); }); });
+    </script>
+    <script>
+        (function() {
+            const toggle = document.getElementById('themeToggle');
+            if (!toggle) return;
+            function updateIcon() {
+                const dark = document.documentElement.getAttribute('data-theme') !== 'light';
+                toggle.innerHTML = dark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            }
+            updateIcon();
+            toggle.addEventListener('click', function() {
+                const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', current);
+                localStorage.setItem('theme', current);
+                updateIcon();
+            });
+        })();
     </script>
 </body>
 </html>
